@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -205,8 +206,8 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
       contentPadding: widget.contentPadding ??
           EdgeInsets.symmetric(
-            horizontal: 1.w,
-            vertical: 2.5.h,
+            horizontal: 2.w,
+            vertical: 1.h,
           ),
       fillColor: widget.fillColor,
       filled: widget.filled ?? true,
@@ -227,25 +228,25 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
               : null),
       prefixIcon: widget.prefixIcon,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 5),
-        borderSide: const BorderSide(
-            // color: widget.borderSideColor ,
-            ),
+        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 14),
+        borderSide: BorderSide(
+          color: widget.borderSideColor ?? AppCommonColors.incorrectTextColor,
+        ),
         gapPadding: 10,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 5),
+        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 14),
         borderSide: BorderSide(
-          color: widget.borderSideColor!,
+          color: widget.borderSideColor ?? AppCommonColors.fieldBorderColor,
         ),
         gapPadding: 10,
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 5),
+        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 14),
         gapPadding: 10,
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 5),
+        borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 14),
         gapPadding: 10,
       ),
     );

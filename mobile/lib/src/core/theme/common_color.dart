@@ -5,6 +5,7 @@ class AppCommonColors {
   static const defaultLink = Color(0xFF007DFC);
   static const hoverButton = Color(0xFFC3922E);
   static const incorrectTextColor = Color(0xFFDE1F1F);
+  static const fieldBorderColor = Color.fromRGBO(58, 58, 58, 0.6);
   static const mainBlueButton = Color(0xFF1779F3);
   static const red = Color(0xFFFC0000);
   static const signInWithGoogleBgnd = Color(0xFF61677D);

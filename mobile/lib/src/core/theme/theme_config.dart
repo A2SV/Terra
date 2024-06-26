@@ -10,7 +10,14 @@ class ThemeConfig {
   ThemeData get darkTheme {
     return ThemeData.dark().copyWith(
       primaryColor: AppCommonColors.mainBlueButton,
-      buttonTheme: ButtonThemeData(
+      inputDecorationTheme: const InputDecorationTheme().copyWith(
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppDarkThemeColors.strokeForInputFieldDark,
+          ),
+        ),
+      ),
+      buttonTheme: const ButtonThemeData().copyWith(
         buttonColor: AppCommonColors.mainBlueButton,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.0),
@@ -26,7 +33,14 @@ class ThemeConfig {
   ThemeData get lightTheme {
     return ThemeData.light().copyWith(
       primaryColor: AppCommonColors.mainBlueButton,
-      buttonTheme: ButtonThemeData(
+      inputDecorationTheme: const InputDecorationTheme().copyWith(
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppLightThemeColors.strokeForInputFieldLight,
+          ),
+        ),
+      ),
+      buttonTheme: const ButtonThemeData().copyWith(
         buttonColor: AppCommonColors.activeButton,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.0),
@@ -40,18 +54,18 @@ class ThemeConfig {
   }
 
   ColorScheme get _darkColorScheme => const ColorScheme.dark().copyWith(
-      // primary: AppDarkThemeColors.kDarkPrimaryColor,
-      onPrimary: Colors.white,
-      // onPrimary: AppDarkThemeColors.kDarkOnPrimaryColor,
-      // secondary: AppDarkThemeColors.kDarkSecondaryColor,
-      // onSecondary: AppDarkThemeColors.kDarkOnSecondaryColor,
-      // tertiary: AppDarkThemeColors.kDarkTertiaryColor,
-      // onTertiary: AppDarkThemeColors.kDarkOnTertiaryColor,
+        // primary: AppDarkThemeColors.kDarkPrimaryColor,
+        onPrimary: Colors.white,
+        // onPrimary: AppDarkThemeColors.kDarkOnPrimaryColor,
+        // secondary: AppDarkThemeColors.kDarkSecondaryColor,
+        // onSecondary: AppDarkThemeColors.kDarkOnSecondaryColor,
+        // tertiary: AppDarkThemeColors.kDarkTertiaryColor,
+        // onTertiary: AppDarkThemeColors.kDarkOnTertiaryColor,
       );
 
   ColorScheme get _lightColorScheme => const ColorScheme.light().copyWith(
-      // primary: AppCommonColors.mainBlueButton,
-      onPrimary: Colors.white,
-      // error: AppCommonColors.red,
+        // primary: AppCommonColors.mainBlueButton,
+        onPrimary: Colors.white,
+        // error: AppCommonColors.red,
       );
 }
