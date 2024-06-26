@@ -1,10 +1,10 @@
 name: mobile
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.4.1 <4.0.0'
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   flutter:
@@ -16,4 +16,6 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
+  # assets:
+  #   - svg/message_icon.svg
   uses-material-design: true
