@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
