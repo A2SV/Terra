@@ -1,8 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../../core/theme/common_color.dart';
+import '../../../core/theme/text_theme.dart';
 
 
 class OtpScreen extends StatefulWidget{
@@ -27,11 +29,17 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
           Container(
             key: Key('Enter OTP'),
-            child: Text('Enter OTP')
+            child: Text(
+                'Enter OTP',
+              style:CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
+            )
           ),
           Container(
               key: Key('description'),
-              child: Text('Enter OTP code we just sent to you on your registered email')
+              child: Text(
+                  'Enter OTP code we just sent to you on your registered email',
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
+              )
           ),
           Container(
             key: Key('Input'),
