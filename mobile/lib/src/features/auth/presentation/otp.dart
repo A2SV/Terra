@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mobile/src/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../core/theme/common_color.dart';
@@ -23,6 +24,7 @@ class _OtpScreenState extends State<OtpScreen> {
         mainAxisAlignment:MainAxisAlignment.center,
 
         children: <Widget>[
+
           Container(
             key: Key('image'),
             child:Image.asset('assets/images/mail.png')
