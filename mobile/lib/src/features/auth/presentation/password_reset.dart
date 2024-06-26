@@ -8,6 +8,7 @@ import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../core/theme/app_light_theme_colors.dart';
+import '../../../onboarding/presentation/widgets/page_indicator.dart';
 
 class PasswordResetScreen extends StatefulWidget{
   @override
@@ -36,8 +37,43 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          Container(
+            alignment: Alignment.topCenter,
+            key: Key('page-indicator'),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child:PageIndicator(
+                    width: 10.w,
+                    color: AppCommonColors.mainlightBlue,
+                  ),
+                ),
+                Container(
+                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child:PageIndicator(
+                    width: 10.w,
+                    color: AppCommonColors.mainlightBlue,
+                  ),
+                ),
+                Container(
+                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                  child:PageIndicator(
+                    width: 10.w,
+                    color: AppCommonColors.mainBlueButton,
+                  ),
+                ),
+
+
+              ],
+            )
+          ),
+          SizedBox(
+            height: 5.h,
+          ),
           Container(
             key: Key('image'),
             margin: EdgeInsets.all(5.h),
@@ -171,9 +207,13 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
             margin: EdgeInsets.all(1.h),
             width: 100.w,
             child: CustomButton(
+              backgroundColor: AppCommonColors.mainBlueButton,
               text:'Reset Password',
               onPressed: (){},
             ),
+          ),
+          SizedBox(
+            height: 10.h,
           ),
 
         ],
