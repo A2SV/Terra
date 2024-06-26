@@ -1,11 +1,8 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mobile/src/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../../core/theme/common_color.dart';
-import '../../../core/theme/text_theme.dart';
 
 
 class OtpScreen extends StatefulWidget{
@@ -24,24 +21,17 @@ class _OtpScreenState extends State<OtpScreen> {
         mainAxisAlignment:MainAxisAlignment.center,
 
         children: <Widget>[
-
           Container(
             key: Key('image'),
             child:Image.asset('assets/images/mail.png')
           ),
           Container(
             key: Key('Enter OTP'),
-            child: Text(
-                'Enter OTP',
-              style:CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
-            )
+            child: Text('Enter OTP')
           ),
           Container(
               key: Key('description'),
-              child: Text(
-                  'Enter OTP code we just sent to you on your registered email',
-                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
-              )
+              child: Text('Enter OTP code we just sent to you on your registered email')
           ),
           Container(
             key: Key('Input'),
