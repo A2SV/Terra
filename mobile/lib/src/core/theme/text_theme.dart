@@ -12,7 +12,7 @@ class CustomTextStyles {
     ),
     displayMedium: TextStyle(
       color: textColor,
-      fontSize: 23.sp,
+      fontSize: 24.sp,
       fontWeight: FontWeight.w700,
       fontFamily: FontFamily.nunito,
     ),
