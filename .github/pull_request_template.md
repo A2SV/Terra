@@ -18,9 +18,9 @@
 ​
 ## Ticket(s) or Conversations
 ​
-> What Jira items (Epics, Stories, Tasks, or Sub-Tasks) are specifically related to this work? If this only covers a single item, there's no reason to list its parents. There should always be at least one Jira item, but if you have relevant Slack threads you can put them here as well. This should just be a bulleted list.
+> What Jira items (Epics, Stories, Tasks, or Sub-Tasks) are specifically related to this work? If this only covers a single item, there's no reason to list its parents. There should always be at least one Jira item, but if you have relevant Slack threads you can put them here as well. This should just be a bulleted list. The following is an example.
 ​
-- https://a2sv.atlassian.net/browse/RE-XXXX
+- https://a2sv.atlassian.net/browse/GGPP-XXXX
 ​
 ## References
 ​
