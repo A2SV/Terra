@@ -9,7 +9,7 @@ exports[`AuthBackground matches snapshot 1`] = `
       class="flex md:flex-row bg-white shadow-lg min-h-screen w-full md:w-auto"
     >
       <div
-        class="hidden md:block relative w-1/2 overflow-hidden rounded-2xl p-8"
+        class="hidden md:block relative w-1/2 overflow-hidden rounded-2xl p-6"
       >
         <img
           alt="Background"
@@ -46,18 +46,18 @@ exports[`AuthBackground matches snapshot 1`] = `
         >
           <img
             alt="Logo"
-            class="object-cover mb-4 md:mb-0 md:mr-4"
+            class="object-cover mb-4 md:mb-0 md:mr-0"
             data-nimg="1"
             decoding="async"
             height="150"
             loading="lazy"
-            src="/_next/image?url=%2Fimg.jpg&w=384&q=75"
-            srcset="/_next/image?url=%2Fimg.jpg&w=256&q=75 1x, /_next/image?url=%2Fimg.jpg&w=384&q=75 2x"
+            src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=128&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
             style="color: transparent;"
-            width="150"
+            width="120"
           />
           <div
-            class="mt-14 md:mt-14 ml-0 font-nunito "
+            class="mt-14 md:mt-10 ml-0 font-nunito "
           >
             <h2
               class="font-semibold text-gray-700 text-2xl"

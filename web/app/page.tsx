@@ -1,10 +1,11 @@
 import AuthBackground from "../components/Authentication/AuthBackground";
-import ResetBackground from "../components/Authentication/ResetBackground";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <div>
-      <ResetBackground/>
+      <AuthBackground description="Sign In" />
     </div>
   );
-}
+};
+
+export default Home;
