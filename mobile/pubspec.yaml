@@ -23,6 +23,7 @@ dependencies:
   responsive_sizer: ^3.3.1
   shimmer: ^3.0.0
   validation_pro: ^1.2.0
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   build_runner: ^2.4.11
