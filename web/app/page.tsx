@@ -1,5 +1,9 @@
-import { redirect } from "next/navigation";
+import AuthBackground from "../components/Authentication/AuthBackground";
 
 export default function Home() {
-  redirect("/trans/en");
+  return (
+    <div>
+      <AuthBackground description="Sign In" />
+    </div>
+  );
 }

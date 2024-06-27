@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResetBackground matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex items-center justify-center min-h-screen bg-white"
+  >
+    <div
+      class="flex md:flex-row bg-white shadow-lg min-h-screen w-full md:w-auto"
+    >
+      <div
+        class="hidden md:block relative w-1/2 overflow-hidden rounded-2xl p-8"
+      >
+        <img
+          alt="Background"
+          class="object-cover rounded-2xl h-full w-full  ml-2"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
+        <div
+          class="absolute bottom-10 left-20 right-0 p-8 font-poppins"
+        >
+          <h2
+            class="text-2xl font-semibold text-white"
+          >
+            Forgot Password?
+          </h2>
+          <p
+            class="mt-2 text-white"
+          >
+            Reset password
+          </p>
+        </div>
+      </div>
+      <div
+        class="w-full items-center md:w-1/2"
+      >
+        <div
+          class="flex justify-center flex-row md:justify-center font-nunito"
+        >
+          <img
+            alt="Logo"
+            class="object-cover"
+            data-nimg="1"
+            decoding="async"
+            height="200"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=640&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=256&q=75 1x, /_next/image?url=%2Fimg.jpg&w=640&q=75 2x"
+            style="color: transparent;"
+            width="200"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
