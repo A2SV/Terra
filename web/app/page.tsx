@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import ResetInputEmail from "@/components/ResetInputEmail";
 
 export default function Home() {
-  redirect("/trans/en");
+  return;
 }

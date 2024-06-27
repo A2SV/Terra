@@ -23,7 +23,12 @@ const config = {
       },
     },
     extend: {
-      colors:{}
+      colors: {
+        terrablue: "#1779F3",
+      },
+      fontFamily: {
+        sans: ["Nunito Sans", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
