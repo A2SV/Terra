@@ -23,11 +23,11 @@ const config = {
       },
     },
     extend: {
-      colors:{
-        'terrablue': '#1779F3',
+      colors: {
+        terrablue: "#1779F3",
       },
       fontFamily: {
-        sans: ['Nunito Sans', 'sans-serif'],
+        sans: ["Nunito Sans", "sans-serif"],
       },
     },
   },
