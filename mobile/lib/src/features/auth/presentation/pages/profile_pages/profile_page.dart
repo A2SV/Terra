@@ -46,6 +46,8 @@ class ProfilePage extends StatelessWidget {
       ),
     bottomNavigationBar: 
     BottomNavigationBar(
+      fixedColor: Colors.black,
+      unselectedItemColor: Colors.grey,
       items: 
     [
       BottomNavigationBarItem(icon: Icon(Icons.search),
@@ -54,8 +56,8 @@ class ProfilePage extends StatelessWidget {
       label: "Wishlist"),
       BottomNavigationBarItem(icon: Icon(CupertinoIcons.mail),
       label: "Inbox"),
-    //  BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),
-    //   label: "Profile"), 
+     BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),
+      label: "Profile"), 
     ]
     ),
     );
