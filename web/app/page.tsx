@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+import Login from "../components/LoginCard"
+
 
 export default function Home() {
-  redirect("/trans/en");
+ 
+  return (
+  <div className="home">
+    <Login />
+  </div>
+
+  );
 }
