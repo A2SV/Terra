@@ -23,8 +23,8 @@ const config = {
       },
     },
     extend: {
-      colors:{
-        'terrablue': '#1779F3',
+      colors: {
+        terrablue: "#1779F3",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

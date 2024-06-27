@@ -48,7 +48,6 @@ const LoginCard: React.FC = () => {
     const { value } = event.target;
     setEmail(value);
 
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
       setEmailError("Invalid email address");
