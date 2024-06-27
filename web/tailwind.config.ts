@@ -23,7 +23,12 @@ const config = {
       },
     },
     extend: {
-      colors:{}
+      colors: {},
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        pops: ["Poppins", "sans-serif", "Arial"],
+        nunito: ["Nunito Sans", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
