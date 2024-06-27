@@ -15,12 +15,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/images.png
   AssetGenImage get images => const AssetGenImage('assets/images/images.png');
 
+  /// File path: assets/images/message_icon.png
+  AssetGenImage get messageIcon =>
+      const AssetGenImage('assets/images/message_icon.png');
+
   /// File path: assets/images/png-clipart-car-car-white-thumbnail.png
   AssetGenImage get pngClipartCarCarWhiteThumbnail => const AssetGenImage(
       'assets/images/png-clipart-car-car-white-thumbnail.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [images, pngClipartCarCarWhiteThumbnail];
+  List<AssetGenImage> get values =>
+      [images, messageIcon, pngClipartCarCarWhiteThumbnail];
 }
 
 class $AssetsSvgGen {

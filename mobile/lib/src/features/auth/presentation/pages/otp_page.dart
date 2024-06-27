@@ -1,5 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/gen/assets.gen.dart';
+import 'package:mobile/src/core/utils/utils.dart';
+import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:pinput/pinput.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class OTPage extends StatelessWidget {
   const OTPage({super.key});
@@ -15,17 +21,39 @@ class OTPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 85,
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 32,
+                  height: 4,
+                  color: const Color(0xFFD6DFFF),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 32,
+                  height: 4,
+                  color: const Color(0xFF1779F3),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 32,
+                  height: 4,
+                  color: const Color(0xFFD6DFFF),
+                ),
+              ],
             ),
-            // Image.asset(""),
-            const Icon(Icons.email, size: 80, color: Color(0xFF1779F3)),
-            const SizedBox(height: 20),
+            const SizedBox(height: 80),
+            Assets.images.messageIcon.path.asAssetImage(height: 9.h),
+            // SvgPicture.asset('assets/svg/message.svg'),
+            const SizedBox(height: 25),
             const Text(
               'Enter OTP',
               style: TextStyle(
@@ -52,41 +80,40 @@ class OTPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _otpInputField(context),
-                _otpInputField(context),
-                _otpInputField(context),
-                _otpInputField(context),
-                _otpInputField(context),
-                _otpInputField(context),
-              ],
+            Pinput(
+              length: 6,
+              showCursor: true,
+              onChanged: (value) {
+                // Handle OTP input change
+              },
+              onCompleted: (pin) {
+                // Handle OTP input completion
+              },
+              defaultPinTheme: PinTheme(
+                width: 50,
+                height: 50,
+                textStyle: const TextStyle(fontSize: 18, color: Colors.black),
+                decoration: BoxDecoration(
+                  color: const Color(0xFEAEFF5),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey),
+                ),
+              ),
             ),
             const SizedBox(height: 30),
-            ElevatedButton(
+            CustomButton(
+              horizontalPadding: 0,
+              text: 'Verify',
               onPressed: () {
                 // Handle verify action
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF1779F3),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 160, vertical: 15),
-              ),
-              child: const Text(
-                'Verify',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
-              ),
+              height: 50,
+              borderColor: const Color(0xFF1779F3),
+              borderRadius: 10,
+              backgroundColor: const Color(0xFF1779F3),
+              textColor: Colors.white,
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Text.rich(
               TextSpan(
                 text: "Didn't get OTP? ",
@@ -95,10 +122,9 @@ class OTPage extends StatelessWidget {
                   TextSpan(
                     text: 'Resend OTP',
                     style: const TextStyle(
-                        color: Color(
-                          0xFF1779F3,
-                        ),
-                        fontSize: 12),
+                      color: Color(0xFF1779F3),
+                      fontSize: 12,
+                    ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         // Handle resend OTP action
@@ -109,30 +135,6 @@ class OTPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _otpInputField(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
-      ),
-      child: const Center(
-        child: TextField(
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18),
-          maxLength: 1,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            counterText: '',
-          ),
         ),
       ),
     );
