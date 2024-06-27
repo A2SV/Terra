@@ -7,6 +7,11 @@ namespace Application.Features.Users.ForgotPassword.Command
 {
     public class ForgotPasswordCommand
     {
-        
+        public string Email {get; set;}
+
+        public ForgotPasswordCommand(string email)
+        {
+            Email = email;
+        }
     }
 }
