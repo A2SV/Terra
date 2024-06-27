@@ -7,7 +7,7 @@ const ResetBackground: React.FC = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="flex md:flex-row bg-white shadow-lg min-h-screen w-full md:w-auto">
-        <div className="hidden md:block relative w-1/2 overflow-hidden rounded-2xl p-8">
+        <div className="hidden md:block relative w-1/2 overflow-hidden rounded-2xl p-6">
           <Image
             src={backgroundImage}
             alt="Background"
@@ -20,7 +20,7 @@ const ResetBackground: React.FC = () => {
         </div>
         <div className="w-full items-center md:w-1/2">
           <div className="flex justify-center flex-row md:justify-center font-nunito">
-            <Image src={logo} alt="Logo" height={200} width={200} className="object-cover" />
+            <Image src={logo} alt="Logo" height={180} width={150} className="object-cover" />
           </div>
         </div>
       </div>
