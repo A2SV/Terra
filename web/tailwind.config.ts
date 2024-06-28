@@ -25,6 +25,8 @@ const config = {
     extend: {
       colors: {
         terrablue: "#1779F3",
+        terrapurple: "#605DEC14",
+        terragray: "#3A3A3A99",
       },
       fontFamily: {
         sans: ["Nunito Sans", "sans-serif"],

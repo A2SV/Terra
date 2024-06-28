@@ -72,7 +72,7 @@ const LoginCard: React.FC = () => {
           onSubmit={handleSubmit}
           className="info-section w-4/6 flex flex-col items-center space-y-10"
         >
-          <div className="nav w-full md:w-3/4 h-16 bg-[#605DEC14] flex items-center rounded-full justify-between px-5 ">
+          <div className="nav w-full md:w-3/4 h-16 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
             <button
               type="button"
               className="login bg-terrablue w-1/2 h-2/3 rounded-full flex justify-center items-center"
@@ -95,7 +95,7 @@ const LoginCard: React.FC = () => {
           <div className="details w-full">
             <p className="font-sans font-light mb-2">Email Address</p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-[#3A3A3A99]"} px-5`}
+              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-terragray"} px-5`}
               type="email"
               required
               placeholder="Enter your Email Address"
@@ -108,7 +108,7 @@ const LoginCard: React.FC = () => {
             <p className="font-sans font-light mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-[#3A3A3A99] px-5 pr-12"
+                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
