@@ -21,6 +21,8 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [images, pngClipartCarCarWhiteThumbnail];
+
+  get messageIcon => null;
 }
 
 class $AssetsSvgGen {
