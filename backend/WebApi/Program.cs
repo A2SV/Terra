@@ -10,6 +10,14 @@ builder.Services.AddDbContext<AppAuthDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("AppAuthDbConnectionString")));
 
 builder.Services.AddControllers();
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
