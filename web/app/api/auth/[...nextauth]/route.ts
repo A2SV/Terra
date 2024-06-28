@@ -55,7 +55,6 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user }: { token: JWT; account?: any; user: any }) {
-      console.log("From JWT: ", user);
       if (user) {
         token.accessToken = user.token;
         token.id = user.userAccount.id;

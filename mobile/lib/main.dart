@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/theme/theme_config.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import 'package:mobile/src/onboarding/presentation/pages/onboarding_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +14,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          darkTheme: ThemeConfig().darkTheme,
+          theme: ThemeConfig().lightTheme,
+          themeMode: ThemeMode.light,
+          home: const Scaffold(),
+        );
+      },
     );
   }
 }

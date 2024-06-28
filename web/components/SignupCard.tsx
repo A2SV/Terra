@@ -56,9 +56,6 @@ export default function SignupCard() {
       router.push("/");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Response:", error.response);
-        console.error("Data:", error.response?.data);
-        console.error("Status:", error.response?.status);
         setMessage(error.response?.data);
       } else {
         setMessage("An error occurred. Please try again later.");

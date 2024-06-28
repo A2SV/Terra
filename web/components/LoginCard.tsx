@@ -30,7 +30,6 @@ export default function LoginCard() {
       if (response?.error) {
         setError(response.error);
         setLoading(false);
-        console.error(response.error);
       } else {
         router.push("/");
       }
