@@ -23,7 +23,13 @@ const config = {
       },
     },
     extend: {
-      colors: {},
+      colors: {
+        btnColor: "#007DFC",
+        btnTextColor: "#FFFFFF",
+        normalTextColor: "#3A3A3A",
+        inputColor: "#605DEC14",
+        pageColor: "#FFFFFF",
+      },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
