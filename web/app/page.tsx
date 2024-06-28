@@ -1,5 +1,7 @@
-import { redirect } from "next/navigation";
-
 export default function Home() {
-  redirect("/trans/en");
+  return (
+    <div className="">
+      <p>Hello world</p>
+    </div>
+  );
 }
