@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Domain.Common
 {
-    public class BaseEntity
+    public class BaseEntity : IdentityUser
     {
-        public Guid Id { get; set; }= Guid.NewGuid();
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
