@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration.Json;
 using Persistence;
 using System.IO;
 
-public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+public class AppAuthDbContextFactory : IDesignTimeDbContextFactory<AppAuthDbContext>
 {
-    public AppDbContext CreateDbContext(string[] args)
+    public AppAuthDbContext CreateDbContext(string[] args)
     {
         var apiProjectPath = Path.Combine(Directory.GetCurrentDirectory(), "../WebApi");
         IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -15,11 +15,11 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var builder = new DbContextOptionsBuilder<AppDbContext>();
-        var connectionString = configuration.GetConnectionString("AppConnectionString");
+        var builder = new DbContextOptionsBuilder<AppAuthDbContext>();
+        var connectionString = configuration.GetConnectionString("AppAuthDbConnectionString");
         builder.UseNpgsql(connectionString);
 
-        return new AppDbContext(builder.Options);
+        return new AppAuthDbContext(builder.Options);
     }
 }
 
