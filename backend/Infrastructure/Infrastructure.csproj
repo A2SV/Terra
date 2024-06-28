@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CloudinaryDotNet" Version="1.21.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.31.0"/>
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0"/>
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0"/>
+        <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.6.2" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.2" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.2" />
     </ItemGroup>
 
 </Project>
