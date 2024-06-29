@@ -1,9 +1,11 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mobile/main.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
+import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../core/theme/app_light_theme_colors.dart';
 
@@ -26,50 +28,76 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: (){},
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             key: Key('image'),
-            child: Image.asset('assets/images/lock.png'),
-            color: AppLightThemeColors.kFieldBackgroundColor.withOpacity(0.15),
+            margin: EdgeInsets.all(5.h),
+            child: Image.asset(
+                'assets/images/lock.png',
+              width: 30.w,
+              height: 30.w,
+            ),
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: AppCommonColors.fieldBorderColor.withOpacity(0.15),
+            ),
+
           ),
           Container(
             key: Key('Reset Password'),
             child: Text(
               'Reset Password',
-              style: CustomTextStyles.kDefaultTextTheme().displayLarge,
+              style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
             ),
           ),
           Container(
             key: Key('Description'),
-            child: Text('Reset your password and join the terra family today'),
+            margin: EdgeInsets.all(1.h),
+            child: Text(
+              'Reset your password and join the terra family today',
+              style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
+            ),
           ),
           Container(
             key: Key('New Password'),
+            margin: EdgeInsets.all(1.h),
             child:Container(
-
-              width: 300,
+              width: 90.w,
               height: 50,
               child: TextField(
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.fieldBorderColor).bodyMedium,
                 obscureText: passwordVisibility,
                 controller: passwordController,
                 decoration: InputDecoration(
-                  prefixIcon:Icon(Icons.lock_outline),
+
+                    prefixIcon:Icon(
+                      Icons.lock_outline,
+                      color: AppCommonColors.fieldBorderColor,
+                    ),
                     fillColor: Colors.white,
                     filled:true,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
                         width: 2,
-                        color:Colors.grey,
+                        color:AppCommonColors.fieldBorderColor,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 2
+                          color: AppCommonColors.fieldBorderColor,
+                          width: 2
                       ),
                       gapPadding: 10,
                     ),
@@ -81,6 +109,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                           print(passwordVisibility);
                         });
                       },
+                      color: AppCommonColors.fieldBorderColor,
                       icon:passwordVisibility?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined),
                     ),
                     hintText: 'New Password'
@@ -90,43 +119,60 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
           ),
           Container(
             key: Key('Confirm new password'),
-            child:TextField(
-              obscureText: passwordVisibility1,
-              controller: passwordController1,
-              decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      passwordVisibility1=!passwordVisibility1;
-                      print(passwordVisibility1);
-                    });
+            margin: EdgeInsets.all(1.h),
+            child:Container(
+              width: 90.w,
+              height: 50,
+              child: TextField(
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.fieldBorderColor).bodyMedium,
+                obscureText: passwordVisibility1,
+                controller: passwordController1,
+                decoration: InputDecoration(
 
-                  },
-                  icon:passwordVisibility1?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined),
+                    prefixIcon:Icon(
+                      Icons.lock_outline,
+                      color: AppCommonColors.fieldBorderColor,
+                    ),
+                    fillColor: Colors.white,
+                    filled:true,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        width: 2,
+                        color:AppCommonColors.fieldBorderColor,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                          color: AppCommonColors.fieldBorderColor,
+                          width: 2
+                      ),
+                      gapPadding: 10,
+                    ),
+
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordVisibility1=!passwordVisibility1;
+                          print(passwordVisibility1);
+                        });
+                      },
+                      color: AppCommonColors.fieldBorderColor,
+                      icon:passwordVisibility?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined),
+                    ),
+                    hintText: 'Confirm Password'
                 ),
-                icon: Icon(
-                    Icons.lock_outline
-                ),
-                  hintText: 'Confirm New Password'
               ),
             ),
           ),
           Container(
             key: Key('button'),
-            child: ElevatedButton(
-              onPressed: () {
-                // Perform some action
-              },
-              style: ElevatedButton.styleFrom(
-                // Define button's look with styleFrom
-                backgroundColor: Colors.blue, // Set the background color
-                foregroundColor: Colors.white, // Set the text (and icon) color
-                shape: RoundedRectangleBorder(
-                  // The button's outline is defined as a rounded rectangle with circular corners
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-              child: const Text('Reset Password'), // Button's label
+            margin: EdgeInsets.all(1.h),
+            width: 100.w,
+            child: CustomButton(
+              text:'Reset Password',
+              onPressed: (){},
             ),
           ),
 
