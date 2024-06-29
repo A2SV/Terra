@@ -1,5 +1,7 @@
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -12,10 +14,9 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("AppAuthDbConnection
 builder.Services.AddControllers();
 
 builder.Services.AddApiVersioning(options =>
-{
+{   options.ReportApiVersions = true;
     options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
-    options.ReportApiVersions = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
