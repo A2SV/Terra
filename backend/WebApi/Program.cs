@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -24,9 +25,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddIdentityCore<User>()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<AppAuthDbContext>();
-    /*.AddTokenProvider<DataProtectorTokenProvider<User>>("AppAuthDbContext")
-    .AddDefaultTokenProviders();*/
+    .AddEntityFrameworkStores<AppAuthDbContext>()
+    .AddTokenProvider<DataProtectorTokenProvider<User>>("AppAuthDbContext")
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
