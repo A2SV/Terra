@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mobile/main.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
+import 'package:mobile/src/core/utils/custom_textformfield.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -37,7 +38,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             alignment: Alignment.topCenter,
@@ -79,18 +80,18 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
             margin: EdgeInsets.all(5.h),
             child: Image.asset(
                 'assets/images/lock.png',
-              width: 30.w,
-              height: 30.w,
+              width: 25.w,
+              height: 25.w,
             ),
-
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: AppCommonColors.fieldBorderColor.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(20),
+              color: AppCommonColors.imageBackgroundColor.withOpacity(0.75),
             ),
 
           ),
           Container(
             key: Key('Reset Password'),
+            margin: EdgeInsets.all(1.h),
             child: Text(
               'Reset Password',
               style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
@@ -104,112 +105,76 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
               style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
             ),
           ),
+          SizedBox(
+            height: 2.h,
+          ),
           Container(
             key: Key('New Password'),
-            margin: EdgeInsets.all(1.h),
             child:Container(
-              width: 90.w,
-              height: 50,
-              child: TextField(
-                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.fieldBorderColor).bodyMedium,
-                obscureText: passwordVisibility,
+              width: 85.w,
+              height: 10.h,
+              child: CustomTextFormField(
+                textFormFieldType: TextFormFieldType.password,
                 controller: passwordController,
-                decoration: InputDecoration(
-
-                    prefixIcon:Icon(
-                      Icons.lock_outline,
-                      color: AppCommonColors.fieldBorderColor,
-                    ),
-                    fillColor: Colors.white,
-                    filled:true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 2,
-                        color:AppCommonColors.fieldBorderColor,
+                hintText: 'New password',
+                prefixIcon:  Container(
+                  width: 15.w,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 5.w,),
+                      Icon(
+                        Icons.lock_outline,
+                        color: AppCommonColors.textFieldTextColor,
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: AppCommonColors.fieldBorderColor,
-                          width: 2
-                      ),
-                      gapPadding: 10,
-                    ),
 
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          passwordVisibility=!passwordVisibility;
-                          print(passwordVisibility);
-                        });
-                      },
-                      color: AppCommonColors.fieldBorderColor,
-                      icon:passwordVisibility?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined),
-                    ),
-                    hintText: 'New Password'
+                    ],
+                  ),
                 ),
-              ),
+                hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                contentPadding: EdgeInsets.symmetric(vertical: 5.w),
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+              )
             ),
           ),
           Container(
             key: Key('Confirm new password'),
-            margin: EdgeInsets.all(1.h),
             child:Container(
-              width: 90.w,
-              height: 50,
-              child: TextField(
-                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.fieldBorderColor).bodyMedium,
-                obscureText: passwordVisibility1,
-                controller: passwordController1,
-                decoration: InputDecoration(
-
-                    prefixIcon:Icon(
-                      Icons.lock_outline,
-                      color: AppCommonColors.fieldBorderColor,
+                width: 85.w,
+                height: 10.h,
+                child: CustomTextFormField(
+                  textFormFieldType: TextFormFieldType.password,
+                  controller: passwordController1,
+                  hintText: 'Confirm New password',
+                  prefixIcon:  Container(
+                    width: 15.w,
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.w,),
+                        Icon(
+                          Icons.lock_outline,
+                          color: AppCommonColors.textFieldTextColor,
+                        ),
+                      ],
                     ),
-                    fillColor: Colors.white,
-                    filled:true,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 2,
-                        color:AppCommonColors.fieldBorderColor,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                          color: AppCommonColors.fieldBorderColor,
-                          width: 2
-                      ),
-                      gapPadding: 10,
-                    ),
-
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          passwordVisibility1=!passwordVisibility1;
-                          print(passwordVisibility1);
-                        });
-                      },
-                      color: AppCommonColors.fieldBorderColor,
-                      icon:passwordVisibility?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off_outlined),
-                    ),
-                    hintText: 'Confirm Password'
-                ),
-              ),
+                  ),
+                  hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                  contentPadding: EdgeInsets.symmetric(vertical: 5.w),
+                  style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                )
             ),
           ),
+
+
           Container(
             key: Key('button'),
-            margin: EdgeInsets.all(1.h),
+
             width: 100.w,
             child: CustomButton(
               backgroundColor: AppCommonColors.mainBlueButton,
               text:'Reset Password',
               onPressed: (){},
+              borderColor:AppCommonColors.mainBlueButton ,
+              width: 85.w,
             ),
           ),
           SizedBox(
