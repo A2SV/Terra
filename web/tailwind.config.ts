@@ -33,7 +33,7 @@ const config = {
         terraPurple: "#605DEC14",
         terraGray: "#3A3A3A99",
       },
-  
+
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
