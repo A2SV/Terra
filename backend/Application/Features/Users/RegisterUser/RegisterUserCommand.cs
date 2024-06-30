@@ -25,7 +25,7 @@ namespace Application.Features.Users.RegisterUser
         public string Password { get; set; }
 
         [Required, StringLength(10, MinimumLength = 10, ErrorMessage = "Mobile number should be 10")]
-        public string? mobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
 
        
 
