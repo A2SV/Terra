@@ -3,8 +3,7 @@ import ResetSuccess from "@/components/ResetSuccess";
 import AuthBackground from "../components/Authentication/AuthBackground";
 
 const Home: React.FC = () => {
-  const handleSubmit = () => {};
-
+  const handleSubmit = (email: string) => {};
   return (
     <div>
       <AuthBackground description="Sign In" />
