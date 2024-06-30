@@ -11,5 +11,6 @@ namespace Domain.Interfaces
     public interface IUserRepository
     {
         Task<User?> GetUserByEmailAsync(string username, string password);
+        Task<Result> RegisterUserAsync(User user);
     }
 }
