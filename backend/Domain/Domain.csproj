@@ -11,4 +11,9 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
         <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.6" />
     </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+    </ItemGroup>
 </Project>
