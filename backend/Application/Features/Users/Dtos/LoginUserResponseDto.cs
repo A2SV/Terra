@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.User.Dtos
+namespace Application.Features.Users.Dtos
 {
     internal class LoginUserResponseDto
     {

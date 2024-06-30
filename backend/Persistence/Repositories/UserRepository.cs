@@ -39,23 +39,72 @@ namespace Persistence.Repositories
     
         }
 
-        public async Task<Result> RegisterUserAsync(User user)
+
+        using Application.Models.ApiResult;
+using Domain.Entities;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Persistence.Repositories
+    {
+        public class UserRepository : IUserRepository
         {
-            var existingUser = await userManager.FindByEmailAsync(user.Email);
+            private readonly UserManager<User> userManager;
 
-            if (existingUser != null)
+
+
+
+            public UserRepository(UserManager<User> userManager)
             {
-                return new Result(false, ResultStatusCode.BadRequest, "User already exists");
+                this.userManager = userManager;
+
             }
 
-            var result = await userManager.CreateAsync(user, user.Password);
-
-            if (result.Succeeded)
+            public async Task<User?> GetUserByEmailAsync(string username, string password)
             {
-                return new Result(true, ResultStatusCode.Created, "User created successfully");
+                var existingUser = await userManager.FindByEmailAsync(username);
+
+                if (existingUser != null)
+                {
+                    var result = await userManager.CheckPasswordAsync(existingUser, password);
+
+                    return result ? existingUser : null;
+                }
+
+                return null;
+
+
             }
 
-            return new Result(false, ResultStatusCode.InternalServerError, "User creation failed");
+
+            public async Task<Result> RegisterUserAsync(User user, string password)
+            {
+                var existingUser = await userManager.FindByEmailAsync(user.Email);
+                if (existingUser != null)
+                {
+                    return new Result(false, ResultStatusCode.BadRequest, "A user with this email already exists.");
+                }
+
+
+                user.UserName = user.Email;
+
+                var result = await userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    return new Result(true, ResultStatusCode.Success, "User created successfully.");
+                }
+
+
+                string errors = string.Join("; ", result.Errors.Select(e => e.Description));
+                return new Result(false, ResultStatusCode.BadRequest, $"User creation failed: {errors}");
+            }
         }
     }
+
+}
 }
