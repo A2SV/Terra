@@ -1,3 +1,4 @@
+using Application.Contracts;
 using Application.Features.Users.LoginUser.Command;
 using Domain.Entities;
 using Domain.Interfaces;
