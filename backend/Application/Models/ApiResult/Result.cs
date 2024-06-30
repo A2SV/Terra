@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Models
 {
-    internal class Result
+    public class Result
     {
         public bool IsSuccess { get; set; }
         public ResultStatusCode StatusCode { get; set; }
@@ -27,7 +27,7 @@ namespace Application.Models
         }
     }
 
-    internal class Result<TData> : Result
+    public class Result<TData> : Result
     where TData : class
     {
         public TData Data { get; set; }
