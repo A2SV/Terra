@@ -33,12 +33,12 @@ const config = {
         inputColor: "#605DEC14",
         pageColor: "#FFFFFF",
       },
+
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
         nunito: ["Nunito Sans", "sans-serif"],
-        sans: ['Nunito Sans', 'sans-serif']
-
+        sans: ["Nunito Sans", "sans-serif"],
       },
     },
   },
