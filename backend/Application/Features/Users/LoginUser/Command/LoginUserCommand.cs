@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Application.Models.ApiResult;
 using Domain.Entities;
 using MediatR;
 using System;
