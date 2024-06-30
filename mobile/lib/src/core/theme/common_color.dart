@@ -10,4 +10,7 @@ class AppCommonColors {
   static const red = Color(0xFFFC0000);
   static const signInWithGoogleBgnd = Color(0xFF61677D);
   static const logoGold = Color(0xFFC3922E);
+  static const mainlightBlue=Color(0xFFD6DFFF);
+  static const imageBackgroundColor=Color(0xFFEAEFF5);
+  static const textFieldTextColor=Color(0xFFACACAC);
 }
