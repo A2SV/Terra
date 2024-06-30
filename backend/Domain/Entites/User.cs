@@ -12,5 +12,6 @@ namespace Domain.Entities
         public string? ProfilePictureUrl { get; set; }
         public string? VerificationToken { get; set; }
         public string? PasswordResetToken { get; set; }
+        public string? MobileNumber { get; set; }
     }
 }
