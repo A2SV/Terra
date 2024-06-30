@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -15,7 +15,9 @@
         <PackageReference Include="MoonSharp" Version="2.0.0" />
     </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Domain\Domain.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+	
 </Project>
