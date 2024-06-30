@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
+import 'package:mobile/src/features/auth/presentation/password_reset.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -18,7 +22,7 @@ class MainApp extends StatelessWidget {
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,
           themeMode: ThemeMode.light,
-          home: const OTPage(),
+          home: PasswordResetScreen(),
         );
       },
     );
