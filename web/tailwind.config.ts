@@ -37,7 +37,6 @@ const config = {
         nunito: ["Nunito Sans", "sans-serif"],
         sans: ["Nunito Sans", "sans-serif"],
       },
-     
     },
   },
   plugins: [require("tailwindcss-animate")],
