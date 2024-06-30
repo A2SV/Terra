@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'package:mobile/src/onboarding/presentation/pages/onboarding_screen.dart';
 
 void main() {
   runApp(const MainApp());
