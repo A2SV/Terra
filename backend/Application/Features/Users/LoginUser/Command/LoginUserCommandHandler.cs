@@ -1,3 +1,4 @@
+using Application.Contracts;
 using Application.Models;
 using Application.Models.ApiResult;
 using Domain.Entities;
