@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -16,10 +15,10 @@ class SignInWithGoogleBtn extends StatelessWidget {
       onPressed: onPressed,
       showSuffixWidget: true,
       suffixWidget: Assets.svg.google.asSvgImage().rightPadding(16.0),
-      backgroundColor: AppCommonColors.signInWithGoogleBgnd.withOpacity(0.3),
+      backgroundColor: AppCommonColors.signInWithGoogleBgnd.withOpacity(0.1),
       borderColor: AppCommonColors.mainBlueButton,
       horizontalPadding: 20.w,
-      textColor: context.colorScheme.onPrimary,
+      textColor: AppCommonColors.fieldBorderColor,
       borderRadius: 14,
     );
   }
