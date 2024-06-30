@@ -3,8 +3,7 @@ import AuthBackground from "../components/Authentication/AuthBackground";
 import ResetInputEmail from "@/components/ResetInputEmail";
 
 const Home: React.FC = () => {
-  const handleSubmit = (email: string) => {
-  };
+  const handleSubmit = (email: string) => {};
 
   return (
     <div>
