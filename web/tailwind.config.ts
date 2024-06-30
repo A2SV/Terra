@@ -23,7 +23,21 @@ const config = {
       },
     },
     extend: {
-      colors:{}
+      colors: {
+        btnColor: "#007DFC",
+        btnTextColor: "#FFFFFF",
+        normalTextColor: "#3A3A3A",
+        inputColor: "#605DEC14",
+        pageColor: "#FFFFFF",
+        terrablue: "#1779F3",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        pops: ["Poppins", "sans-serif", "Arial"],
+        nunito: ["Nunito Sans", "sans-serif"],
+        sans: ["Nunito Sans", "sans-serif"],
+      },
+     
     },
   },
   plugins: [require("tailwindcss-animate")],
