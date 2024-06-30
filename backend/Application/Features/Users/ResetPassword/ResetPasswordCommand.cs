@@ -1,8 +1,9 @@
+using Application.Models;
 using MediatR;
 
 namespace Application.Features.Users.ResetPassword;
 
-public class ResetPasswordCommand : IRequest
+public class ResetPasswordCommand : IRequest<Result>
 {
     public string Email { get; set; }
     public string Token { get; set; }
