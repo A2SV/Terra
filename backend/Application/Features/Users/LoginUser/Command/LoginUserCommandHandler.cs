@@ -1,4 +1,4 @@
-﻿using Application.Models;
+using Application.Models;
 using Application.Models.ApiResult;
 using Domain.Entities;
 using Domain.Interfaces;

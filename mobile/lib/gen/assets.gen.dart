@@ -12,25 +12,59 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/house_image1.png
+  AssetGenImage get houseImage1 =>
+      const AssetGenImage('assets/images/house_image1.png');
+
+  /// File path: assets/images/house_image2.png
+  AssetGenImage get houseImage2 =>
+      const AssetGenImage('assets/images/house_image2.png');
+
+  /// File path: assets/images/house_image3.png
+  AssetGenImage get houseImage3 =>
+      const AssetGenImage('assets/images/house_image3.png');
+
   /// File path: assets/images/images.png
   AssetGenImage get images => const AssetGenImage('assets/images/images.png');
 
-  /// File path: assets/images/png-clipart-car-car-white-thumbnail.png
-  AssetGenImage get pngClipartCarCarWhiteThumbnail => const AssetGenImage(
-      'assets/images/png-clipart-car-car-white-thumbnail.png');
+  /// File path: assets/images/messageIcon.png
+  AssetGenImage get messageIcon =>
+      const AssetGenImage('assets/images/messageIcon.png');
+
+  /// File path: assets/images/onboarding_image2.png
+  AssetGenImage get onboardingImage2 =>
+      const AssetGenImage('assets/images/onboarding_image2.png');
+
+  /// File path: assets/images/onboarding_image3.png
+  AssetGenImage get onboardingImage3 =>
+      const AssetGenImage('assets/images/onboarding_image3.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [images, pngClipartCarCarWhiteThumbnail];
+  List<AssetGenImage> get values => [
+        houseImage1,
+        houseImage2,
+        houseImage3,
+        images,
+        messageIcon,
+        onboardingImage2,
+        onboardingImage3
+      ];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/TERRA LOGO - MAIN-2 1@2x.svg
+  String get tERRALOGOMAIN212x => 'assets/svg/TERRA LOGO - MAIN-2 1@2x.svg';
+
   /// File path: assets/svg/person.svg
   String get person => 'assets/svg/person.svg';
 
+  /// File path: assets/svg/terra_logo.svg
+  String get terraLogo => 'assets/svg/terra_logo.svg';
+
   /// List of all assets
-  List<String> get values => [person];
+  List<String> get values => [tERRALOGOMAIN212x, person, terraLogo];
 }
 
 class Assets {

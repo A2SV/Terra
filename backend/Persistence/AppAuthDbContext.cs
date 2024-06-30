@@ -52,7 +52,7 @@ namespace Persistence
                 NormalizedName = "Landlord".ToUpper(),
                 ConcurrencyStamp = landlordRoleId
             };
-
+            
             modelBuilder.Entity<IdentityRole>().HasData(tenantRole, landlordRole);
 
             var adminUserRoles = new List<IdentityUserRole<string>>
