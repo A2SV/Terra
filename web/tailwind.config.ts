@@ -24,18 +24,21 @@ const config = {
     },
     extend: {
       colors: {
+        terrablue: "#1779F3",
+        terrapurple: "#605DEC14",
+        terragray: "#3A3A3A99",
         btnColor: "#007DFC",
         btnTextColor: "#FFFFFF",
         normalTextColor: "#3A3A3A",
         inputColor: "#605DEC14",
         pageColor: "#FFFFFF",
-        terrablue: "#1779F3",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
         nunito: ["Nunito Sans", "sans-serif"],
-        sans: ["Nunito Sans", "sans-serif"],
+        sans: ['Nunito Sans', 'sans-serif']
+
       },
     },
   },
