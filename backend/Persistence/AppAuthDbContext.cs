@@ -21,13 +21,16 @@ namespace Persistence
             var adminUser = new User
             {
                 Id = adminId,
+                UserName = "superadmin@gmail.com",
+                NormalizedUserName = "superadmin@gmail.com".ToUpper(),
                 FirstName = "Superadmin",
                 LastName = "Superadmin",
-                Email = "superadmin@email.com"
+                Email = "superadmin@gmail.com",
+                NormalizedEmail = "superadmin@gmail.com".ToUpper()
             };
 
             adminUser.PasswordHash = new PasswordHasher<IdentityUser>()
-                        .HashPassword(adminUser, "Admin@123");
+                        .HashPassword(adminUser, "superadmin@123");
 
             modelBuilder.Entity<User>().HasData(adminUser);
 
@@ -49,8 +52,8 @@ namespace Persistence
                 NormalizedName = "Landlord".ToUpper(),
                 ConcurrencyStamp = landlordRoleId
             };
-
-            modelBuilder.Entity<IdentityRole>().HasData([tenantRole, landlordRole]);
+            
+            modelBuilder.Entity<IdentityRole>().HasData(tenantRole, landlordRole);
 
             var adminUserRoles = new List<IdentityUserRole<string>>
             {
