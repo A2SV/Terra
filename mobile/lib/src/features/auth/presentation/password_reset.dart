@@ -30,6 +30,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
@@ -37,152 +38,155 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
           onPressed: (){},
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            alignment: Alignment.topCenter,
-            key: Key('page-indicator'),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
-                  child:PageIndicator(
-                    width: 10.w,
-                    color: AppCommonColors.mainlightBlue,
-                  ),
-                ),
-                Container(
-                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
-                  child:PageIndicator(
-                    width: 10.w,
-                    color: AppCommonColors.mainlightBlue,
-                  ),
-                ),
-                Container(
-                  margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
-                  child:PageIndicator(
-                    width: 10.w,
-                    color: AppCommonColors.mainBlueButton,
-                  ),
-                ),
-
-
-              ],
-            )
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Container(
-            key: Key('image'),
-            margin: EdgeInsets.all(5.h),
-            child: Image.asset(
-                'assets/images/lock.png',
-              width: 25.w,
-              height: 25.w,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppCommonColors.imageBackgroundColor.withOpacity(0.75),
-            ),
-
-          ),
-          Container(
-            key: Key('Reset Password'),
-            margin: EdgeInsets.all(1.h),
-            child: Text(
-              'Reset Password',
-              style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
-            ),
-          ),
-          Container(
-            key: Key('Description'),
-            margin: EdgeInsets.all(1.h),
-            child: Text(
-              'Reset your password and join the terra family today',
-              style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Container(
-            key: Key('New Password'),
-            child:Container(
-              width: 85.w,
-              height: 10.h,
-              child: CustomTextFormField(
-                textFormFieldType: TextFormFieldType.password,
-                controller: passwordController,
-                hintText: 'New password',
-                prefixIcon:  Container(
-                  width: 15.w,
-                  child: Row(
-                    children: [
-                      SizedBox(width: 5.w,),
-                      Icon(
-                        Icons.lock_outline,
-                        color: AppCommonColors.textFieldTextColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                alignment: Alignment.topCenter,
+                key: Key('page-indicator'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                      child:PageIndicator(
+                        width: 10.w,
+                        color: AppCommonColors.mainlightBlue,
                       ),
-
-                    ],
-                  ),
-                ),
-                hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
-                contentPadding: EdgeInsets.symmetric(vertical: 5.w),
-                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
-              )
-            ),
-          ),
-          Container(
-            key: Key('Confirm new password'),
-            child:Container(
-                width: 85.w,
-                height: 10.h,
-                child: CustomTextFormField(
-                  textFormFieldType: TextFormFieldType.password,
-                  controller: passwordController1,
-                  hintText: 'Confirm New password',
-                  prefixIcon:  Container(
-                    width: 15.w,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 5.w,),
-                        Icon(
-                          Icons.lock_outline,
-                          color: AppCommonColors.textFieldTextColor,
-                        ),
-                      ],
                     ),
-                  ),
-                  hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
-                  contentPadding: EdgeInsets.symmetric(vertical: 5.w),
-                  style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                    Container(
+                      margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                      child:PageIndicator(
+                        width: 10.w,
+                        color: AppCommonColors.mainlightBlue,
+                      ),
+                    ),
+                    Container(
+                      margin:EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
+                      child:PageIndicator(
+                        width: 10.w,
+                        color: AppCommonColors.mainBlueButton,
+                      ),
+                    ),
+
+
+                  ],
                 )
             ),
-          ),
-
-
-          Container(
-            key: Key('button'),
-
-            width: 100.w,
-            child: CustomButton(
-              backgroundColor: AppCommonColors.mainBlueButton,
-              text:'Reset Password',
-              onPressed: (){},
-              borderColor:AppCommonColors.mainBlueButton ,
-              width: 85.w,
+            SizedBox(
+              height: 5.h,
             ),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
+            Container(
+              key: Key('image'),
+              margin: EdgeInsets.all(5.h),
+              child: Image.asset(
+                'assets/images/lock.png',
+                width: 25.w,
+                height: 25.w,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: AppCommonColors.imageBackgroundColor.withOpacity(0.75),
+              ),
 
-        ],
-      ),
+            ),
+            Container(
+              key: Key('Reset Password'),
+              margin: EdgeInsets.all(1.h),
+              child: Text(
+                'Reset Password',
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
+              ),
+            ),
+            Container(
+              key: Key('Description'),
+              margin: EdgeInsets.all(1.h),
+              child: Text(
+                'Reset your password and join the terra family today',
+                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
+              ),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Container(
+              key: Key('New Password'),
+              child:Container(
+                  width: 85.w,
+                  height: 10.h,
+                  child: CustomTextFormField(
+                    textFormFieldType: TextFormFieldType.password,
+                    controller: passwordController,
+                    hintText: 'New password',
+                    borderSideColor: AppCommonColors.textFieldTextColor,
+                    prefixIcon:  Container(
+                      width: 15.w,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5.w,),
+                          Icon(
+                            Icons.lock_outline,
+                            color: AppCommonColors.textFieldTextColor,
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                    contentPadding: EdgeInsets.symmetric(vertical: 5.w),
+                    style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                  )
+              ),
+            ),
+            Container(
+              key: Key('Confirm new password'),
+              child:Container(
+                  width: 85.w,
+                  height: 10.h,
+                  child: CustomTextFormField(
+                    textFormFieldType: TextFormFieldType.password,
+                    borderSideColor: AppCommonColors.textFieldTextColor,
+                    hintText: 'Confirm New password',
+                    prefixIcon:  Container(
+                      width: 15.w,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5.w,),
+                          Icon(
+                            Icons.lock_outline,
+                            color: AppCommonColors.textFieldTextColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                    hintStyle: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                    contentPadding: EdgeInsets.symmetric(vertical: 5.w),
+                    style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                  )
+              ),
+            ),
+
+
+            Container(
+              key: Key('button'),
+
+              width: 100.w,
+              child: CustomButton(
+                backgroundColor: AppCommonColors.mainBlueButton,
+                text:'Reset Password',
+                onPressed: (){},
+                borderColor:AppCommonColors.mainBlueButton ,
+                width: 85.w,
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+
+          ],
+        ),
+      )
     );
   }
 }
