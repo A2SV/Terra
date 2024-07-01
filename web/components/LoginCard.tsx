@@ -116,7 +116,7 @@ const LoginCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl text-gray-700"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
