@@ -34,17 +34,12 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
       body:
-
-   
-     
            Column(
              children: [
-              
               Stack(
                 children: [
                    Container(
                     height: 140,  
-               
                    ),
                   Container(
                   height: 70,
@@ -52,7 +47,6 @@ class ProfilePage extends StatelessWidget {
                   const BoxDecoration(
                     color: Color.fromRGBO(235, 240, 240, 1),
                   ),
-                  
                 ),
                 Positioned(
                   
@@ -79,8 +73,6 @@ class ProfilePage extends StatelessWidget {
                   top: 20,
                   child: Image.asset('assets/images/profile/pfp.png',
                   )),
-                
-              
                 ]
               ),
                Center(
@@ -118,24 +110,31 @@ class ProfilePage extends StatelessWidget {
            ),
       
     bottomNavigationBar: 
-    BottomNavigationBar(
+    Theme(
+      data: Theme.of(context).copyWith(
 
-      backgroundColor: Colors.white,
-      fixedColor: Colors.black,
-      unselectedItemColor: Colors.black,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      items: 
-     [
-      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Search.png'),
-      label: "Explore" ),
-      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Heart.png'),
-      label: "Wishlist"),
-      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Message.png'),
-      label: "Inbox"),
-      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/User.png'),
-      label: "Profile"), 
-    ]
+        canvasColor: Colors.white,
+       ),
+      
+      child: BottomNavigationBar(
+      
+        backgroundColor: Colors.white,
+        fixedColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        items: 
+       [
+        BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Search.png'),
+        label: "Explore" ),
+        BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Heart.png'),
+        label: "Wishlist"),
+        BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Message.png'),
+        label: "Inbox"),
+        BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/User.png'),
+        label: "Profile"), 
+      ]
+      ),
     ),
     );
   }
