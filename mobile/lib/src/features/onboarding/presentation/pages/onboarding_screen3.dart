@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:mobile/src/onboarding/presentation/widgets/page_indicator.dart';
-import 'package:mobile/src/onboarding/presentation/widgets/skip_button.dart';
+import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
+import 'package:mobile/src/core/widgets/skip_button.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key, required this.onBack});
@@ -36,7 +36,9 @@ class OnboardingScreen3 extends StatelessWidget {
                             onPressed: onBack,
                             icon: const Icon(Icons.arrow_back)),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushReplacementNamed(context, "/signup");
+                          },
                           child: const SkipButton(opacity: 0.69),
                         ),
                       ],
@@ -94,13 +96,18 @@ class OnboardingScreen3 extends StatelessWidget {
                       ),
                       SizedBox(height: 2.h),
                       Center(
-                        child: Text(
-                          "Get started",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Nunito",
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(context, "/signup");
+                          },
+                          child: Text(
+                            "Get started",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Nunito",
+                            ),
                           ),
                         ),
                       ),

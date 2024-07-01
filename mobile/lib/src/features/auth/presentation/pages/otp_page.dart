@@ -9,11 +9,15 @@ class OTPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pinController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -82,6 +86,7 @@ class OTPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Pinput(
+                controller: pinController,
                 length: 6,
                 showCursor: true,
                 onChanged: (value) {
@@ -106,7 +111,11 @@ class OTPage extends StatelessWidget {
                 horizontalPadding: 0,
                 text: 'Verify',
                 onPressed: () {
-                  // Handle verify action
+                  var value = pinController.value.text;
+                  if (value.length < 6) {
+                    return;
+                  }
+                  Navigator.pushReplacementNamed(context, "/signin");
                 },
                 height: 50,
                 borderColor: const Color(0xFF1779F3),
