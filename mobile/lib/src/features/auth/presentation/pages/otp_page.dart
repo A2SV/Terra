@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -95,7 +96,7 @@ class OTPage extends StatelessWidget {
                   height: 50,
                   textStyle: const TextStyle(fontSize: 18, color: Colors.black),
                   decoration: BoxDecoration(
-                    color: const Color(0x0feaeff5),
+                    color: const Color(0xFEAEFF5),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.grey),
                   ),
