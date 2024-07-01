@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/utils/utils.dart';
 
 class Card3 extends StatelessWidget {
   const Card3({super.key});
@@ -8,7 +9,7 @@ class Card3 extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 45.0),
       child: Container(
-        height: 170,
+        height: 120,
       
         decoration: BoxDecoration(
           color: Colors.white,
@@ -16,29 +17,32 @@ class Card3 extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               color: Colors.grey,
-              blurRadius: 10,
+              blurRadius: 3,
               offset: Offset(0, 2),
             ),
           ],
         ),
         
         child: ListView(
-          
+          itemExtent: 35,
           children:  [
             ListTile(
               leading: Image.asset('assets/images/profile/help.png'),
-              title: Text('Help & Support'),
+              title: Text('Help & Support',
+              style: context.textTheme.bodyMedium,),
   
             ),
             ListTile(
               leading: Image.asset('assets/images/profile/contact.png'),
-              title: Text('Contact us'),
+              title: Text('Contact us',
+              style: context.textTheme.bodyMedium,),
            
   
             ),
             ListTile(
               leading: Image.asset('assets/images/profile/privacy.png'),
-              title: Text('Privacy policy'),
+              title: Text('Privacy policy',
+              style: context.textTheme.bodyMedium,),
      
   
             ),

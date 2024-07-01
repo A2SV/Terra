@@ -1,62 +1,139 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/profile_widgets/profile_cards.dart';
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      
       backgroundColor: Colors.white,
    
       appBar: AppBar(
-        backgroundColor: Colors.white,
-       
+        backgroundColor: const Color.fromRGBO(235, 240, 240, 1),
+
         leading: IconButton(
-          icon: const Icon(CupertinoIcons.bell,
-         ),
+          icon: Image.asset('assets/images/profile/notifications.png'),
           onPressed: () {
           },
         ),
         actions: [
           IconButton(
-            icon: const Icon(CupertinoIcons.timer),
+            icon: Image.asset('assets/images/profile/timer.png',
+            ),
             onPressed: () {
             },
           ),
           IconButton(
-            icon: const Icon(CupertinoIcons.drop),
+            icon: Image.asset('assets/images/profile/dots.png'),
             onPressed: () {
             },
           )
         ],
       ),
-      body: const Center(
-        child:  Column(
-         
-          children: [
-            Card1(),
-            SizedBox(height: 20),
-            Card2(),
-            SizedBox(height: 20),
-            Card3(),
-          ],
-        ),
-      ),
+      body:
+
+   
+     
+           Column(
+             children: [
+              
+              Stack(
+                children: [
+                   Container(
+                    height: 140,  
+               
+                   ),
+                  Container(
+                  height: 70,
+                  decoration: 
+                  const BoxDecoration(
+                    color: Color.fromRGBO(235, 240, 240, 1),
+                  ),
+                  
+                ),
+                Positioned(
+                  
+                  child: ClipOval(
+                    child: 
+                    Container(
+                    height: 120,
+                    decoration: 
+                    const BoxDecoration(
+                      color:Color.fromRGBO(235, 240, 240, 1),
+                     
+                    ),
+                    
+                  ),
+                    ),
+                ),
+                
+                  Positioned(
+                    left: 250,
+                    top: 95,
+                    child: Image.asset('assets/images/profile/pencil.png',)),
+                  Positioned(
+                  left: 150,
+                  top: 20,
+                  child: Image.asset('assets/images/profile/pfp.png',
+                  )),
+                
+              
+                ]
+              ),
+               Center(
+                      child:  Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+               
+                children: [
+                  const Text('Evans Acheampong',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                
+                  ),),
+                  Text('evansachie01@gmail.com|+233505411926',
+                  style: context.textTheme.bodyMedium),
+                  const SizedBox(height: 60),
+                  const Card1(),
+                  const SizedBox(height: 20),
+                  const Card2(),
+                  const SizedBox(height: 20),
+                  const Card3(),
+                  const SizedBox(height: 60),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    child: Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                      
+                    ),
+                  ),
+                ],
+                         ),
+                       ),
+             ],
+           ),
+      
     bottomNavigationBar: 
     BottomNavigationBar(
+
+      backgroundColor: Colors.white,
       fixedColor: Colors.black,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: Colors.black,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       items: 
-    [
-      BottomNavigationBarItem(icon: Icon(Icons.search),
+     [
+      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Search.png'),
       label: "Explore" ),
-      BottomNavigationBarItem(icon: Icon(CupertinoIcons.heart),
+      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Heart.png'),
       label: "Wishlist"),
-      BottomNavigationBarItem(icon: Icon(CupertinoIcons.mail),
+      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/Message.png'),
       label: "Inbox"),
-     BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),
+      BottomNavigationBarItem(icon: Image.asset('assets/images/bottomNav/User.png'),
       label: "Profile"), 
     ]
     ),
