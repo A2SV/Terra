@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:mobile/src/onboarding/presentation/widgets/page_indicator.dart';
-import 'package:mobile/src/onboarding/presentation/widgets/skip_button.dart';
+import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
+import 'package:mobile/src/core/widgets/skip_button.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
-  const OnboardingScreen1(
-      {super.key, required this.onSkip, required this.onNext});
+  const OnboardingScreen1({super.key, required this.onNext});
 
   final VoidCallback onNext;
-  final VoidCallback onSkip;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,9 @@ class OnboardingScreen1 extends StatelessWidget {
                   ),
                   SizedBox(width: 19.w),
                   GestureDetector(
-                    onTap: onSkip,
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, "/signup");
+                    },
                     child: const SkipButton(),
                   ),
                 ],

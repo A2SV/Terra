@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/core/widgets/skip_button.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_field.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -36,9 +37,24 @@ class _SignInPageState extends State<SignInPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: 8.h,
+                  height: 7.h,
                 ),
-                SvgPicture.asset('assets/svg/terra_logo.svg'),
+                Row(
+                  children: [
+                    SizedBox(width: 36.w),
+                    SvgPicture.asset(
+                      "assets/svg/terra_logo.svg",
+                      height: 20.w,
+                    ),
+                    SizedBox(width: 19.w),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, "/dashboard");
+                      },
+                      child: const SkipButton(),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 2.h),
                 Text(
                   'Sign In',
@@ -88,18 +104,20 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   textAlign: TextAlign.end,
                 ),
-                SizedBox(height: 6.h),
+                SizedBox(height: 5.h),
                 CustomButton(
                   text: 'Log In',
                   onPressed: () {
                     final valid = CustomValidator.validateForm(_formKey);
-                    if (valid) {}
+                    if (valid) {
+                      Navigator.pushReplacementNamed(context, '/dashboard');
+                    }
                   },
                   horizontalPadding: 0,
                   borderColor: Colors.white,
                 ),
                 SizedBox(
-                  height: 3.h,
+                  height: 2.h,
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
@@ -109,7 +127,9 @@ class _SignInPageState extends State<SignInPage> {
                         color: AppCommonColors.fieldBorderColor),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
@@ -117,7 +137,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                 ]),
-                SizedBox(height: 6.h),
+                SizedBox(height: 4.h),
                 const Row(
                   children: [
                     Expanded(

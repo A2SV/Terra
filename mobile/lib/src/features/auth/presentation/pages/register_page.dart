@@ -3,10 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/core/widgets/skip_button.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_field.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -43,7 +43,22 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 6.h,
                 ),
-                SvgPicture.asset('assets/svg/terra_logo.svg'),
+                Row(
+                  children: [
+                    SizedBox(width: 36.w),
+                    SvgPicture.asset(
+                      "assets/svg/terra_logo.svg",
+                      height: 20.w,
+                    ),
+                    SizedBox(width: 19.w),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, "/dashboard");
+                      },
+                      child: const SkipButton(),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 12),
                 Text(
                   'Sign Up',
@@ -156,7 +171,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   text: 'Create Account',
                   onPressed: () {
                     final valid = CustomValidator.validateForm(_formKey);
-                    if (valid) {}
+                    if (valid) {
+                      Navigator.pushNamed(context, "/otp");
+                    }
                   },
                   horizontalPadding: 0,
                   borderColor: Colors.white,
@@ -169,7 +186,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         color: AppCommonColors.fieldBorderColor),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/signin");
+                    },
                     child: Text(
                       'Sign In',
                       style: TextStyle(
