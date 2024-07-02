@@ -3,6 +3,11 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
+import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -11,6 +16,30 @@ const SignUpCard: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      firstName: e.target.value,
+    }));
+  };
+
+  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      lastName: e.target.value,
+    }));
+  };
 
   const togglePasswordVisibility = (): void => {
     setPasswordVisible(!passwordVisible);
@@ -21,8 +50,8 @@ const SignUpCard: React.FC = () => {
     }
   };
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = event.target;
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
     setEmail(value);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,23 +60,49 @@ const SignUpCard: React.FC = () => {
     } else {
       setEmailError("");
     }
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      email: e.target.value,
+    }));
   };
 
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setPassword(event.target.value);
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
+    setUser((prevUser) => ({
+      ...prevUser,
+      password: e.target.value,
+    }));
   };
 
   const handleConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
     } else {
       setPasswordError("");
     }
+
+    try {
+      const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "UserAccount/register";
+      await axios.post(baseUrl, user);
+
+      router.push("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setMessage(error.response?.data);
+      } else {
+        setMessage("An error occurred. Please try again later.");
+      }
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -58,20 +113,36 @@ const SignUpCard: React.FC = () => {
           onSubmit={handleSubmit}
           className="info-section mt-20 max-w-lg mb-10  w-4/6 flex flex-col items-center space-y-6"
         >
-          <div className="nav w-full md:w-2/4 h-12 bg-terraPurple flex items-center rounded-full justify-between px-5 ">
+          <div className="nav w-full md:w-2/4 h-12 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
             <button
               type="button"
               className="login  w-1/2 h-2/3 rounded-full flex justify-center items-center"
             >
-              <p className="text-terraBlue text-sm ">Login</p>
+              <p className="text-terrablue text-sm ">Login</p>
             </button>
             <button
               type="button"
-              className="register w-1/2 h-2/3 bg-terraBlue rounded-full flex justify-center items-center"
+              className="register w-1/2 h-2/3 bg-terrablue rounded-full flex justify-center items-center"
             >
               <p className="text-white text-sm ">Register</p>
             </button>
           </div>
+
+          {message && (
+            <div
+              className="flex items-center bg-red-100 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <Image
+                src="/ErrorIcon.svg"
+                width={20}
+                height={20}
+                className="rounded-lg mr-2"
+                alt="avatar"
+              />
+              <span className="block sm:inline">{message}</span>
+            </div>
+          )}
 
           <div className="info w-full">
             <p className="font-sans text-sm font-light">
@@ -88,6 +159,7 @@ const SignUpCard: React.FC = () => {
               type="text"
               required
               placeholder="Enter your User name"
+              onChange={handleFirstNameChange}
             />
           </div>
 
@@ -100,6 +172,7 @@ const SignUpCard: React.FC = () => {
               type="text"
               required
               placeholder="Enter your User name"
+              onChange={handleLastNameChange}
             />
           </div>
 
@@ -133,7 +206,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute text-sm  top-1/2 right-20 sm:right-24 transform -translate-y-1/2 cursor-pointer text-eye text-gray-700"
+                className="absolute text-sm  top-1/2 right-20 sm:right-24 transform -translate-y-1/2 cursor-pointer text-eye"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -156,7 +229,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handleConfirmPasswordChange}
               />
               <span
-                className="absolute top-1/2 right-20 sm:right-24 text-sm transform -translate-y-1/2 cursor-pointer text-eye text-gray-700"
+                className="absolute top-1/2 right-20 sm:right-24 text-sm transform -translate-y-1/2 cursor-pointer text-eye"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -171,9 +244,9 @@ const SignUpCard: React.FC = () => {
             <div className="login-btn w-2/5 text-sm ">
               <button
                 type="submit"
-                className="w-full h-9 bg-terraBlue rounded-full text-white text-xs"
+                className="w-full h-9 bg-terrablue rounded-full text-white text-xs"
               >
-                Register
+                {loading ? "Loading..." : "Register"}
               </button>
             </div>
 
@@ -182,6 +255,9 @@ const SignUpCard: React.FC = () => {
             <button
               type="button"
               className="google w-3/4 md:w-3/6 h-9 text-sm  rounded-full flex items-center justify-center border border-terraGray"
+              onClick={() => {
+                signIn("google");
+              }}
             >
               <FcGoogle className="text-2xl mr-2" />
               <p className="font-sans font-light text-xs ">Continue with Google</p>

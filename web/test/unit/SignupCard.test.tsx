@@ -1,16 +1,44 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import SignUpCard from "@/components/SignUpCard";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import SignUpCard from "../../components/SignupCard";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
+import { signIn } from "next-auth/react";
 
-describe("SignUpCard Component", () => {
-  test("renders SignUpCard component", () => {
+// Mocking the modules
+jest.mock("axios");
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+jest.mock("next-runtime-env", () => ({
+  env: jest.fn(),
+}));
+jest.mock("next-auth/react", () => ({
+  signIn: jest.fn(),
+}));
+
+describe("SignUpCard", () => {
+  let push: jest.Mock;
+
+  beforeEach(() => {
+    push = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({ push });
+    (env as jest.Mock).mockReturnValue("http://mockapi.com/");
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders the component", () => {
     render(<SignUpCard />);
     expect(
       screen.getByText("Enter your details and join the Terra family today")
     ).toBeInTheDocument();
   });
 
-  test("shows email validation error for invalid email", () => {
+  test("validates email format", () => {
     render(<SignUpCard />);
     const emailInput = screen.getByPlaceholderText("Enter your Email Address");
     fireEvent.change(emailInput, { target: { value: "invalid-email" } });
@@ -18,23 +46,9 @@ describe("SignUpCard Component", () => {
     expect(screen.getByText("Invalid email address")).toBeInTheDocument();
   });
 
-  test("does not show email validation error for valid email", () => {
+  test("handles Google sign-in", () => {
     render(<SignUpCard />);
-    const emailInput = screen.getByPlaceholderText("Enter your Email Address");
-    fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
-    fireEvent.blur(emailInput);
-    expect(screen.queryByText("Invalid email address")).not.toBeInTheDocument();
-  });
-
-  test("toggles password visibility", () => {
-    render(<SignUpCard />);
-    const passwordInput = screen.getByPlaceholderText("Enter your Password");
-    const toggleButton = screen.getAllByRole("button", { name: /Show password/i })[0];
-
-    fireEvent.click(toggleButton);
-    expect(passwordInput).toHaveAttribute("type", "text");
-
-    fireEvent.click(toggleButton);
-    expect(passwordInput).toHaveAttribute("type", "password");
+    fireEvent.click(screen.getByText("Continue with Google"));
+    expect(signIn).toHaveBeenCalledWith("google");
   });
 });

@@ -1,11 +1,11 @@
 import React from "react";
-import SignUpBackground from "@/components/SignUpBackground";
+import SignUpCard from "@/components/SignupCard";
 
 const SignUp = () => {
   return (
-    <main>
-      <SignUpBackground />
-    </main>
+    <div>
+      <SignUpCard />
+    </div>
   );
 };
 

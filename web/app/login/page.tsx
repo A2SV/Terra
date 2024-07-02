@@ -1,10 +1,10 @@
 import React from "react";
-import LoginBackground from "@/components/LoginBackground";
+import LoginCard from "@/components/LoginCard";
 
 const Login = () => {
   return (
     <div>
-      <LoginBackground />
+      <LoginCard />
     </div>
   );
 };
