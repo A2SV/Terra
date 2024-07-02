@@ -32,6 +32,7 @@ class ThemeConfig {
 
   ThemeData get lightTheme {
     return ThemeData.light().copyWith(
+      
       primaryColor: AppCommonColors.mainBlueButton,
       inputDecorationTheme: const InputDecorationTheme().copyWith(
         border: const OutlineInputBorder(
@@ -39,6 +40,11 @@ class ThemeConfig {
             color: AppLightThemeColors.strokeForInputFieldLight,
           ),
         ),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white, // Set the background color
+ 
+
       ),
       buttonTheme: const ButtonThemeData().copyWith(
         buttonColor: AppCommonColors.activeButton,
