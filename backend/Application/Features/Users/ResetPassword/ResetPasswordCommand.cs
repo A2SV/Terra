@@ -1,4 +1,4 @@
-using Application.Models;
+using Application.Models.ApiResult;
 using MediatR;
 
 namespace Application.Features.Users.ResetPassword;

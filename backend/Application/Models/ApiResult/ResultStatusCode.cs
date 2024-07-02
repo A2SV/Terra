@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Application.Models.ApiResult
 {
@@ -35,6 +30,9 @@ namespace Application.Models.ApiResult
         NotAcceptable = 406,
 
         [Display(Name = "Failed Dependency")]
-        FailedDependency = 424
+        FailedDependency = 424,
+
+        [Display(Name = "Created")]
+        Created = 201
     }
 }
