@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
 
-// Mocking the modules
 jest.mock("axios");
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
