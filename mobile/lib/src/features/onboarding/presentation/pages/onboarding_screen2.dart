@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
@@ -22,13 +23,14 @@ class OnboardingScreen2 extends StatelessWidget {
           image: DecorationImage(
             image: const AssetImage("assets/images/onboarding_image2.png"),
             colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                AppLightThemeColors.kBlackColor.withOpacity(0.5),
+                BlendMode.dstATop),
           ),
           gradient: const LinearGradient(
             colors: [
-              Color.fromRGBO(203, 201, 190, 1),
-              Color.fromRGBO(210, 204, 188, 1),
-              Color.fromRGBO(115, 115, 115, 1),
+              AppLightThemeColors.kGradientColor1,
+              AppLightThemeColors.kGradientColor2,
+              AppLightThemeColors.kGradientColor3,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -64,22 +66,28 @@ class OnboardingScreen2 extends StatelessWidget {
                 "Discover affordable and convenient housing options at your comfort.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: 18.5.sp,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Nunito",
                 ),
               ),
             ),
-            const Center(
+            Center(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  PageIndicator(width: 7, color: Colors.white),
-                  SizedBox(width: 6),
-                  PageIndicator(width: 22, color: Colors.white),
-                  SizedBox(width: 6),
-                  PageIndicator(width: 7, color: Colors.white),
+                  PageIndicator(
+                      width: 7,
+                      color: Theme.of(context).colorScheme.onPrimary), //change
+                  const SizedBox(width: 6),
+                  PageIndicator(
+                      width: 22,
+                      color: Theme.of(context).colorScheme.onPrimary), //change
+                  const SizedBox(width: 6),
+                  PageIndicator(
+                      width: 7,
+                      color: Theme.of(context).colorScheme.onPrimary), //change
                 ],
               ),
             ),
@@ -90,7 +98,7 @@ class OnboardingScreen2 extends StatelessWidget {
                 child: Text(
                   "Next",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Nunito",

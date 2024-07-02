@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -33,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Form(
       key: _formKey,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 2.8.h, horizontal: 4.w),
@@ -66,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      color: AppLightThemeColors.kBlackColor),
                 ),
                 const Text(
                   'Join the Terra family',
@@ -176,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     }
                   },
                   horizontalPadding: 0,
-                  borderColor: Colors.white,
+                  borderColor: Theme.of(context).colorScheme.onPrimary,
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(

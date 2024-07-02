@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:mobile/src/core/theme/light_theme_colors.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
@@ -17,8 +19,8 @@ class OnboardingScreen1 extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(151, 181, 217, 1),
-              Color.fromRGBO(229, 207, 166, 1),
+              AppLightThemeColors.kGradientBlue, // error here
+              AppLightThemeColors.kGradientYellow, // error here
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

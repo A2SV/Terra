@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -29,7 +30,7 @@ class _SignInPageState extends State<SignInPage> {
     return Form(
       key: _formKey,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 2.8.h, horizontal: 4.w),
@@ -62,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
                   style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      color: AppLightThemeColors.kBlackColor), //black
                 ),
                 const Text(
                   'Welcome to the Terra family',
@@ -114,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                     }
                   },
                   horizontalPadding: 0,
-                  borderColor: Colors.white,
+                  borderColor: Theme.of(context).colorScheme.onPrimary,
                 ),
                 SizedBox(
                   height: 2.h,
