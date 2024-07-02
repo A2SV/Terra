@@ -5,7 +5,13 @@ using Application.Features.Users.RegisterUser;
 using Application.Features.Users.ResetPassword;
 using Application.Models.ApiResult;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Domain.Entities;
+using Application.Contracts;
 
 
 namespace WebApi.Controllers
@@ -15,10 +21,14 @@ namespace WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly UserManager<User> userManager;
+        private readonly ITokenRepository tokenRepository;
 
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator, UserManager<User> userManager, ITokenRepository tokenRepository)
         {
             this.mediator = mediator;
+            this.userManager = userManager;
+            this.tokenRepository = tokenRepository;
         }
 
         [HttpPost("login")]
@@ -98,6 +108,57 @@ namespace WebApi.Controllers
                 var result = new Result(false, ResultStatusCode.BadRequest, "An error occured while sending forgot password email.");
                 return StatusCode((int)result.StatusCode, result);
             }
+        }
+
+        [HttpGet("google-login")]
+        public IActionResult GoogleLogin()
+        {
+            var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet("google-response")]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            if (!authenticateResult.Succeeded)
+            {
+                return BadRequest("Google authentication failed");
+            }
+
+            var claims = authenticateResult.Principal.Identities.FirstOrDefault().Claims;
+            var emailClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+            var email = emailClaim?.Value;
+
+            if (email == null)
+            {
+                return BadRequest("There is no user with this email");
+            }
+
+            var user = await userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                user = new User
+                {
+                    Email = email,
+                    UserName = email,
+                    FirstName = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
+                    LastName = claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(user);
+                if (!result.Succeeded)
+                {
+                    return BadRequest("User creation failed");
+                }
+            }
+
+            var userRoles = await userManager.GetRolesAsync(user);
+            var jwtToken = tokenRepository.GenerateJwtToken(user, userRoles.ToArray());
+
+            return Ok(new { Token = jwtToken });
         }
     }
 }
