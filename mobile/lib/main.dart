@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
+import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 
-import 'package:mobile/src/features/auth/presentation/password_reset.dart';
+
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
