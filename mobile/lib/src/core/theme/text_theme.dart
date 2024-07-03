@@ -10,6 +10,12 @@ class CustomTextStyles {
       fontWeight: FontWeight.w400,
       fontFamily: FontFamily.nunito,
     ),
+    displaySmall: TextStyle(
+      color: textColor,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w600,
+      fontFamily: FontFamily.nunito,
+    ),
     displayMedium: TextStyle(
       color: textColor,
       fontSize: 23.sp,
