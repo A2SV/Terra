@@ -19,8 +19,8 @@ class OnboardingScreen1 extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppLightThemeColors.kGradientBlue, // error here
-              AppLightThemeColors.kGradientYellow, // error here
+              AppLightThemeColors.kGradientBlue, 
+              AppLightThemeColors.kGradientYellow, 
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

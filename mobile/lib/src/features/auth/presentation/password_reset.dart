@@ -3,6 +3,7 @@ import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/custom_textformfield.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../onboarding/presentation/widgets/page_indicator.dart';
