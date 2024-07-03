@@ -2,6 +2,7 @@
 using Application.Features.Users.ForgotPassword.Command;
 using Application.Features.Users.LoginUser.Command;
 using Application.Features.Users.RegisterUser;
+using Application.Features.Users.ResendOTP;
 using Application.Features.Users.ResetPassword;
 using Application.Features.Users.VerifyOTP;
 using Application.Models.ApiResult;
@@ -108,11 +109,30 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPost("verifyOTP")]
+        [HttpPost("VerifyOTP")]
         public async Task<IActionResult> VerifyOTP([FromBody] VerifyOTPCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return StatusCode((int)result.StatusCode, result);
+            }
+        }
+
+        [HttpPost("ResendOTP")]
+        public async Task<IActionResult> ResendOTP([FromBody] ResendOTPCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var result = await mediator.Send(command);
             if (result.IsSuccess)
