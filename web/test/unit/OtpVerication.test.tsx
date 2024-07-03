@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import OtpVerification from "@/components/Authentication/OtpVerification";
+import OtpVerification from "../../components/Authentication/OtpVerification";
+import React from "react";
 
 describe("Header", () => {
   it("renders the submit button", () => {

@@ -1,4 +1,4 @@
-﻿using Application.Features.Users.Dtos;
+using Application.Features.Users.Dtos;
 using Application.Features.Users.ForgotPassword.Command;
 using Application.Features.Users.LoginUser.Command;
 using Application.Features.Users.RegisterUser;
@@ -7,7 +7,15 @@ using Application.Features.Users.ResetPassword;
 using Application.Features.Users.VerifyOTP;
 using Application.Models.ApiResult;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Domain.Entities;
+using Application.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace WebApi.Controllers
@@ -17,10 +25,14 @@ namespace WebApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly UserManager<User> userManager;
+        private readonly ITokenRepository tokenRepository;
 
-        public AuthController(IMediator mediator)
+        public AuthController(IMediator mediator, UserManager<User> userManager, ITokenRepository tokenRepository)
         {
             this.mediator = mediator;
+            this.userManager = userManager;
+            this.tokenRepository = tokenRepository;
         }
 
         [HttpPost("login")]
@@ -54,7 +66,6 @@ namespace WebApi.Controllers
                 Message = "Registration successful. Please verify your OTP sent to your email.",
             });
         }
-
 
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
@@ -108,7 +119,7 @@ namespace WebApi.Controllers
                 return StatusCode((int)result.StatusCode, result);
             }
         }
-
+        
         [HttpPost("VerifyOTP")]
         public async Task<IActionResult> VerifyOTP([FromBody] VerifyOTPCommand command)
         {
@@ -145,7 +156,65 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpGet("google-login")]
+        [AllowAnonymous]
+        public IActionResult GoogleLogin()
+        {
+            // var properties = new AuthenticationProperties { RedirectUri = "http://localhost:5183/api/Auth/google-response" };
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleResponse", "Auth", null, Request.Scheme),
+                Items =
+                {
+                    {"scheme", GoogleDefaults.AuthenticationScheme}
+                }
+            };
+            Console.WriteLine($"RedirectUri: {properties.RedirectUri}");
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
 
+        [HttpGet("google-response")]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            if (!authenticateResult.Succeeded)
+            {
+                return BadRequest("Google authentication failed");
+            }
 
+            var claims = authenticateResult.Principal?.Identities.FirstOrDefault()?.Claims;
+            var emailClaim = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            // var email = emailClaim?.Value;
+
+            if (String.IsNullOrEmpty(emailClaim))
+            {
+                return BadRequest("There is no user with this email");
+            }
+
+            var user = await userManager.FindByEmailAsync(emailClaim);
+
+            if (user == null)
+            {
+                user = new User
+                {
+                    Email = emailClaim,
+                    UserName = emailClaim,
+                    FirstName = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
+                    LastName = claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(user);
+                if (!result.Succeeded)
+                {
+                    return BadRequest("User creation failed");
+                }
+            }
+
+            var userRoles = await userManager.GetRolesAsync(user);
+            var jwtToken = tokenRepository.GenerateJwtToken(user, userRoles.ToArray());
+
+            return Ok(new { Token = jwtToken });
+        }
     }
 }
