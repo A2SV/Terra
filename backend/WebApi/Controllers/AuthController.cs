@@ -58,7 +58,7 @@ namespace WebApi.Controllers
 
             return Created($"/User/{result.Data.Id}", "User registration successful");
         }
-
+    
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
         {
