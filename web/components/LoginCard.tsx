@@ -6,8 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import ErrorIcon from "@/public/ErrorIcon.svg";
+import ErrorMessage from "./ErrorMessage";
+import SuccessMessage from "./SuccessMessage";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -16,6 +16,7 @@ const LoginCard: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>("");
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,10 +31,22 @@ const LoginCard: React.FC = () => {
         password,
       });
 
-      if (response?.error) {
-        setError(response.error);
+      if (response?.error === "Not Found") {
+        setError("Incorrect email address");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      } else if (response?.error === "Unauthorized") {
+        setError("Incorrect password");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
       } else {
-        router.push("/");
+        setSuccessMessage("Login successful");
+        setTimeout(() => {
+          setSuccessMessage("");
+          router.push("/");
+        }, 500);
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -93,6 +106,11 @@ const LoginCard: React.FC = () => {
 
   return (
     <div className="body lg:h-screen bg-gray-400 lg:flex">
+      {error && !emailError && <ErrorMessage message={error}></ErrorMessage>}
+      {!error && !emailError && successMessage && (
+        <SuccessMessage message={successMessage}></SuccessMessage>
+      )}
+
       <div className="body-left bg-zinc-800 lg:w-1/2"></div>
       <div className="body-right bg-white w-screen lg:w-1/2 flex flex-col items-center justify-center">
         <form
@@ -115,25 +133,15 @@ const LoginCard: React.FC = () => {
           </div>
 
           <div className="info w-full">
-            <p className="font-sans font-light">
+            <p className="font-sans font-normal">
               Enter your details and join the Terra family today
             </p>
           </div>
 
-          {error && (
-            <div
-              className="flex items-center bg-red-100 borde text-sm text-text font-pops font-medium px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <Image className="mr-4" src={ErrorIcon} alt="single blog" />
-              <span className="block sm:inline">{error}</span>
-            </div>
-          )}
-
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Email Address</p>
+            <p className="font-sans font-normal mb-2">Email Address</p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-terragray"} px-5`}
+              className={`h-10 w-full py-6 font-light rounded-full border focus: outline-none focus:border-terragray ${emailError ? "border-red-500" : "border-terragray"} px-5`}
               type="email"
               required
               placeholder="Enter your Email Address"
@@ -143,10 +151,10 @@ const LoginCard: React.FC = () => {
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Password</p>
+            <p className="font-sans font-normal mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12"
+                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12 focus: outline-none focus:border-terragray"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -175,26 +183,30 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-2/5">
+            <div className="login-btn w-8/12 md:w-4/12 h-12">
               <button
                 type="submit"
-                className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
+                className="w-full h-12 bg-terrablue rounded-full text-white text-xs flex items-center justify-center"
               >
-                {loading ? "Loading..." : "Login"}
+                {loading ? (
+                  <div className="h-6 w-6 border-2 border-t-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+                ) : (
+                  "Login"
+                )}
               </button>
             </div>
 
-            <p className="font-sans font-light -my-3">or</p>
+            <p className="font-sans font-normal -my-3">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-black"
+              className="google w-full md:w-6/12 h-12 rounded-full flex items-center justify-center  border-2 border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-light text-sm ">Continue with Google</p>
+              <p className="font-sans font-normal text-sm ">Continue with Google</p>
             </button>
           </div>
         </form>

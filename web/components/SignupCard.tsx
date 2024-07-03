@@ -6,8 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
-import Image from "next/image";
 import { signIn } from "next-auth/react";
+import ErrorMessage from "./ErrorMessage";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -97,6 +97,10 @@ const SignUpCard: React.FC = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setMessage(error.response?.data);
+
+        setTimeout(() => {
+          setMessage("");
+        }, 5000);
       } else {
         setMessage("An error occurred. Please try again later.");
       }
@@ -106,43 +110,28 @@ const SignUpCard: React.FC = () => {
   };
 
   return (
-    <div className="body bg-gray-400 lg:flex">
-      <div className="body-left  bg-zinc-800 lg:w-1/2"> </div>
+    <div className="relative bg-gray-400 lg:flex">
+      {message && <ErrorMessage message={message} />}
+      <div className="body-left bg-zinc-800 lg:w-1/2"> </div>
       <div className="body-right bg-white w-screen lg:w-1/2 flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="info-section mt-20 max-w-lg mb-10  w-4/6 flex flex-col items-center space-y-6"
+          className="info-section mt-20 max-w-lg mb-10 w-4/6 flex flex-col items-center space-y-6"
         >
-          <div className="nav w-full md:w-2/4 h-12 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
+          <div className="nav w-full md:w-2/4 h-12 bg-terrapurple flex items-center rounded-full justify-between px-5">
             <button
               type="button"
-              className="login  w-1/2 h-2/3 rounded-full flex justify-center items-center"
+              className="login w-1/2 h-2/3 rounded-full flex justify-center items-center"
             >
-              <p className="text-terrablue text-sm ">Login</p>
+              <p className="text-terrablue text-sm">Login</p>
             </button>
             <button
               type="button"
               className="register w-1/2 h-2/3 bg-terrablue rounded-full flex justify-center items-center"
             >
-              <p className="text-white text-sm ">Register</p>
+              <p className="text-white text-sm">Register</p>
             </button>
           </div>
-
-          {message && (
-            <div
-              className="flex items-center bg-red-100 text-red-700 px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <Image
-                src="/ErrorIcon.svg"
-                width={20}
-                height={20}
-                className="rounded-lg mr-2"
-                alt="avatar"
-              />
-              <span className="block sm:inline">{message}</span>
-            </div>
-          )}
 
           <div className="info w-full">
             <p className="font-sans text-sm font-light">
@@ -151,11 +140,11 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               First name
             </p>
             <input
-              className={`h-10 w-5/6 py-4 font-light text-sm  rounded-full border border-terraGray px-3`}
+              className="h-10 w-5/6 py-4 font-light text-sm rounded-full border border-terraGray px-3"
               type="text"
               required
               placeholder="Enter your User name"
@@ -168,7 +157,7 @@ const SignUpCard: React.FC = () => {
               Last name
             </p>
             <input
-              className={`h-10 w-5/6 py-4 font-light text-sm  rounded-full border border-terraGray px-3`}
+              className="h-10 w-5/6 py-4 font-light text-sm rounded-full border border-terraGray px-3"
               type="text"
               required
               placeholder="Enter your User name"
@@ -177,11 +166,11 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Email Address
             </p>
             <input
-              className={`h-10 w-5/6 text-sm  py-4 font-light rounded-full border ${
+              className={`h-10 w-5/6 text-sm py-4 font-light rounded-full border ${
                 emailError ? "border-red-500" : "border-terraGray"
               } px-3`}
               type="email"
@@ -192,6 +181,7 @@ const SignUpCard: React.FC = () => {
             />
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
+
           <div className="details w-full">
             <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Password
@@ -206,7 +196,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute text-sm  top-1/2 right-20 sm:right-24 transform -translate-y-1/2 cursor-pointer text-eye"
+                className="absolute text-sm top-1/2 right-20 sm:right-24 transform -translate-y-1/2 cursor-pointer text-eye"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -215,8 +205,9 @@ const SignUpCard: React.FC = () => {
               </span>
             </div>
           </div>
+
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Confirm Password
             </p>
             <div className="relative w-full">
@@ -241,7 +232,7 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-2/5 text-sm ">
+            <div className="login-btn w-2/5 text-sm">
               <button
                 type="submit"
                 className="w-full h-9 bg-terrablue rounded-full text-white text-xs"
@@ -250,17 +241,17 @@ const SignUpCard: React.FC = () => {
               </button>
             </div>
 
-            <p className="font-sans font-light text-sm  -my-">or</p>
+            <p className="font-sans font-light text-sm -my-">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-3/6 h-9 text-sm  rounded-full flex items-center justify-center border border-terraGray"
+              className="google w-3/4 md:w-3/6 h-9 text-sm rounded-full flex items-center justify-center border border-terraGray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-light text-xs ">Continue with Google</p>
+              <p className="font-sans font-light text-xs">Continue with Google</p>
             </button>
           </div>
         </form>

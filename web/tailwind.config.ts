@@ -61,10 +61,20 @@ const config = {
 
       fontSize: {
         line: "2px",
-        tiny: "0.625rem", // 10px
-        huge: "3rem", // 48px
-        giant: "5rem", // 80px
+        tiny: "0.625rem",
+        huge: "3rem",
+        giant: "5rem",
         sans: ["Nunito Sans", "sans-serif"],
+      },
+
+      keyframes: {
+        "slide-in": {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        "slide-in": "slide-in 0.5s forwards",
       },
     },
   },
