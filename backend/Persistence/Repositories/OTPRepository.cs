@@ -43,5 +43,20 @@ namespace Persistence.Repositories
             }
         }
 
+        public async Task UpdateOtpEntryAsync(OtpEntry otpEntry)
+        {
+            
+            var existingEntry = await _context.Otps.FirstOrDefaultAsync(o => o.UserId == otpEntry.UserId);
+            if (existingEntry == null)
+            {
+                throw new InvalidOperationException("OTP Entry not found for the given user.");
+            }
+
+            existingEntry.Otp = otpEntry.Otp;
+            existingEntry.Expiry = otpEntry.Expiry;
+     
+            await _context.SaveChangesAsync(CancellationToken.None);
+        }
+
     }
 }

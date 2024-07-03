@@ -12,5 +12,6 @@ namespace Application.Contracts
         Task<OtpEntry> GetOtpEntryAsync(string userId);
         Task<OtpEntry> AddOtpEntryAsync(OtpEntry otpEntry);
         Task DeleteOtpEntryAsync(Guid otpId);
+        Task UpdateOtpEntryAsync(OtpEntry otpEntry);
     }
 }
