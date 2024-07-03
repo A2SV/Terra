@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Domain.Entities;
 using Application.Contracts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace WebApi.Controllers
@@ -111,9 +113,19 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("google-login")]
+        [AllowAnonymous]
         public IActionResult GoogleLogin()
         {
-            var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
+            // var properties = new AuthenticationProperties { RedirectUri = "http://localhost:5183/api/Auth/google-response" };
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleResponse", "Auth", null, Request.Scheme),
+                Items =
+                {
+                    {"scheme", GoogleDefaults.AuthenticationScheme}
+                }
+            };
+            Console.WriteLine($"RedirectUri: {properties.RedirectUri}");
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
@@ -126,23 +138,23 @@ namespace WebApi.Controllers
                 return BadRequest("Google authentication failed");
             }
 
-            var claims = authenticateResult.Principal.Identities.FirstOrDefault().Claims;
-            var emailClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
-            var email = emailClaim?.Value;
+            var claims = authenticateResult.Principal?.Identities.FirstOrDefault()?.Claims;
+            var emailClaim = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            // var email = emailClaim?.Value;
 
-            if (email == null)
+            if (String.IsNullOrEmpty(emailClaim))
             {
                 return BadRequest("There is no user with this email");
             }
 
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByEmailAsync(emailClaim);
 
             if (user == null)
             {
                 user = new User
                 {
-                    Email = email,
-                    UserName = email,
+                    Email = emailClaim,
+                    UserName = emailClaim,
                     FirstName = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
                     LastName = claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value,
                     EmailConfirmed = true

@@ -11,7 +11,9 @@ using Persistence.Configurations;
 using Persistence.Repositories;
 using System.Reflection;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,10 +40,23 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentity<User, IdentityRole>();
+builder.Services.AddIdentityCore<User>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppAuthDbContext>()
+    .AddTokenProvider<DataProtectorTokenProvider<User>>("AppAuthDbContext")
+    .AddDefaultTokenProviders();
+
+
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    })
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+    {
+        options.LoginPath = "/api/Auth/google-login";
     })
     .AddJwtBearer(options =>
     {
@@ -59,15 +74,11 @@ builder.Services.AddAuthentication(options =>
     })
     .AddGoogle(googleOptions =>
     {
-        googleOptions.ClientId = builder.Configuration["Authentication:Google:Client"];
+        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
         googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        // googleOptions.CallbackPath = new PathString("/api/Auth/google-response");
+        googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     });
-
-builder.Services.AddIdentityCore<User>()
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<AppAuthDbContext>()
-    .AddTokenProvider<DataProtectorTokenProvider<User>>("AppAuthDbContext")
-    .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
