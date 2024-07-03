@@ -124,12 +124,14 @@ const LoginCard: React.FC = () => {
             >
               <p className="text-white">Login</p>
             </button>
-            <button
-              type="button"
-              className="register w-1/2 h-2/3 rounded-full flex justify-center items-center"
+            <Link
+              href="/signup"
+              className="w-1/2 h-2/3 rounded-full flex justify-center items-center"
             >
-              <p className="text-terrablue">Register</p>
-            </button>
+              <button type="button" className="register ">
+                <p className="text-terrablue">Register</p>
+              </button>
+            </Link>
           </div>
 
           <div className="info w-full">

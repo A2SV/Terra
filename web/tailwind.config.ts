@@ -61,9 +61,9 @@ const config = {
 
       fontSize: {
         line: "2px",
-        tiny: "0.625rem",
-        huge: "3rem",
-        giant: "5rem",
+        tiny: "0.625rem", // 10px
+        huge: "3rem", // 48px
+        giant: "5rem", // 80px
         sans: ["Nunito Sans", "sans-serif"],
       },
 

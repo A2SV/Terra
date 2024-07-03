@@ -1,13 +1,13 @@
 using Application.Contracts;
 using Application.Features.Users.LoginUser.Command;
 using Domain.Entities;
-using Domain.Interfaces;
+using Infrastructure.EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Persistence;
+using Persistence.Configurations;
 using Persistence.Repositories;
 using System.Reflection;
 using System.Text;
@@ -20,6 +20,7 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("AppAuthDbConnection
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));

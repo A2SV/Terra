@@ -1,9 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using Domain.Common;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
         public required string FirstName { get; set; }
         public required string LastName { get; set; }        
@@ -12,6 +11,7 @@ namespace Domain.Entities
         public string? ProfilePictureUrl { get; set; }
         public string? VerificationToken { get; set; }
         public string? PasswordResetToken { get; set; }
-        public string? MobileNumber { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

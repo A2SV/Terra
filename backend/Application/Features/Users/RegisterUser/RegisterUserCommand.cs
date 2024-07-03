@@ -1,16 +1,11 @@
 ﻿using Application.Models.ApiResult;
-using FluentValidation.Validators;
+using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Users.RegisterUser
 {
-    public class RegisterUserCommand : IRequest<Result>
+    public class RegisterUserCommand : IRequest<Result<User>>
     {
         [Required, StringLength(50)]
         public string FirstName { get; set; }
@@ -25,11 +20,6 @@ namespace Application.Features.Users.RegisterUser
         public string Password { get; set; }
 
         [Required, StringLength(10, MinimumLength = 10, ErrorMessage = "Mobile number should be 10")]
-        public string? MobileNumber { get; set; }
-
-       
-
- 
-
+        public string? PhoneNumber { get; set; }
     }
 }

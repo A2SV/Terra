@@ -1,9 +1,6 @@
-using Application.Models;
 using Application.Models.ApiResult;
-using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Domain.Entities;
 
 namespace Application.Features.Users.ResetPassword;
 

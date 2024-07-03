@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using Domain.Common;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace Persistence
+namespace Persistence.Configurations
 {
     public class AppAuthDbContext : IdentityDbContext
     {
@@ -52,7 +50,7 @@ namespace Persistence
                 NormalizedName = "Landlord".ToUpper(),
                 ConcurrencyStamp = landlordRoleId
             };
-            
+
             modelBuilder.Entity<IdentityRole>().HasData(tenantRole, landlordRole);
 
             var adminUserRoles = new List<IdentityUserRole<string>>
@@ -75,7 +73,7 @@ namespace Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            foreach (var change in ChangeTracker.Entries<BaseEntity>())
+            foreach (var change in ChangeTracker.Entries<User>())
             {
                 change.Entity.UpdatedAt = DateTime.UtcNow;
                 if (change.State == EntityState.Added)
@@ -86,9 +84,5 @@ namespace Persistence
             }
             return base.SaveChangesAsync(cancellationToken);
         }
-
-        // public DbSet<User> Users;
-
-        // public DbSet<Role> Roles;
     }
 }

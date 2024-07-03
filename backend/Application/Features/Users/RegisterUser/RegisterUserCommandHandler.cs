@@ -1,17 +1,12 @@
 ﻿using Application.Models.ApiResult;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Domain.Entities;
 
 namespace Application.Features.Users.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result<User>>
     {
         private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
@@ -22,12 +17,12 @@ namespace Application.Features.Users.RegisterUser
             _userManager = userManager;
         }
 
-        public async Task<Result> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<User>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
             if (existingUser != null)
             {
-                return new Result(false, ResultStatusCode.BadRequest, "A user with this email already exists.");
+                return new Result<User>(false, ResultStatusCode.BadRequest, null, "A user with this email already exists.");
             }
 
 
@@ -37,11 +32,17 @@ namespace Application.Features.Users.RegisterUser
                 LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Email,
-                PhoneNumber = request.MobileNumber
+                PhoneNumber = request.PhoneNumber
             };
 
-            
-            return await _userRepository.RegisterUserAsync(newUser, request.Password);
+            var result = await _userRepository.RegisterUserAsync(newUser, request.Password);
+
+            if (!result.Succeeded)
+            {
+                string errors = string.Join("; ", result.Errors.Select(e => e.Description));
+                return new Result<User>(false, ResultStatusCode.BadRequest, null, $"User creation failed: {errors}");
+            }
+            return new Result<User>(true, ResultStatusCode.Created, newUser, "Registration successful");
         }
     }
 }
