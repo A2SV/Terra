@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-
+import Link from "next/link";
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
@@ -107,24 +107,27 @@ const SignUpCard: React.FC = () => {
 
   return (
     <div className="body bg-gray-400 lg:flex">
-      <div className="body-left  bg-zinc-800 lg:w-1/2"> </div>
-      <div className="body-right bg-white w-screen lg:w-1/2 flex flex-col items-center justify-center">
+      <div className="body-left"> </div>
+      <div className="body-right bg-white w-screen flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="info-section mt-20 max-w-lg mb-10  w-4/6 flex flex-col items-center space-y-6"
+          className="info-section  max-w-lg mb-10  w-4/6 flex flex-col items-center space-y-6"
         >
-          <div className="nav w-full md:w-2/4 h-12 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
-            <button
-              type="button"
-              className="login  w-1/2 h-2/3 rounded-full flex justify-center items-center"
+          <div className="nav w-full md:w-3/4 h-16 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
+            <Link
+              href="/login"
+              className=" w-1/2 h-2/3 rounded-full flex justify-center items-center"
             >
-              <p className="text-terrablue text-sm ">Login</p>
-            </button>
+              <button type="button" className="login  ">
+                <p className="text-terrablue  ">Login</p>
+              </button>
+            </Link>
+
             <button
               type="button"
               className="register w-1/2 h-2/3 bg-terrablue rounded-full flex justify-center items-center"
             >
-              <p className="text-white text-sm ">Register</p>
+              <p className="text-white  ">Register</p>
             </button>
           </div>
 
@@ -145,17 +148,17 @@ const SignUpCard: React.FC = () => {
           )}
 
           <div className="info w-full">
-            <p className="font-sans text-sm font-light">
+            <p className="font-sans font-light">
               Enter your details and join the Terra family today
             </p>
           </div>
 
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               First name
             </p>
             <input
-              className={`h-10 w-5/6 py-4 font-light text-sm  rounded-full border border-terraGray px-3`}
+              className={`h-10 w-full py-6 font-light rounded-full border border-terraGray px-5`}
               type="text"
               required
               placeholder="Enter your User name"
@@ -164,11 +167,11 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="details w-full">
-            <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Last name
             </p>
             <input
-              className={`h-10 w-5/6 py-4 font-light text-sm  rounded-full border border-terraGray px-3`}
+              className={`h-10 w-full py-6 font-light   rounded-full border border-terraGray px-5`}
               type="text"
               required
               placeholder="Enter your User name"
@@ -177,28 +180,28 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans   font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Email Address
             </p>
             <input
-              className={`h-10 w-5/6 text-sm  py-4 font-light rounded-full border ${
+              className={`h-10 w-full   py-6 font-light rounded-full border ${
                 emailError ? "border-red-500" : "border-terraGray"
-              } px-3`}
+              } px-5`}
               type="email"
               required
               placeholder="Enter your Email Address"
               value={email}
               onChange={handleEmailChange}
             />
-            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+            {emailError && <p className="text-red-500  mt-1">{emailError}</p>}
           </div>
           <div className="details w-full">
-            <p className="font-sans text-sm font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Password
             </p>
             <div className="w-full relative">
               <input
-                className="h-10 w-5/6 text-sm py-4 font-light rounded-full border border-terraGray px-3 pr-12"
+                className="h-10 w-full  py-6 font-light rounded-full border border-terraGray px-5 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -206,7 +209,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute text-sm  top-1/2 right-20 sm:right-24 transform -translate-y-1/2 cursor-pointer text-eye"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -216,12 +219,12 @@ const SignUpCard: React.FC = () => {
             </div>
           </div>
           <div className="details w-full">
-            <p className="font-sans text-sm  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-sans   font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Confirm Password
             </p>
             <div className="relative w-full">
               <input
-                className="h-10 w-5/6 text-sm py-4 font-light rounded-full border border-terraGray px-3 pr-12"
+                className="h-10 w-full  py-6 font-light rounded-full border border-terraGray px-5 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Renter your Password"
@@ -229,7 +232,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handleConfirmPasswordChange}
               />
               <span
-                className="absolute top-1/2 right-20 sm:right-24 text-sm transform -translate-y-1/2 cursor-pointer text-eye"
+                className="absolute top-1/2 right-4  transform -translate-y-1/2 cursor-pointer text-eye text-xl"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -237,24 +240,24 @@ const SignUpCard: React.FC = () => {
                 {passwordVisible ? <IoEyeOff /> : <IoEye />}
               </span>
             </div>
-            {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
+            {passwordError && <p className="text-red-500  mt-1">{passwordError}</p>}
           </div>
 
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-2/5 text-sm ">
+            <div className="login-btn w-2/5  ">
               <button
                 type="submit"
-                className="w-full h-9 bg-terrablue rounded-full text-white text-xs"
+                className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
               >
                 {loading ? "Loading..." : "Register"}
               </button>
             </div>
 
-            <p className="font-sans font-light text-sm  -my-">or</p>
+            <p className="font-sans font-light   -my-3">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-3/6 h-9 text-sm  rounded-full flex items-center justify-center border border-terraGray"
+              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
