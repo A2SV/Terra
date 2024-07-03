@@ -84,5 +84,7 @@ namespace Persistence.Configurations
             }
             return base.SaveChangesAsync(cancellationToken);
         }
+
+        public DbSet<OtpEntry> Otps { get; set; }
     }
 }

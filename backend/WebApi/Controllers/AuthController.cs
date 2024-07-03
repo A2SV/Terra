@@ -1,8 +1,10 @@
-﻿using Application.Features.Users.Dtos;
+using Application.Features.Users.Dtos;
 using Application.Features.Users.ForgotPassword.Command;
 using Application.Features.Users.LoginUser.Command;
 using Application.Features.Users.RegisterUser;
+using Application.Features.Users.ResendOTP;
 using Application.Features.Users.ResetPassword;
+using Application.Features.Users.VerifyOTP;
 using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -49,16 +51,22 @@ namespace WebApi.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
-            var result = await mediator.Send(command);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var result = await mediator.Send(command);
             if (!result.IsSuccess)
             {
-                return BadRequest("User registration not successful");
+                return StatusCode((int)result.StatusCode, result);
             }
 
-            return Created($"/User/{result.Data.Id}", "User registration successful");
+
+            return CreatedAtAction(nameof(VerifyOTP), new { result.Data.Id }, new
+            {
+                Message = "Registration successful. Please verify your OTP sent to your email.",
+            });
         }
-    
+
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
         {
@@ -108,6 +116,42 @@ namespace WebApi.Controllers
             catch (Exception ex)
             {
                 var result = new Result(false, ResultStatusCode.BadRequest, "An error occured while sending forgot password email.");
+                return StatusCode((int)result.StatusCode, result);
+            }
+        }
+        
+        [HttpPost("VerifyOTP")]
+        public async Task<IActionResult> VerifyOTP([FromBody] VerifyOTPCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return StatusCode((int)result.StatusCode, result);
+            }
+        }
+
+        [HttpPost("ResendOTP")]
+        public async Task<IActionResult> ResendOTP([FromBody] ResendOTPCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            else
+            {
                 return StatusCode((int)result.StatusCode, result);
             }
         }

@@ -21,5 +21,11 @@ namespace Application.Features.Users.RegisterUser
 
         [Required, StringLength(10, MinimumLength = 10, ErrorMessage = "Mobile number should be 10")]
         public string? PhoneNumber { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+
+        
+
     }
 }

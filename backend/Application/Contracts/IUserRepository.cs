@@ -8,5 +8,7 @@ namespace Application.Contracts
     {
         Task<User?> GetUserByEmailAsync(string username, string password);
         Task<IdentityResult> RegisterUserAsync(User user, string password);
+
+        
     }
 }
