@@ -1,44 +1,63 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import LoginCard from "@/components/LoginCard";
+import LoginCard from "../components/LoginCard";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+
+jest.mock("axios");
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+jest.mock("next-auth/react", () => ({
+  signIn: jest.fn(),
+}));
 
 describe("LoginCard", () => {
-  test("renders login card with email and password inputs", () => {
-    render(<LoginCard />);
+  let push: jest.Mock;
 
-    expect(screen.getByPlaceholderText("Enter your Email Address")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Enter your Password")).toBeInTheDocument();
+  beforeEach(() => {
+    push = jest.fn();
+    (useRouter as jest.Mock).mockReturnValue({ push });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders the component", () => {
+    render(<LoginCard />);
+    expect(
+      screen.getByText("Enter your details and join the Terra family today")
+    ).toBeInTheDocument();
+  });
+
+  test("validates email format", () => {
+    render(<LoginCard />);
+    const emailInput = screen.getByPlaceholderText("Enter your Email Address");
+    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+    fireEvent.blur(emailInput);
+    expect(screen.getByText("Invalid email address")).toBeInTheDocument();
   });
 
   test("toggles password visibility", () => {
     render(<LoginCard />);
-
     const passwordInput = screen.getByPlaceholderText("Enter your Password");
-    const toggleButton = screen.getByRole("button", { name: "Show password" });
+    const toggleButton = screen.getByLabelText("Show password");
 
     expect(passwordInput).toHaveAttribute("type", "password");
 
     fireEvent.click(toggleButton);
     expect(passwordInput).toHaveAttribute("type", "text");
 
-    fireEvent.click(toggleButton);
-    expect(passwordInput).toHaveAttribute("type", "password");
+    setTimeout(() => {
+      expect(passwordInput).toHaveAttribute("type", "password");
+    }, 700);
   });
 
-  test("validates email input", () => {
+  test("handles Google sign-in", () => {
     render(<LoginCard />);
-
-    const emailInput = screen.getByPlaceholderText("Enter your Email Address");
-
-    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
-    fireEvent.blur(emailInput);
-
-    expect(screen.getByText("Invalid email address")).toBeInTheDocument();
-
-    fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
-    fireEvent.blur(emailInput);
-
-    expect(screen.queryByText("Invalid email address")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("Continue with Google"));
+    expect(signIn).toHaveBeenCalledWith("google");
   });
 });

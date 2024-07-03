@@ -1,6 +1,5 @@
-using Application.Models;
+using Application.Contracts;
 using Application.Models.ApiResult;
-using Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

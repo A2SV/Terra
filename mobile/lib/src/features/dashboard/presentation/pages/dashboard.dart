@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          'Sign In',
+          'Home Screen',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 24.sp,

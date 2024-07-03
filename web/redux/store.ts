@@ -6,7 +6,7 @@ export const store = configureStore({
   reducer: {},
 
   devTools: env("NEXT_PUBLIC_NODE_ENV") !== "production",
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([]),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([]),
 });
 
 setupListeners(store.dispatch);

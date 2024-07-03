@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Application.Contracts;
+using System.Net.Mail;
+using System.Net;
 
 namespace Infrastructure.EmailService
 {
