@@ -157,6 +157,25 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpPost("ResendOTP")]
+        public async Task<IActionResult> ResendOTP([FromBody] ResendOTPCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return StatusCode((int)result.StatusCode, result);
+            }
+        }
+
         [HttpGet("google-login")]
         [AllowAnonymous]
         public IActionResult GoogleLogin()
