@@ -92,9 +92,9 @@ const LoginCard: React.FC = () => {
   };
 
   return (
-    <div className="body lg:h-screen bg-gray-400 lg:flex">
-      <div className="body-left bg-zinc-800 lg:w-1/2"></div>
-      <div className="body-right bg-white w-screen lg:w-1/2 flex flex-col items-center justify-center">
+    <div className="body">
+      <div className="body-left"></div>
+      <div className="body-right bg-white  flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
           className="info-section w-4/6 flex flex-col items-center space-y-10"
@@ -106,12 +106,14 @@ const LoginCard: React.FC = () => {
             >
               <p className="text-white">Login</p>
             </button>
-            <button
-              type="button"
-              className="register w-1/2 h-2/3 rounded-full flex justify-center items-center"
+            <Link
+              href="/signup"
+              className="w-1/2 h-2/3 rounded-full flex justify-center items-center"
             >
-              <p className="text-terrablue">Register</p>
-            </button>
+              <button type="button" className="register ">
+                <p className="text-terrablue">Register</p>
+              </button>
+            </Link>
           </div>
 
           <div className="info w-full">
@@ -122,7 +124,7 @@ const LoginCard: React.FC = () => {
 
           {error && (
             <div
-              className="flex items-center bg-red-100 borde text-sm text-text font-pops font-medium px-4 py-3 rounded relative"
+              className="flex items-center bg-red-100 border text-sm text-text font-pops font-medium px-4 py-3 rounded relative"
               role="alert"
             >
               <Image className="mr-4" src={ErrorIcon} alt="single blog" />
@@ -188,7 +190,7 @@ const LoginCard: React.FC = () => {
 
             <button
               type="button"
-              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-black"
+              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
