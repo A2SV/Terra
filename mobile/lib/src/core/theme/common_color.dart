@@ -13,4 +13,6 @@ class AppCommonColors {
   static const mainlightBlue=Color(0xFFD6DFFF);
   static const imageBackgroundColor=Color(0xFFEAEFF5);
   static const textFieldTextColor=Color(0xFFACACAC);
+  static const dialogTextColor=Color(0xFF59606E);
+
 }

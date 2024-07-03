@@ -19,7 +19,126 @@ bool passwordVisibility = true;
 TextEditingController passwordController1 = TextEditingController();
 bool passwordVisibility1 = true;
 
-class _PasswordResetScreenState extends State<PasswordResetScreen> {
+class _PasswordResetScreenState extends State<PasswordResetScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat();
+
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  void _showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  key: const Key('image'),
+                  margin: EdgeInsets.all(5.h),
+
+                  child: Image.asset(
+                    'assets/images/lock_bubble.png',
+                    width: 35.w,
+                    height: 35.w,
+                  ),
+                ),
+
+                Center(
+                  child: Text(
+                    'Reset Password',
+                    style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.defaultLink)
+                        .displaySmall,
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Successful!',
+                    style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.defaultLink)
+                        .displaySmall,
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Please wait...',
+                    style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.dialogTextColor)
+                        .bodyMedium,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'You will be directed to Sign In soon.',
+                    style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.dialogTextColor)
+                        .bodyMedium,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: AnimatedBuilder(
+                      animation: _animation,
+                      child: Image.asset(
+                        'assets/images/loading.png',
+                        width: 20.w,
+                        height: 20.w,
+                      ),
+                      builder: (BuildContext context, Widget? child) {
+                        return Transform.rotate(
+                          angle: _animation.value * 2.0 * 3.14159,
+                          child: child,
+                        );
+                      },
+                    ),
+                  )
+                ),
+                /*
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Close"),
+                ),
+
+                 */
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,7 +300,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                 child: CustomButton(
                   backgroundColor: AppCommonColors.mainBlueButton,
                   text: 'Reset Password',
-                  onPressed: () {},
+                  onPressed: () => _showCustomDialog(context),
                   borderColor: AppCommonColors.mainBlueButton,
                   width: 85.w,
                 ),
