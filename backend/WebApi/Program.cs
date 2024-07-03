@@ -28,7 +28,6 @@ builder.Services.AddScoped<IOTPRepository, OTPRepository>();
 
 builder.Services.Configure<IdentityOptions>(
     options => options.SignIn.RequireConfirmedAccount = true);
-builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
