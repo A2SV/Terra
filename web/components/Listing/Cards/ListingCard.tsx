@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Listing1 from "@/public/listing1.png";
-import { HiOutlineLocationMarker , HiOutlineBookmark } from "react-icons/hi";
+import { HiOutlineLocationMarker, HiOutlineBookmark } from "react-icons/hi";
 import { GoDotFill } from "react-icons/go";
 import Link from "next/link";
 
