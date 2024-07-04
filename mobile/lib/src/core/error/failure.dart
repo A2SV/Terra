@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'exception.dart';
 
+abstract class Failure extends Equatable{
+  final List properties;
+  Failure([this.properties = const <dynamic>[]]);
 
-abstract class Failure extends Equatable {
-  abstract final String errorMessage;
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [properties];
 }
