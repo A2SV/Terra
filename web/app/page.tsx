@@ -1,10 +1,10 @@
 "use client";
-import ResetNew from "@/components/ResetNew";
+import ListingCard from "@/components/Listing/Cards/ListingCard";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <ResetNew />
+      <ListingCard />
     </div>
   );
 };
