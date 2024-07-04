@@ -1,17 +1,27 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/use_case/use_case.dart';
+import 'package:mobile/src/features/auth/domain/domain.dart';
 
-import 'package:mobile/src/features/auth/domain/repositories/auth_repository.dart';
 
-class LoginUseCase extends UseCase {
-  final AuthRepository authRepository;
+class LoginUseCase extends UseCase<LoginReturn,LoginParams> {
+  
 
-  LoginUseCase({
-    required this.authRepository,
-  });
+  LoginUseCase(this._authRepository,);
+  final AuthRepository _authRepository;
   @override
-  Future<Either<Failure, dynamic>> call(params) {
-    throw UnimplementedError();
+  Future<Either<Failure, LoginReturn>> call(LoginParams params){
+    return _authRepository.login(params.email, params.password);
   }
+}
+
+
+class LoginParams {
+  final String email;
+  final String password;
+
+  LoginParams({
+    required this.email,
+    required this.password,
+  });
 }
