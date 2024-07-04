@@ -46,7 +46,7 @@ const LoginCard: React.FC = () => {
         setTimeout(() => {
           setSuccessMessage("");
           router.push("/");
-        }, 500);
+        }, 700);
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -105,14 +105,13 @@ const LoginCard: React.FC = () => {
   };
 
   return (
-    <div className="body lg:h-screen bg-gray-400 lg:flex">
+    <div className="body">
       {error && !emailError && <ErrorMessage message={error}></ErrorMessage>}
       {!error && !emailError && successMessage && (
         <SuccessMessage message={successMessage}></SuccessMessage>
       )}
-
-      <div className="body-left bg-zinc-800 lg:w-1/2"></div>
-      <div className="body-right bg-white w-screen lg:w-1/2 flex flex-col items-center justify-center">
+      <div className="body-left"></div>
+      <div className="body-right bg-white  flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
           className="info-section w-4/6 flex flex-col items-center space-y-10"
@@ -135,15 +134,15 @@ const LoginCard: React.FC = () => {
           </div>
 
           <div className="info w-full">
-            <p className="font-sans font-normal">
+            <p className="font-sans font-light">
               Enter your details and join the Terra family today
             </p>
           </div>
 
           <div className="details w-full">
-            <p className="font-sans font-normal mb-2">Email Address</p>
+            <p className="font-sans font-light mb-2">Email Address</p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border focus: outline-none focus:border-terragray ${emailError ? "border-red-500" : "border-terragray"} px-5`}
+              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-terragray"} px-5`}
               type="email"
               required
               placeholder="Enter your Email Address"
@@ -153,10 +152,10 @@ const LoginCard: React.FC = () => {
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
           <div className="details w-full">
-            <p className="font-sans font-normal mb-2">Password</p>
+            <p className="font-sans font-light mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12 focus: outline-none focus:border-terragray"
+                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -177,7 +176,7 @@ const LoginCard: React.FC = () => {
           <div className="pass-info w-full flex justify-between">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={``}>
+              <Link href={"/otp"}>
                 <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
@@ -185,7 +184,7 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-8/12 md:w-4/12 h-12">
+            <div className="login-btn w-2/5">
               <button
                 type="submit"
                 className="w-full h-12 bg-terrablue rounded-full text-white text-xs flex items-center justify-center"
@@ -198,17 +197,17 @@ const LoginCard: React.FC = () => {
               </button>
             </div>
 
-            <p className="font-sans font-normal -my-3">or</p>
+            <p className="font-sans font-light -my-3">or</p>
 
             <button
               type="button"
-              className="google w-full md:w-6/12 h-12 rounded-full flex items-center justify-center  border-2 border-terragray"
+              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-normal text-sm ">Continue with Google</p>
+              <p className="font-sans font-light text-sm ">Continue with Google</p>
             </button>
           </div>
         </form>

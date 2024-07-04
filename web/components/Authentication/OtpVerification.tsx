@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import OtpInput from "react-otp-input";
+import Link from "next/link";
 
 const OtpVerification: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
@@ -44,9 +45,11 @@ const OtpVerification: React.FC = () => {
                   Didn&apos;t receive OTP? <span className="text-btnColor underline">Resend</span>
                 </p>
               </div>
-              <button className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]">
-                Submit
-              </button>
+              <Link href="/reset">
+                <button className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]">
+                  Submit
+                </button>
+              </Link>
             </div>
           </div>
 
