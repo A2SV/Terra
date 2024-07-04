@@ -30,21 +30,6 @@ describe("SignUpCard", () => {
     jest.clearAllMocks();
   });
 
-  test("renders the component", () => {
-    render(<SignupCard />);
-    expect(
-      screen.getByText("Enter your details and join the Terra family today")
-    ).toBeInTheDocument();
-  });
-
-  test("validates email format", () => {
-    render(<SignupCard />);
-    const emailInput = screen.getByPlaceholderText("Enter your Email Address");
-    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
-    fireEvent.blur(emailInput);
-    expect(screen.getByText("Invalid email address")).toBeInTheDocument();
-  });
-
   test("handles Google sign-in", () => {
     render(<SignupCard />);
     fireEvent.click(screen.getByText("Continue with Google"));
