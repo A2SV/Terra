@@ -14,18 +14,6 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
     return NextResponse.redirect(url);
   }
 
-  if (pathname === "/auth") {
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
-  }
-
-  if (pathname.startsWith("/auth")) {
-    if (session !== null) {
-      url.pathname = "/admin/dashboard";
-      return NextResponse.redirect(url);
-    }
-  }
-
   if (pathname.startsWith("/admin")) {
     if (session === null) {
       url.pathname = "/auth/login";

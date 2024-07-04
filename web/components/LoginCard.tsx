@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ErrorIcon from "@/public/ErrorIcon.svg";
+import AuthButton from "@/components/Common/Auth/AuthButton";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -92,30 +93,12 @@ const LoginCard: React.FC = () => {
   };
 
   return (
-    <div className="body">
-      <div className="body-left"></div>
-      <div className="body-right bg-white  flex flex-col items-center justify-center">
+    <div className="">
+      <div className="bg-white flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="info-section w-4/6 flex flex-col items-center space-y-10"
+          className="info-section w-[60%] flex flex-col items-center space-y-10"
         >
-          <div className="nav w-full md:w-3/4 h-16 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
-            <button
-              type="button"
-              className="login bg-terrablue w-1/2 h-2/3 rounded-full flex justify-center items-center"
-            >
-              <p className="text-white">Login</p>
-            </button>
-            <Link
-              href="/signup"
-              className="w-1/2 h-2/3 rounded-full flex justify-center items-center"
-            >
-              <button type="button" className="register ">
-                <p className="text-terrablue">Register</p>
-              </button>
-            </Link>
-          </div>
-
           <div className="info w-full">
             <p className="font-sans font-light">
               Enter your details and join the Terra family today
@@ -135,7 +118,9 @@ const LoginCard: React.FC = () => {
           <div className="details w-full">
             <p className="font-sans font-light mb-2">Email Address</p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-terragray"} px-5`}
+              className={`h-10 w-full   py-6 font-light rounded-full border ${
+                emailError ? "border-red-500" : "border-terraGray"
+              } px-5`}
               type="email"
               required
               placeholder="Enter your Email Address"
@@ -148,7 +133,7 @@ const LoginCard: React.FC = () => {
             <p className="font-sans font-light mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12"
+                className="h-10 w-full py-6 font-light rounded-full border border-terraGray px-5"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -177,14 +162,7 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-2/5">
-              <button
-                type="submit"
-                className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
-              >
-                {loading ? "Loading..." : "Login"}
-              </button>
-            </div>
+            <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
 
             <p className="font-sans font-light -my-3">or</p>
 
