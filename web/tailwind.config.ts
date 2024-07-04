@@ -43,6 +43,7 @@ const config = {
         blog: "#746F6F",
         tag: "#F5F5F5",
         varietyBlue: "rgb(59 130 246)",
+        listingBlue: "#0066CC",
       },
 
       fontFamily: {
