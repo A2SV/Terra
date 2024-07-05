@@ -23,10 +23,10 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 # Expose the custom port
-EXPOSE 8000
+EXPOSE 5183
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://*:8000
+ENV ASPNETCORE_URLS=http://*:5183
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Copy and set permissions for the entrypoint script
