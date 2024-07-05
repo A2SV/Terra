@@ -16,6 +16,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using DotNetEnv;
 using Application.Mappings;
 using DotNetEnv;
 
