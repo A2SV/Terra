@@ -1,9 +1,9 @@
 # Build the application
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Install EF tools in the build environment
-RUN dotnet tool install --global dotnet-ef --version 7.0.20
+RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 COPY ./*.sln ./
@@ -18,7 +18,7 @@ COPY . ./
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
