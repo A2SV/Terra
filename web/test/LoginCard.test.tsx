@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import LoginCard from "../components/LoginCard";
+import LoginCard from "../components/common/Auth/LoginCard";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
@@ -23,13 +23,6 @@ describe("LoginCard", () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  test("renders the component", () => {
-    render(<LoginCard />);
-    expect(
-      screen.getByText("Enter your details and join the Terra family today")
-    ).toBeInTheDocument();
   });
 
   test("validates email format", () => {

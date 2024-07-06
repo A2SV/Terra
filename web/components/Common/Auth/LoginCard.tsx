@@ -6,9 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import ErrorIcon from "@/public/ErrorIcon.svg";
-import AuthButton from "@/components/Common/Auth/AuthButton";
+import ErrorMessage from "../Reusable/ErrorMessage";
+import SuccessMessage from "../Reusable/SuccessMessage";
+import AuthButton from "./AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -17,6 +17,7 @@ const LoginCard: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>("");
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -31,10 +32,22 @@ const LoginCard: React.FC = () => {
         password,
       });
 
-      if (response?.error) {
-        setError(response.error);
+      if (response?.error === "Not Found") {
+        setError("Incorrect email address");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      } else if (response?.error === "Unauthorized") {
+        setError("Incorrect password");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
       } else {
-        router.push("/");
+        setSuccessMessage("Login successful");
+        setTimeout(() => {
+          setSuccessMessage("");
+          router.push("/");
+        }, 700);
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
@@ -69,7 +82,7 @@ const LoginCard: React.FC = () => {
           onChange={handleCheckboxChange}
           className="mr-2"
         />
-        <label className="font-sans font-light text-sm" htmlFor="rememberMe">
+        <label className="font-nunito font-normal text-sm" htmlFor="rememberMe">
           Remember me
         </label>
       </div>
@@ -94,46 +107,39 @@ const LoginCard: React.FC = () => {
 
   return (
     <div className="">
+      {error && !emailError && <ErrorMessage message={error}></ErrorMessage>}
+      {!error && !emailError && successMessage && (
+        <SuccessMessage message={successMessage}></SuccessMessage>
+      )}
+
       <div className="bg-white flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="info-section w-[60%] flex flex-col items-center space-y-10"
+          className="info-section w-5/6 md:w-4/6 flex flex-col items-center space-y-5"
         >
-          <div className="info w-full">
-            <p className="font-sans font-light">
-              Enter your details and join the Terra family today
+          <div className="info w-full mt-7">
+            <p className="font-nunito font-normal text-sm">
+              Log In and Continue Your Terra Journey
             </p>
           </div>
 
-          {error && (
-            <div
-              className="flex items-center bg-red-100 border text-sm text-text font-pops font-medium px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <Image className="mr-4" src={ErrorIcon} alt="single blog" />
-              <span className="block sm:inline">{error}</span>
-            </div>
-          )}
-
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Email Address</p>
+            <p className="font-nunito text-sm font-normal mb-2">Email Address</p>
             <input
-              className={`h-10 w-full   py-6 font-light rounded-full border ${
-                emailError ? "border-red-500" : "border-terraGray"
-              } px-5`}
+              className={`h-5 w-full py-5 text-sm font-nunito font-light rounded-full border focus:outline-none focus:border-terrablue ${emailError ? "border-red-500" : "border-terragray"} px-3`}
               type="email"
               required
               placeholder="Enter your Email Address"
               value={email}
               onChange={handleEmailChange}
             />
-            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+            {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
           </div>
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Password</p>
+            <p className="font-nunito text-sm font-normal mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terraGray px-5"
+                className="h-5 w-full py-5 text-sm font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -141,7 +147,7 @@ const LoginCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
+                className="absolute font-nunito top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -151,11 +157,11 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
 
-          <div className="pass-info w-full flex justify-between">
+          <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={``}>
-                <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
+              <Link href={"/otp"}>
+                <p className="font-nunito font-normal text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
               </Link>
@@ -164,17 +170,17 @@ const LoginCard: React.FC = () => {
           <div className="lower-section w-full flex flex-col items-center space-y-3">
             <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
 
-            <p className="font-sans font-light -my-3">or</p>
+            <p className="font-nunito font-normal text-sm">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
+              className="google w-3/4 md:w-5/12 h-10 p-2 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-light text-sm ">Continue with Google</p>
+              <p className="font-nunito font-normal text-xs ">Continue with Google</p>
             </button>
           </div>
         </form>
