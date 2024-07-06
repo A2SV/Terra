@@ -160,8 +160,8 @@ const LoginCard: React.FC = () => {
           <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={"/otp"}>
-                <p className="font-nunito font-normal text-sm hover:underline hover:text-terrablue">
+              <Link href={"/forgot-password"}>
+                <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
               </Link>
