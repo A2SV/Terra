@@ -14,27 +14,18 @@ COPY ./Infrastructure/*.csproj ./Infrastructure/
 COPY ./Persistence/*.csproj ./Persistence/
 COPY ./WebApi/*.csproj ./WebApi/
 RUN dotnet restore
-
-# Copy the remaining source files
 COPY . ./
-
-# Publish the WebApi project
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 # Install EF tools in the runtime environment
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
-# Copy the published output from the build stage
 COPY --from=build-env /app/out .
-
-# Also copy the Persistence and WebApi directories for EF migrations
-COPY --from=build-env /app/Persistence /app/Persistence
-COPY --from=build-env /app/WebApi /app/WebApi
 
 # Expose the custom port
 EXPOSE 8000
