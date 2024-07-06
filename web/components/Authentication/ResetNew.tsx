@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import SuccessMessage from "./SuccessMessage";
+import SuccessMessage from "../common/Reusable/SuccessMessage";
 import { useRouter } from "next/navigation";
 
 const ResetNew = () => {

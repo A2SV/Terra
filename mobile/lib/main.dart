@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
+import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
+import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
@@ -28,7 +30,9 @@ class MainApp extends StatelessWidget {
             '/signin': (context) => const SignInPage(),
             "/otp": (context) => const OTPage(),
             '/password-reset': (context) => const PasswordResetScreen(),
+            '/forgot-password': (context) => const ForgotPasswordScreen(),
             '/dashboard': (context) => const HomePage(),
+            '/identify-student-identity': (context) => const IdentifyStudent(),
           },
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,

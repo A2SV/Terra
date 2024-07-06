@@ -16,10 +16,16 @@ namespace Application.Features.Users.RegisterUser
         [Required, EmailAddress]
         public string Email { get; set; }
 
-        [Required, StringLength(100, MinimumLength =6)]
+        [Required, MaxLength(100), MinLength(10)]
         public string Password { get; set; }
 
         [Required, StringLength(10, MinimumLength = 10, ErrorMessage = "Mobile number should be 10")]
         public string? PhoneNumber { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+
+        
+
     }
 }

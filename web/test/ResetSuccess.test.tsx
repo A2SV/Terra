@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import ResetSuccess from "@/components/ResetSuccess";
+import ResetSuccess from "@/components/Authentication/ResetSuccess";
 
 describe("ResetSuccess", () => {
   it("should render success message correctly", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import ResetInputEmail from "@/components/ResetInputEmail";
+import ResetInputEmail from "@/components/Authentication/ResetInputEmail";
 
 describe("ResetInputEmail", () => {
   it("should display the correct text to the user", () => {

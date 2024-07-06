@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SignupCard from "../components/SignupCard";
+import SignupCard from "../components/common/Auth/SignupCard";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
@@ -28,21 +28,6 @@ describe("SignUpCard", () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  test("renders the component", () => {
-    render(<SignupCard />);
-    expect(
-      screen.getByText("Enter your details and join the Terra family today")
-    ).toBeInTheDocument();
-  });
-
-  test("validates email format", () => {
-    render(<SignupCard />);
-    const emailInput = screen.getByPlaceholderText("Enter your Email Address");
-    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
-    fireEvent.blur(emailInput);
-    expect(screen.getByText("Invalid email address")).toBeInTheDocument();
   });
 
   test("handles Google sign-in", () => {

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../Reusable/ErrorMessage";
 import AuthButton from "@/components/common/Auth/AuthButtons";
 
 const SignUpCard: React.FC = () => {
@@ -136,7 +136,7 @@ const SignUpCard: React.FC = () => {
               className={`h-5 w-full py-4 font-light font-nunito text-sm rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
-              placeholder="Enter your User name"
+              placeholder="Enter Your First Name"
               onChange={handleFirstNameChange}
             />
           </div>
@@ -149,7 +149,7 @@ const SignUpCard: React.FC = () => {
               className={`h-5 w-full py-4 font-nunito font-light text-sm  rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
-              placeholder="Enter your User name"
+              placeholder="Enter Your Last Name"
               onChange={handleLastNameChange}
             />
           </div>
@@ -164,7 +164,7 @@ const SignUpCard: React.FC = () => {
               } focus:outline-none focus:border-terrablue px-3`}
               type="email"
               required
-              placeholder="Enter your Email Address"
+              placeholder="Enter Your Email Address"
               value={email}
               onChange={handleEmailChange}
             />
@@ -179,7 +179,7 @@ const SignUpCard: React.FC = () => {
                 className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
-                placeholder="Enter your Password"
+                placeholder="Enter Your Password"
                 value={password}
                 onChange={handlePasswordChange}
               />
@@ -202,7 +202,7 @@ const SignUpCard: React.FC = () => {
                 className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
-                placeholder="Renter your Password"
+                placeholder="Renter Your Password"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />

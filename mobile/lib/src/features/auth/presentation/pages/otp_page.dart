@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -21,9 +23,9 @@ class OTPage extends StatelessWidget {
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: Theme.of(context).colorScheme.onPrimary,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 6.w),
@@ -37,19 +39,19 @@ class OTPage extends StatelessWidget {
                   Container(
                     width: 7.5.w,
                     height: 4,
-                    color: const Color(0xFFD6DFFF),
+                    color: AppCommonColors.pageViewIconUnactive, //
                   ),
                   SizedBox(width: 2.w),
                   Container(
                     width: 7.5.w,
                     height: 4,
-                    color: const Color(0xFF1779F3),
+                    color: AppCommonColors.pageViewIconActive, //
                   ),
                   SizedBox(width: 2.w),
                   Container(
                     width: 7.5.w,
                     height: 4,
-                    color: const Color(0xFFD6DFFF),
+                    color: AppCommonColors.pageViewIconUnactive, //
                   ),
                 ],
               ),
@@ -62,10 +64,10 @@ class OTPage extends StatelessWidget {
               const Text(
                 'Enter OTP',
                 style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1779F3),
-                ),
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: AppCommonColors.mainBlueButton //blue
+                    ),
               ),
               const SizedBox(height: 10),
               const Text(
@@ -73,7 +75,7 @@ class OTPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.black54,
+                  color: AppLightThemeColors.kBlackTextColor,
                 ),
               ),
               const Text(
@@ -81,7 +83,7 @@ class OTPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.black54,
+                  color: AppLightThemeColors.kBlackTextColor,
                 ),
               ),
               const SizedBox(height: 30),
@@ -98,11 +100,13 @@ class OTPage extends StatelessWidget {
                 defaultPinTheme: PinTheme(
                   width: 50,
                   height: 50,
-                  textStyle: const TextStyle(fontSize: 18, color: Colors.black),
+                  textStyle:
+                      const TextStyle(fontSize: 18, color: Colors.black), //
                   decoration: BoxDecoration(
-                    color: const Color(0x0feaeff5),
+                    color: AppLightThemeColors.kBlackTextColor, //
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(
+                        color: AppLightThemeColors.kLightTextColor), //
                   ),
                 ),
               ),
@@ -118,10 +122,10 @@ class OTPage extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, "/signin");
                 },
                 height: 50,
-                borderColor: const Color(0xFF1779F3),
+                borderColor: AppCommonColors.mainBlueButton, //
                 borderRadius: 10,
-                backgroundColor: const Color(0xFF1779F3),
-                textColor: Colors.white,
+                backgroundColor: AppCommonColors.mainBlueButton, //
+                textColor: Theme.of(context).colorScheme.onPrimary,
               ),
               const SizedBox(height: 20),
               Row(
@@ -130,13 +134,14 @@ class OTPage extends StatelessWidget {
                   Text.rich(
                     TextSpan(
                       text: "Didn't get OTP? ",
-                      style:
-                          const TextStyle(color: Colors.black54, fontSize: 12),
+                      style: const TextStyle(
+                          color: AppLightThemeColors.kBlackTextColor,
+                          fontSize: 12), //
                       children: [
                         TextSpan(
                           text: 'Resend OTP',
                           style: const TextStyle(
-                            color: Color(0xFF1779F3),
+                            color: AppCommonColors.mainBlueButton, //
                             fontSize: 12,
                           ),
                           recognizer: TapGestureRecognizer()
@@ -150,7 +155,7 @@ class OTPage extends StatelessWidget {
                   const Text(
                     'Incorrect Try again',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: AppCommonColors.red, //red
                       fontSize: 12,
                     ),
                   ),
