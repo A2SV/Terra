@@ -45,7 +45,7 @@ const OtpVerification: React.FC = () => {
                   Didn&apos;t receive OTP? <span className="text-btnColor underline">Resend</span>
                 </p>
               </div>
-              <Link href="/reset">
+              <Link href="/reset-new">
                 <button className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]">
                   Submit
                 </button>

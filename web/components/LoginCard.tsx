@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "./ErrorMessage";
 import SuccessMessage from "./SuccessMessage";
+import AuthButton from "./common/Auth/AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -81,7 +82,7 @@ const LoginCard: React.FC = () => {
           onChange={handleCheckboxChange}
           className="mr-2"
         />
-        <label className="font-sans font-light text-sm" htmlFor="rememberMe">
+        <label className="font-nunito font-normal text-sm" htmlFor="rememberMe">
           Remember me
         </label>
       </div>
@@ -105,57 +106,40 @@ const LoginCard: React.FC = () => {
   };
 
   return (
-    <div className="body">
+    <div className="">
       {error && !emailError && <ErrorMessage message={error}></ErrorMessage>}
       {!error && !emailError && successMessage && (
         <SuccessMessage message={successMessage}></SuccessMessage>
       )}
-      <div className="body-left"></div>
-      <div className="body-right bg-white  flex flex-col items-center justify-center">
+
+      <div className="bg-white flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="info-section w-4/6 flex flex-col items-center space-y-10"
+          className="info-section w-5/6 md:w-4/6 flex flex-col items-center space-y-5"
         >
-          <div className="nav w-full md:w-3/4 h-16 bg-terrapurple flex items-center rounded-full justify-between px-5 ">
-            <button
-              type="button"
-              className="login bg-terrablue w-1/2 h-2/3 rounded-full flex justify-center items-center"
-            >
-              <p className="text-white">Login</p>
-            </button>
-            <Link
-              href="/signup"
-              className="w-1/2 h-2/3 rounded-full flex justify-center items-center"
-            >
-              <button type="button" className="register ">
-                <p className="text-terrablue">Register</p>
-              </button>
-            </Link>
-          </div>
-
-          <div className="info w-full">
-            <p className="font-sans font-light">
-              Enter your details and join the Terra family today
+          <div className="info w-full mt-7">
+            <p className="font-nunito font-normal text-sm">
+              Log In and Continue Your Terra Journey
             </p>
           </div>
 
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Email Address</p>
+            <p className="font-nunito text-sm font-normal mb-2">Email Address</p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border ${emailError ? "border-red-500" : "border-terragray"} px-5`}
+              className={`h-5 w-full py-5 text-sm font-nunito font-light rounded-full border focus:outline-none focus:border-terrablue ${emailError ? "border-red-500" : "border-terragray"} px-3`}
               type="email"
               required
               placeholder="Enter your Email Address"
               value={email}
               onChange={handleEmailChange}
             />
-            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+            {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
           </div>
           <div className="details w-full">
-            <p className="font-sans font-light mb-2">Password</p>
+            <p className="font-nunito text-sm font-normal mb-2">Password</p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terragray px-5 pr-12"
+                className="h-5 w-full py-5 text-sm font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter your Password"
@@ -163,7 +147,7 @@ const LoginCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
+                className="absolute font-nunito top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -173,41 +157,30 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
 
-          <div className="pass-info w-full flex justify-between">
+          <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
               <Link href={"/otp"}>
-                <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
+                <p className="font-nunito font-normal text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
               </Link>
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <div className="login-btn w-2/5">
-              <button
-                type="submit"
-                className="w-full h-12 bg-terrablue rounded-full text-white text-xs flex items-center justify-center"
-              >
-                {loading ? (
-                  <div className="h-6 w-6 border-2 border-t-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-                ) : (
-                  "Login"
-                )}
-              </button>
-            </div>
+            <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
 
-            <p className="font-sans font-light -my-3">or</p>
+            <p className="font-nunito font-normal text-sm">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
+              className="google w-3/4 md:w-5/12 h-10 p-2 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-light text-sm ">Continue with Google</p>
+              <p className="font-nunito font-normal text-xs ">Continue with Google</p>
             </button>
           </div>
         </form>

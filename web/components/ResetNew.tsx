@@ -63,7 +63,7 @@ const ResetNew = () => {
 
             <div className="relative mb-8 text-sm">
               <input
-                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terragray rounded-full py-3 px-6 w-full`}
+                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue  rounded-full py-3 px-6 w-full`}
                 type={showPassword1 ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password1}
@@ -85,7 +85,7 @@ const ResetNew = () => {
 
             <div className="relative text-sm">
               <input
-                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terragray rounded-full py-3 px-6 w-full`}
+                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
                 type={showPassword2 ? "text" : "password"}
                 placeholder="Re-enter your password"
                 value={password2}
@@ -103,7 +103,7 @@ const ResetNew = () => {
           </div>
 
           <button
-            className="w-full md:w-6/12 flex justify-center items-center bg-terrablue rounded-full mt-10 py-3 px-6 text-white text-sm"
+            className="w-full md:w-4/12 flex justify-center items-center bg-terrablue rounded-full mt-10 py-3 px-6 text-white text-sm"
             type="submit"
             onClick={handlePasswordReset}
           >

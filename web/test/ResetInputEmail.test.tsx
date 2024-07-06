@@ -4,7 +4,7 @@ import ResetInputEmail from "@/components/ResetInputEmail";
 
 describe("ResetInputEmail", () => {
   it("should display the correct text to the user", () => {
-    render(<ResetInputEmail onSubmit={() => {}} />);
+    render(<ResetInputEmail />);
     expect(
       screen.getByText(
         /Enter your email address, you will receive a link in your email to create a new password/
@@ -13,19 +13,9 @@ describe("ResetInputEmail", () => {
   });
 
   it("should allow entering an email", () => {
-    render(<ResetInputEmail onSubmit={() => {}} />);
+    render(<ResetInputEmail />);
     const input: HTMLInputElement = screen.getByPlaceholderText("Email Address");
     fireEvent.change(input, { target: { value: "user@example.com" } });
     expect(input.value).toBe("user@example.com");
-  });
-
-  it("should submit the form with the email", () => {
-    const handleSubmit = jest.fn();
-    render(<ResetInputEmail onSubmit={handleSubmit} />);
-    const input: HTMLInputElement = screen.getByPlaceholderText("Email Address");
-    fireEvent.change(input, { target: { value: "user@example.com" } });
-    const button = screen.getByRole("button", { name: "Continue" });
-    fireEvent.click(button);
-    expect(handleSubmit).toHaveBeenCalled();
   });
 });

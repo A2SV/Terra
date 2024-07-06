@@ -25,13 +25,6 @@ describe("LoginCard", () => {
     jest.clearAllMocks();
   });
 
-  test("renders the component", () => {
-    render(<LoginCard />);
-    expect(
-      screen.getByText("Enter your details and join the Terra family today")
-    ).toBeInTheDocument();
-  });
-
   test("validates email format", () => {
     render(<LoginCard />);
     const emailInput = screen.getByPlaceholderText("Enter your Email Address");

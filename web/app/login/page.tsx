@@ -1,13 +1,12 @@
+import Auth from "@/components/Authentication/Auth";
 import React from "react";
-import LoginCard from "@/components/LoginCard";
-import AuthBackground from "@/components/Authentication/AuthBackground";
 
-const Login = () => {
+const AuthPage: React.FC = () => {
   return (
     <div>
-      <AuthBackground description="Sign In" Card={LoginCard} />
+      <Auth />
     </div>
   );
 };
 
-export default Login;
+export default AuthPage;
