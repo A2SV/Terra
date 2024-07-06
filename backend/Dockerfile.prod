@@ -18,7 +18,8 @@ COPY . ./
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Use the SDK image to ensure EF tools can be used in the runtime
+FROM mcr.microsoft.com/dotnet/sdk:8.0
 WORKDIR /app
 
 # Install EF tools in the runtime environment
