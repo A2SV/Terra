@@ -1,10 +1,9 @@
 "use client";
-import ListingCard from "@/components/Listing/Cards/ListingCard";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <ListingCard />
+      <p>Home</p>
     </div>
   );
 };

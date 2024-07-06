@@ -6,9 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
-import Image from "next/image";
 import { signIn } from "next-auth/react";
-import AuthButton from "./Common/Auth/AuthButton";
+import ErrorMessage from "../Reusable/ErrorMessage";
+import AuthButton from "@/components/common/Auth/AuthButtons";
+
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
@@ -97,8 +98,15 @@ const SignUpCard: React.FC = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setMessage(error.response?.data);
+
+        setTimeout(() => {
+          setMessage("");
+        }, 5000);
       } else {
         setMessage("An error occurred. Please try again later.");
+        setTimeout(() => {
+          setMessage("");
+        }, 5000);
       }
     }
 
@@ -106,40 +114,26 @@ const SignUpCard: React.FC = () => {
   };
 
   return (
-    <div className=" bg-gray-400">
-      <div className=" bg-white flex flex-col items-center justify-center">
+    <div className="">
+      {!passwordError && message && <ErrorMessage message={message}></ErrorMessage>}
+
+      <div className="bg-white w-full flex flex-col items-center justify-center">
         <form
           onSubmit={handleSubmit}
-          className="w-[60%] mb-10 flex flex-col items-center space-y-6"
+          className="w-5/6 md:w-4/6 flex flex-col items-center space-y-3"
         >
-          {message && (
-            <div
-              className="flex items-center bg-red-100 text-red-700 px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <Image
-                src="/ErrorIcon.svg"
-                width={20}
-                height={20}
-                className="rounded-lg mr-2"
-                alt="avatar"
-              />
-              <span className="block sm:inline">{message}</span>
-            </div>
-          )}
-
           <div className="w-full">
-            <p className="font-sans font-light">
-              Enter Your details and join the Terra family today
+            <p className="font-nunito text-sm font-normal">
+              Enter your details and join the Terra family today
             </p>
           </div>
 
           <div className="w-full">
-            <p className="font-sans font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-nunito text-sm font-normal mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               First name
             </p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border border-terraGray px-5`}
+              className={`h-5 w-full py-4 font-light font-nunito text-sm rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
               placeholder="Enter Your First Name"
@@ -147,12 +141,12 @@ const SignUpCard: React.FC = () => {
             />
           </div>
 
-          <div className="w-full">
-            <p className="font-sans font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+          <div className="details w-full">
+            <p className="font-nunito  font-normal text-sm mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Last name
             </p>
             <input
-              className={`h-10 w-full py-6 font-light rounded-full border border-terraGray px-5`}
+              className={`h-5 w-full py-4 font-nunito font-light text-sm  rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
               placeholder="Enter Your Last Name"
@@ -160,29 +154,29 @@ const SignUpCard: React.FC = () => {
             />
           </div>
 
-          <div className="w-full">
-            <p className="font-sans font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+          <div className="details w-full">
+            <p className="font-nunito font-normal text-sm mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Email Address
             </p>
             <input
-              className={`h-10 w-full   py-6 font-light rounded-full border ${
-                emailError ? "border-red-500" : "border-terraGray"
-              } px-5`}
+              className={`h-5 w-full text-sm   py-4 font-nunito font-light rounded-full border ${
+                emailError ? "border-red-500" : "border-terragray"
+              } focus:outline-none focus:border-terrablue px-3`}
               type="email"
               required
               placeholder="Enter Your Email Address"
               value={email}
               onChange={handleEmailChange}
             />
-            {emailError && <p className="text-red-500  mt-1">{emailError}</p>}
+            {emailError && <p className="text-red-500 font-nunito text-sm  mt-1">{emailError}</p>}
           </div>
-          <div className="w-full">
-            <p className="font-sans  font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+          <div className="details w-full">
+            <p className="font-nunito text-sm font-normal mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Password
             </p>
             <div className="w-full relative">
               <input
-                className="h-10 w-full py-6 font-light rounded-full border border-terraGray px-5 pr-12"
+                className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Enter Your Password"
@@ -190,7 +184,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handlePasswordChange}
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
+                className="absolute font-nunito top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-sm text-eye"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -200,12 +194,12 @@ const SignUpCard: React.FC = () => {
             </div>
           </div>
           <div className="details w-full">
-            <p className="font-sans font-light mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
+            <p className="font-nunito text-sm font-normal mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Confirm Password
             </p>
             <div className="relative w-full">
               <input
-                className="h-10 w-full  py-6 font-light rounded-full border border-terraGray px-5 pr-12"
+                className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
                 type={passwordVisible ? "text" : "password"}
                 required
                 placeholder="Renter Your Password"
@@ -213,7 +207,7 @@ const SignUpCard: React.FC = () => {
                 onChange={handleConfirmPasswordChange}
               />
               <span
-                className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-eye text-xl"
+                className="absolute font-nunito top-1/2 right-4 text-sm  transform -translate-y-1/2 cursor-pointer text-eye"
                 role="button"
                 aria-label={passwordVisible ? "Hide password" : "Show password"}
                 onClick={togglePasswordVisibility}
@@ -221,23 +215,24 @@ const SignUpCard: React.FC = () => {
                 {passwordVisible ? <IoEyeOff /> : <IoEye />}
               </span>
             </div>
-            {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
+            {passwordError && (
+              <p className="text-red-500 font-nunito text-sm  mt-1">{passwordError}</p>
+            )}
           </div>
 
-          <div className="lower-section w-full flex flex-col items-center space-y-3">
+          <div className="lower-section font-nunito w-full flex flex-col items-center text-sm space-y-3">
             <AuthButton loading={loading} text="Login" action={handleSubmit} />
-
-            <p className="font-sans font-light my-3">or</p>
+            <p className="font-sans font-normal text-sm">or</p>
 
             <button
               type="button"
-              className="google w-3/4 md:w-8/12 h-12 rounded-full flex items-center justify-center border border-terragray"
+              className="google w-3/4 md:w-5/12 h-10 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-sans font-light text-xs ">Continue with Google</p>
+              <p className="font-nunito font-normal text-xs ">Continue with Google</p>
             </button>
           </div>
         </form>

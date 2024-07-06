@@ -44,6 +44,7 @@ const config = {
         tag: "#F5F5F5",
         varietyBlue: "rgb(59 130 246)",
         listingBlue: "#0066CC",
+        "hover-blue": "#1e3f8d",
       },
 
       fontFamily: {
@@ -66,6 +67,16 @@ const config = {
         huge: "3rem", // 48px
         giant: "5rem", // 80px
         sans: ["Nunito Sans", "sans-serif"],
+      },
+
+      keyframes: {
+        "slide-in": {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        "slide-in": "slide-in 0.5s forwards",
       },
     },
   },
