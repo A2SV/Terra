@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Ensure the project file exists
+# Check if the project file exists
 if [ ! -f "./Persistence/Persistence.csproj" ]; then
   echo "Project file does not exist: ./Persistence/Persistence.csproj"
   ls -la ./Persistence
