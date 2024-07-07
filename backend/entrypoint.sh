@@ -1,8 +1,11 @@
 #!/bin/bash
 set -e  # Stop on error
 
+# Debugging steps to verify dotnet-ef availability
+echo "Checking if dotnet-ef is available..."
+dotnet ef --help
+
 echo "Running EF migrations..."
-# Uncomment the next line if migrations need to be applied at runtime
 dotnet ef database update --project ./Persistence/Persistence.csproj
 
 echo "Starting application..."
