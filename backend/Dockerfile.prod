@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Install EF tools and restore dependencies
-RUN dotnet tool install --global dotnet-ef --version <version>  # Optional: Specify version
+RUN dotnet tool install --global dotnet-ef
 RUN dotnet restore
 
 # Copy project files and build the application
