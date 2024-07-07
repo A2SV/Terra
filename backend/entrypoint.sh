@@ -1,14 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+set -e  # Stop on error
 
-# Check if the project file exists
-if [ ! -f "./Persistence/Persistence.csproj" ]; then
-  echo "Project file does not exist: ./Persistence/Persistence.csproj"
-  ls -la ./Persistence
-  exit 1
-fi
+echo "Running EF migrations..."
+# Uncomment the next line if migrations need to be applied at runtime
+# dotnet ef database update --project ./Persistence/Persistence.csproj
 
-# Run EF Core migrations
-dotnet ef database update --project ./Persistence/Persistence.csproj --startup-project ./WebApi/WebApi.csproj
-
-# Start the application
-dotnet WebApi.dll
+echo "Starting application..."
+dotnet ./WebApi.dll
