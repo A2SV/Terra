@@ -20,6 +20,11 @@ RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
+# Install EF tools in the runtime environment
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
 COPY --from=build-env /app/out .
 
 # Expose the custom port
