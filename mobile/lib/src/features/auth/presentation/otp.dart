@@ -1,50 +1,46 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mobile/src/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../core/theme/common_color.dart';
 import '../../../core/theme/text_theme.dart';
 
+final pinController = TextEditingController();
 
-class OtpScreen extends StatefulWidget{
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
+
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
-
-final pinController = TextEditingController();
-
 
 class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment:MainAxisAlignment.center,
-
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-
           Container(
-            key: Key('image'),
-            child:Image.asset('assets/images/mail.png')
-          ),
+              key: const Key('image'),
+              child: Image.asset('assets/images/mail.png')),
           Container(
-            key: Key('Enter OTP'),
-            child: Text(
-                'Enter OTP',
-              style:CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).displayMedium,
-            )
-          ),
-          Container(
-              key: Key('description'),
+              key: const Key('Enter OTP'),
               child: Text(
-                  'Enter OTP code we just sent to you on your registered email',
-                style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.signInWithGoogleBgnd).bodyMedium,
-              )
-          ),
+                'Enter OTP',
+                style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.defaultLink)
+                    .displayMedium,
+              )),
           Container(
-            key: Key('Input'),
+              key: const Key('description'),
+              child: Text(
+                'Enter OTP code we just sent to you on your registered email',
+                style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.signInWithGoogleBgnd)
+                    .bodyMedium,
+              )),
+          Container(
+            key: const Key('Input'),
             child: Directionality(
               // Specify direction if desired
               textDirection: TextDirection.ltr,
@@ -73,7 +69,7 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
           ),
           Container(
-            key: Key('button'),
+            key: const Key('button'),
             child: ElevatedButton(
               onPressed: () {
                 // Perform some action
@@ -89,29 +85,22 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               child: const Text('Verify'), // Button's label
             ),
-
           ),
-
           Row(
             children: <Widget>[
               Container(
-                key: Key('resend'),
-                child:Row(
-                  children: <Widget>[
-                    Text('Didn\'t get OTP?'),
-                    TextButton(
-                        onPressed: (){},
-                        child: Text('Resend')
-                    ),
-                  ],
-                )
-              ),
+                  key: const Key('resend'),
+                  child: Row(
+                    children: <Widget>[
+                      const Text('Didn\'t get OTP?'),
+                      TextButton(onPressed: () {}, child: const Text('Resend')),
+                    ],
+                  )),
               Container(
-                key: Key('feedback'),
+                key: const Key('feedback'),
               ),
             ],
           )
-
         ],
       ),
     );
