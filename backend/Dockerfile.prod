@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Install EF tools in the build environment
-ENV PATH="${PATH}:/root/.dotnet/tools"
+ENV PATH $PATH:/root/.dotnet/tools
 RUN dotnet tool install --global dotnet-ef
 
 # Copy the solution and project files
