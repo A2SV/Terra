@@ -15,7 +15,8 @@ COPY ./Persistence/*.csproj ./Persistence/
 COPY ./WebApi/*.csproj ./WebApi/
 RUN dotnet restore
 COPY . ./
-RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
+RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity diagnostic
+
 
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
