@@ -5,4 +5,4 @@ echo "Running EF migrations..."
 dotnet ef database update --project ./Persistence/Persistence.csproj
 
 echo "Starting application..."
-dotnet ./WebApi.dll
+dotnet WebApi.dll

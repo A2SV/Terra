@@ -17,16 +17,16 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity diagnostic
 
-
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-# Copy the EF tools from the build stage
+# Copy the EF tools and NuGet packages from the build stage
 COPY --from=build-env /root/.dotnet /root/.dotnet
 COPY --from=build-env /root/.nuget /root/.nuget
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
+# Copy the published application
 COPY --from=build-env /app/out .
 
 # Expose the custom port
