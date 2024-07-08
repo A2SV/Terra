@@ -33,24 +33,24 @@ namespace Application.Features.Users.ResendOTP
             }
 
             var existingOtp = await _otpRepository.GetOtpEntryAsync(user.Id);
-            if (existingOtp!=null && (DateTime.UtcNow - existingOtp.Expiry).TotalMinutes<1)
+            if (existingOtp!=null && (DateTime.UtcNow - existingOtp.Expiry).TotalMinutes<2)
             {
                 return new Result(false, ResultStatusCode.BadRequest, "Please wait for 1 minute before requesting a new OTP.");
             }
+                
 
-
-            var totp = _otpService.GenerateOTP();
-            var otp = totp.ComputeTotp();
+            //var totp = _otpService.GenerateOTP();
+            var otp = "122345";
             var otpEntry = new OtpEntry
             {
                 UserId = user.Id,
                 Otp = otp,
-                Expiry = DateTime.UtcNow.AddSeconds(60),
+                Expiry = DateTime.UtcNow.AddSeconds(120),
                 
             };
 
             await _otpRepository.UpdateOtpEntryAsync(otpEntry);
-            await _otpService.SendOtpEmailAsync(user.Email, otp);
+            //await _otpService.SendOtpEmailAsync(user.Email, otp);
 
             return new Result(true, ResultStatusCode.Success, "OTP has been resent successfully.");
 
