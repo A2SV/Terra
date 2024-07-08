@@ -3,10 +3,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Install EF tools in the build environment
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 ENV PATH="${PATH}:/root/.dotnet/tools"
-RUN dotnet tool install --global dotnet-ef --version 8
+RUN dotnet tool install --global dotnet-ef
 
+# Copy the solution and project files
 COPY ./*.sln ./
 COPY ./Application/*.csproj ./Application/
 COPY ./Application.Tests/*.csproj ./Application.Tests/
@@ -14,21 +14,27 @@ COPY ./Domain/*.csproj ./Domain/
 COPY ./Infrastructure/*.csproj ./Infrastructure/
 COPY ./Persistence/*.csproj ./Persistence/
 COPY ./WebApi/*.csproj ./WebApi/
+
+# Restore the dependencies
 RUN dotnet restore
+
+# Copy the rest of the files
 COPY . ./
-RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
+
+# Publish the application
+RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity diagnostic
 
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
+# Copy the published application
+COPY --from=build-env /app/out .
+
 # Copy the EF tools and NuGet packages from the build stage
 COPY --from=build-env /root/.dotnet /root/.dotnet
 COPY --from=build-env /root/.nuget /root/.nuget
 ENV PATH="${PATH}:/root/.dotnet/tools"
-
-# Copy the published application
-COPY --from=build-env /app/out .
 
 # Expose the custom port
 EXPOSE 5183
