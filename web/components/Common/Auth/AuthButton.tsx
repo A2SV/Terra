@@ -1,5 +1,5 @@
 import React from "react";
-import SpinnerComponent from "@/components/Common/Reusable/SpinnerComponent";
+import SpinnerComponent from "@/components/common/Reusable/SpinnerComponent";
 
 interface Props {
   loading: boolean;

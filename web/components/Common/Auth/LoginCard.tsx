@@ -12,7 +12,7 @@ import AuthButton from "./AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ const LoginCard: React.FC = () => {
     try {
       const response = await signIn("credentials", {
         redirect: false,
-        email,
+        userName,
         password,
       });
 
@@ -91,7 +91,7 @@ const LoginCard: React.FC = () => {
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
-    setEmail(value);
+    setUserName(value);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
@@ -130,7 +130,7 @@ const LoginCard: React.FC = () => {
               type="email"
               required
               placeholder="Enter your Email Address"
-              value={email}
+              value={userName}
               onChange={handleEmailChange}
             />
             {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}

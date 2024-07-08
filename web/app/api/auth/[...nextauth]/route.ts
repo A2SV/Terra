@@ -9,11 +9,11 @@ const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "Email address" },
+        userName: { label: "Email", type: "email", placeholder: "Email address" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}UserAccount/login`;
+        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}Auth/login`;
         const res = await fetch(loginUrl, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -22,7 +22,7 @@ const authOptions: NextAuthOptions = {
 
         if (res.status === 200) {
           const jsonResponse = await res.json();
-          if (res.ok) {
+          if (jsonResponse.isSuccess) {
             return jsonResponse;
           } else {
             throw new Error(jsonResponse.message);
@@ -44,6 +44,34 @@ const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
+    async signIn({ user, account }) {
+      if (account && account.provider === "google") {
+        const registerUrl = `${env("NEXT_PUBLIC_BASE_URL")}Auth/register`;
+        const body = JSON.stringify({
+          email: user.email,
+          name: user.name,
+          image: user.image,
+        });
+
+        const res = await fetch(registerUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body,
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to register user");
+        }
+
+        // Optionally handle the response
+        const jsonResponse = await res.json();
+        console.log("Registration response:", jsonResponse);
+      }
+      return true; // Return true to complete the sign-in process
+    },
+
     async session({ session, token }: any) {
       if (token) {
         session.user.token = token.accessToken;
@@ -55,7 +83,6 @@ const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user }: { token: JWT; account?: any; user: any }) {
-      console.log("From JWT: ", user);
       if (user) {
         token.accessToken = user.token;
         token.id = user.userAccount.id;

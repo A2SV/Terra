@@ -26,6 +26,8 @@ const SignUpCard: React.FC = () => {
     lastName: "",
     email: "",
     password: "",
+    phoneNumber: "+233",
+    role: "tenant",
   });
 
   const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
