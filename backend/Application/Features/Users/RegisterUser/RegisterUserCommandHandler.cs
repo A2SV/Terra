@@ -58,7 +58,7 @@ namespace Application.Features.Users.RegisterUser
             {
                 UserId = newUser.Id,
                 Otp = otp,
-                Expiry = DateTime.UtcNow.AddSeconds(60)
+                Expiry = DateTime.UtcNow.AddSeconds(120)
             };
             await _otpRepository.AddOtpEntryAsync(otpEntry);
             await _otpService.SendOtpEmailAsync(newUser.Email, otp);
