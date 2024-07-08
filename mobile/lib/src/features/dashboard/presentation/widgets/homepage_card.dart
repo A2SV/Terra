@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
-import 'package:mobile/src/core/theme/dark_theme_colors.dart';
-import 'package:mobile/src/core/utils/utils.dart';
+
+import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
-import 'dart:math' as math;
 
 class HomepageCard extends StatelessWidget {
   const HomepageCard({super.key});
@@ -154,62 +151,9 @@ class HomepageCard extends StatelessWidget {
             SizedBox(
               height: 2.h,
             ),
-            Padding(
+            const Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 5.h,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: TextField(
-                        style: const TextStyle(
-                            color: AppLightThemeColors.kBlackColor),
-                        decoration: InputDecoration(
-                          hintText: 'Search address, city, location',
-                          hintStyle: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppCommonColors.textFieldTextColor,
-                              fontWeight: FontWeight.w400),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/images/search_icon.png',
-                              height: 2.6.h,
-                            ),
-                          ),
-                          prefixIconConstraints: const BoxConstraints(
-                            minWidth: 10,
-                          ),
-                          border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 5),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 2.w),
-                  Container(
-                    height: 5.h,
-                    width: 10.w,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Transform.rotate(
-                      angle: 90 * math.pi / 180,
-                      child: Icon(
-                        Icons.tune,
-                        size: 3.h,
-                        color: AppDarkThemeColors.mainDarkMode,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: TopBarSearchInput(),
             ),
           ],
         ),
