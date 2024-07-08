@@ -9,9 +9,9 @@ class OtpScreen extends StatefulWidget {
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
-final pinController = TextEditingController();
 
 class _OtpScreenState extends State<OtpScreen> {
+final pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
