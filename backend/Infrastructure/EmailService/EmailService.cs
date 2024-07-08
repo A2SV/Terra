@@ -11,7 +11,7 @@ namespace Infrastructure.EmailService
 
         public EmailService(IConfiguration configuration)
         {
-            configuration = _configuration;
+            _configuration = configuration;
         }
 
         public async Task SendEmailAsync(string to, string subject, string body)
@@ -33,6 +33,7 @@ namespace Infrastructure.EmailService
                 Body = body,
                 IsBodyHtml = true
             };
+
 
             mailMessage.To.Add(to);
 

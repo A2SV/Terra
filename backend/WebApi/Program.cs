@@ -97,6 +97,12 @@ builder.Services.AddAuthentication(options =>
         googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     });
 
+builder.Services.AddIdentityCore<User>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppAuthDbContext>()
+    .AddTokenProvider<DataProtectorTokenProvider<User>>("AppAuthDbContext")
+    .AddDefaultTokenProviders();
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequiredLength = 6;
