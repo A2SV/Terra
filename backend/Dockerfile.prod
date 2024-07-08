@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install EF tools in the build environment
 RUN dotnet tool install --global dotnet-ef
-ENV PATH="${PATH}:/app/.dotnet/tools"
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
 COPY ./*.sln ./
 COPY ./Application/*.csproj ./Application/
