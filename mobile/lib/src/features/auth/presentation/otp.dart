@@ -21,11 +21,20 @@ final pinController = TextEditingController();
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
+<<<<<<< HEAD
               key: const Key('image'),
               child: Image.asset('assets/images/mail.png')),
           Container(
               key: const Key('Enter OTP'),
               child: Text(
+=======
+            key: const Key('image'),
+            child:Image.asset('assets/images/mail.png')
+          ),
+          Container(
+            key: const Key('Enter OTP'),
+            child: Text(
+>>>>>>> feat(mobile): registration implementation(not completed)
                 'Enter OTP',
                 style: CustomTextStyles.kDefaultTextTheme(
                         AppCommonColors.defaultLink)
@@ -89,6 +98,7 @@ final pinController = TextEditingController();
           Row(
             children: <Widget>[
               Container(
+<<<<<<< HEAD
                   key: const Key('resend'),
                   child: Row(
                     children: <Widget>[
@@ -96,6 +106,19 @@ final pinController = TextEditingController();
                       TextButton(onPressed: () {}, child: const Text('Resend')),
                     ],
                   )),
+=======
+                key: const Key('resend'),
+                child:Row(
+                  children: <Widget>[
+                    const Text('Didn\'t get OTP?'),
+                    TextButton(
+                        onPressed: (){},
+                        child: const Text('Resend')
+                    ),
+                  ],
+                )
+              ),
+>>>>>>> feat(mobile): registration implementation(not completed)
               Container(
                 key: const Key('feedback'),
               ),

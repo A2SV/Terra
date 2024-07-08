@@ -41,9 +41,11 @@ class MainApp extends StatelessWidget {
             '/password-reset': (context) => const PasswordResetScreen(),
             '/dashboard': (context) => const DashBoard(),
           },
+          debugShowCheckedModeBanner: false,
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,
-          themeMode: ThemeMode.system,
+          themeMode: ThemeMode.light,
+          home: const Scaffold(),
         );
       },
     );
