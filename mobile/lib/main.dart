@@ -34,9 +34,11 @@ class MainApp extends StatelessWidget {
             '/dashboard': (context) => const HomePage(),
             '/identify-student-identity': (context) => const IdentifyStudent(),
           },
+          debugShowCheckedModeBanner: false,
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,
           themeMode: ThemeMode.light,
+          home: const Scaffold(),
         );
       },
     );
