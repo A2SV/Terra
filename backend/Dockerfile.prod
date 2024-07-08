@@ -1,12 +1,9 @@
 # Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
 
-# Install EF tools and Postgres provider
-RUN dotnet tool install --global dotnet-ef
-RUN dotnet tool install --global Microsoft.EntityFrameworkCore.PostgreSQL
-
-# Update PATH
+# Install EF tools in the build environment
+RUN dotnet tool install --global dotnet-ef --version 7.0.20
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
 COPY ./*.sln ./
@@ -17,30 +14,24 @@ COPY ./Infrastructure/*.csproj ./Infrastructure/
 COPY ./Persistence/*.csproj ./Persistence/
 COPY ./WebApi/*.csproj ./WebApi/
 RUN dotnet restore
-
-# Run migrations before publishing
-RUN dotnet ef database update
-
-# Publish Application
+COPY . ./
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
 # Expose the custom port
-EXPOSE 5183
+EXPOSE 8000
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://*:5183
+ENV ASPNETCORE_URLS=http://*:8000
 ENV ASPNETCORE_ENVIRONMENT=Production
 
-# Copy and set permissions for the entrypoint script (assuming you have one)
-# You can comment out these lines if you don't use an entrypoint script
+# Copy and set permissions for the entrypoint script
 COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
-# Run the entrypoint script (assuming you have one)
-# You can comment out this line if you don't use an entrypoint script
+# Run the entrypoint script
 CMD ["./entrypoint.sh"]
