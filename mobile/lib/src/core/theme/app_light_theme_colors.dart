@@ -14,6 +14,7 @@ class AppLightThemeColors {
   static const kBlackColor = Colors.black;
   static const kGradientBlue = Color.fromRGBO(151, 181, 217, 1);
   static const kGradientYellow = Color.fromRGBO(229, 207, 166, 1);
+  static const kMainBlueButton = Color.fromRGBO(23, 121, 243, 1);
+  static const kMainLightButton = Color.fromRGBO(242, 242, 243, 1);
+  static const kMainLightButtonBorder = Color.fromRGBO(227, 227, 231, 1);
 }
-
-
