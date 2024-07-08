@@ -12,9 +12,6 @@ class OtpScreen extends StatefulWidget {
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
-
-
-
 class _OtpScreenState extends State<OtpScreen> {
 final pinController = TextEditingController();
   @override
