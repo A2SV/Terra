@@ -8,7 +8,7 @@ import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicat
 import 'package:mobile/src/core/widgets/skip_button.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
-  const OnboardingScreen1({super.key, required this.onNext});
+  const OnboardingScreen1({super.key, required this.onNext, required void Function() onSkip});
 
   final VoidCallback onNext;
 
