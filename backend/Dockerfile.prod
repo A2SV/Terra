@@ -20,7 +20,7 @@ RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity dia
 
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
-WORKDIR /app/out
+WORKDIR /app
 
 # Copy the EF tools and NuGet packages from the build stage
 COPY --from=build-env /root/.dotnet /root/.dotnet
