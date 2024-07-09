@@ -8,15 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-namespace Application.Features.Users.RegisterUser
+namespace Application.Features.Accounts.RegisterUser
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result<User>>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAccountRepository _userRepository;
         private readonly UserManager<User> _userManager;
         private readonly IOTPService _otpService;
         private readonly IOTPRepository _otpRepository;
-        public RegisterUserCommandHandler(IUserRepository userRepository, UserManager<User> userManager,
+        public RegisterUserCommandHandler(IAccountRepository userRepository, UserManager<User> userManager,
             /*IOTPService otpService*/ IOTPRepository otpRepository)
         {
             _userRepository = userRepository;

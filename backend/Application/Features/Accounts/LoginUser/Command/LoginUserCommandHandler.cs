@@ -4,15 +4,15 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Features.Users.LoginUser.Command
+namespace Application.Features.Accounts.LoginUser.Command
 {
     public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, TokenUserResult>
     {
         private readonly UserManager<User> userManager;
-        private readonly IUserRepository userRepository;
+        private readonly IAccountRepository userRepository;
         private readonly ITokenRepository tokenRepository;
 
-        public LoginUserCommandHandler(UserManager<User> userManager,IUserRepository userRepository, ITokenRepository tokenRepository)
+        public LoginUserCommandHandler(UserManager<User> userManager,IAccountRepository userRepository, ITokenRepository tokenRepository)
         {
             this.userManager = userManager;
             this.userRepository = userRepository;

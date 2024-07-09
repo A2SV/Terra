@@ -2,7 +2,7 @@
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Features.Users.LoginUser.Command
+namespace Application.Features.Accounts.LoginUser.Command
 {
     public class LoginUserCommand : IRequest<TokenUserResult>
     {
