@@ -4,7 +4,6 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
-import 'package:mobile/src/features/auth/presentation/pages/user_reviews.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 // import 'package:mobile/src/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -22,19 +21,18 @@ class MainApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
-          // initialRoute: '/',
-          // routes: {
-          //   '/': (context) => const OnboardingScreen(),
-          //   '/signup': (context) => const SignUpPage(),
-          //   '/signin': (context) => const SignInPage(),
-          //   "/otp": (context) => const OTPage(),
-          //   '/password-reset': (context) => const PasswordResetScreen(),
-          //   '/dashboard': (context) => const HomePage(),
-          // },
-          // darkTheme: ThemeConfig().darkTheme,
-          // theme: ThemeConfig().lightTheme,
-          // themeMode: ThemeMode.light,
-          home: UserReviews(),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const OnboardingScreen(),
+            '/signup': (context) => const SignUpPage(),
+            '/signin': (context) => const SignInPage(),
+            "/otp": (context) => const OTPage(),
+            '/password-reset': (context) => const PasswordResetScreen(),
+            '/dashboard': (context) => const HomePage(),
+          },
+          darkTheme: ThemeConfig().darkTheme,
+          theme: ThemeConfig().lightTheme,
+          themeMode: ThemeMode.light,
         );
       },
     );
