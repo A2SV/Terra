@@ -3,7 +3,7 @@ using Domain.Entities;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Features.Users.RegisterUser
+namespace Application.Features.Accounts.RegisterUser
 {
     public class RegisterUserCommand : IRequest<Result<User>>
     {

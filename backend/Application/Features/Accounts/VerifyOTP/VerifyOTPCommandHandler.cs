@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 
 
-namespace Application.Features.Users.VerifyOTP
+namespace Application.Features.Accounts.VerifyOTP
 {
     public class VerifyOTPCommandHandler:IRequestHandler<VerifyOTPCommand, Result>
     {

@@ -1,5 +1,5 @@
 using Application.Contracts;
-using Application.Features.Users.LoginUser.Command;
+using Application.Features.Accounts.LoginUser.Command;
 using Domain.Entities;
 using Infrastructure.EmailService;
 using Infrastructure.OTPService;
@@ -16,6 +16,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Application.Mappings;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ var connectionString = $"Host={host}; Database={database};Username={user};Passwo
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
 options.UseNpgsql(connectionString));
 
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -114,6 +116,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.User.RequireUniqueEmail = true;
 });
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
