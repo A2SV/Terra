@@ -24,10 +24,10 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: AppCommonColors.reviewCard,
-      margin: EdgeInsets.symmetric(vertical: 1.h),
+      margin: EdgeInsets.symmetric(vertical: 0.9.h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       child: Padding(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(2.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -79,21 +79,13 @@ class ReviewCard extends StatelessWidget {
                             color: AppCommonColors.reviewText,
                           ),
                         ),
-                        SizedBox(height: 1.h),
-                        Text(
-                          timeAgo,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: AppCommonColors.textFieldTextColor,
-                          ),
-                        ),
                         if (reviewImages != null &&
                             reviewImages!.isNotEmpty) ...[
-                          SizedBox(height: 2.h),
+                          SizedBox(height: 1.h),
                           Row(
                             children: reviewImages!.map((image) {
                               return Padding(
-                                padding: EdgeInsets.only(right: 2.w),
+                                padding: EdgeInsets.only(right: 1.w),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
@@ -106,7 +98,16 @@ class ReviewCard extends StatelessWidget {
                               );
                             }).toList(),
                           ),
+                          
                         ],
+                        SizedBox(height: 1.h),
+                        Text(
+                          timeAgo,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: AppCommonColors.textFieldTextColor,
+                          ),
+                        ),
                       ],
                     ),
                   ),
