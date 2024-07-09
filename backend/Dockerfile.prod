@@ -17,12 +17,9 @@ RUN dotnet restore
 # Copy the rest of the files
 COPY . ./
 
-# Install EF tools in the build environment and apply migrations
-#need to make a change
+# Install EF tools in the build environment
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
-RUN dotnet-ef database update --project /app/Persistence/Persistence.csproj
-
 
 # Publish the application
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity diagnostic
@@ -33,11 +30,6 @@ WORKDIR /app
 
 # Copy the published application
 COPY --from=build-env /app/out .
-
-# Copy the EF tools and NuGet packages from the build stage
-COPY --from=build-env /root/.dotnet /root/.dotnet
-COPY --from=build-env /root/.nuget /root/.nuget
-ENV PATH="${PATH}:/root/.dotnet/tools"
 
 # Expose the custom port
 EXPOSE 5183
