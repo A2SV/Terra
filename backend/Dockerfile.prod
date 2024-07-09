@@ -18,6 +18,7 @@ RUN dotnet restore
 COPY . ./
 
 # Install EF tools in the build environment and apply migrations
+#need to make a change
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 RUN dotnet-ef database update --project /app/Persistence/Persistence.csproj
