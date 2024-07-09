@@ -3,10 +3,43 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import OtpInput from "react-otp-input";
-import Link from "next/link";
+import axios from "axios";
+import { env } from "next-runtime-env";
+import { useRouter } from "next/navigation";
 
-const OtpVerification: React.FC = () => {
+interface OtpVerificationProps {
+  email: string;
+}
+
+const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
   const [otp, setOtp] = useState<string>("");
+  const baseUrl = env("NEXT_PUBLIC_BASE_URL");
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(baseUrl + "Auth/VerifyOTP", {
+        otp,
+        email,
+      });
+      if (response.status === 200) {
+        console.log("OTP Verified");
+        router.push(`/reset/${email}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleReset = () => {
+    try {
+      axios.post(baseUrl + "Auth/ResendOTP", {
+        email,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -41,15 +74,16 @@ const OtpVerification: React.FC = () => {
                 )}
               />
               <div className="pt-7 pb-10">
-                <p className="text-[#3A3A3A80]">
+                <p className="text-[#3A3A3A80]" onClick={handleReset}>
                   Didn&apos;t receive OTP? <span className="text-btnColor underline">Resend</span>
                 </p>
               </div>
-              <Link href="/reset-new">
-                <button className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]">
-                  Submit
-                </button>
-              </Link>
+              <button
+                onClick={handleSubmit}
+                className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]"
+              >
+                Submit
+              </button>
             </div>
           </div>
 
