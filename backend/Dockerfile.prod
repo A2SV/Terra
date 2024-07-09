@@ -19,7 +19,7 @@ COPY . ./
 
 # Install EF tools in the build environment and apply migrations
 RUN dotnet tool install --global dotnet-ef
-RUN /root/.dotnet/tools/dotnet-ef migrations add InitialCreate --project Persistence.csproj -v
+RUN /root/.dotnet/tools/dotnet-ef migrations add InitialCreate --project /app/Persistence/Persistence.csproj -v
 RUN /root/.dotnet/tools/dotnet-ef database update
 
 # Publish the application
