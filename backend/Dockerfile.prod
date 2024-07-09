@@ -1,5 +1,5 @@
 # Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:4.5 AS build-env
 WORKDIR /app
 
 # Copy the solution and project files
@@ -25,7 +25,7 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/core/aspnet:4.5
 WORKDIR /app
 
 # Copy the published application
