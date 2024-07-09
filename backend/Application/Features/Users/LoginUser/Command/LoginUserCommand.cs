@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.Users.LoginUser.Command
 {
-    public class LoginUserCommand : IRequest<Result<string>>
+    public class LoginUserCommand : IRequest<TokenUserResult>
     {
         [Required]
         [DataType(DataType.EmailAddress)]

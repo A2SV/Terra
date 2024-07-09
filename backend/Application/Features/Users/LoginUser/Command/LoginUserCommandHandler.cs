@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Users.LoginUser.Command
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Result<string>>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, TokenUserResult>
     {
         private readonly UserManager<User> userManager;
         private readonly IUserRepository userRepository;
@@ -19,17 +19,18 @@ namespace Application.Features.Users.LoginUser.Command
             this.tokenRepository = tokenRepository;
         }
 
-        public async Task<Result<string>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+        public async Task<TokenUserResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
             var existingUser = await userRepository.GetUserByEmailAsync(request.UserName, request.Password);
 
             if (existingUser == null)
             {
-                return new Result<string>(
+                return new TokenUserResult(
                     false,
                     ResultStatusCode.BadRequest,
+                    "User login failed",
                     string.Empty,
-                    "Invalid login credentials"
+                    new {}
                 );
             }
 
@@ -37,12 +38,19 @@ namespace Application.Features.Users.LoginUser.Command
 
             var JwtToken = tokenRepository.GenerateJwtToken(existingUser, userRoles.ToArray());
 
-            return new Result<string>(
-                true,
-                ResultStatusCode.Success,
-                JwtToken,
-                "Login credentials valid"
-            );
+            return new TokenUserResult(
+                    true,
+                    ResultStatusCode.Created,
+                    "User login successful",
+                    JwtToken,
+                    new
+                    {
+                        FirstName = existingUser.FirstName,
+                        LastName = existingUser.LastName,
+                        Email = existingUser.Email,
+                        ProfilePicture = existingUser.ProfilePictureUrl
+                    }
+                );
         }
     }
 }
