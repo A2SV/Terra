@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Moq;
 using Domain.Entities;
 using Application.Contracts;
-using Application.Features.Users.ForgotPassword.Command;
 using Application.Models.ApiResult;
+using Application.Features.Accounts.ForgotPassword.Command;
 
 
 namespace Application.Tests.Features.Users.RegisterUser
