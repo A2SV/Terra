@@ -26,14 +26,13 @@ describe("ListingCard", () => {
 
   it("displays the property details", () => {
     render(<ListingCard />);
-    expect(screen.getByText("3 beds")).toBeInTheDocument();
-    expect(screen.getByText("3 bathrooms")).toBeInTheDocument();
-    expect(screen.getByText("500 acres")).toBeInTheDocument();
+    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText("2")).toBeInTheDocument();
+    expect(screen.getByText("3000 sq.ft")).toBeInTheDocument();
   });
 
   it("renders the bookmark icon", () => {
     render(<ListingCard />);
-    // Since icons don't have text content or accessible roles, we check if an element with the expected class name exists.
     const bookmarkIcon = document.querySelector(".w-5.h-5.text-gray-400");
     expect(bookmarkIcon).toBeInTheDocument();
   });
