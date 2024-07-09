@@ -45,6 +45,7 @@ namespace Application.Features.Accounts.LoginUser.Command
                     JwtToken,
                     new
                     {
+                        Id = existingUser.Id,
                         FirstName = existingUser.FirstName,
                         LastName = existingUser.LastName,
                         Email = existingUser.Email,
