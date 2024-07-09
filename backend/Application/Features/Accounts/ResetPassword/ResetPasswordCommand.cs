@@ -1,7 +1,7 @@
 using Application.Models.ApiResult;
 using MediatR;
 
-namespace Application.Features.Users.ResetPassword;
+namespace Application.Features.Accounts.ResetPassword;
 
 public class ResetPasswordCommand : IRequest<Result>
 {
