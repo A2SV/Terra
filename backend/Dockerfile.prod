@@ -1,5 +1,5 @@
 # Build the application
-FROM mcr.microsoft.com/dotnet/core/sdk:4.5 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copy the solution and project files
@@ -21,11 +21,14 @@ COPY . ./
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
+CMD ["cd", "app/Persistence"]
+CMD ["dotnet-ef", "database", "update"]
+
 # Publish the application
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/core/aspnet:4.5
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 # Copy the published application
