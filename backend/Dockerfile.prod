@@ -21,9 +21,6 @@ COPY . ./
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
-CMD ["cd", "app/Persistence"]
-CMD ["dotnet-ef", "database", "update"]
-
 # Publish the application
 RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
@@ -49,4 +46,6 @@ COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
 # Run the entrypoint script
+CMD ["cd", "app/Persistence"]
+CMD ["dotnet-ef", "database", "update"]
 CMD ["./entrypoint.sh"]
