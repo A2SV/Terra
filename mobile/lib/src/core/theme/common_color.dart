@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppCommonColors {
   static const activeButton = Color(0xFF043174);
+  static const activeFilter = Color(0xFF1F4C6B); 
+  static const reviewText = Color(0xFF53587A);
+  static const reviewHeading = Color(0xFF252B5C);
+  static const reviewCard = Color(0xFFF5F4F8);
+  static const reviewStars = Color(0xFFEEA651);
   static const defaultLink = Color(0xFF007DFC);
   static const hoverButton = Color(0xFFC3922E);
   static const incorrectTextColor = Color(0xFFDE1F1F);
