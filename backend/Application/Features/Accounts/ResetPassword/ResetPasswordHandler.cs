@@ -2,7 +2,7 @@ using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Features.Users.ResetPassword;
+namespace Application.Features.Accounts.ResetPassword;
 
 public class ResetPasswordHandler : IRequestHandler<ResetPasswordCommand, Result>
 {

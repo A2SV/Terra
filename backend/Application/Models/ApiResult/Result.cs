@@ -31,4 +31,17 @@ namespace Application.Models.ApiResult
             Data = data;
         }
     }
+
+    public class TokenUserResult : Result
+    {
+        public string? Token { get; set; }
+        public Object User { get; set; }
+
+        public TokenUserResult(bool isSuccess, ResultStatusCode statusCode, string message, string? jwtToken, Object userDetails)
+            : base(isSuccess, statusCode, message)
+        {
+            Token = jwtToken;
+            User = userDetails;
+        }
+    }
 }

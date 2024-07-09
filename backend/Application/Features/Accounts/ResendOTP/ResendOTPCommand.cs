@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Users.ResendOTP
+namespace Application.Features.Accounts.ResendOTP
 {
     public class ResendOTPCommand:IRequest<Result>
     {
