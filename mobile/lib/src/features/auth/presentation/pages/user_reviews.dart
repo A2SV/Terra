@@ -88,7 +88,7 @@ class _UserReviewsState extends State<UserReviews> {
               timeAgo: '10 mins ago',
             ),
             SizedBox(
-              height: 30.h,
+              height: 2.h,
             ),
           ],
         ),

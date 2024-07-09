@@ -24,7 +24,7 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: AppCommonColors.reviewCard,
-      margin: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.w),
+      margin: EdgeInsets.symmetric(vertical: 1.h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       child: Padding(
         padding: EdgeInsets.all(3.w),
