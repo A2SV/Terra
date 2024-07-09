@@ -35,5 +35,26 @@ namespace Application.Tests.Features.Users.RegisterUser
              Assert.False(result.IsSuccess);
              Assert.Equal(ResultStatusCode.NotFound, result.StatusCode);
         }
+
+        [Fact]
+        public async Task Handle_UserFound_SendEmail()
+        {
+
+            // Arrange
+            var user = new User { FirstName = "Eben", LastName = "Success", Email = "aebenezer237@gmail.com"};
+            _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+            _userManagerMock.Setup(x => x.GeneratePasswordResetTokenAsync(user)).ReturnsAsync("token");
+            _userManagerMock.Setup(x => x.GetEmailAsync(user)).ReturnsAsync(user.Email);
+
+            // Act
+            var result = await _handler.Handle(new ForgotPasswordCommand(user.Email), CancellationToken.None);
+
+            // Assert 
+            Assert.True(result.IsSuccess);
+            _emailServiceMock.Verify(x => x.SendEmailAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        
+
     }
 }
