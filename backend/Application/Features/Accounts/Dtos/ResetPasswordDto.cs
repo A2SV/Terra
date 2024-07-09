@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Features.Users.Dtos
+namespace Application.Features.Accounts.Dtos
 {
     public class ResetPasswordDto
     {

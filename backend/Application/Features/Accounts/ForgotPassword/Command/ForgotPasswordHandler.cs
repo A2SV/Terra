@@ -3,7 +3,7 @@ using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Features.Users.ForgotPassword.Command
+namespace Application.Features.Accounts.ForgotPassword.Command
 {
     public class ForgotPasswordHandler : IRequestHandler<ForgotPasswordCommand, Result>
     {

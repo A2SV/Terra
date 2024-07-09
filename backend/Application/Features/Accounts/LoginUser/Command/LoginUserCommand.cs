@@ -2,9 +2,9 @@
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.Features.Users.LoginUser.Command
+namespace Application.Features.Accounts.LoginUser.Command
 {
-    public class LoginUserCommand : IRequest<Result<string>>
+    public class LoginUserCommand : IRequest<TokenUserResult>
     {
         [Required]
         [DataType(DataType.EmailAddress)]
