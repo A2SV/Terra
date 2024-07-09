@@ -122,6 +122,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("myAppCors", policy =>
