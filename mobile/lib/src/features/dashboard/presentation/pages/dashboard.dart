@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,16 +7,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'Home Screen',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 24.sp,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-          ),
+    return const Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text("hsdxgdbAhj"),
         ),
       ),
     );
