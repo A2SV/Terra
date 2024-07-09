@@ -22,7 +22,7 @@ RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Publish the application
-RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out --verbosity diagnostic
+RUN dotnet publish ./WebApi/WebApi.csproj -c Release -o /app/out
 
 # Final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
@@ -30,6 +30,9 @@ WORKDIR /app
 
 # Copy the published application
 COPY --from=build-env /app/out .
+
+# Ensure the PATH includes the directory where dotnet-ef is installed
+ENV PATH="$PATH:/root/.dotnet/tools"
 
 # Expose the custom port
 EXPOSE 5183
