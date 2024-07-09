@@ -1,10 +1,16 @@
 import React from "react";
 import OtpVerification from "@/components/Authentication/OtpVerification";
 
-const Otp: React.FC = () => {
+const Otp: any = ({
+  params,
+}: {
+  params: {
+    email: string;
+  };
+}) => {
   return (
     <div>
-      <OtpVerification />
+      <OtpVerification email={params.email} />
     </div>
   );
 };
