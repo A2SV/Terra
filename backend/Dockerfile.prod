@@ -46,6 +46,4 @@ COPY entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
 # Run the entrypoint script
-CMD ["cd", "app/Persistence"]
-CMD ["dotnet-ef", "database", "update"]
 CMD ["./entrypoint.sh"]
