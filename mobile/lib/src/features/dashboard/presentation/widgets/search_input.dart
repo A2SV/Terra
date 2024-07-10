@@ -7,10 +7,11 @@ import 'dart:math' as math;
 
 class TopBarSearchInput extends StatelessWidget {
   const TopBarSearchInput(
-      {super.key, this.sideContainerColor, this.sideCotainerTextColor});
+      {super.key, this.sideContainerColor, this.sideCotainerTextColor, this.searchBackgroundColor});
 
   final Color? sideContainerColor;
   final Color? sideCotainerTextColor;
+  final Color? searchBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class TopBarSearchInput extends StatelessWidget {
           child: Container(
             height: 5.h,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: searchBackgroundColor,
               borderRadius: BorderRadius.circular(50),
             ),
             child: TextField(
