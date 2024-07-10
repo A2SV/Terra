@@ -57,7 +57,7 @@ namespace Application.Features.Accounts.RegisterUser
             var otpEntry = new OtpEntry
             {
                 UserId = newUser.Id,
-                Otp = otp,
+                Otp = otp,  
                 Expiry = DateTime.UtcNow.AddSeconds(120)
             };
             await _otpRepository.AddOtpEntryAsync(otpEntry);
