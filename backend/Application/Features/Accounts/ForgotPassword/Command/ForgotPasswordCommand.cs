@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Features.Accounts.ForgotPassword.Command
 {
-    public class ForgotPasswordCommand : IRequest<Result>
+    public class ForgotPasswordCommand : IRequest<Result<string>>
     {
         public string Email {get; set;}
 
@@ -16,3 +16,5 @@ namespace Application.Features.Accounts.ForgotPassword.Command
         }
     }
 }
+
+
