@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using DotNetEnv;
 using Application.Mappings;
-using DotNetEnv;
+
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../.env");
@@ -170,6 +170,7 @@ using (var scope = app.Services.CreateScope())
         logger.LogError(ex, "An error occurred while migrating the database.");
     }
 }
+
 
 app.UseHttpsRedirection();
 app.UseCors("myAppCors");
