@@ -38,7 +38,7 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 EXPOSE 5183
 
 # Set environment variables
-ENV ASPNETCORE_URLS=http://*:5183
+ENV ASPNETCORE_URLS=http://*:${PORT:-5183}
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Copy and set permissions for the entrypoint script
