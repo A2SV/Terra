@@ -24,6 +24,7 @@ class AppCommonColors {
   static const disabledFieldColorBorder = Color(0xFFE3E3E7);
   static const pageViewIconUnactive = Color(0xFFD6DFFF);
   static const pageViewIconActive = Color(0xFF1779F3);
+  static const detailsDirtyWhiteTextColor = Color(0xFF7D7F88);
   static const searchFieldFillColor = Color(0xFFF2F2F3);
   static const propertyTypeContainerColor=Color(0xFFF4F6F9);
   static const propertyTitleColor=Color(0xFF122D4D);
