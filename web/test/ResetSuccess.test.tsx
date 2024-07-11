@@ -4,15 +4,13 @@ import ResetSuccess from "@/components/Authentication/ResetSuccess";
 
 describe("ResetSuccess", () => {
   it("should render success message correctly", () => {
-    render(<ResetSuccess onSubmit={() => {}} />);
+    render(<ResetSuccess />);
     expect(screen.getByText(/Your password has been reset! successfully/)).toBeInTheDocument();
   });
 
-  it('should call onSubmit when "Back to login" button is clicked', () => {
-    const mockOnSubmit = jest.fn();
-    render(<ResetSuccess onSubmit={mockOnSubmit} />);
+  it('should navigate to "/auth" when "Back to login" button is clicked', () => {
+    render(<ResetSuccess />);
     const button = screen.getByRole("button", { name: "Back to login" });
     fireEvent.click(button);
-    expect(mockOnSubmit).toHaveBeenCalled();
   });
 });
