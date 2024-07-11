@@ -12,10 +12,8 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text("hsdxgdbAhj"),
-        ),
+      body: Center(
+        child: Text("Dashboard"),
       ),
     );
   }
