@@ -8,6 +8,7 @@ import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart'
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/search_listing.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/compare_listing_page.dart';
@@ -36,6 +37,7 @@ class MainApp extends StatelessWidget {
             '/forgot-password': (context) => const ForgotPasswordScreen(),
             '/dashboard': (context) => const HomePage(),
             '/identify-student-identity': (context) => const IdentifyStudent(),
+            '/listing-detail': (context) => const ListingDetail(),
             '/search-listing': (context) => const SearchListingPage(),
             '/password-reset': (context) => const PasswordResetScreen(),
             '/dashboard': (context) => const DashBoard(),
@@ -43,7 +45,7 @@ class MainApp extends StatelessWidget {
           },
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.system,
         );
       },
     );
