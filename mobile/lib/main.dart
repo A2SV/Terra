@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
-          initialRoute: '/compare-listing',
+          initialRoute: '/',
           routes: {
             '/': (context) => const OnboardingScreen(),
             '/signup': (context) => const SignUpPage(),

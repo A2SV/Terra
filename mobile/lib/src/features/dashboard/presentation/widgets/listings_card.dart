@@ -33,6 +33,8 @@ class ListingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      surfaceTintColor: Colors.white,
+      margin: EdgeInsets.only(bottom: 2.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(2.5.h),
       ),
@@ -198,7 +200,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "$landSize   acres",
+                                  "$landSize",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
