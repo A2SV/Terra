@@ -21,7 +21,7 @@ namespace Application.Features.Accounts.LoginUser.Command
 
         public async Task<TokenUserResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var existingUser = await userRepository.GetUserByEmailAsync(request.UserName, request.Password);
+            var existingUser = await userRepository.GetUserByEmailAsync(request.Email, request.Password);
 
             if (existingUser == null)
             {
