@@ -19,6 +19,7 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/help
   $AssetsImagesHelpGen get help => const $AssetsImagesHelpGen();
 
+
   /// File path: assets/images/house_image1.png
   AssetGenImage get houseImage1 =>
       const AssetGenImage('assets/images/house_image1.png');
@@ -126,6 +127,42 @@ class $AssetsSvgGen {
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
 
+  /// File path: assets/svg/kitchen.svg
+  String get kitchen => 'assets/svg/kitchen.svg';
+
+  /// File path: assets/svg/location.svg
+  String get location => 'assets/svg/location.svg';
+
+  /// File path: assets/svg/logo.svg
+  String get logo => 'assets/svg/logo.svg';
+
+  /// File path: assets/svg/mail.svg
+  String get mail => 'assets/svg/mail.svg';
+
+  /// File path: assets/svg/Wifi.svg
+  String get wifi => 'assets/svg/Wifi.svg';
+
+  /// File path: assets/svg/arctic.svg
+  String get arctic => 'assets/svg/arctic.svg';
+
+  /// File path: assets/svg/bathroom_icon.svg
+  String get bathroomIcon => 'assets/svg/bathroom_icon.svg';
+
+  /// File path: assets/svg/bedroom_icon.svg
+  String get bedroomIcon => 'assets/svg/bedroom_icon.svg';
+
+  /// File path: assets/svg/car.svg
+  String get car => 'assets/svg/car.svg';
+
+  /// File path: assets/svg/chat.svg
+  String get chat => 'assets/svg/chat.svg';
+
+  /// File path: assets/svg/fully_furnished.svg
+  String get fullyFurnished => 'assets/svg/fully_furnished.svg';
+
+  /// File path: assets/svg/google.svg
+  String get google => 'assets/svg/google.svg';
+
   /// File path: assets/svg/identity_verified_logo.svg
   String get identityVerifiedLogo => 'assets/svg/identity_verified_logo.svg';
 
@@ -167,7 +204,6 @@ class $AssetsSvgGen {
         chat,
         fullyFurnished,
         google,
-        identityVerifiedLogo,
         kitchen,
         location,
         logo,
