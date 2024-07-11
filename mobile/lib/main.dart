@@ -6,6 +6,7 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
-          initialRoute: '/',
+          initialRoute: '/listing-detail',
           routes: {
             '/': (context) => const OnboardingScreen(),
             '/signup': (context) => const SignUpPage(),
@@ -33,10 +34,11 @@ class MainApp extends StatelessWidget {
             '/forgot-password': (context) => const ForgotPasswordScreen(),
             '/dashboard': (context) => const HomePage(),
             '/identify-student-identity': (context) => const IdentifyStudent(),
+            '/listing-detail': (context) => const ListingDetail(),
           },
           darkTheme: ThemeConfig().darkTheme,
           theme: ThemeConfig().lightTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.system,
         );
       },
     );

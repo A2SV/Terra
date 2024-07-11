@@ -15,9 +15,11 @@ class AppCommonColors {
   static const imageBackgroundColor = Color(0xFFEAEFF5);
   static const textFieldTextColor = Color(0xFF7D7F88);
   static const dialogTextColor = Color(0xFF59606E);
-
+  static const disabledFieldColor = Color(0xFFF5F4F8);
+  static const disabledFieldColorBorder = Color(0xFFE3E3E7);
   static const pageViewIconUnactive = Color(0xFFD6DFFF);
   static const pageViewIconActive = Color(0xFF1779F3);
+  static const detailsDirtyWhiteTextColor = Color(0xFF7D7F88);
 }
 
 //const 
