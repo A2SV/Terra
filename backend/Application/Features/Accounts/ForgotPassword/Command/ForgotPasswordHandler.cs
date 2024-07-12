@@ -26,7 +26,7 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             }
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var resetUrl = $"https://yourwebsite.com/reset-password?token={token}&email={request.Email}";
+            var resetUrl = $"https://yourwebsite.com/reset-password/{token}";
 
             var message = $"<p>Please reset your password by clicking <a href='{resetUrl}'>here</a>.</p>";
             await _emailService.SendEmailAsync(user.Email, "Reset Password", message);
