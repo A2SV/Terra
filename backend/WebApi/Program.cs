@@ -29,8 +29,6 @@ var database = System.Environment.GetEnvironmentVariable("DB_NAME");
 var port = System.Environment.GetEnvironmentVariable("DB_PORT");
 var pooling = System.Environment.GetEnvironmentVariable("DB_POOLING");
 var connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
-var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
-var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
 var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
 var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
 var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
@@ -93,8 +91,8 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = jwt_issuer,
-            ValidAudience = jwt_audience,
+            ValidIssuer = "https://terra-wb9c.onrender.com",
+            ValidAudience = "https://terra-wb9c.onrender.com",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
