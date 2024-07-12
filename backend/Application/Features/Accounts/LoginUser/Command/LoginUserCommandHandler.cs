@@ -21,11 +21,7 @@ namespace Application.Features.Accounts.LoginUser.Command
 
         public async Task<TokenUserResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-<<<<<<< HEAD
             var existingUser = await userRepository.GetUserByEmailAsync(request.Email, request.Password);
-=======
-            var existingUser = await userRepository.GetUserByEmailAsync(request.UserName, request.Password);
->>>>>>> 25ac370 (feat: create endpoint to get user by id)
 
             if (existingUser == null)
             {
@@ -49,10 +45,7 @@ namespace Application.Features.Accounts.LoginUser.Command
                     JwtToken,
                     new
                     {
-<<<<<<< HEAD
                         Id = existingUser.Id,
-=======
->>>>>>> 25ac370 (feat: create endpoint to get user by id)
                         FirstName = existingUser.FirstName,
                         LastName = existingUser.LastName,
                         Email = existingUser.Email,
