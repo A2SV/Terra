@@ -1,9 +1,9 @@
 "use client";
-
+import FAQ from "@/components/General/FAQ";
 const Home: React.FC = () => {
   return (
     <div>
-      <p>Home</p>
+      <FAQ />
     </div>
   );
 };

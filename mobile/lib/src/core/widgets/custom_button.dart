@@ -6,8 +6,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 class CustomButton extends StatefulWidget {
   final bool? disabled;
   final bool? showSuffixWidget;
+  final bool? showPrefixWidget;
   final Color? backgroundColor;
   final Color? borderColor;
+
   final Color? textColor;
   final double? borderRadius;
   final double? height;
@@ -18,6 +20,7 @@ class CustomButton extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;
   final Widget? suffixWidget;
+  final Widget? prefixWidget;
   final bool gradient;
 
   const CustomButton({
@@ -32,7 +35,9 @@ class CustomButton extends StatefulWidget {
     this.shape,
     this.horizontalPadding,
     this.suffixWidget,
+    this.prefixWidget,
     this.showSuffixWidget,
+    this.showPrefixWidget,
     this.disabled,
     this.borderColor,
     this.textColor,
@@ -107,6 +112,9 @@ class _CustomButtonState extends State<CustomButton>
                         fontWeight: FontWeight.w400,
                       ),
                 ),
+                if (widget.showPrefixWidget == true &&
+                    widget.prefixWidget != null)
+                  widget.prefixWidget!,
               ],
             ),
           ),
