@@ -29,6 +29,12 @@ var database = System.Environment.GetEnvironmentVariable("DB_NAME");
 var port = System.Environment.GetEnvironmentVariable("DB_PORT");
 var pooling = System.Environment.GetEnvironmentVariable("DB_POOLING");
 var connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
+var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
+var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
+var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
+var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
+
 
 // Add services to the container.
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
@@ -87,15 +93,15 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER"),
-            ValidAudience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(System.Environment.GetEnvironmentVariable("JWT_KEY")))
+            ValidIssuer = jwt_issuer,
+            ValidAudience = jwt_audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
     .AddGoogle(googleOptions =>
     {
-        googleOptions.ClientId = System.Environment.GetEnvironmentVariable("CLIENT_ID");
-        googleOptions.ClientSecret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
+        googleOptions.ClientId = client_id;
+        googleOptions.ClientSecret = client_secret;
         // googleOptions.CallbackPath = new PathString("/api/Auth/google-response");
         googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     });
