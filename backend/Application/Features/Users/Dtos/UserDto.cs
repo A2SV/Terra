@@ -8,7 +8,10 @@ namespace Application.Features.Users.Dtos
 {
     public class UserDto
     {
+<<<<<<< HEAD
         public Guid Id { get; set; }
+=======
+>>>>>>> 25ac370 (feat: create endpoint to get user by id)
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
