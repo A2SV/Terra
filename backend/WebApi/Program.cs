@@ -91,8 +91,8 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = "https://terra-wb9c.onrender.com",
-            ValidAudience = "https://terra-wb9c.onrender.com",
+            ValidIssuer = "http://localhost:5183",
+            ValidAudience = "http://localhost:5183",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
