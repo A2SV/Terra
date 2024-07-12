@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using DotNetEnv;
 using Application.Mappings;
 
+
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../.env");
 var host = System.Environment.GetEnvironmentVariable("DB_HOST");
