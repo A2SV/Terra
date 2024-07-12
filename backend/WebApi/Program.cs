@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Application.Contracts;
 using Application.Features.Accounts.LoginUser.Command;
 using Domain.Entities;
@@ -93,7 +94,7 @@ builder.Services.AddAuthentication(options =>
 
             ValidIssuer = "http://localhost:5183",
             ValidAudience = "https://terra-wb9c.onrender.com",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jkkjdfkKKJ889JKLHHfk1n9vk909043kjksbkbjJJKJJKsd9904"))
         };
     })
     .AddGoogle(googleOptions =>
