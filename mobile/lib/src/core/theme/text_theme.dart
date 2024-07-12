@@ -28,6 +28,12 @@ class CustomTextStyles {
       fontWeight: FontWeight.w700,
       fontFamily: FontFamily.nunito,
     ),
+    labelSmall: TextStyle(
+      color: textColor,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700,
+      fontFamily: FontFamily.nunito,
+    ),
     headlineMedium: TextStyle( 
       color: textColor,
       fontSize: 15.sp,
