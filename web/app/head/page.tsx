@@ -1,9 +1,9 @@
-import Navbar from "@/components/General/Navbar";
+import CreateListing from "@/components/General/CreateListing";
 
 const Page = () => {
   return (
     <div>
-      <Navbar />
+      <CreateListing />
     </div>
   );
 };
