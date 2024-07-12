@@ -32,8 +32,8 @@ namespace Persistence.Repositories
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                configuration["Jwt:Issuer"],
-                configuration["Jwt:Audience"],
+                "https://terra-wb9c.onrender.com",
+                "https://terra-wb9c.onrender.com",
                 claims,
                 expires: DateTime.Now.AddDays(3),
                 signingCredentials: credentials
