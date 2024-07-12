@@ -33,6 +33,9 @@ var connectionString = $"Host={host}; Database={database};Username={user};Passwo
 var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
 var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
 var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
+var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
+var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
 
 
 // Add services to the container.
@@ -94,7 +97,7 @@ builder.Services.AddAuthentication(options =>
 
             ValidIssuer = "https://terra-wb9c.onrender.com",
             ValidAudience = "https://terra-wb9c.onrender.com",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jkkjdfkKKJ889JKLHHfk1n9vk909043kjksbkbjJJKJJKsd9904"))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
     .AddGoogle(googleOptions =>
