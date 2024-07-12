@@ -8,7 +8,7 @@ import 'dart:math' as math;
 class TopBarSearchListingInput extends StatelessWidget {
   const TopBarSearchListingInput(
       {super.key, this.sideContainerColor, this.sideCotainerTextColor,this.focusNode,
-        this.fillColor,this.borderRadius,this.controller,this.onTapOutside
+        this.fillColor,this.borderRadius,this.controller,this.onTapOutside,this.onSubmitted
       });
 
   final Color? sideContainerColor;
@@ -18,6 +18,7 @@ class TopBarSearchListingInput extends StatelessWidget {
   final double? borderRadius;
   final TextEditingController? controller;
   final TapRegionCallback? onTapOutside;
+  final ValueChanged<String>? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class TopBarSearchListingInput extends StatelessWidget {
               focusNode: focusNode,
               controller: controller,
               onTapOutside: onTapOutside??(event){},
+              onSubmitted: onSubmitted,
               decoration: InputDecoration(
                 hintText: 'Search address, city, location',
                 hintStyle: TextStyle(

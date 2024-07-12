@@ -37,8 +37,34 @@ class _SearchListingPageState extends State<SearchListingPage> {
     List items=cachedTexts;
     //items+=['Accra, Ghana', 'Airport Residential', 'Azure Skyline'];
 
+    if (items.isEmpty){
+      return Container(
+        margin: EdgeInsets.all(4.5.w),
+
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Recent Searches',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: FontFamily.nunito,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    for (String item in items){}
+
     return Container(
       margin: EdgeInsets.all(4.5.w),
+
       child: Column(
         children: [
           Container(
@@ -55,12 +81,12 @@ class _SearchListingPageState extends State<SearchListingPage> {
           ),
           Container(
             alignment: Alignment.topCenter,
-            height: 10.h,
+            height: (6.5*(items.length)).h,
             child: ListView.builder(
               itemCount: items.length,
+              reverse: true,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.all(1.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -163,16 +189,24 @@ class _SearchListingPageState extends State<SearchListingPage> {
                     fillColor: AppCommonColors.searchFieldFillColor,
                     borderRadius: 30,
                     controller: _controller,
-                    onTapOutside: (event){
+                    onSubmitted: (String value){
                       print('Caching....${_controller.text}');
-                      recent=Container();
-                      if (_controller.text.isNotEmpty) {
-
-                        _cacheText(_controller.text);
-                        _controller.clear();
+                    recent=Container();
+                    if (_controller.text.isNotEmpty) {
+                      _cacheText(_controller.text);
+                      if(_cachedTexts.length==3){
+                        _deleteCachedText(_cachedTexts[0]);
                       }
-                      FocusManager.instance.primaryFocus?.unfocus();
+                      _loadCachedTexts();
+                      _controller.clear();
+                    }
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    recent=Container();
+                    setState(() {});
+                    },
+                    onTapOutside: (event){
                       recent=Container();
+                      FocusManager.instance.primaryFocus?.unfocus();
                       setState(() {});
                     },
                   ),
