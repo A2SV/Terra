@@ -24,7 +24,6 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             {
                 return new Result<string>(false, ResultStatusCode.NotFound, "User not found or email not confirmed.");
             }
-
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var resetUrl = $"https://yourwebsite.com/reset-password/{token}/{user.Email}";
 
