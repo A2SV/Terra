@@ -94,7 +94,7 @@ builder.Services.AddAuthentication(options =>
 
             ValidIssuer = "https://terra-wb9c.onrender.com",
             ValidAudience = "https://terra-wb9c.onrender.com",
-            IssuerSigningKey = new SymmetricSecurityKey("jkkjdfkKKJ889JKLHHfk1n9vk909043kjksbkbjJJKJJKsd9904"u8.ToArray())
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jkkjdfkKKJ889JKLHHfk1n9vk909043kjksbkbjJJKJJKsd9904"))
         };
     })
     .AddGoogle(googleOptions =>

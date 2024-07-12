@@ -28,7 +28,7 @@ namespace Persistence.Repositories
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("jkkjdfkKKJ889JKLHHfk1n9vk909043kjksbkbjJJKJJKsd9904"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
