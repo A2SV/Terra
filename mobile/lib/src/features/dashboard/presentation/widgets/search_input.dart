@@ -44,7 +44,7 @@ class TopBarSearchInput extends StatelessWidget {
                 ),
                 border: InputBorder.none,
                 contentPadding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
               ),
             ),
           ),
@@ -55,7 +55,7 @@ class TopBarSearchInput extends StatelessWidget {
           width: 10.w,
           decoration: BoxDecoration(
             color:
-                sideContainerColor ?? Theme.of(context).colorScheme.onPrimary,
+            sideContainerColor ?? Theme.of(context).colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Transform.rotate(

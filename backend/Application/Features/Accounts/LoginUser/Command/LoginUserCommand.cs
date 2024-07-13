@@ -9,15 +9,15 @@ namespace Application.Features.Accounts.LoginUser.Command
         [Required]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "A valid email address is required")]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public LoginUserCommand(string username, string password)
+        public LoginUserCommand(string email, string password)
         {
-            UserName = username;
+            Email = email;
             Password = password;
         }
     }

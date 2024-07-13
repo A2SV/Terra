@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class DashBoard extends StatefulWidget {
+  const DashBoard({super.key});
 
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text("hsdxgdbAhj"),
-        ),
+      body: Center(
+        child: Text("Dashboard"),
       ),
     );
   }
