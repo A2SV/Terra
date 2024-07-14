@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "next-runtime-env";
@@ -13,7 +13,7 @@ const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}UserAccount/login`;
+        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}auth/login`;
         const res = await fetch(loginUrl, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -22,7 +22,7 @@ const authOptions: NextAuthOptions = {
 
         if (res.status === 200) {
           const jsonResponse = await res.json();
-          if (res.ok) {
+          if (jsonResponse.isSuccess) {
             return jsonResponse;
           } else {
             throw new Error(jsonResponse.message);
@@ -44,24 +44,47 @@ const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async session({ session, token }: any) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
-        session.user.token = token.accessToken;
-        session.user.firstName = token.firstName;
-        session.user.lastName = token.lastName;
-        session.user.email = token.email;
-        session.user.id = token.id;
+        session.user = session.user || { token: "", id: "" };
+        session.user.token = token.accessToken as string;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
+        session.user.email = token.email as string;
+        session.user.id = token.id as string;
       }
       return session;
     },
-    async jwt({ token, user }: { token: JWT; account?: any; user: any }) {
-      console.log("From JWT: ", user);
-      if (user) {
+    async jwt({ token, account, user }: { token: JWT; account?: any; user: any }) {
+      if (account?.provider === "google") {
+        const res = await fetch(`${env("NEXT_PUBLIC_BASE_URL")}Auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: token.email,
+            firstName: token.name?.split(" ")[0],
+            lastName: token.name?.split(" ")[1],
+            accessToken: account.access_token,
+          }),
+        });
+
+        const jsonResponse = await res.json();
+        user = jsonResponse.user;
         token.accessToken = user.token;
-        token.id = user.userAccount.id;
-        token.firstName = user.userAccount.firstName;
-        token.lastName = user.userAccount.lastName;
-        token.email = user.userAccount.email;
+        token.id = user.user.id;
+        token.firstName = user.user.firstName;
+        token.lastName = user.user.lastName;
+        token.email = user.user.email;
+        token.profilePicture = user.user.profilePicture;
+      } else if (user) {
+        token.accessToken = user.token;
+        token.id = user.user.id;
+        token.firstName = user.user.firstName;
+        token.lastName = user.user.lastName;
+        token.email = user.user.email;
+        token.profilePicture = user.user.profilePicture;
       }
       return token;
     },

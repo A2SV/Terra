@@ -1,9 +1,10 @@
-"use client";
+import React from "react";
+import ExploreProperty from "@/components/General/ExploreProperty";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <p>Home</p>
+      <ExploreProperty />
     </div>
   );
 };
