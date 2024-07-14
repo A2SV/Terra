@@ -6,13 +6,13 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
-import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
-import AuthButton from "@/components/Common/Auth/AuthButtons";
+import ErrorMessage from "../Reusable/ErrorMessage";
+import SuccessMessage from "../Reusable/SuccessMessage";
+import AuthButton from "./AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ const LoginCard: React.FC = () => {
     try {
       const response = await signIn("credentials", {
         redirect: false,
-        userName,
+        email,
         password,
       });
 
@@ -86,7 +86,7 @@ const LoginCard: React.FC = () => {
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
-    setUserName(value);
+    setEmail(value);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
@@ -125,7 +125,7 @@ const LoginCard: React.FC = () => {
               type="email"
               required
               placeholder="Enter your Email Address"
-              value={userName}
+              value={email}
               onChange={handleEmailChange}
             />
             {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
