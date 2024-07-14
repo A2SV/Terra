@@ -36,6 +36,7 @@ var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
 var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
 var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
 
+
 // Add services to the container.
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
 options.UseNpgsql(connectionString));
