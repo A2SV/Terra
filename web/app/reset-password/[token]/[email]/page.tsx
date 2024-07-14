@@ -3,17 +3,17 @@
 import React from "react";
 import ResetNew from "@/components/Authentication/ResetNew";
 import ResetBackground from "@/components/Authentication/ResetBackground";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 const Reset: React.FC = () => {
-  const { query } = useRouter()
-  const token = query.token || '';
-  const email = query.email || '';
+  const { query } = useRouter();
+  const token = query.token || "";
+  const email = query.email || "";
 
   if (!token || !email) {
     return (
-      <div>
-        <h1>The page you're looking for isn't available.</h1>
+      <div className="items-center justify-center">
+        <h1 className="text-lg font-bold">The page you are looking for is not available.</h1>
       </div>
     );
   }
@@ -22,7 +22,7 @@ const Reset: React.FC = () => {
 
   return (
     <div>
-      <ResetBackground description="Reset password" Card={CardWithProps }/>
+      <ResetBackground description="Reset password" Card={CardWithProps} />
     </div>
   );
 };

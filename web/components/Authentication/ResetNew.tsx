@@ -9,7 +9,7 @@ interface ResetNewProps {
   token: string;
 }
 
-const ResetNew:React.FC<ResetNewProps> = ({email,token}) => {
+const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [showPassword1, setShowPassword1] = useState(false);
@@ -32,7 +32,7 @@ const ResetNew:React.FC<ResetNewProps> = ({email,token}) => {
     setError("");
     setSuccessMessage("");
 
-    setTimeout( async() => {
+    setTimeout(async () => {
       if (password1.length === 0 || password2.length === 0) {
         setError("Passwords cannot be empty.");
         setLoading(false);
@@ -49,7 +49,7 @@ const ResetNew:React.FC<ResetNewProps> = ({email,token}) => {
           await resetPasswordApi();
           setSuccessMessage("Password successfully reset.");
           setLoading(false);
-  
+
           setTimeout(() => {
             setSuccessMessage("");
             router.push("reset-success");
@@ -78,9 +78,8 @@ const ResetNew:React.FC<ResetNewProps> = ({email,token}) => {
         },
       });
       setSuccessMessage(response.data.msg);
-
     } catch (error: any) {
-      setError(error.response.data.message || 'Failed to reset password');
+      setError(error.response.data.message || "Failed to reset password");
       setLoading(false);
     }
   };
