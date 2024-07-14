@@ -45,6 +45,7 @@ const config = {
         varietyBlue: "rgb(59 130 246)",
         listingBlue: "#0066CC",
         "hover-blue": "#1e3f8d",
+        property: "#F5F5F5",
       },
 
       fontFamily: {
@@ -61,11 +62,27 @@ const config = {
         extraThin: "300",
       },
 
+      height: {
+        property: "32rem",
+        "property-card": "21.5rem",
+        ellipse: "8rem",
+      },
+      minHeight: {
+        property: "32rem",
+        ellipse: "8rem",
+      },
+
+      width: {
+        ellipse: "10.5em",
+        "property-card": "12.5rem",
+      },
+
       fontSize: {
+        xxs: "0.6rem",
         line: "2px",
-        tiny: "0.625rem", // 10px
-        huge: "3rem", // 48px
-        giant: "5rem", // 80px
+        tiny: "0.625rem",
+        huge: "3rem",
+        giant: "5rem",
         sans: ["Nunito Sans", "sans-serif"],
       },
 
@@ -80,7 +97,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
 } satisfies Config;
 
 export default config;

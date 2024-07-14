@@ -39,8 +39,8 @@ const authOptions: NextAuthOptions = {
   ],
 
   pages: {
-    signIn: "/",
-    signOut: "/",
+    signIn: "/login",
+    signOut: "/login",
   },
 
   callbacks: {

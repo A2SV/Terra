@@ -4,10 +4,10 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
 import ErrorMessage from "../Reusable/ErrorMessage";
+import SuccessMessage from "../Reusable/SuccessMessage";
 import AuthButton from "@/components/common/Auth/AuthButtons";
 
 const SignUpCard: React.FC = () => {
@@ -18,17 +18,19 @@ const SignUpCard: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "+233",
-    role: "tenant",
+    phoneNumber: "0554574688",
+    role: "user",
   });
+
+  console.log(user);
 
   const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prevUser) => ({
@@ -90,25 +92,29 @@ const SignUpCard: React.FC = () => {
       setPasswordError("Passwords do not match");
     } else {
       setPasswordError("");
-    }
 
-    try {
-      const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "UserAccount/register";
-      await axios.post(baseUrl, user);
+      try {
+        const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "auth/register";
+        const res = await axios.post(baseUrl, user);
 
-      router.push("/");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setMessage(error.response?.data);
-
-        setTimeout(() => {
-          setMessage("");
-        }, 5000);
-      } else {
-        setMessage("An error occurred. Please try again later.");
-        setTimeout(() => {
-          setMessage("");
-        }, 5000);
+        setSuccess(res.data.message);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          setMessage(
+            error.response?.data.message ||
+              setPasswordError(
+                "Passwords must have at least one non alphanumeric character and a minimum length of 10 characters"
+              )
+          );
+          setTimeout(() => {
+            setMessage("");
+          }, 5000);
+        } else {
+          setMessage("An error occurred. Please try again later.");
+          setTimeout(() => {
+            setMessage("");
+          }, 5000);
+        }
       }
     }
 
@@ -118,6 +124,7 @@ const SignUpCard: React.FC = () => {
   return (
     <div className="">
       {!passwordError && message && <ErrorMessage message={message}></ErrorMessage>}
+      {!passwordError && !message && success && <SuccessMessage message={success}></SuccessMessage>}
 
       <div className="bg-white w-full flex flex-col items-center justify-center">
         <form

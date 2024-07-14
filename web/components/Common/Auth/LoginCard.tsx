@@ -32,13 +32,8 @@ const LoginCard: React.FC = () => {
         password,
       });
 
-      if (response?.error === "Not Found") {
-        setError("Incorrect email address");
-        setTimeout(() => {
-          setError("");
-        }, 5000);
-      } else if (response?.error === "Unauthorized") {
-        setError("Incorrect password");
+      if (response?.error) {
+        setError("Incorrect email or Password");
         setTimeout(() => {
           setError("");
         }, 5000);
