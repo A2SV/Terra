@@ -5,7 +5,7 @@ import ResetBackground from "@/components/Authentication/ResetBackground";
 const Reset: React.FC = () => {
   return (
     <div>
-      <ResetBackground description="Reset password" Card={ResetNew} />
+      <ResetBackground description="Reset password" card={ResetNew} action={undefined} />
     </div>
   );
 };
