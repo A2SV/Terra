@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "next-runtime-env";
@@ -9,11 +9,11 @@ const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        userName: { label: "Email", type: "email", placeholder: "Email address" },
+        email: { label: "Email", type: "email", placeholder: "Email address" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}Auth/login`;
+        const loginUrl = `${env("NEXT_PUBLIC_BASE_URL")}auth/login`;
         const res = await fetch(loginUrl, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -39,56 +39,30 @@ const authOptions: NextAuthOptions = {
   ],
 
   pages: {
-    signIn: "/login",
-    signOut: "/login",
+    signIn: "/",
+    signOut: "/",
   },
 
   callbacks: {
-    async signIn({ user, account }) {
-      if (account && account.provider === "google") {
-        const registerUrl = `${env("NEXT_PUBLIC_BASE_URL")}Auth/register`;
-        const body = JSON.stringify({
-          email: user.email,
-          name: user.name,
-          image: user.image,
-        });
-
-        const res = await fetch(registerUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body,
-        });
-
-        if (!res.ok) {
-          throw new Error("Failed to register user");
-        }
-
-        // Optionally handle the response
-        const jsonResponse = await res.json();
-        console.log("Registration response:", jsonResponse);
-      }
-      return true; // Return true to complete the sign-in process
-    },
-
-    async session({ session, token }: any) {
+    async session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
-        session.user.token = token.accessToken;
-        session.user.firstName = token.firstName;
-        session.user.lastName = token.lastName;
-        session.user.email = token.email;
-        session.user.id = token.id;
+        session.user = session.user || { token: "", id: "" };
+        session.user.token = token.accessToken as string;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
+        session.user.email = token.email as string;
+        session.user.id = token.id as string;
       }
       return session;
     },
     async jwt({ token, user }: { token: JWT; account?: any; user: any }) {
       if (user) {
         token.accessToken = user.token;
-        token.id = user.userAccount.id;
-        token.firstName = user.userAccount.firstName;
-        token.lastName = user.userAccount.lastName;
-        token.email = user.userAccount.email;
+        token.id = user.user.id;
+        token.firstName = user.user.firstName;
+        token.lastName = user.user.lastName;
+        token.email = user.user.email;
+        token.profilePicture = user.user.profilePicture;
       }
       return token;
     },
