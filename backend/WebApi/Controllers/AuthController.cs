@@ -114,7 +114,7 @@ namespace WebApi.Controllers
 
                 return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var result = new Result(false, ResultStatusCode.BadRequest, "An error occured while sending forgot password email.");
                 return StatusCode((int)result.StatusCode, result);
