@@ -28,7 +28,7 @@ const ResetBackground: React.FC<ResetBackgroundProps> = ({ Card }) => {
             <Image src={logo} alt="Logo" height={180} width={150} className="object-cover" />
           </div>
           <div className="Card flex-grow overflow-y-auto ">
-            <Card />
+            <Card/>
           </div>
         </div>
       </div>
