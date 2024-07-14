@@ -1,10 +1,15 @@
-"use client";
 import React, { useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import SuccessMessage from "../common/Reusable/SuccessMessage";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
-const ResetNew = () => {
+interface ResetNewProps {
+  email: string;
+  token: string;
+}
+
+const ResetNew:React.FC<ResetNewProps> = ({email,token}) => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [showPassword1, setShowPassword1] = useState(false);
@@ -16,12 +21,10 @@ const ResetNew = () => {
 
   const togglePasswordVisibility1 = () => {
     setShowPassword1(true);
-    setTimeout(() => setShowPassword1(false), 1000);
   };
 
   const togglePasswordVisibility2 = () => {
     setShowPassword2(true);
-    setTimeout(() => setShowPassword2(false), 1000);
   };
 
   const handlePasswordReset = () => {
@@ -29,7 +32,7 @@ const ResetNew = () => {
     setError("");
     setSuccessMessage("");
 
-    setTimeout(() => {
+    setTimeout( async() => {
       if (password1.length === 0 || password2.length === 0) {
         setError("Passwords cannot be empty.");
         setLoading(false);
@@ -42,12 +45,45 @@ const ResetNew = () => {
           router.push("/");
         }, 1000);
       } else {
-        setError("Passwords do not match ");
-        setLoading(false);
+        try {
+          await resetPasswordApi();
+          setSuccessMessage("Password successfully reset.");
+          setLoading(false);
+  
+          setTimeout(() => {
+            setSuccessMessage("");
+            router.push("reset-success");
+          }, 1000);
+        } catch (error: any) {
+          setError(error.message);
+          setLoading(false);
+        }
       }
     }, 1000);
   };
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const resetPasswordApi = async () => {
+    try {
+      const response = await axios({
+        method: "POST",
+        url: `${baseUrl}/auth/reset-password`,
+        data: {
+          email,
+          token,
+          newPassword: password1,
+          confirmPassword: password2,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setSuccessMessage(response.data.msg);
 
+    } catch (error: any) {
+      setError(error.response.data.message || 'Failed to reset password');
+      setLoading(false);
+    }
+  };
   return (
     <div>
       <div className="w-10/12 md:w-8/12 flex items-center justify-center mx-auto">
