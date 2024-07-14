@@ -1,7 +1,7 @@
 // SignUpCard.test.tsx
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import SignUpCard from "@/components/common/Auth/SignupCard";
+import SignUpCard from "@/components/Common/Auth/SignupCard";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { env } from "next-runtime-env";

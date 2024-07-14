@@ -1,5 +1,6 @@
+using System.Net.Mime;
 using Application.Contracts;
-using Application.Features.Users.LoginUser.Command;
+using Application.Features.Accounts.LoginUser.Command;
 using Domain.Entities;
 using Infrastructure.EmailService;
 using Infrastructure.OTPService;
@@ -16,13 +17,31 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using DotNetEnv;
+using Application.Mappings;
+
 
 var builder = WebApplication.CreateBuilder(args);
+DotNetEnv.Env.Load("../.env");
+var host = System.Environment.GetEnvironmentVariable("DB_HOST");
+var user = System.Environment.GetEnvironmentVariable("DB_USER");
+var password = System.Environment.GetEnvironmentVariable("DB_PASS");
+var database = System.Environment.GetEnvironmentVariable("DB_NAME");
+var port = System.Environment.GetEnvironmentVariable("DB_PORT");
+var pooling = System.Environment.GetEnvironmentVariable("DB_POOLING");
+var connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
+var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
+var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
+var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
+var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
+var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
 
 // Add services to the container.
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("AppAuthDbConnectionString")));
+options.UseNpgsql(connectionString));
 
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -74,16 +93,15 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            ValidIssuer = "https://terra-wb9c.onrender.com",
+            ValidAudience = "https://terra-wb9c.onrender.com",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
     .AddGoogle(googleOptions =>
     {
-        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-        googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+        googleOptions.ClientId = client_id;
+        googleOptions.ClientSecret = client_secret;
         // googleOptions.CallbackPath = new PathString("/api/Auth/google-response");
         googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     });
@@ -106,7 +124,47 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myAppCors", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myAppCors", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
 var app = builder.Build();
+
+// Apply migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var dbContext = services.GetRequiredService<AppAuthDbContext>();
+        dbContext.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -115,8 +173,25 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Apply migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var dbContext = services.GetRequiredService<AppAuthDbContext>();
+        dbContext.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
 
+
+app.UseHttpsRedirection();
+app.UseCors("myAppCors");
 app.UseAuthentication();
 app.UseAuthorization();
 

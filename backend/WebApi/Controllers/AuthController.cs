@@ -1,10 +1,10 @@
-using Application.Features.Users.Dtos;
-using Application.Features.Users.ForgotPassword.Command;
-using Application.Features.Users.LoginUser.Command;
-using Application.Features.Users.RegisterUser;
-using Application.Features.Users.ResendOTP;
-using Application.Features.Users.ResetPassword;
-using Application.Features.Users.VerifyOTP;
+using Application.Features.Accounts.Dtos;
+using Application.Features.Accounts.ForgotPassword.Command;
+using Application.Features.Accounts.LoginUser.Command;
+using Application.Features.Accounts.RegisterUser;
+using Application.Features.Accounts.ResendOTP;
+using Application.Features.Accounts.ResetPassword;
+using Application.Features.Accounts.VerifyOTP;
 using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -114,7 +114,7 @@ namespace WebApi.Controllers
 
                 return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var result = new Result(false, ResultStatusCode.BadRequest, "An error occured while sending forgot password email.");
                 return StatusCode((int)result.StatusCode, result);

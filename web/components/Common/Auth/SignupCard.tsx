@@ -8,7 +8,7 @@ import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
 import ErrorMessage from "../Reusable/ErrorMessage";
 import SuccessMessage from "../Reusable/SuccessMessage";
-import AuthButton from "@/components/common/Auth/AuthButtons";
+import AuthButton from "../Auth/AuthButton";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);

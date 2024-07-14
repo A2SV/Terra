@@ -1,14 +1,14 @@
 ﻿using Domain.Entities;
-using Application.Models.ApiResult;
-using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Application.Contracts
 {
     public interface IUserRepository
     {
-        Task<User?> GetUserByEmailAsync(string username, string password);
-        Task<IdentityResult> RegisterUserAsync(User user, string password);
-
-        
+        Task<User?> GetUserByIdAsync(string id);
     }
 }

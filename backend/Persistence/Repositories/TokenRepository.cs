@@ -27,13 +27,16 @@ namespace Persistence.Repositories
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            
+            var Jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Jwt_key));
+            var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
+            var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                configuration["Jwt:Issuer"],
-                configuration["Jwt:Audience"],
+                jwt_issuer,
+                jwt_audience,
                 claims,
                 expires: DateTime.Now.AddDays(3),
                 signingCredentials: credentials

@@ -6,9 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "../Reusable/ErrorMessage";
-import SuccessMessage from "../Reusable/SuccessMessage";
-import AuthButton from "./AuthButtons";
+import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
+import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
+import AuthButton from "@/components/Common/Auth/AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
