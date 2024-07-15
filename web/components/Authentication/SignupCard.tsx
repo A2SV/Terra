@@ -6,9 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";
-import ErrorMessage from "../Reusable/ErrorMessage";
-import SuccessMessage from "../Reusable/SuccessMessage";
-import AuthButton from "../Auth/AuthButton";
+import ErrorMessage from "../Common/Reusable/ErrorMessage";
+import SuccessMessage from "../Common/Reusable/SuccessMessage";
+import AuthButton from "../Common/Auth/AuthButton";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -26,11 +26,9 @@ const SignUpCard: React.FC = () => {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "0554574688",
+    phoneNumber: "0500000000",
     role: "user",
   });
-
-  console.log(user);
 
   const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prevUser) => ({
