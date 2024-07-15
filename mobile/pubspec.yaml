@@ -83,3 +83,11 @@ flutter:
           weight: 300
         - asset: assets/fonts/Raleway/Raleway-ExtraLight.ttf
           weight: 200
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700

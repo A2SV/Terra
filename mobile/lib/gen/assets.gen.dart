@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/estates_card.png
+  AssetGenImage get estatesCard =>
+      const AssetGenImage('assets/images/estates_card.png');
+
   /// Directory path: assets/images/help
   $AssetsImagesHelpGen get help => const $AssetsImagesHelpGen();
 
@@ -26,6 +30,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/house_image3.png
   AssetGenImage get houseImage3 =>
       const AssetGenImage('assets/images/house_image3.png');
+
+  /// File path: assets/images/identity_verified_logo.jpg
+  AssetGenImage get identityVerifiedLogo =>
+      const AssetGenImage('assets/images/identity_verified_logo.jpg');
 
   /// File path: assets/images/images.png
   AssetGenImage get images => const AssetGenImage('assets/images/images.png');
@@ -69,9 +77,11 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        estatesCard,
         houseImage1,
         houseImage2,
         houseImage3,
+        identityVerifiedLogo,
         images,
         loading,
         lock,
@@ -116,6 +126,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
 
+  /// File path: assets/svg/identity_verified_logo.svg
+  String get identityVerifiedLogo => 'assets/svg/identity_verified_logo.svg';
+
   /// File path: assets/svg/kitchen.svg
   String get kitchen => 'assets/svg/kitchen.svg';
 
@@ -154,6 +167,7 @@ class $AssetsSvgGen {
         chat,
         fullyFurnished,
         google,
+        identityVerifiedLogo,
         kitchen,
         location,
         logo,
