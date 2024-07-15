@@ -12,13 +12,20 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Rectangle 86.png
+  AssetGenImage get rectangle86 =>
+      const AssetGenImage('assets/images/Rectangle 86.png');
+
+  /// File path: assets/images/Rectangle 89.png
+  AssetGenImage get rectangle89 =>
+      const AssetGenImage('assets/images/Rectangle 89.png');
+
   /// File path: assets/images/estates_card.png
   AssetGenImage get estatesCard =>
       const AssetGenImage('assets/images/estates_card.png');
 
   /// Directory path: assets/images/help
   $AssetsImagesHelpGen get help => const $AssetsImagesHelpGen();
-
 
   /// File path: assets/images/house_image1.png
   AssetGenImage get houseImage1 =>
@@ -38,6 +45,14 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/images.png
   AssetGenImage get images => const AssetGenImage('assets/images/images.png');
+
+  /// File path: assets/images/kay_profile.png
+  AssetGenImage get kayProfile =>
+      const AssetGenImage('assets/images/kay_profile.png');
+
+  /// File path: assets/images/kurt_profile.png
+  AssetGenImage get kurtProfile =>
+      const AssetGenImage('assets/images/kurt_profile.png');
 
   /// File path: assets/images/loading.png
   AssetGenImage get loading => const AssetGenImage('assets/images/loading.png');
@@ -72,18 +87,33 @@ class $AssetsImagesGen {
   AssetGenImage get profilePic =>
       const AssetGenImage('assets/images/profile_pic.png');
 
+  /// File path: assets/images/property.png
+  AssetGenImage get property =>
+      const AssetGenImage('assets/images/property.png');
+
+  /// File path: assets/images/sam_profile.png
+  AssetGenImage get samProfile =>
+      const AssetGenImage('assets/images/sam_profile.png');
+
   /// File path: assets/images/search_icon.png
   AssetGenImage get searchIcon =>
       const AssetGenImage('assets/images/search_icon.png');
 
+  /// File path: assets/images/star.png
+  AssetGenImage get star => const AssetGenImage('assets/images/star.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        rectangle86,
+        rectangle89,
         estatesCard,
         houseImage1,
         houseImage2,
         houseImage3,
         identityVerifiedLogo,
         images,
+        kayProfile,
+        kurtProfile,
         loading,
         lock,
         lockBubble,
@@ -93,12 +123,21 @@ class $AssetsImagesGen {
         onboardingImage2,
         onboardingImage3,
         profilePic,
-        searchIcon
+        property,
+        samProfile,
+        searchIcon,
+        star
       ];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
+
+  /// File path: assets/svg/Bookmark.svg
+  String get bookmark => 'assets/svg/Bookmark.svg';
+
+  /// File path: assets/svg/Group.svg
+  String get group => 'assets/svg/Group.svg';
 
   /// File path: assets/svg/TERRA LOGO - MAIN-2 1@2x.svg
   String get tERRALOGOMAIN212x => 'assets/svg/TERRA LOGO - MAIN-2 1@2x.svg';
@@ -112,44 +151,8 @@ class $AssetsSvgGen {
   /// File path: assets/svg/bathroom_icon.svg
   String get bathroomIcon => 'assets/svg/bathroom_icon.svg';
 
-  /// File path: assets/svg/bedroom_icon.svg
-  String get bedroomIcon => 'assets/svg/bedroom_icon.svg';
-
-  /// File path: assets/svg/car.svg
-  String get car => 'assets/svg/car.svg';
-
-  /// File path: assets/svg/chat.svg
-  String get chat => 'assets/svg/chat.svg';
-
-  /// File path: assets/svg/fully_furnished.svg
-  String get fullyFurnished => 'assets/svg/fully_furnished.svg';
-
-  /// File path: assets/svg/google.svg
-  String get google => 'assets/svg/google.svg';
-
-  /// File path: assets/svg/identity_verified_logo.svg
-  String get identityVerifiedLogo => 'assets/svg/identity_verified_logo.svg';
-
-  /// File path: assets/svg/kitchen.svg
-  String get kitchen => 'assets/svg/kitchen.svg';
-
-  /// File path: assets/svg/location.svg
-  String get location => 'assets/svg/location.svg';
-
-  /// File path: assets/svg/logo.svg
-  String get logo => 'assets/svg/logo.svg';
-
-  /// File path: assets/svg/mail.svg
-  String get mail => 'assets/svg/mail.svg';
-
-  /// File path: assets/svg/Wifi.svg
-  String get wifi => 'assets/svg/Wifi.svg';
-
-  /// File path: assets/svg/arctic.svg
-  String get arctic => 'assets/svg/arctic.svg';
-
-  /// File path: assets/svg/bathroom_icon.svg
-  String get bathroomIcon => 'assets/svg/bathroom_icon.svg';
+  /// File path: assets/svg/bed.svg
+  String get bed => 'assets/svg/bed.svg';
 
   /// File path: assets/svg/bedroom_icon.svg
   String get bedroomIcon => 'assets/svg/bedroom_icon.svg';
@@ -160,11 +163,23 @@ class $AssetsSvgGen {
   /// File path: assets/svg/chat.svg
   String get chat => 'assets/svg/chat.svg';
 
+  /// File path: assets/svg/columns.svg
+  String get columns => 'assets/svg/columns.svg';
+
+  /// File path: assets/svg/copy.svg
+  String get copy => 'assets/svg/copy.svg';
+
+  /// File path: assets/svg/eye.svg
+  String get eye => 'assets/svg/eye.svg';
+
   /// File path: assets/svg/fully_furnished.svg
   String get fullyFurnished => 'assets/svg/fully_furnished.svg';
 
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
+
+  /// File path: assets/svg/home.svg
+  String get home => 'assets/svg/home.svg';
 
   /// File path: assets/svg/identity_verified_logo.svg
   String get identityVerifiedLogo => 'assets/svg/identity_verified_logo.svg';
@@ -184,11 +199,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/person.svg
   String get person => 'assets/svg/person.svg';
 
+  /// File path: assets/svg/premium_banner.svg
+  String get premiumBanner => 'assets/svg/premium_banner.svg';
+
+  /// File path: assets/svg/profile.svg
+  String get profile => 'assets/svg/profile.svg';
+
   /// File path: assets/svg/profile_photo.svg
   String get profilePhoto => 'assets/svg/profile_photo.svg';
 
   /// File path: assets/svg/river_view.svg
   String get riverView => 'assets/svg/river_view.svg';
+
+  /// File path: assets/svg/saved.svg
+  String get saved => 'assets/svg/saved.svg';
 
   /// File path: assets/svg/search_normal.svg
   String get searchNormal => 'assets/svg/search_normal.svg';
@@ -198,23 +222,33 @@ class $AssetsSvgGen {
 
   /// List of all assets
   List<String> get values => [
+        bookmark,
+        group,
         tERRALOGOMAIN212x,
         wifi,
         arctic,
         bathroomIcon,
+        bed,
         bedroomIcon,
         car,
         chat,
+        columns,
+        copy,
+        eye,
         fullyFurnished,
         google,
+        home,
         identityVerifiedLogo,
         kitchen,
         location,
         logo,
         mail,
         person,
+        premiumBanner,
+        profile,
         profilePhoto,
         riverView,
+        saved,
         searchNormal,
         terraLogo
       ];
