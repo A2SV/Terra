@@ -6,6 +6,7 @@ namespace Domain.Entities
     {
         public Guid PropertyId { get; set; }
         public double GarageSpace { get; set; }
+        public bool StudentFriendly { get; set; }
 
         public required Property Property { get; set; }
     }
