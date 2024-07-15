@@ -18,6 +18,8 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
 
   const handleSubmit = async () => {
     try {
+      console.log("OTP: ", otp);
+      console.log("Email: ", email);
       const response = await axios.post(baseUrl + "Auth/VerifyOTP", {
         otp,
         email,
@@ -33,6 +35,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
 
   const handleReset = () => {
     try {
+      console.log("Email: ", email);
       axios.post(baseUrl + "Auth/ResendOTP", {
         email,
       });
