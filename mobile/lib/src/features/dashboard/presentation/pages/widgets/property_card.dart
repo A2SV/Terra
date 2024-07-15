@@ -123,7 +123,7 @@ class PropertyCard extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: context.textTheme.labelSmall!.copyWith(
+                style: context.textTheme.headlineSmall!.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                 ),

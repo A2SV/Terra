@@ -33,9 +33,4 @@ class AppCommonColors {
   static const propertyTitleColor=Color(0xFF122D4D);
   static const locationTextColor=Color(0xFF415770);
   static const starRatingColor=Color(0xFFEEA651);
-
-  static const detailsDirtyWhiteTextColor = Color(0xFF7D7F88);
-  static const reviewsLeadingColor = Color(0x1F4C6BB0);
-  static const unshadedStarColor = Color(0xFFD9D9D9);
-  static const propertyCardPriceTypeColor = Color(0xFF252B5C);
 }

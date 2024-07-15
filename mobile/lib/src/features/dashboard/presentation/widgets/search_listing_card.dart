@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import '../../../../../gen/fonts.gen.dart';
 
 class SearchListingsCard extends StatelessWidget {
-  const SearchListingsCard({
-    super.key,
-    required this.price,
-    required this.propertyType,
-    required this.title,
-    required this.location,
-    required this.bedroomNumber,
-    required this.size,
-    required this.imageUrl,
-    required this.ratings
-
-  });
-
   final String imageUrl;
+
   final double price;
   final String propertyType;
   final String title;
@@ -30,7 +15,16 @@ class SearchListingsCard extends StatelessWidget {
   final int bedroomNumber;
   final String size;
   final double ratings;
-
+  const SearchListingsCard(
+      {super.key,
+      required this.price,
+      required this.propertyType,
+      required this.title,
+      required this.location,
+      required this.bedroomNumber,
+      required this.size,
+      required this.imageUrl,
+      required this.ratings});
 
   @override
   Widget build(BuildContext context) {
@@ -47,86 +41,93 @@ class SearchListingsCard extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.all(2.w),
-                child:ClipRRect(
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     imageUrl,
                     fit: BoxFit.cover,
                     width: 24.w,
                     height: 24.w,
-                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) {
                         return child;
                       } else {
                         return Center(
                           child: CircularProgressIndicator(
                             value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
                                 : null,
                           ),
                         );
                       }
                     },
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
                       return Text(
                         'Failed\n to load\n image',
-                        style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodySmall,
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppCommonColors.textFieldTextColor)
+                            .bodySmall,
                       );
                     },
                   ),
                 ),
               ),
               Positioned(
-                top: 4.w, // Vertical position from the top of the image
-                right: 5.w, // Horizontal position from the right of the image
-                child: Container(
-                  width: 7.w,
-                  height: 7.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color:  Colors.white.withOpacity(0.5)
-                  ),
-                  child:Icon(
-                    Icons.favorite,
-                    color: Colors.blue,
-                    size: 5.w,
-                  ),
-                )
-              )
+                  top: 4.w, // Vertical position from the top of the image
+                  right: 5.w, // Horizontal position from the right of the image
+                  child: Container(
+                    width: 7.w,
+                    height: 7.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white.withOpacity(0.5)),
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.blue,
+                      size: 5.w,
+                    ),
+                  ))
             ],
           ),
-
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: 67.w,
-                child:Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(
-                            Icons.star,
+                        const Icon(
+                          Icons.star,
                           color: AppCommonColors.starRatingColor,
                         ),
                         Text(
-                            '${ratings}',
-                          style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
+                          '$ratings',
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppCommonColors.textFieldTextColor)
+                              .bodyMedium,
                         ),
                       ],
                     ),
-                    SizedBox(width: 27.w,),
+                    SizedBox(
+                      width: 27.w,
+                    ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: AppCommonColors.propertyTypeContainerColor
-                      ),
-                      child:Text(
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppCommonColors.propertyTypeContainerColor),
+                      child: Text(
                         propertyType,
-                        style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.defaultLink).labelSmall,
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppCommonColors.defaultLink)
+                            .labelSmall,
                       ),
                     )
                   ],
@@ -135,10 +136,10 @@ class SearchListingsCard extends StatelessWidget {
               SizedBox(
                 height: 1.w,
               ),
-              Container(
+              SizedBox(
                 width: 60.w,
                 child: Text(
-                    title,
+                  title,
                   style: TextStyle(
                     color: AppCommonColors.propertyTitleColor,
                     fontSize: 17.sp,
@@ -146,25 +147,24 @@ class SearchListingsCard extends StatelessWidget {
                     fontFamily: FontFamily.nunito,
                   ),
                 ),
-
               ),
               SizedBox(
                 height: 1.w,
               ),
               Container(
                 alignment: Alignment.centerLeft,
-                child:Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(
-                        Icons.location_on,
+                      Icons.location_on,
                       color: AppCommonColors.locationTextColor,
                       size: 4.w,
                     ),
                     Text(
                       location,
                       style: TextStyle(
-                        color:  AppCommonColors.locationTextColor,
+                        color: AppCommonColors.locationTextColor,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontFamily: FontFamily.nunito,
@@ -179,7 +179,7 @@ class SearchListingsCard extends StatelessWidget {
               Container(
                 width: 60.w,
                 alignment: Alignment.centerLeft,
-                child:Row(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -188,16 +188,14 @@ class SearchListingsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                                Icons.aspect_ratio_outlined
-                            ),
+                            const Icon(Icons.aspect_ratio_outlined),
                             SizedBox(
                               width: 1.w,
                             ),
                             Text(
-                              '${size}',
+                              size,
                               style: TextStyle(
-                                color:  Colors.black,
+                                color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: FontFamily.nunito,
@@ -210,16 +208,14 @@ class SearchListingsCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(
-                                Icons.bed_outlined
-                            ),
+                            const Icon(Icons.bed_outlined),
                             SizedBox(
                               width: 1.w,
                             ),
                             Text(
-                              '${bedroomNumber}',
+                              '$bedroomNumber',
                               style: TextStyle(
-                                color:  Colors.black,
+                                color: Colors.black,
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: FontFamily.nunito,
@@ -230,9 +226,9 @@ class SearchListingsCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                        '\$${price}/month',
+                      '\$$price/month',
                       style: TextStyle(
-                        color:  AppCommonColors.defaultLink,
+                        color: AppCommonColors.defaultLink,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w600,
                         fontFamily: FontFamily.nunito,
@@ -241,7 +237,6 @@ class SearchListingsCard extends StatelessWidget {
                   ],
                 ),
               )
-
             ],
           )
         ],
