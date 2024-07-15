@@ -17,13 +17,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-<<<<<<< HEAD
 using DotNetEnv;
 using Application.Mappings;
-
-=======
-using Application.Mappings;
->>>>>>> 25ac370 (feat: create endpoint to get user by id)
 
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../.env");
@@ -128,7 +123,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-<<<<<<< HEAD
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("myAppCors", policy =>
@@ -139,8 +133,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-=======
->>>>>>> 25ac370 (feat: create endpoint to get user by id)
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddCors(options =>
