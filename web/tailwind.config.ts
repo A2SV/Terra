@@ -45,6 +45,8 @@ const config = {
         varietyBlue: "rgb(59 130 246)",
         listingBlue: "#0066CC",
         "hover-blue": "#1e3f8d",
+        backgroundColor: "#F5F5F5E8",
+        bulletColor: "#05E200",
       },
 
       fontFamily: {

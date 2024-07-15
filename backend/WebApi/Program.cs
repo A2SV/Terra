@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Application.Contracts;
 using Application.Features.Accounts.LoginUser.Command;
 using Domain.Entities;
@@ -29,6 +30,12 @@ var database = System.Environment.GetEnvironmentVariable("DB_NAME");
 var port = System.Environment.GetEnvironmentVariable("DB_PORT");
 var pooling = System.Environment.GetEnvironmentVariable("DB_POOLING");
 var connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
+var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
+var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
+var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
+var jwt_issuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER");
+var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+
 
 // Add services to the container.
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
@@ -86,16 +93,15 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-
-            ValidIssuer = System.Environment.GetEnvironmentVariable("JWT_ISSUER"),
-            ValidAudience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(System.Environment.GetEnvironmentVariable("JWT_KEY")))
+            ValidIssuer = "https://terra-wb9c.onrender.com",
+            ValidAudience = "https://terra-wb9c.onrender.com",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt_key))
         };
     })
     .AddGoogle(googleOptions =>
     {
-        googleOptions.ClientId = System.Environment.GetEnvironmentVariable("CLIENT_ID");
-        googleOptions.ClientSecret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
+        googleOptions.ClientId = client_id;
+        googleOptions.ClientSecret = client_secret;
         // googleOptions.CallbackPath = new PathString("/api/Auth/google-response");
         googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     });
@@ -117,6 +123,18 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     options.User.RequireUniqueEmail = true;
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myAppCors", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddCors(options =>
 {

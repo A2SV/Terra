@@ -3,6 +3,7 @@ using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Domain.Entities;
+using Application.Contracts;
 
 namespace Application.Features.Accounts.ForgotPassword.Command
 {
@@ -10,7 +11,7 @@ namespace Application.Features.Accounts.ForgotPassword.Command
     {
         private readonly UserManager<User> _userManager;
         private readonly IEmailService _emailService;
-
+        
         public ForgotPasswordHandler(UserManager<User> userManager, IEmailService emailService)
         {
             _userManager = userManager;
@@ -24,9 +25,8 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             {
                 return new Result<string>(false, ResultStatusCode.NotFound, "User not found or email not confirmed.");
             }
-
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var resetUrl = $"https://yourwebsite.com/reset-password?token={token}&email={request.Email}";
+            var resetUrl = $"https://yourwebsite.com/reset-password/{token}/{user.Email}";
 
             var message = $"<p>Please reset your password by clicking <a href='{resetUrl}'>here</a>.</p>";
             await _emailService.SendEmailAsync(user.Email, "Reset Password", message);

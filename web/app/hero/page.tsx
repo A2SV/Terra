@@ -1,14 +1,12 @@
-"use client";
+import HeroSection from "@/components/Hero/HeroSection";
 import React from "react";
 
-import ProcedureSection from "@/components/General/ProcedureSection";
-
-const hero: React.FC = () => {
+const page = () => {
   return (
     <div>
-      <ProcedureSection />
+      <HeroSection />
     </div>
   );
 };
 
-export default hero;
+export default page;
