@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SignupCard from "@/components/Common/Auth/SignupCard";
+import SignupCard from "@/components/Authentication/SignupCard";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 import { signIn } from "next-auth/react";

@@ -55,6 +55,7 @@
     "styled-components": "^6.1.11",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.2",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "whatwg-fetch": "^3.6.20"
   },

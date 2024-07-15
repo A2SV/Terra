@@ -1,9 +1,10 @@
-"use client";
-import FAQ from "@/components/General/FAQ";
+import React from "react";
+import ExploreProperty from "@/components/General/ExploreProperty";
+
 const Home: React.FC = () => {
   return (
     <div>
-      <FAQ />
+      <ExploreProperty />
     </div>
   );
 };

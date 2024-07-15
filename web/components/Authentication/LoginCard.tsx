@@ -6,9 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
-import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
-import AuthButton from "@/components/Common/Auth/AuthButtons";
+import ErrorMessage from "../Common/Reusable/ErrorMessage";
+import SuccessMessage from "../Common/Reusable/SuccessMessage";
+import AuthButton from "../Common/Auth/AuthButton";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -32,13 +32,8 @@ const LoginCard: React.FC = () => {
         password,
       });
 
-      if (response?.error === "Not Found") {
-        setError("Incorrect email address");
-        setTimeout(() => {
-          setError("");
-        }, 5000);
-      } else if (response?.error === "Unauthorized") {
-        setError("Incorrect password");
+      if (response?.error) {
+        setError("Incorrect email or Password");
         setTimeout(() => {
           setError("");
         }, 5000);
