@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-interface ResetInputEmailProps {
-  action: any;
-}
-const ResetInputEmail: React.FC<ResetInputEmailProps> = ({ action }) => {
+const ResetInputEmail = () => {
   const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="w-10/12 md:w-8/12 flex flex-col items-center justify-center mx-auto">
@@ -16,7 +17,7 @@ const ResetInputEmail: React.FC<ResetInputEmailProps> = ({ action }) => {
       </div>
 
       <div className="p-3 w-full">
-        <form onSubmit={action}>
+        <form onSubmit={handleSubmit}>
           <span className="text-md font-normal font-nunito">Email Address</span>
           <div className="pt-2">
             <label>
