@@ -37,7 +37,7 @@ class FacilityChip extends StatelessWidget {
             if (icon != null) icon.asSvgImage(rightPadding: 2.w),
             Text(
               label,
-              style: context.textTheme.labelSmall!.copyWith(
+              style: context.textTheme.headlineSmall!.copyWith(
                 color: AppCommonColors.detailsDirtyWhiteTextColor,
                 fontSize: 13.5.sp,
               ),

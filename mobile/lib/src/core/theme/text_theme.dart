@@ -53,18 +53,6 @@ class CustomTextStyles {
       fontWeight: FontWeight.w700,
       fontFamily: FontFamily.nunito,
     ),
-    headlineSmall: TextStyle(
-      color: textColor,
-      fontSize: 15.sp,
-      fontWeight: FontWeight.w500,
-      fontFamily: FontFamily.raleway,
-    ),
-    headlineSmall: TextStyle(
-      color: textColor,
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w700,
-      fontFamily: FontFamily.nunito,
-    ),
     headlineMedium: TextStyle( 
       color: textColor,
       fontSize: 15.sp,

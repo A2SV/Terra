@@ -23,7 +23,7 @@ class CustomDetailsButton extends StatelessWidget {
       borderColor: AppCommonColors.disabledFieldColorBorder,
       borderRadius: 15.sp,
       height: 27.sp,
-      textStyle: context.textTheme.labelSmall!.copyWith(
+      textStyle: context.textTheme.headlineSmall!.copyWith(
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
       ),
