@@ -127,6 +127,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/google.svg
   String get google => 'assets/svg/google.svg';
 
+  /// File path: assets/svg/identity_verified_logo.svg
+  String get identityVerifiedLogo => 'assets/svg/identity_verified_logo.svg';
+
   /// File path: assets/svg/kitchen.svg
   String get kitchen => 'assets/svg/kitchen.svg';
 
@@ -204,6 +207,7 @@ class $AssetsSvgGen {
         chat,
         fullyFurnished,
         google,
+        identityVerifiedLogo,
         kitchen,
         location,
         logo,
