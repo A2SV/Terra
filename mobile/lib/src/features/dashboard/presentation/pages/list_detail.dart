@@ -1,187 +1,23 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/custom_details_button.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/facility_chip.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/listing_detail_appbar_button.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/property_card.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/review_card.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-class CustomDetailsButton extends StatelessWidget {
-  final String label;
-  final void Function() onPressed;
-  const CustomDetailsButton({
-    super.key,
-    required this.label,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomButton(
-      text: label,
-      onPressed: onPressed,
-      horizontalPadding: 0,
-      backgroundColor: AppCommonColors.disabledFieldColor,
-      borderColor: AppCommonColors.disabledFieldColorBorder,
-      borderRadius: 15.sp,
-      height: 27.sp,
-      textStyle: context.textTheme.labelSmall!.copyWith(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-}
-
-class FacilityChip extends StatelessWidget {
-  final String label;
-  final String? icon;
-  final double? verticalPaddingValue;
-  const FacilityChip({
-    super.key,
-    required this.label,
-    this.icon,
-    this.verticalPaddingValue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 2.w),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: verticalPaddingValue ?? 0.5.h,
-          horizontal: 5.w,
-        ),
-        decoration: BoxDecoration(
-          color: AppCommonColors.disabledFieldColor,
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-            color: AppCommonColors.disabledFieldColorBorder,
-          ),
-        ),
-        child: Row(
-          children: [
-            if (icon != null) icon.asSvgImage(rightPadding: 2.w),
-            Text(
-              label,
-              style: context.textTheme.labelSmall!.copyWith(
-                color: AppCommonColors.detailsDirtyWhiteTextColor,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class ListingDetail extends StatefulWidget {
   const ListingDetail({super.key});
 
   @override
   State<ListingDetail> createState() => _ListingDetailState();
-}
-
-class ListingDetailAppbarButton extends StatelessWidget {
-  final void Function() onPressed;
-  final IconData icon;
-  final Color? iconColor;
-  final Color? backgroundColor;
-
-  const ListingDetailAppbarButton(
-      {super.key,
-      required this.onPressed,
-      required this.icon,
-      this.iconColor,
-      this.backgroundColor});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        padding: EdgeInsets.zero,
-        shape: const CircleBorder(),
-      ),
-      child: Icon(
-        icon,
-        color: iconColor ?? Colors.black,
-      ),
-    );
-  }
-}
-
-class PropertyCard extends StatelessWidget {
-  final String name;
-  final int price;
-  final String location;
-  final double rating;
-
-  const PropertyCard(
-      {super.key,
-      required this.name,
-      required this.price,
-      required this.location,
-      required this.rating});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              color: Colors.grey[300],
-              child: const Center(
-                child: Icon(Icons.photo, size: 50),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text('\$$price/month'),
-                Text(location),
-                Text('⭐ $rating'),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ReviewCard extends StatelessWidget {
-  final String name;
-  final String review;
-  final int rating;
-  final int daysAgo;
-
-  const ReviewCard(
-      {super.key,
-      required this.name,
-      required this.review,
-      required this.rating,
-      required this.daysAgo});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        title: Text(name),
-        subtitle: Text('$review\n$daysAgo days ago'),
-        trailing: const Icon(Icons.star, color: Colors.yellow),
-      ),
-    );
-  }
 }
 
 class _ListingDetailState extends State<ListingDetail> {
@@ -256,6 +92,14 @@ class _ListingDetailState extends State<ListingDetail> {
       'isFavorite': false,
     },
   ];
+  final List<String> apartmentImages = [
+    Assets.images.houseImage1.path,
+    Assets.images.houseImage2.path,
+    Assets.images.houseImage3.path,
+    Assets.images.houseImage1.path,
+    Assets.images.houseImage2.path,
+    Assets.images.houseImage3.path,
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -263,37 +107,149 @@ class _ListingDetailState extends State<ListingDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Assets.images.help.home.path.asAssetImage(),
-                SafeArea(
-                  child: Row(
-                    children: [
-                      ListingDetailAppbarButton(
-                        icon: Icons.arrow_back_ios,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      const Spacer(),
-                      ListingDetailAppbarButton(
-                        onPressed: () {},
-                        icon: Icons.ios_share,
-                      ),
-                      ListingDetailAppbarButton(
-                        icon: Icons.favorite,
-                        onPressed: () {},
-                        iconColor: Colors.white,
-                        backgroundColor: AppCommonColors.mainBlueButton,
-                      ),
-                      SizedBox(
-                        width: 4.5.w,
-                      ),
-                    ],
+            SizedBox(
+              height: context.height * 0.57,
+              child: Stack(
+                fit: StackFit.loose,
+                clipBehavior: Clip.none,
+                children: [
+                  Assets.images.help.home.path.asAssetImage(
+                    height: context.height * 0.57,
+                    width: context.width,
+                    fit: BoxFit.fill,
                   ),
-                ),
-              ],
+                  SafeArea(
+                    bottom: false,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            ListingDetailAppbarButton(
+                              icon: Icons.arrow_back,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            const Spacer(),
+                            ListingDetailAppbarButton(
+                              onPressed: () {},
+                              icon: Icons.ios_share,
+                            ),
+                            ListingDetailAppbarButton(
+                              icon: Icons.favorite,
+                              onPressed: () {},
+                              iconColor: Colors.white,
+                              backgroundColor: AppCommonColors.mainBlueButton,
+                            ),
+                            SizedBox(
+                              width: 4.5.w,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 1.2.h,
+                                horizontal: 4.w,
+                              ),
+                              margin: EdgeInsets.only(bottom: 0.5.h),
+                              decoration: BoxDecoration(
+                                color: AppCommonColors.mainBlueButton,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: AppCommonColors.logoGold,
+                                    size: 16.sp,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    '4.6',
+                                    style:
+                                        context.textTheme.labelMedium!.copyWith(
+                                      color: Colors.white,
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 2.w),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 1.2.h,
+                                horizontal: 5.w,
+                              ),
+                              margin: EdgeInsets.only(bottom: 0.5.h),
+                              decoration: BoxDecoration(
+                                color: AppCommonColors.mainBlueButton,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Text(
+                                'Apartment',
+                                style: context.textTheme.labelMedium!.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ),
+                            const Spacer(),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: List.generate(
+                                min(3, apartmentImages.length),
+                                (index) {
+                                  return Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.all(5.sp),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15.sp),
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 7.sp,
+                                          ),
+                                        ),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: apartmentImages[index]
+                                            .asAssetImage(
+                                              height: 5.5.h,
+                                              width: 12.w,
+                                            )
+                                            .circularClip(15.sp),
+                                      ),
+                                      if (index == 2 &&
+                                          apartmentImages.length - (index + 1) >
+                                              0)
+                                        Text(
+                                          '+${apartmentImages.length - (index + 1)}',
+                                          style: context.textTheme.bodyMedium!
+                                              .copyWith(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ).symmetricPadding(4.5.w, 3.5.h),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             Column(
               children: [
@@ -349,7 +305,7 @@ class _ListingDetailState extends State<ListingDetail> {
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(
-                        vertical: 1.5.h,
+                        vertical: 1.3.h,
                         horizontal: 5.w,
                       ),
                       decoration: BoxDecoration(
@@ -360,7 +316,8 @@ class _ListingDetailState extends State<ListingDetail> {
                         'Rent',
                         style: context.textTheme.labelMedium!.copyWith(
                           color: Colors.white,
-                          fontSize: 15.sp,
+                          fontSize: 14.sp,
+                          // fontSize: 13.sp,
                         ),
                       ),
                     ),
@@ -369,7 +326,7 @@ class _ListingDetailState extends State<ListingDetail> {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(
-                        vertical: 1.5.h,
+                        vertical: 1.3.h,
                         horizontal: 5.w,
                       ),
                       decoration: BoxDecoration(
@@ -379,14 +336,16 @@ class _ListingDetailState extends State<ListingDetail> {
                       child: Text(
                         'Buy',
                         style: context.textTheme.labelMedium!.copyWith(
-                          fontSize: 15.sp,
+                          // fontSize: 14.sp,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.h),
+                  padding: EdgeInsets.symmetric(vertical: 1.1.h),
                   child: const Divider(
                     color: AppCommonColors.disabledFieldColorBorder,
                   ),
@@ -416,7 +375,7 @@ class _ListingDetailState extends State<ListingDetail> {
                   child: Text(
                     'Location & Public Facilities',
                     style: context.textTheme.labelMedium!.copyWith(
-                      fontSize: 18.sp,
+                      fontSize: 17.sp,
                     ),
                   ),
                 ),
@@ -483,7 +442,7 @@ class _ListingDetailState extends State<ListingDetail> {
             ).horizontalPadding(4.5.w),
             Container(
               margin: EdgeInsets.only(
-                top: 2.h,
+                top: 0.7.h,
                 bottom: 2.h,
                 left: 4.5.w,
               ),
@@ -496,18 +455,18 @@ class _ListingDetailState extends State<ListingDetail> {
                     FacilityChip(label: otherFacilities[index]),
               ),
             ),
-            _buildMapCard(context).onlyPadding(0, 3.h, 4.5.w, 4.5.w),
+            _buildMapCard(context),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'What this place offers',
                   style: context.textTheme.labelMedium!.copyWith(
-                    fontSize: 18.sp,
+                    fontSize: 17.sp,
                   ),
                 ),
                 ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 2.h),
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
                   shrinkWrap: true,
                   primary: false,
                   physics: const NeverScrollableScrollPhysics(),
@@ -517,9 +476,10 @@ class _ListingDetailState extends State<ListingDetail> {
                       context,
                       icon: amenities[index]['icon'],
                       label: amenities[index]['label'],
-                    );
+                    ).verticalPadding(0.5.h);
                   },
                 ),
+                SizedBox(height: 1.h),
                 CustomDetailsButton(
                   label: 'Show all 20 Amenities',
                   onPressed: () {},
@@ -541,7 +501,7 @@ class _ListingDetailState extends State<ListingDetail> {
                       width: 50.0,
                     ),
                   ),
-                  minTileHeight: 37.sp,
+                  minTileHeight: 35.sp,
                   enabled: false,
                   title: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -563,92 +523,230 @@ class _ListingDetailState extends State<ListingDetail> {
                   ),
                   trailing: Assets.svg.chat.asSvgImage(),
                 ),
-
-                const SizedBox(height: 8),
-                const Text('⭐ 3 Reviews'),
-                const Text('✅ Identity verified'),
-                const SizedBox(height: 8),
-                const Text('Information for Users',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                const Text(
-                    'I will be available on site. When I\'m not on site you can reach me via text, phone or through Terra.'),
-                const SizedBox(height: 8),
-                const Text('Language: English'),
-                const Text('Response rate: 80%'),
-                const SizedBox(height: 8),
-                const Text('Email: ghproperties@gmail.com'),
-                const Text('Phone: +233 123 456 789'),
-                const Text('Response time: within an hour'),
-
-                // Reviews Section
+                SizedBox(height: 2.h),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      size: 17.sp,
+                      color: AppCommonColors.logoGold,
+                    ),
+                    SizedBox(width: 2.w),
+                    Text(
+                      '3 Reviews',
+                      style: context.textTheme.bodyMedium!.copyWith(
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 0.5.h),
+                Row(
+                  children: [
+                    Assets.images.identityVerifiedLogo.path.asAssetImage(
+                      height: 17.sp,
+                      width: 17.sp,
+                    ),
+                    SizedBox(width: 2.w),
+                    Text(
+                      'Identity verified',
+                      style: context.textTheme.bodyMedium!.copyWith(
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 2.h),
+                Text(
+                  'Information for Users',
+                  style: context.textTheme.labelMedium!.copyWith(
+                    fontSize: 16.sp,
+                  ),
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  'I will be available on site. When I\'m not on site you can reach me via text, phone or through Terra.',
+                  style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: 15.sp,
+                  ),
+                ),
+                SizedBox(height: 1.h),
+                _buildUserInfoRichText(
+                  context,
+                  key: "Language",
+                  value: "English",
+                ),
+                _buildUserInfoRichText(
+                  context,
+                  key: "Response rate",
+                  value: "80%",
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                _buildUserInfoRichText(
+                  context,
+                  key: "Email",
+                  value: "ghproperties@gmail.com",
+                ),
+                _buildUserInfoRichText(
+                  context,
+                  key: "Phone",
+                  value: "+233 123 456 789",
+                ),
+                _buildUserInfoRichText(
+                  context,
+                  key: "Response time",
+                  value: "within an hour",
+                ),
+                SizedBox(height: 1.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'To protect your payment, always make sure to verify the property listing first through in-person visits before purhaches',
+                        style: context.textTheme.bodyMedium!.copyWith(
+                          fontSize: 13.sp,
+                        ),
+                      ),
+                    ),
+                    Assets.images.identityVerifiedLogo.path.asAssetImage(
+                      height: 24.sp,
+                      width: 24.sp,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4.5.h),
                 Text(
                   'Reviews',
                   style: context.textTheme.labelMedium!.copyWith(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
                   ),
                 ),
-
-                Container(),
-
-                const SizedBox(height: 8),
-                const ReviewCard(
-                  name: 'Kurt Mullins',
-                  review:
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
-                  rating: 5,
-                  daysAgo: 8,
+                SizedBox(height: 2.h),
+                ListTile(
+                  enabled: false,
+                  tileColor: AppCommonColors.reviewsLeadingColor,
+                  leading: Container(
+                    decoration: BoxDecoration(
+                      color: AppCommonColors.reviewsLeadingColor,
+                      borderRadius: BorderRadius.circular(17.sp),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(15.sp),
+                      child: Icon(
+                        Icons.star,
+                        color: AppCommonColors.logoGold,
+                        size: 20.sp,
+                      ),
+                    ),
+                  ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          const ShaderRatingWidget(rating: 4.6),
+                          SizedBox(
+                            width: 1.h,
+                          ),
+                          Text(
+                            '4.6',
+                            style: context.textTheme.titleLarge!.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'From 112 reviewers',
+                        style: context.textTheme.bodyMedium!
+                            .copyWith(fontSize: 13.sp),
+                      ),
+                    ],
+                  ),
+                  trailing: Stack(
+                    children: List.generate(
+                      3,
+                      (index) => Padding(
+                        padding:
+                            EdgeInsets.only(left: index / 3 * 70, right: 8.w),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 3.0,
+                            ),
+                          ),
+                          child: Assets.images.profilePic.path
+                              .asAssetImage(height: 3.5.h)
+                              .circularClip(25.0),
+                        ),
+                      ),
+                    ).toList(),
+                  ),
+                  minTileHeight: 9.h,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.sp),
+                  ),
                 ),
-                const ReviewCard(
-                  name: 'Kay Swanson',
-                  review:
-                      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem...',
-                  rating: 5,
-                  daysAgo: 12,
+                SizedBox(height: 2.h),
+                ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: 2,
+                  physics: const NeverScrollableScrollPhysics(),
+                  primary: false,
+                  itemBuilder: (context, index) => const ReviewCard(
+                    name: 'Kurt Mullins',
+                    review:
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    rating: 4.6,
+                    daysAgo: 8,
+                  ),
                 ),
+                SizedBox(height: 1.5.h),
                 CustomDetailsButton(
                   onPressed: () {},
                   label: 'View all reviews',
                 ),
-                const Divider(),
-
-                // Nearby Locations Section
+                SizedBox(height: 2.h),
                 Text(
                   'Nearby From this Location',
                   style: context.textTheme.labelMedium!.copyWith(
-                    fontSize: 18.sp,
+                    fontSize: 16.sp,
                   ),
                 ),
-                const SizedBox(height: 8),
-                GridView.count(
+                SizedBox(height: 2.5.h),
+                GridView.builder(
                   primary: false,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  crossAxisCount: 2,
-                  children: const [
-                    PropertyCard(
-                        name: 'Wings Tower',
-                        price: 220,
-                        location: 'Accra, Ghana',
-                        rating: 4.2),
-                    PropertyCard(
-                        name: 'Sky Dandelions',
-                        price: 190,
-                        location: 'Accra, Ghana',
-                        rating: 4.9),
-                    PropertyCard(
-                        name: 'Wings Tower',
-                        price: 220,
-                        location: 'Accra, Ghana',
-                        rating: 4.2),
-                    PropertyCard(
-                        name: 'Wings Tower',
-                        price: 220,
-                        location: 'Accra, Ghana',
-                        rating: 4.2),
-                  ],
+                  itemCount: nearbyLocations.length,
+                  padding: EdgeInsets.only(right: 4.5.w),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.71,
+                    crossAxisSpacing: 10.w,
+                    mainAxisSpacing: 1.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    return PropertyCard(
+                      name: nearbyLocations[index]['name'],
+                      price: nearbyLocations[index]['price'],
+                      location: nearbyLocations[index]['location'],
+                      rating: nearbyLocations[index]['rating'],
+                      isFavourite: nearbyLocations[index]['isFavorite'],
+                    );
+                  },
                 ),
               ],
             ).horizontalPadding(4.5.w),
+            SizedBox(
+              height: 5.h,
+            )
           ],
         ),
       ),
@@ -665,7 +763,7 @@ class _ListingDetailState extends State<ListingDetail> {
         ),
         Text(
           label,
-          style: context.textTheme.bodyMedium!.copyWith(fontSize: 16.sp),
+          style: context.textTheme.bodyMedium!.copyWith(fontSize: 15.sp),
         ),
       ],
     );
@@ -673,33 +771,54 @@ class _ListingDetailState extends State<ListingDetail> {
 
   Container _buildMapCard(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 2.h, left: 4.5.w, right: 4.5.w),
       decoration: BoxDecoration(
         color: AppCommonColors.disabledFieldColor,
-        borderRadius: BorderRadius.circular(25.sp),
+        borderRadius: BorderRadius.circular(20.sp),
       ),
       width: context.width,
       clipBehavior: Clip.antiAlias,
-      child: Expanded(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.red,
-              height: 25.h,
+      child: Column(
+        children: [
+          Container(
+            color: Colors.red,
+            height: 25.h,
+          ),
+          CustomButton(
+            text: 'View all on map',
+            onPressed: () {},
+            horizontalPadding: 0,
+            borderRadius: 0,
+            height: 5.h,
+            backgroundColor: AppCommonColors.disabledFieldColor,
+            borderColor: Colors.transparent,
+            textStyle: context.textTheme.bodyMedium!.copyWith(
+              fontSize: 13.sp,
             ),
-            CustomButton(
-              text: 'View all on map',
-              onPressed: () {},
-              horizontalPadding: 0,
-              borderRadius: 0,
-              backgroundColor: AppCommonColors.disabledFieldColor,
-              borderColor: Colors.transparent,
-              textStyle: context.textTheme.bodyMedium!.copyWith(
-                fontSize: 13.sp,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
+  }
+
+  Widget _buildUserInfoRichText(BuildContext context,
+      {required String key, required String value}) {
+    return RichText(
+      text: TextSpan(
+        text: '$key:',
+        style: context.textTheme.bodyMedium!.copyWith(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w700,
+        ),
+        children: [
+          TextSpan(
+            text: ' $value',
+            style: context.textTheme.bodyMedium!.copyWith(
+              fontSize: 14.sp,
+            ),
+          ),
+        ],
+      ),
+    ).verticalPadding(0.5.h);
   }
 }

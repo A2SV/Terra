@@ -17,6 +17,12 @@ class CustomTextStyles {
       fontWeight: FontWeight.w400,
       fontFamily: FontFamily.nunito,
     ),
+    titleLarge: TextStyle(
+      color: textColor,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      fontFamily: FontFamily.montserrat,
+    ),
     displaySmall: TextStyle(
       color: textColor,
       fontSize: 20.sp,

@@ -20,8 +20,7 @@ class AppCommonColors {
   static const pageViewIconUnactive = Color(0xFFD6DFFF);
   static const pageViewIconActive = Color(0xFF1779F3);
   static const detailsDirtyWhiteTextColor = Color(0xFF7D7F88);
+  static const reviewsLeadingColor = Color(0x1F4C6BB0);
+  static const unshadedStarColor = Color(0xFFD9D9D9);
+  static const propertyCardPriceTypeColor = Color(0xFF252B5C);
 }
-
-//const 
-                    // const
-                    
