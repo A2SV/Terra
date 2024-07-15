@@ -6,7 +6,6 @@ namespace Domain.Enums
         PerishableGoods,
         HazardousMaterials,
         Electronics,
-        Pharmaceuticals,
         IndustrialOrContructionMaterials,
     }
 }
