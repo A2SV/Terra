@@ -11,6 +11,7 @@ namespace Domain.Entities
         public int FloorNumberOfUnit { get; set; }
         public bool LaundryFacilityAvailable { get; set; }
         public bool CleaningServiceAvailable { get; set; }
+        public bool StudentFriendly { get; set; }
 
         public required Property Property { get; set; }
     }
