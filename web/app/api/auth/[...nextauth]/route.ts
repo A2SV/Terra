@@ -57,28 +57,23 @@ const authOptions: NextAuthOptions = {
     },
     async jwt({ token, account, user }: { token: JWT; account?: any; user: any }) {
       if (account?.provider === "google") {
-        const res = await fetch(`${env("NEXT_PUBLIC_BASE_URL")}Auth/register`, {
+        await fetch(`${env("NEXT_PUBLIC_BASE_URL")}auth/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: token.email,
             firstName: token.name?.split(" ")[0],
             lastName: token.name?.split(" ")[1],
-            accessToken: account.access_token,
+            email: token.email,
+            password: "around2amterra#",
+            phoneNumber: "0554574688",
+            role: "user",
           }),
         });
+      }
 
-        const jsonResponse = await res.json();
-        user = jsonResponse.user;
-        token.accessToken = user.token;
-        token.id = user.user.id;
-        token.firstName = user.user.firstName;
-        token.lastName = user.user.lastName;
-        token.email = user.user.email;
-        token.profilePicture = user.user.profilePicture;
-      } else if (user) {
+      if (user) {
         token.accessToken = user.token;
         token.id = user.user.id;
         token.firstName = user.user.firstName;
