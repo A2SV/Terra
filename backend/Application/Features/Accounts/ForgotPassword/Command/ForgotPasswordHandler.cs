@@ -23,7 +23,7 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
             {
-                return new Result<string>(false, ResultStatusCode.NotFound, "User not found or email not confirmed.");
+                return new Result<string>(false, ResultStatusCode.NotFound, string.Empty, "User not found or email not confirmed.");
             }
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var resetUrl = $"https://yourwebsite.com/reset-password/{token}/{user.Email}";
@@ -31,7 +31,7 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             var message = $"<p>Please reset your password by clicking <a href='{resetUrl}'>here</a>.</p>";
             await _emailService.SendEmailAsync(user.Email, "Reset Password", message);
             
-            return new Result<string>(true, ResultStatusCode.Success, "Password reset email sent");
+            return new Result<string>(true, ResultStatusCode.Success, token, "Password reset email sent");
         }
     }
 }

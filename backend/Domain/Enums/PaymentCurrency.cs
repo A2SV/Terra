@@ -2,9 +2,9 @@ namespace Domain.Enums
 {
     public enum PaymentCurrency
     {
-        GHS,
-        USD,
-        EUR,
-        GBP
+        Ghs,
+        Usd,
+        Eur,
+        Gbp
     }
 }

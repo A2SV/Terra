@@ -20,7 +20,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using DotNetEnv;
 using Application.Mappings;
 
-
 var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../.env");
 var host = System.Environment.GetEnvironmentVariable("DB_HOST");
@@ -41,16 +40,15 @@ var jwt_audience = System.Environment.GetEnvironmentVariable("JWT_AUDIENCE");
 builder.Services.AddDbContext<AppAuthDbContext>(options =>
 options.UseNpgsql(connectionString));
 
+builder.Services.AddDbContext<PropertyDbContext>(options =>
+options.UseNpgsql(connectionString));
+
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOTPService, OTPService>();
 builder.Services.AddScoped<IOTPRepository, OTPRepository>();
-
-builder.Services.Configure<IdentityOptions>(
-    options => options.SignIn.RequireConfirmedAccount = true);
-
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));
@@ -120,7 +118,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireDigit = false;
-
+    options.SignIn.RequireConfirmedEmail = true;
     options.User.RequireUniqueEmail = true;
 });
 
