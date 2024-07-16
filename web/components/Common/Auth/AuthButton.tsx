@@ -13,9 +13,7 @@ const AuthButton: React.FC<Props> = ({ action }) => {
         type="submit"
         className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
         onClick={action}
-      >
-        {/* {loading ? <SpinnerComponent /> : `${text}`} */}
-      </button>
+      ></button>
     </div>
   );
 };
