@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import LoginCard from "../Common/Auth/LoginCard";
+import LoginCard from "./LoginCard";
 import Link from "next/link";
 
 const LoginBackground: React.FC = () => {
