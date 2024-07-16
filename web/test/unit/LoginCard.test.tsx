@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import LoginCard from "@/components/Common/Auth/LoginCard";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import LoginCard from "@/components/Authentication/LoginCard";
 
 jest.mock("axios");
 jest.mock("next/navigation", () => ({

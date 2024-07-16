@@ -5,11 +5,10 @@ import logo from "../../public/logo.png";
 
 interface ResetBackgroundProps {
   description: string;
-  card: any;
-  action: any;
+  Card: React.ComponentType;
 }
 
-const ResetBackground: React.FC<ResetBackgroundProps> = ({ card, action }) => {
+const ResetBackground: React.FC<ResetBackgroundProps> = ({ Card }) => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="flex md:flex-row bg-white shadow-lg min-h-screen w-full md:w-auto">
@@ -28,7 +27,9 @@ const ResetBackground: React.FC<ResetBackgroundProps> = ({ card, action }) => {
           <div className="flex justify-center flex-row md:justify-center font-nunito">
             <Image src={logo} alt="Logo" height={180} width={150} className="object-cover" />
           </div>
-          <div className="Card flex-grow overflow-y-auto ">{card({ action })}</div>
+          <div className="Card flex-grow overflow-y-auto ">
+            <Card />
+          </div>
         </div>
       </div>
     </div>

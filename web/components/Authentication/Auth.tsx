@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import backgroundImage from "../../public/background.png";
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import LoginCard from "@/components/Common/Auth/LoginCard";
-import SignupCard from "@/components/Common/Auth/SignupCard";
+import LoginCard from "./LoginCard";
+import SignupCard from "./SignupCard";
 
 const Auth: React.FC = () => {
   const [cardType, setCardType] = useState<string>("login");
