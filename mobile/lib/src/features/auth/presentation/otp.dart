@@ -4,14 +4,16 @@ import 'package:pinput/pinput.dart';
 import '../../../core/theme/common_color.dart';
 import '../../../core/theme/text_theme.dart';
 
+
 class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
+
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
 
-final pinController = TextEditingController();
-
 class _OtpScreenState extends State<OtpScreen> {
+final pinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
