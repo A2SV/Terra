@@ -22,7 +22,6 @@ const ResetInputEmail = () => {
         .post(`${baseUrl}Auth/forgot-password`, { email })
         .then((response) => {
           if (response.status === 200) {
-            alert("Success");
             router.push(`/otp`);
           }
         })
@@ -30,7 +29,7 @@ const ResetInputEmail = () => {
           if (error?.response?.data?.data?.length > 0) {
             setErrorMessage(error?.response?.data?.data);
           } else {
-            console.log(error);
+            alert("An error occurred. Please try again.");
           }
         });
     } catch (error) {
