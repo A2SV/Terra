@@ -67,7 +67,7 @@ const authOptions: NextAuthOptions = {
             lastName: token.name?.split(" ")[1],
             email: token.email,
             password: "around2amterra#",
-            phoneNumber: "0554574688",
+            phoneNumber: "0500000000",
             role: "user",
           }),
         });
