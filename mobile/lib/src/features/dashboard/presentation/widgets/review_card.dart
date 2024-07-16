@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/shader_widget.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ReviewCard extends StatelessWidget {

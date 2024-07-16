@@ -5,12 +5,12 @@ import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/custom_details_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/facility_chip.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/listing_detail_appbar_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/property_card.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/review_card.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/shader_widget.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/property_card.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/review_card.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ListingDetail extends StatefulWidget {
