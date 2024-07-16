@@ -98,7 +98,6 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-
               {/* Contact */}
               <div className="lg:my-0">
                 <h3 className="text-lg font-bold pb-7">Contact</h3>
