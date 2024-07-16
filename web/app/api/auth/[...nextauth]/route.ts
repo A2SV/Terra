@@ -55,8 +55,23 @@ const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async jwt({ token, user }: { token: JWT; account?: any; user: any }) {
-      if (user) {
+    async jwt({ token, account, user }: { token: JWT; account?: any; user: any }) {
+      if (account?.provider === "google") {
+        await fetch(`${env("NEXT_PUBLIC_BASE_URL")}auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: token.name?.split(" ")[0],
+            lastName: token.name?.split(" ")[1],
+            email: token.email,
+            password: "around2amterra#",
+            phoneNumber: "0554574688",
+            role: "user",
+          }),
+        });
+      } else if (user) {
         token.accessToken = user.token;
         token.id = user.user.id;
         token.firstName = user.user.firstName;
