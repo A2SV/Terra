@@ -8,9 +8,12 @@ const Otp: any = ({
     email: string;
   };
 }) => {
+  // Decode the email parameter
+  const decodedEmail = decodeURIComponent(params.email);
+
   return (
     <div>
-      <OtpVerification email={params.email} />
+      <OtpVerification email={decodedEmail} />
     </div>
   );
 };
