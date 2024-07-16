@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "../Reusable/Spinner";
+import SpinnerComponent from "../Reusable/SpinnerComponent";
 
 interface Props {
   loading: boolean;
@@ -15,7 +15,7 @@ const AuthButton: React.FC<Props> = ({ loading, action, text }) => {
         className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
         onClick={action}
       >
-        {loading ? <Spinner /> : `${text}`}
+        {loading ? <SpinnerComponent /> : `${text}`}
       </button>
     </div>
   );
