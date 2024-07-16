@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import SignupCard from "../Common/Auth/SignupCard";
+import SignupCard from "@/components/Common/Auth/SignupCard";
 import Link from "next/link";
 
 const SignUpBackground: React.FC = () => {
