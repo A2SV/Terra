@@ -14,7 +14,8 @@ interface OtpVerificationProps {
 
 const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
   const [otp, setOtp] = useState<string>("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string>("");
+
   const baseUrl = env("NEXT_PUBLIC_BASE_URL");
   const router = useRouter();
 
