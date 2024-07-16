@@ -1,4 +1,4 @@
-import ResetNew from "@/components/ResetNew";
+import ResetNew from "@/components/Authentication/ResetNew";
 import React from "react";
 
 const ResetPasswordPage = () => {
