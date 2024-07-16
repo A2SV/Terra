@@ -30,6 +30,8 @@ const SignUpCard: React.FC = () => {
     role: "user",
   });
 
+  console.log(user);
+
   const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prevUser) => ({
       ...prevUser,

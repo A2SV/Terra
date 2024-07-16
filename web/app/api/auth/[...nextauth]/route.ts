@@ -71,8 +71,8 @@ const authOptions: NextAuthOptions = {
             role: "user",
           }),
         });
-      } 
-      
+      }
+
       if (user) {
         token.accessToken = user.token;
         token.id = user.user.id;
