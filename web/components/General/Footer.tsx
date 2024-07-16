@@ -8,34 +8,33 @@ import Navbar from "./Navbar";
 const Footer = () => {
   return (
     <div>
-      {/* Page */}
-      <div>
-        <Navbar />
-        <footer className="bg-[#00010F] text-white py-12 font-nunito text-sm">
-          <div className="mx-32 text-left justify-start flex-col px-4 sm:px-6 lg:px-8">
+      <Navbar />
+      <div className="flex items-center justify-center">
+        {/* Page */}
+
+        <footer className="bg-[#00010F] w-screen text-white py-12 md:px-6 font-nunito text-sm">
+          <div className="lg:mx-32 text-left justify-start flex-col px-4 sm:px-3 lg:px-8">
             {/* FIrst line */}
-            <div className="flex my-12 justify-between">
-              <div className="flex-row">
-                <Image className="pb-2" src="/terra_black.png" alt="Logo" height={90} width={126} />
+            <div className="flex flex-col md:flex-row justify-between my-10">
+              <div className="flex-row justify-between">
+                <Image className="pb-4" src="/terra_black.png" alt="Logo" height={90} width={126} />
                 <p>
                   We are a dedicated team of agents ready, <br /> to give you the best deals on
                   properties for <br /> sale, rent or lease
                 </p>
               </div>
               {/* Second line */}
-              <div className="w-6/12">
-                <div className="pb-2 w-4/6 my-4 text-3xl">
-                  <h1>Subscribe to our newsletter</h1>
-                </div>
-                <div className="flex">
+              <div className="w-full md:w-6/12">
+                <h1 className="my-4 pb-2 mt-4 text-2xl md:text-3xl">Subscribe to our newsletter</h1>
+                <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:items-center">
                   <input
                     type="email"
-                    className="flex w-4/6 h-14 bg-black border-2 rounded-3xl
-                     py-2 px-4 text-white focus:outline-none focus:ring"
+                    className="flex lg:w-full mr-4 md:w-4/6 h-16 bg-inherit border-2 rounded-3xl
+                     py-2 px-4 text-white"
                     placeholder="enter your email address"
                   />
                   <button
-                    className="bg-terrablue hover:bg-terrablue text-white text-md rounded-3xl ml-2 py-2 px-10 focus:outline-none focus:ring-2 focus:ring-terrablue"
+                    className="bg-terrablue hover:bg-terrablue text-white w-2/5 rounded-3xl ml-1 px-10 h-16 focus:outline-none focus:ring-2 focus:ring-terrablue lg:w-3/12 md:w-2/6 py-0.5 text-lg flex items-center justify-center"
                     type="submit"
                   >
                     Subscribe
@@ -45,7 +44,7 @@ const Footer = () => {
             </div>
 
             {/* 2nd grid */}
-            <div className="flex space-x-10 border-t-2 pt-12 justify-between">
+            <div className="grid grid-cols-2 gap-y-8 md:space-x-10 md:grid-cols-3 border-t-2 pt-12">
               {/* Menu */}
               <div className="">
                 <h3 className="text-lg font-bold pb-7">Menu</h3>
@@ -101,7 +100,7 @@ const Footer = () => {
               </div>
 
               {/* Contact */}
-              <div>
+              <div className="lg:my-0">
                 <h3 className="text-lg font-bold pb-7">Contact</h3>
                 <ul className="space-y-2">
                   <li>
@@ -109,19 +108,19 @@ const Footer = () => {
                       href="mailto:info@example.com"
                       className="text-gray-400 hover:text-blue-500 flex"
                     >
-                      <RxEnvelopeClosed />
+                      <RxEnvelopeClosed className="mr-2" />
                       terra@gmail.com
                     </a>
                   </li>
                   <li>
                     <a href="tel:+15551234567" className="text-gray-400 hover:text-blue-500 flex">
-                      <FiPhone />
+                      <FiPhone className="mr-2" />
                       terra_company
                     </a>
                   </li>
                   <li>
                     <a href="#" className="text-gray-400 hover:text-blue-500 flex">
-                      <CiLocationOn /> American House, Accra
+                      <CiLocationOn className="mr-2" /> American House, Accra
                     </a>
                   </li>
                 </ul>
