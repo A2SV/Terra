@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/homepage_card.dart';
@@ -26,6 +27,12 @@ class _HomePageState extends State<HomePage> {
   ];
 
   int _selectedIndex = 0;
+
+  void onFilterButtonPress(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -232,11 +239,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  void onFilterButtonPress(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }

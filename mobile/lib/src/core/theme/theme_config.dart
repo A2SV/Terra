@@ -70,7 +70,7 @@ class ThemeConfig {
       );
 
   ColorScheme get _lightColorScheme => const ColorScheme.light().copyWith(
-        primary: AppCommonColors.mainBlueButton,
+        // primary: AppCommonColors.mainBlueButton,
         onPrimary: Colors.white,
         // error: AppCommonColors.red,
       );
