@@ -1,13 +1,41 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
+import { env } from "next-runtime-env";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ResetInputEmail = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleEmailSubmission();
+  };
+
+  const handleEmailSubmission = async () => {
+    const baseUrl = env("NEXT_PUBLIC_BASE_URL");
+    try {
+      await axios
+        .post(`${baseUrl}Auth/forgot-password`, { email })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Success");
+            router.push(`/otp`);
+          }
+        })
+        .catch((error: any) => {
+          if (error?.response?.data?.data?.length > 0) {
+            setErrorMessage(error?.response?.data?.data);
+          } else {
+            console.log(error);
+          }
+        });
+    } catch (error) {
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -19,6 +47,9 @@ const ResetInputEmail = () => {
       <div className="p-3 w-full">
         <form onSubmit={handleSubmit}>
           <span className="text-md font-normal font-nunito">Email Address</span>
+          {errorMessage.length > 0 ? (
+            <p className=" text-red-500 text-xs font-montserrat">{errorMessage}</p>
+          ) : null}
           <div className="pt-2">
             <label>
               <input
@@ -32,14 +63,12 @@ const ResetInputEmail = () => {
             </label>
           </div>
           <div className="pt-9 text-sm font-sans">
-            <Link href="/otp">
-              <button
-                type="submit"
-                className="rounded-3xl bg-terrablue w-36 h-12 text-white hover:bg-blue-800 font-sans"
-              >
-                Continue
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="rounded-3xl bg-terrablue w-36 h-12 text-white hover:bg-blue-800 font-sans"
+            >
+              Continue
+            </button>
           </div>
         </form>
       </div>
