@@ -7,7 +7,12 @@ const ExploreProperty: React.FC = () => {
     <div className="relative min-h-property overflow-x-hidden bg-property flex flex-row justify-center items-center">
       <div className="flex flex-row justify-center items-center">
         <div className="w-36 h-36 top-5 -right-16 absolute z-0">
-          <Image src="/explore_section_images/ellipse-1-home.svg" className="object-cover" layout="fill" alt="ellipse" />
+          <Image
+            src="/explore_section_images/ellipse-1-home.svg"
+            className="object-cover"
+            layout="fill"
+            alt="ellipse"
+          />
         </div>
       </div>
 
