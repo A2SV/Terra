@@ -44,6 +44,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         
         if(result.statusCode != 201){
           final response = jsonDecode(result.body);
+          print(response['message']);
           throw ApiException(response['message']);
           
         } 

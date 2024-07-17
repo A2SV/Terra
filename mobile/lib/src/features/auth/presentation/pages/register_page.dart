@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
@@ -31,6 +32,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
@@ -41,21 +44,18 @@ class _SignUpPageState extends State<SignUpPage> {
             message: state.message,
           );
         } else if (state is AuthenticationSuccess) {
-        
           
-          
-         
           Navigator.pushNamed(context, '/otp');
         }
       },
       builder: (context, state) {
-        if (state is AuthenticationLoading) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
+        // if (state is AuthenticationLoading) {
+        //   return const Scaffold(
+        //     body: Center(
+        //       child: CircularProgressIndicator(),
+        //     ),
+        //   );
+        // }
         return Form(
           key: _formKey,
           child: Scaffold(
@@ -132,48 +132,49 @@ class _SignUpPageState extends State<SignUpPage> {
                             CustomValidator.validateEmail(email ?? "")),
                     const SizedBox(height: 12),
                     AuthTextFormField(
-                  firstNameController: passwordController,
-                  icon: Icons.lock_outline,
-                  labelText: 'Password',
-                  validator: (password) =>
-                      CustomValidator.validatePassword(password ?? ""),
-                  obscureText: passwordVisibility1,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        passwordVisibility1 = !passwordVisibility1;
-                      });
-                    },
-                    color: AppCommonColors.fieldBorderColor,
-                    icon: passwordVisibility1
-                        ? const Icon(Icons.visibility_outlined)
-                        : const Icon(Icons.visibility_off_outlined),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                AuthTextFormField(
-                  firstNameController: confirmPasswordController,
-                  icon: Icons.lock_outline,
-                  labelText: 'Confirm password',
-                  validator: (password) {
-                    return CustomValidator.validatePassword(password ?? "") ??
-                        CustomValidator.validatePasswordFields(
-                            passwordController.text,
-                            confirmPasswordController.text);
-                  },
-                  obscureText: passwordVisibility,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        passwordVisibility = !passwordVisibility;
-                      });
-                    },
-                    color: AppCommonColors.fieldBorderColor,
-                    icon: passwordVisibility
-                        ? const Icon(Icons.visibility_outlined)
-                        : const Icon(Icons.visibility_off_outlined),
-                  ),
-                ),
+                      firstNameController: passwordController,
+                      icon: Icons.lock_outline,
+                      labelText: 'Password',
+                      validator: (password) =>
+                          CustomValidator.validatePassword(password ?? ""),
+                      obscureText: passwordVisibility1,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordVisibility1 = !passwordVisibility1;
+                          });
+                        },
+                        color: AppCommonColors.fieldBorderColor,
+                        icon: passwordVisibility1
+                            ? const Icon(Icons.visibility_outlined)
+                            : const Icon(Icons.visibility_off_outlined),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    AuthTextFormField(
+                      firstNameController: confirmPasswordController,
+                      icon: Icons.lock_outline,
+                      labelText: 'Confirm password',
+                      validator: (password) {
+                        return CustomValidator.validatePassword(
+                                password ?? "") ??
+                            CustomValidator.validatePasswordFields(
+                                passwordController.text,
+                                confirmPasswordController.text);
+                      },
+                      obscureText: passwordVisibility,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordVisibility = !passwordVisibility;
+                          });
+                        },
+                        color: AppCommonColors.fieldBorderColor,
+                        icon: passwordVisibility
+                            ? const Icon(Icons.visibility_outlined)
+                            : const Icon(Icons.visibility_off_outlined),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -182,7 +183,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           value: _agreeToTerms,
                           onChanged: (bool? value) {
                             setState(() {
-                             
                               _agreeToTerms = value!;
                             });
                           },
@@ -201,22 +201,30 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 12),
                     CustomButton(
+                      showSuffixWidget: true,
+                      suffixWidget: state is AuthenticationLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Container(),
+                        disabled: state is AuthenticationLoading,
+
                       text: 'Create Account',
                       onPressed: () {
                         final isValid = CustomValidator.validateForm(_formKey);
-                       
+
                         if (isValid) {
-                           if (!_agreeToTerms){
-                            
-                           CustomSnackBar.errorSnackBar(
+                          if (!_agreeToTerms) {
+                            CustomSnackBar.errorSnackBar(
                               context: context,
-                              message: "Agree with Terms of service and Privacy Policy to continue",
-                                );
-                              return;
-
-                        }
-                       
-
+                              message:
+                                  "Agree with Terms of service and Privacy Policy to continue",
+                            );
+                            return;
+                          }
+                           
                           context.read<AuthenticationBloc>().add(
                               AuthenticationRegisterUserEvent(
                                   firstName: firstNameController.text.trim(),
@@ -226,15 +234,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                   phoneNumber: '0500000000',
                                   role: 'tenant'));
                         }
-                         firstNameController.clear();
-                          lastNameController.clear();
-                          emailController.clear();
-                          passwordController.clear();
-                          confirmPasswordController.clear();
-                          setState(() {
-                              _agreeToTerms = false;
-                            });
-                      
                       },
                       horizontalPadding: 0,
                       borderColor: Theme.of(context).colorScheme.onPrimary,
@@ -281,8 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    SignInWithGoogleBtn(
-                      onPressed: () {})
+                    SignInWithGoogleBtn(onPressed: () {})
                   ],
                 ),
               ),
@@ -291,5 +289,26 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       },
     );
+  }
+    @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    super.initState();
+    
   }
 }
