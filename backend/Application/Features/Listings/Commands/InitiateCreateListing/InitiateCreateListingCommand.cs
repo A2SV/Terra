@@ -22,10 +22,8 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         public DateTime? AvailableEndDate { get; set; }
         [Required]
         public required User Lister { get; set; }
-        [Required]
-        public PaymentCurrency PaymentCurrency { get; set; }
-        [Required]
-        public PaymentFrequency PaymentFrequency { get; set; }
+        public PaymentCurrency PaymentCurrency { get; set; } = PaymentCurrency.Ghs;
+        public PaymentFrequency PaymentFrequency { get; set; } = PaymentFrequency.Once;
         [Required]
         public double Price { get; set; }
         [Required]
