@@ -7,20 +7,19 @@ describe("FAQ Component", () => {
     render(<FAQ />);
 
     expect(screen.getByText("Frequently Asked Questions")).toBeInTheDocument();
-
     expect(screen.getByAltText("Woman thinking about a question")).toBeInTheDocument();
   });
 
   test("renders all accordion components with correct titles", () => {
     render(<FAQ />);
 
-    expect(screen.getByText("What does Step Worth specialize in?")).toBeInTheDocument();
-    expect(screen.getByText("How can I contact Step Worth?")).toBeInTheDocument();
-    expect(screen.getByText("What sets Step Worth apart from competitors?")).toBeInTheDocument();
-    expect(screen.getByText("Is Step Worth hiring?")).toBeInTheDocument();
+    expect(screen.getByText("What types of properties can I list on Terra?")).toBeInTheDocument();
+    expect(screen.getByText("How do I create a listing on Terra?")).toBeInTheDocument();
+    expect(screen.getByText("How can I ensure my listing gets noticed?")).toBeInTheDocument();
     expect(
-      screen.getByText("Do you offer custom solutions for unique project requirements?")
+      screen.getByText("How can I get my property featured on the homepage?")
     ).toBeInTheDocument();
-    expect(screen.getByText("What payment methods does Step Worth accept?")).toBeInTheDocument();
+    expect(screen.getByText("Can I edit my listing after it's published?")).toBeInTheDocument();
+    expect(screen.getByText("Is there a fee for listing a property on Terra?")).toBeInTheDocument();
   });
 });

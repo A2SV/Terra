@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useState, FC } from "react";
 import { IoIosArrowDropdown, IoIosArrowDropup } from "react-icons/io";
-
 interface AccordionProps {
   title: string;
   answer: string;
@@ -13,7 +14,7 @@ const Accordion: FC<AccordionProps> = ({ title, answer }) => {
     <div className="flex flex-col justify-center">
       <button onClick={() => setAccordionOpen(!accordionOpen)} className="">
         <div className="flex h-20 pl-10 pr-7 justify-between items-center">
-          <span className="font-montserrat font-light text-xs md:text-base text-left text-gray-700">
+          <span className="font-montserrat font-light text-xs md:text-base text-left text-black">
             {title}
           </span>
           {accordionOpen ? (

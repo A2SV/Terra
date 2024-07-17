@@ -9,7 +9,7 @@ class OnboardingScreen2 extends StatelessWidget {
   const OnboardingScreen2({
     super.key,
     required this.onBack,
-    required this.onNext,
+    required this.onNext, required void Function() onSkip,
   });
 
   final VoidCallback onNext;

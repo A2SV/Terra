@@ -16,6 +16,6 @@ namespace Domain.Entities
         [MinLength(1)]
         public List<EventSpaceSuitableEvents> SuitableEvents { get; set; } = new();
 
-        public required Property Property { get; set; }
+        public required CommercialProperty Property { get; set; }
     }
 }
