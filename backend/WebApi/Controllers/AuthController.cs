@@ -198,7 +198,6 @@ namespace WebApi.Controllers
             {
                 user = new User
                 {
-                    Id = user.Id,
                     Email = emailClaim,
                     UserName = emailClaim,
                     FirstName = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
