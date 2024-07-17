@@ -1,17 +1,14 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/dark_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'dart:math' as math;
 
 class TopBarSearchListingInput extends StatelessWidget {
-  const TopBarSearchListingInput(
-      {super.key, this.sideContainerColor, this.sideCotainerTextColor,this.focusNode,
-        this.fillColor,this.borderRadius,this.controller,this.onTapOutside,this.onSubmitted
-      });
-
   final Color? sideContainerColor;
+
   final Color? sideCotainerTextColor;
   final FocusNode? focusNode;
   final Color? fillColor;
@@ -19,6 +16,16 @@ class TopBarSearchListingInput extends StatelessWidget {
   final TextEditingController? controller;
   final TapRegionCallback? onTapOutside;
   final ValueChanged<String>? onSubmitted;
+  const TopBarSearchListingInput(
+      {super.key,
+      this.sideContainerColor,
+      this.sideCotainerTextColor,
+      this.focusNode,
+      this.fillColor,
+      this.borderRadius,
+      this.controller,
+      this.onTapOutside,
+      this.onSubmitted});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,7 @@ class TopBarSearchListingInput extends StatelessWidget {
               style: const TextStyle(color: AppLightThemeColors.kBlackColor),
               focusNode: focusNode,
               controller: controller,
-              onTapOutside: onTapOutside??(event){},
+              onTapOutside: onTapOutside ?? (event) {},
               onSubmitted: onSubmitted,
               decoration: InputDecoration(
                 hintText: 'Search address, city, location',
@@ -55,27 +62,19 @@ class TopBarSearchListingInput extends StatelessWidget {
                 ),
                 border: InputBorder.none,
                 contentPadding:
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
-                fillColor: fillColor??Colors.white,
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+                fillColor: fillColor ?? Colors.white,
                 filled: true,
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(borderRadius??0)
-                  ),
-                  borderSide: BorderSide(
-                      color: fillColor??Colors.white
-                  ),
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(borderRadius ?? 0)),
+                  borderSide: BorderSide(color: fillColor ?? Colors.white),
                 ),
-
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(borderRadius??0)
-                  ),
-                  borderSide: BorderSide(
-                      color: fillColor??Colors.white
-                  ),
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(borderRadius ?? 0)),
+                  borderSide: BorderSide(color: fillColor ?? Colors.white),
                 ),
-
               ),
             ),
           ),
@@ -84,17 +83,17 @@ class TopBarSearchListingInput extends StatelessWidget {
         Container(
           height: 5.h,
           width: 10.w,
-
           decoration: BoxDecoration(
             color:
-            sideContainerColor ?? Theme.of(context).colorScheme.onPrimary,
+                sideContainerColor ?? Theme.of(context).colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: sideContainerColor!.withOpacity(0.25)??Colors.grey.withOpacity(0.5),
+                color: sideContainerColor!.withOpacity(0.25) ??
+                    Colors.grey.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 8,
-                offset: Offset(2, 3), // changes position of shadow
+                offset: const Offset(2, 3), // changes position of shadow
               ),
             ],
           ),
