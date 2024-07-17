@@ -30,17 +30,15 @@ namespace Persistence.Configurations
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        public DbSet<Amenity> Amenitites { get; set; }
+        public DbSet<Amenity> Amenities { get; set; }
         public DbSet<Apartment> Apartments { get; set; }
         public DbSet<CommercialProperty> CommercialProperties { get; set; }
-        public DbSet<ContactInformation> ContactInformations { get; set; }
-        public DbSet<DomesticProperty> DomesticProperties { get; set; }
+        public DbSet<ResidentialProperty> DomesticProperties { get; set; }
         public DbSet<EventSpace> EventSpaces { get; set; }
         public DbSet<GuestHouse> GuestHouses { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<House> Houses { get; set; }
         public DbSet<OfficeSpace> OfficeSpaces { get; set; }
-        public DbSet<OtpEntry> OtpEntries { get; set; }
         public DbSet<PaymentInformation> PaymentInformations { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyAmenity> PropertyAmenities { get; set; }

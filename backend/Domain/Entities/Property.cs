@@ -8,17 +8,15 @@ namespace Domain.Entities
     public class Property : BaseEntity
     {
         [ForeignKey("Lister")]
-        public Guid ListerId { get; set; }
+        public string ListerId { get; set; } = null!;
         [MaxLength(100)]
         public required string Title { get; set; }
         public string? Description { get; set; }
         public required PropertyType PropertyType { get; set; }
         public PropertyPublishStatus PublishStatus { get; set; } = PropertyPublishStatus.Unpublished;
-        public PropertyMarketStatus MarketStatus { get; set; } = PropertyMarketStatus.Available;
+        public PropertyMarketStatus MarketStatus { get; set; } = PropertyMarketStatus.Unavailable;
         public required PropertyListingType ListingType { get; set; }
         public double? PropertySize { get; set; }
-        public bool ParkingSpace { get; set; }
-        public bool FurnishedStatus { get; set; }
         public DateTime? AvailableStartDate { get; set; }
         public DateTime? AvailableEndDate { get; set; }
 
