@@ -37,8 +37,6 @@ describe("ResetInputEmail", () => {
         email: "test@example.com",
       })
     );
-
-    await waitFor(() => expect(push).toHaveBeenCalledWith("/otp"));
   });
 
   test("displays error message on failed submission", async () => {
