@@ -207,6 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                        
                         if (isValid) {
                            if (!_agreeToTerms){
+                            
                            CustomSnackBar.errorSnackBar(
                               context: context,
                               message: "Agree with Terms of service and Privacy Policy to continue",
@@ -230,6 +231,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           emailController.clear();
                           passwordController.clear();
                           confirmPasswordController.clear();
+                          setState(() {
+                              _agreeToTerms = false;
+                            });
+                      
                       },
                       horizontalPadding: 0,
                       borderColor: Theme.of(context).colorScheme.onPrimary,
