@@ -216,7 +216,7 @@ namespace WebApi.Controllers
             var userRoles = await userManager.GetRolesAsync(user);
             var jwtToken = tokenRepository.GenerateJwtToken(user, userRoles.ToArray());
 
-            return Ok(new { Token = jwtToken });
+            return Ok(new { Token = jwtToken, id = user.Id });
         }
     }
 }
