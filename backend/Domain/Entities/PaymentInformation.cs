@@ -10,8 +10,7 @@ namespace Domain.Entities
         [ForeignKey("Property")]
         public Guid PropertyId { get; set; }
         public required PaymentCurrency Currency { get; set; }
-        [MinLength(1)]
-        public List<PaymentFrequency> PaymentFrequencies { get; set; } = new();
+        public PaymentFrequency PaymentFrequency { get; set; }
         public double Cost { get; set; }
         public bool Negotiable { get; set;}
 

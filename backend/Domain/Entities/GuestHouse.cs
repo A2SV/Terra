@@ -10,8 +10,8 @@ namespace Domain.Entities
         public Guid PropertyId { get; set; }
         [Range(1, 5)]
         public int StarRating { get; set; }
-        public required bool RestaurantOnSite { get; set; }
+        public bool RestaurantOnSite { get; set; }
 
-        public required Property Property { get; set; }
+        public required ResidentialProperty Property { get; set; }
     }
 }

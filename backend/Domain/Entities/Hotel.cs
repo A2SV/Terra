@@ -9,9 +9,9 @@ namespace Domain.Entities
         [ForeignKey("Property")]
         public Guid PropertyId { get; set; }
         [Range(1, 5)]
-        public required int StarRating { get; set; }
-        public required bool RestaurantOnSite { get; set; }
+        public int StarRating { get; set; }
+        public bool RestaurantOnSite { get; set; }
 
-        public required Property Property { get; set; }
+        public required ResidentialProperty Property { get; set; }
     }
 }

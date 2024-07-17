@@ -8,8 +8,8 @@ namespace Domain.Entities
         [ForeignKey("Property")]
         public Guid PropertyId { get; set; }
         public bool DisplayWindowAvailable { get; set; }
-        public double? StorageRoomSize { get; set; }
+        public double StorageRoomSize { get; set; }
 
-        public required Property Property { get; set; }
+        public required CommercialProperty Property { get; set; }
     }
 }
