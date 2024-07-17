@@ -1,12 +1,13 @@
-import ResetNew from "@/components/Authentication/ResetNew";
 import React from "react";
+import ResetInputEmail from "@/components/Authentication/ResetInputEmail";
+import ResetBackground from "@/components/Authentication/ResetBackground";
 
-const ResetPasswordPage = () => {
+const Reset: React.FC = () => {
   return (
     <div>
-      <ResetNew />
+      <ResetBackground description="Reset password" Card={ResetInputEmail} />
     </div>
   );
 };
 
-export default ResetPasswordPage;
+export default Reset;
