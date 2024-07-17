@@ -32,7 +32,7 @@ const ResetInputEmail = () => {
             </label>
           </div>
           <div className="pt-9 text-sm font-sans">
-            <Link href="/otp">
+            <Link href="/">
               <button
                 type="submit"
                 className="rounded-3xl bg-terrablue w-36 h-12 text-white hover:bg-blue-800 font-sans"

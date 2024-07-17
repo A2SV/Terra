@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
