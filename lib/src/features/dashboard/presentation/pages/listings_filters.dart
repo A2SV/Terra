@@ -29,7 +29,7 @@ class _ListingsFiltersState extends State<ListingsFilters> {
               child: ListView(
                 children: [
                   // Search Bar
-                  TopBarSearchInput(
+                  const TopBarSearchInput(
                     key: Key('search-input'),
                     sideContainerColor: AppLightThemeColors.kMainBlueButton,
                     sideCotainerTextColor: AppLightThemeColors.kMainLightButton,
@@ -131,14 +131,14 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                   //Rooms and beds
                   DropdownComponent(title: 'Rooms and Beds', trail: "see more",tiles: [
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Text('Bathroom'),
-                              SizedBox(
+                              const Text('Bathroom'),
+                              const SizedBox(
                                 width: 12,
                               ),
                               SvgPicture.asset(
@@ -150,7 +150,7 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                             children: [
                               SvgPicture.asset('assets/svg/add-circle.svg')
                                   .rightPadding(16.0),
-                              Text('0'),
+                              const Text('0'),
                               SvgPicture.asset('assets/svg/minus-cirlce.svg')
                                   .leftPadding(16.0),
                             ],
@@ -159,14 +159,14 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
-                              Text('Bedroom'),
-                              SizedBox(
+                              const Text('Bedroom'),
+                              const SizedBox(
                                 width: 12,
                               ),
                               SvgPicture.asset(
@@ -178,7 +178,7 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                             children: [
                               SvgPicture.asset('assets/svg/add-circle.svg')
                                   .rightPadding(16.0),
-                              Text('0'),
+                              const Text('0'),
                               SvgPicture.asset('assets/svg/minus-cirlce.svg')
                                   .leftPadding(16.0),
                             ],

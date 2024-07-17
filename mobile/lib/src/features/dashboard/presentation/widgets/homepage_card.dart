@@ -150,7 +150,7 @@ class HomepageCard extends StatelessWidget {
             height: 2.h,
           ),
           const Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TopBarSearchInput(),
           ),
         ],
