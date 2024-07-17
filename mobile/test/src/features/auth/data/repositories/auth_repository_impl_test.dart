@@ -10,7 +10,7 @@ import 'package:mocktail/mocktail.dart';
 class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
 void main() {
-  late MockAuthRemoteDataSource remoteDataSource;
+  late MockAuthRemoteDataSource remoteDataSource; //dependency
   late AuthRepositoryImpl authRepositoryImpl;
 
   setUp(() {
@@ -22,10 +22,11 @@ void main() {
     lastName: 'lastName',
     email: 'email',
     password: 'password',
-    confirmPassword: 'confirmPassword',
+    phoneNumber: 'phoneNumber',
+    role: 'role',
   );
 
-  group('registerWithEmailPassword', () {
+  group('register With Email Password tests', () {
     test(
         'should verify the '
         'datasource.registerWithEmailPassword'
@@ -36,7 +37,8 @@ void main() {
               lastName: any(named: 'lastName'),
               email: any(named: 'email'),
               password: any(named: 'password'),
-              confirmPassword: any(named: 'confirmPassword')))
+              phoneNumber: any(named: 'phoneNumber'),
+              role: any(named: 'role')))
           .thenAnswer((_) async => Future.value());
       //act
       final result = await authRepositoryImpl.registerWithEmailPassword(
@@ -44,7 +46,8 @@ void main() {
           lastName: params.lastName,
           email: params.email,
           password: params.password,
-          confirmPassword: params.confirmPassword);
+          phoneNumber: params.phoneNumber,
+          role: params.role);
 
       // //assert
       expect(result, isA<void>());
@@ -54,7 +57,8 @@ void main() {
             lastName: params.lastName,
             email: params.email,
             password: params.password,
-            confirmPassword: params.confirmPassword),
+            phoneNumber: params.phoneNumber,
+            role: params.role),
       ).called(1);
       verifyNoMoreInteractions(remoteDataSource);
     });
@@ -69,7 +73,9 @@ void main() {
               lastName: any(named: 'lastName'),
               email: any(named: 'email'),
               password: any(named: 'password'),
-              confirmPassword: any(named: 'confirmPassword')))
+              phoneNumber: any(named: 'phoneNumber'),
+              role: any(named: 'role')
+              ))
           .thenThrow(tException);
       //act
       final result = await authRepositoryImpl.registerWithEmailPassword(
@@ -77,7 +83,9 @@ void main() {
           lastName: params.lastName,
           email: params.email,
           password: params.password,
-          confirmPassword: params.confirmPassword);
+          phoneNumber: params.phoneNumber,
+          role: params.role
+          );
       //assert
       expect(result, Left(APIFailure(tException.message)));
       verify(() => remoteDataSource.registerWithEmailPassword(
@@ -85,7 +93,9 @@ void main() {
           lastName: params.lastName,
           email: params.email,
           password: params.password,
-          confirmPassword: params.confirmPassword)).called(1);
+          phoneNumber: params.phoneNumber,
+          role: params.role,
+          )).called(1);
       verifyNoMoreInteractions(remoteDataSource);
     });
   });

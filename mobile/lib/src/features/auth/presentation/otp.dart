@@ -4,14 +4,7 @@ import 'package:pinput/pinput.dart';
 import '../../../core/theme/common_color.dart';
 import '../../../core/theme/text_theme.dart';
 
-<<<<<<< HEAD
 class OtpScreen extends StatefulWidget {
-=======
-
-class OtpScreen extends StatefulWidget{
-  const OtpScreen({super.key});
-
->>>>>>> feat(mobile): registration implementation(not completed)
   @override
   State<OtpScreen> createState() => _OtpScreenState();
 }
@@ -26,20 +19,11 @@ class _OtpScreenState extends State<OtpScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-<<<<<<< HEAD
               key: const Key('image'),
               child: Image.asset('assets/images/mail.png')),
           Container(
               key: const Key('Enter OTP'),
               child: Text(
-=======
-            key: const Key('image'),
-            child:Image.asset('assets/images/mail.png')
-          ),
-          Container(
-            key: const Key('Enter OTP'),
-            child: Text(
->>>>>>> feat(mobile): registration implementation(not completed)
                 'Enter OTP',
                 style: CustomTextStyles.kDefaultTextTheme(
                         AppCommonColors.defaultLink)
@@ -103,7 +87,6 @@ class _OtpScreenState extends State<OtpScreen> {
           Row(
             children: <Widget>[
               Container(
-<<<<<<< HEAD
                   key: const Key('resend'),
                   child: Row(
                     children: <Widget>[
@@ -111,19 +94,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       TextButton(onPressed: () {}, child: const Text('Resend')),
                     ],
                   )),
-=======
-                key: const Key('resend'),
-                child:Row(
-                  children: <Widget>[
-                    const Text('Didn\'t get OTP?'),
-                    TextButton(
-                        onPressed: (){},
-                        child: const Text('Resend')
-                    ),
-                  ],
-                )
-              ),
->>>>>>> feat(mobile): registration implementation(not completed)
               Container(
                 key: const Key('feedback'),
               ),

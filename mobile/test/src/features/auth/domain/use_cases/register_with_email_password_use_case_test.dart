@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 class MockAuthRepository extends Mock implements AuthRepository {}
 
 void main() {
-  late MockAuthRepository mockAuthRepository;
+  late MockAuthRepository mockAuthRepository; //dependency
   late RegisterWithEmailPasswordUseCase useCase;
   setUp(() {
     mockAuthRepository = MockAuthRepository();
@@ -20,9 +20,11 @@ void main() {
     lastName: 'lastName',
     email: 'email',
     password: 'password',
-    confirmPassword: 'confirmPassword',
+    phoneNumber: 'phoneNumber',
+    role: 'role',
   );
-  test(
+  group('Register With Email Password tests', (){
+      test(
       "Should test that the AuthRepository.registerWithEmailPassword"
       "is called once and Returns a void", () async {
     //arrange
@@ -31,19 +33,21 @@ void main() {
           lastName: any(named: 'lastName'),
           email: any(named: 'email'),
           password: any(named: 'password'),
-          confirmPassword: any(named: 'confirmPassword'),
+          phoneNumber: any(named: 'phoneNumber'),
+          role: any(named: 'role'),
         )).thenAnswer((_) async => const Right(null));
     //act
     final result = await useCase(params);
-  
+
     //assert
-      verify(
+    verify(
       () => mockAuthRepository.registerWithEmailPassword(
         firstName: params.firstName,
         lastName: params.lastName,
         email: params.email,
         password: params.password,
-        confirmPassword: params.confirmPassword,
+        phoneNumber: params.phoneNumber,
+        role: params.role,
       ),
     ).called(1);
     verifyNoMoreInteractions(mockAuthRepository);
@@ -60,14 +64,15 @@ void main() {
               lastName: any(named: 'lastName'),
               email: any(named: 'email'),
               password: any(named: 'password'),
-              confirmPassword: any(named: 'confirmPassword'),
+              phoneNumber: any(named: 'phoneNumber'),
+              role: any(named: 'role'),
             ))
         .thenAnswer(
             (_) async => const Left(APIFailure("Failed To Register User")));
 
     //act
     final result = await useCase(params);
-    
+
     //assert
     verify(
       () => mockAuthRepository.registerWithEmailPassword(
@@ -75,11 +80,14 @@ void main() {
         lastName: params.lastName,
         email: params.email,
         password: params.password,
-        confirmPassword: params.confirmPassword,
+        phoneNumber: params.phoneNumber,
+        role: params.role,
       ),
     ).called(1);
     verifyNoMoreInteractions(mockAuthRepository);
     expect(result, const Left(APIFailure("Failed To Register User")));
+  });
 
   });
+
 }

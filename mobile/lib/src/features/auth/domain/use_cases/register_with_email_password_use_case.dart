@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/use_case/use_case.dart';
@@ -16,7 +17,8 @@ class RegisterWithEmailPasswordUseCase extends UseCase<void,RegisterWithEmailPas
       lastName: params.lastName,
       email: params.email,
       password: params.password,
-      confirmPassword: params.confirmPassword,  
+      phoneNumber: params.phoneNumber,
+      role: params.role,
 
     );
   }
@@ -28,13 +30,15 @@ class RegisterWithEmailPasswordUseCaseParams {
   final String? lastName;
   final String email;
   final String password;
-  final String confirmPassword;
+  final String phoneNumber;
+  final String role;
 
   RegisterWithEmailPasswordUseCaseParams({
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.password,
-    required this.confirmPassword,
+    required this.phoneNumber,
+    required this.role,
   });
 }

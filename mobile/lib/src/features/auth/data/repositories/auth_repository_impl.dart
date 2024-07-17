@@ -48,14 +48,17 @@ class AuthRepositoryImpl implements AuthRepository {
       required String? lastName,
       required String email,
       required String password,
-      required String confirmPassword}) async {
+      required String phoneNumber,
+      required String role,
+      }) async {
     try {
       final result = await _remoteDataSource.registerWithEmailPassword(
           firstName: firstName,
           lastName: lastName,
           email: email,
           password: password,
-          confirmPassword: confirmPassword);
+          phoneNumber: phoneNumber,
+          role: role);
       return Right(result);
     } on ApiException catch (e) {
       return Left(APIFailure(e.message));

@@ -9,7 +9,8 @@ abstract class AuthRepository {
     required String? lastName,
     required String email,
     required String password,
-    required String confirmPassword,});
+    required String phoneNumber,
+    required String role,});
   Future<Either<Failure,void>> registerWithGoogle();
   Future<Either<Failure,void>> logout();
   Future<Either<Failure,void>> resetPassword(String password);

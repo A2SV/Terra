@@ -1,4 +1,8 @@
-import 'dart:io';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:mobile/src/core/constants/constants.dart';
+import 'package:mobile/src/core/error/exception.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> registerWithEmailPassword({
@@ -6,15 +10,15 @@ abstract class AuthRemoteDataSource {
     required String? lastName,
     required String email,
     required String password,
-    required String confirmPassword,
-  }
-  );
+    required String phoneNumber,
+    required String role,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final HttpClient client;
+  final http.Client _client;
 
-  AuthRemoteDataSourceImpl(this.client);
+  AuthRemoteDataSourceImpl(this._client);
 
   @override
   Future<void> registerWithEmailPassword({
@@ -22,8 +26,27 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String? lastName,
     required String email,
     required String password,
-    required String confirmPassword,
+    required String phoneNumber,
+    required String role,
   }) async {
-    throw UnimplementedError();
-    }
+      final result  = await _client.post(Uri.parse('$baseUrl$registerUrl'),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'password': password,
+          'phoneNumber': phoneNumber,
+          'role': role,
+        }));
+        
+        if(result.statusCode != 201){
+          final response = jsonDecode(result.body);
+          throw ApiException(response['message']);
+          
+        } 
+
+  }
 }

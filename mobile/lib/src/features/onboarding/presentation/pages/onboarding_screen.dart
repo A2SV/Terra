@@ -3,12 +3,9 @@ import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_scr
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen2.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen3.dart';
 
-<<<<<<< HEAD:mobile/lib/src/features/onboarding/presentation/pages/onboarding_screen.dart
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen1.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen2.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen3.dart';
-=======
->>>>>>> feat(mobile): registration implementation(not completed):mobile/lib/src/onboarding/presentation/pages/onboarding_screen.dart
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -47,9 +44,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         controller: _pageController,
         children: <Widget>[
           OnboardingScreen1(
+            onSkip: (){},
             onNext: _nextPage,
           ),
           OnboardingScreen2(
+            onSkip: (){},
             onBack: _previousPage,
             onNext: _nextPage,
           ),
