@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen1.dart';
+import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen2.dart';
+import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen3.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen1.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen2.dart';
@@ -41,9 +44,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         controller: _pageController,
         children: <Widget>[
           OnboardingScreen1(
+            onSkip: (){},
             onNext: _nextPage,
           ),
           OnboardingScreen2(
+            onSkip: (){},
             onBack: _previousPage,
             onNext: _nextPage,
           ),

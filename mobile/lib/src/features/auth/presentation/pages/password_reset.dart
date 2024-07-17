@@ -52,7 +52,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> with SingleTi
               borderRadius: BorderRadius.circular(40),
               color: Colors.white,
             ),
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.min,
@@ -84,7 +84,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> with SingleTi
                         .displaySmall,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Container(
                   alignment: Alignment.center,
                   child: Text(
@@ -103,7 +103,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> with SingleTi
                         .bodyMedium,
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
                   alignment: Alignment.center,
                   child: Center(
