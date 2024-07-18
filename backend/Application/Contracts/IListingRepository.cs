@@ -18,5 +18,7 @@ namespace Application.Contracts
             int? maxPrice, string? paymentFrequency,
             int? minPropertySize, int? maxPropertySize,
             List<string>? amenities);
+
+        Task<Property?> GetListingByIdAsync(Guid id);
     }
 }

@@ -159,6 +159,15 @@ namespace Persistence.Repositories
             return  new PaginatedList<Property>(properties, pageIndex, totalPages);
             }
 
+        public async Task<Property?> GetListingByIdAsync(Guid id)
+        {
+            var property = await _context.Properties
+            .Include(p => p.PropertyAmenities)
+            .Include(p => p.Lister)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+            return property;
+        }
     }
 }
 
