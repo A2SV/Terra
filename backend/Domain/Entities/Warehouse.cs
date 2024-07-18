@@ -15,6 +15,6 @@ namespace Domain.Entities
         [MinLength(1)]
         public List<WarehouseSuitableGoods> SuitableGoods { get; set; } = new();
 
-        public required Property Property { get; set; }
+        public required CommercialProperty Property { get; set; }
     }
 }

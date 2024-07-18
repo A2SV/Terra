@@ -19,6 +19,6 @@ namespace Domain.Entities
         public bool LaundryFacilityAvailable { get; set; }
         public bool CleaningServiceAvailable { get; set; }
 
-        public required Property Property { get; set; }
+        public required ResidentialProperty Property { get; set; }
     }
 }

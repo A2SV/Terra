@@ -6,9 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "../Common/Reusable/ErrorMessage";
-import SuccessMessage from "../Common/Reusable/SuccessMessage";
-import AuthButton from "../Common/Auth/AuthButton";
+import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
+import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
+import AuthButton from "@/components/Common/Auth/AuthButtons";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -155,8 +155,8 @@ const LoginCard: React.FC = () => {
           <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={"/otp"}>
-                <p className="font-nunito font-normal text-sm hover:underline hover:text-terrablue">
+              <Link href={"/forgot-password"}>
+                <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
               </Link>
