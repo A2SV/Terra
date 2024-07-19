@@ -8,7 +8,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
 import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
-import AuthButtons from "@/components/Common/Auth/AuthButtons";
+import AuthButton from "@/components/Common/Auth/AuthButton";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -163,7 +163,7 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <AuthButtons loading={loading} text="Sign Up" action={handleSubmit} />
+            <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
 
             <p className="font-nunito font-normal text-sm">or</p>
 
