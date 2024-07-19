@@ -80,13 +80,11 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
                         FloorNumber = request.FloorNumber
                     };
 
-                    var amenities = new List<PropertyAmenity>();
-
                     if (request.Amenities != null)
                     {
                         foreach (var amenity in request.Amenities)
                         {
-                            var response = await _amenityRepository.GetAllAmenitiesAsync("Name", amenity, "Name", true);
+                            var response = await _amenityRepository.GetAllAmenitiesAsync("Name", amenity);
                             if (response != null && response.Count() > 0)
                             {
                                 var propertyAmenity = new PropertyAmenity
