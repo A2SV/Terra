@@ -21,7 +21,5 @@ namespace Domain.Entities
         public DateTime? AvailableEndDate { get; set; }
 
         public User Lister { get; set; } = null!;
-        
-        public List<PropertyAmenity>? PropertyAmenities { get; set; } 
     }
 }
