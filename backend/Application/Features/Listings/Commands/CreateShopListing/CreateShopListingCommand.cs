@@ -4,12 +4,12 @@ using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.InitiateCreateListing
+namespace Application.Features.Listings.Commands.CreateShopListing
 {
-    public class InitiateCreateListingCommand : IRequest<Result<Property>>
+    public class CreateShopListingCommand : IRequest<Result<Shop>>
     {
         [Required]
-        public string ListerId { get; set; } = null!;
+        public Guid ListerId { get; set; }
         [Required]
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
@@ -44,6 +44,13 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         // public List<PropertyAmenity>? Amenities { get; set; }
         // public List<string>? Images { get; set; }
         // public List<string>? Videos { get; set; }
+
+        [Required]
+        public int TotalFloors { get; set; }
+        public int FloorNumber { get; set; }
+        public bool ParkingSpace { get; set; }
+
+        public bool DisplayWindowAvailable { get; set; }
+        public double StorageRoomSize { get; set; }
     }
 }
-

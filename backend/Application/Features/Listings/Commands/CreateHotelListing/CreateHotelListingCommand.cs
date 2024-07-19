@@ -4,12 +4,12 @@ using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.InitiateCreateListing
+namespace Application.Features.Listings.Commands.CreateHotelListing
 {
-    public class InitiateCreateListingCommand : IRequest<Result<Property>>
+    public class CreateHotelListingCommand : IRequest<Result<Hotel>>
     {
         [Required]
-        public string ListerId { get; set; } = null!;
+        public Guid ListerId { get; set; }
         [Required]
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
@@ -44,6 +44,15 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         // public List<PropertyAmenity>? Amenities { get; set; }
         // public List<string>? Images { get; set; }
         // public List<string>? Videos { get; set; }
+
+        public bool FurnishedStatus { get; set; }
+        public int NumberOfBedrooms { get; set; }
+        public int NumberOfBathrooms { get; set; }
+        public int NumberOfWashrooms { get; set; }
+        public int NumberOfKitchens { get; set; }
+        
+        [Range(1, 5)]
+        public int StarRating { get; set; }
+        public bool RestaurantOnSite { get; set; }
     }
 }
-

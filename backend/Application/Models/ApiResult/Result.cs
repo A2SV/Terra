@@ -11,7 +11,7 @@ namespace Application.Models.ApiResult
         public string Message { get; set; }
         public string RequestId { get; }
 
-        public Result(bool isSuccess, ResultStatusCode statusCode, string message = null)
+        public Result(bool isSuccess, ResultStatusCode statusCode, string? message = null)
         {
             IsSuccess = isSuccess;
             StatusCode = statusCode;
@@ -23,9 +23,9 @@ namespace Application.Models.ApiResult
     public class Result<TData> : Result
     where TData : class
     {
-        public TData Data { get; set; }
+        public TData? Data { get; set; }
 
-        public Result(bool isSuccess, ResultStatusCode statusCode, TData data, string message = null)
+        public Result(bool isSuccess, ResultStatusCode statusCode, TData? data, string? message = null)
             : base(isSuccess, statusCode, message)
         {
             Data = data;
