@@ -33,7 +33,7 @@ namespace Persistence.Configurations
         public DbSet<Amenity> Amenities { get; set; }
         public DbSet<Apartment> Apartments { get; set; }
         public DbSet<CommercialProperty> CommercialProperties { get; set; }
-        public DbSet<ResidentialProperty> DomesticProperties { get; set; }
+        public DbSet<ResidentialProperty> ResidentialProperties { get; set; }
         public DbSet<EventSpace> EventSpaces { get; set; }
         public DbSet<GuestHouse> GuestHouses { get; set; }
         public DbSet<Hotel> Hotels { get; set; }

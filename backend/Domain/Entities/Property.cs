@@ -20,8 +20,6 @@ namespace Domain.Entities
         public DateTime? AvailableStartDate { get; set; }
         public DateTime? AvailableEndDate { get; set; }
 
-        public required User Lister { get; set; }
-        
-        public List<PropertyAmenity> PropertyAmenities { get; set; } = new();
+        public User Lister { get; set; } = null!;
     }
 }

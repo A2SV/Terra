@@ -1,3 +1,4 @@
 {
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "cmake.sourceDirectory": "/Users/felixboachieyiadom/Desktop/Stress/Terra/mobile/linux"
 }
