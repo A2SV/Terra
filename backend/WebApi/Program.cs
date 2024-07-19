@@ -14,6 +14,19 @@ using Persistence.Configurations;
 using Persistence.Repositories;
 using System.Reflection;
 using System.Text;
+using Application.Features.Listings.Commands.CreateApartmentListing;
+using Application.Features.Listings.Commands.CreateCommercialListing;
+using Application.Features.Listings.Commands.CreateEventSpaceListing;
+using Application.Features.Listings.Commands.CreateGuestHouseListing;
+using Application.Features.Listings.Commands.CreateHotelListing;
+using Application.Features.Listings.Commands.CreateHouseListing;
+using Application.Features.Listings.Commands.CreateOfficeSpaceListing;
+using Application.Features.Listings.Commands.CreateResidentialListing;
+using Application.Features.Listings.Commands.CreateShopListing;
+using Application.Features.Listings.Commands.CreateStudentHostelListing;
+using Application.Features.Listings.Commands.CreateWarehouseListing;
+using Application.Features.Listings.Commands.InitiateCreateListing;
+using Application.Features.Listings.Queries.GetAmenity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -50,9 +63,25 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOTPService, OTPService>();
 builder.Services.AddScoped<IOTPRepository, OTPRepository>();
+builder.Services.AddScoped<IListingRepository, ListingRepository>();
+builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateApartmentListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateCommercialListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateEventSpaceListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateGuestHouseListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateHotelListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateHouseListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateOfficeSpaceListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateResidentialListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateShopListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateStudentHostelListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateWarehouseListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
 
 builder.Services.AddControllers();
 
