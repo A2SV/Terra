@@ -1,6 +1,8 @@
 
 using Application.Contracts;
+using Application.Models.ApiResult;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
 namespace Persistence.Repositories
@@ -16,7 +18,17 @@ namespace Persistence.Repositories
 
         public async Task<Property> GetPropertyByIdAsync(Guid id)
         {
-            return await _propertyDbContext.Properties.FindAsync(id);
+            var property = await _propertyDbContext.Properties
+            .Include(p => p.PropertyAmenities)
+            .Include(p => p.Lister)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (property == null)
+            {
+                throw new KeyNotFoundException("Property not found.");
+            }
+
+            return property;
         }
     }
 }
