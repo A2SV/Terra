@@ -9,7 +9,7 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
     public class CreateEventSpaceListingCommand : IRequest<Result<EventSpace>>
     {
         [Required]
-        public string ListerId { get; set; } = null!;
+        public Guid ListerId { get; set; } 
         [Required]
         public string Title { get; set; } = null!;
         public string? Description { get; set; }

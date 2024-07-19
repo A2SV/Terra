@@ -22,14 +22,15 @@ namespace Application.Features.Listings.Commands.CreateGuestHouseListing
             {
                 try
                 {
-                    var user = await _userRepository.GetUserByIdAsync(request.ListerId);
+                    var listerId = request.ListerId.ToString();
+                    var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
                         return new Result<GuestHouse>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
                     var property = new Property
                     {
-                        ListerId = request.ListerId,
+                        ListerId = listerId,
                         Title = request.Title,
                         Description = request.Description,
                         PropertyType = request.PropertyType,

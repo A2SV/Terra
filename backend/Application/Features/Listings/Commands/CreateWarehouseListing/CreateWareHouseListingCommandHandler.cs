@@ -23,14 +23,15 @@ namespace Application.Features.Listings.Commands.CreateWarehouseListing
             {
                 try
                 {
-                    var user = await _userRepository.GetUserByIdAsync(request.ListerId);
+                    var listerId = request.ListerId.ToString();
+                    var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
                         return new Result<Warehouse>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
                     var property = new Property
                     {
-                        ListerId = request.ListerId,
+                        ListerId = listerId,
                         Title = request.Title,
                         Description = request.Description,
                         PropertyType = request.PropertyType,
