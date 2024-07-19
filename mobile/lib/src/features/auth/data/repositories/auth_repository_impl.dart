@@ -7,7 +7,10 @@ import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_sour
 
 import 'package:mobile/src/features/auth/domain/entities/login_return_entity.dart';
 
+import '../../../../core/entities/user_account.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../data_sources/auth_remote_data_source.dart';
+import '../models/UserModel.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
@@ -17,9 +20,21 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.network,
   });
   @override
-  Future<Either<Failure, LoginReturn>> login(String email, String password) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<Either<Failure, LoginReturn>> login(String email, String password) async {
+    Either<Failure,UserModel> response= await  AuthRemoteDataSourceImpl().login(email, password);
+
+    var output;
+    response.fold(
+            (failure)=> output = failure,
+            (usermodel) => output=LoginReturn(user: UserAccount(username: usermodel.username,password: usermodel.password), token: '')
+    );
+
+    if (output is LoginReturn){
+      return Right(output);
+    }
+    else{
+      return Left(output);
+    }
   }
 
   @override
