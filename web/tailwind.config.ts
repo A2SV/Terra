@@ -48,6 +48,8 @@ const config = {
         backgroundColor: "#F5F5F5E8",
         bulletColor: "#05E200",
         property: "#F5F5F5",
+        terraOrange: "#FFA72A",
+        light: "#F9F9F9",
       },
 
       fontFamily: {
@@ -67,6 +69,7 @@ const config = {
       height: {
         property: "32rem",
         "property-card": "21.5rem",
+        listHeight: "28rem",
         ellipse: "8rem",
       },
       minHeight: {

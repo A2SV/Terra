@@ -1,12 +1,12 @@
 import React from "react";
-import ExploreProperty from "@/components/General/ExploreProperty";
-import FAQ from "@/components/General/FAQ";
+import ResultsListBackgroundImage from "../components/Common/Reusable/ResultsListBackgroundImage";
+import AdvancedListingSettings from "../components/Common/Reusable/AdvancedListingSettings";
 
 const Home: React.FC = () => {
   return (
     <div>
-      <ExploreProperty />
-      <FAQ />
+      <ResultsListBackgroundImage />
+      <AdvancedListingSettings />
     </div>
   );
 };
