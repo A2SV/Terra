@@ -9,6 +9,8 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
     public class InitiateCreateListingCommand : IRequest<Result<Property>>
     {
         [Required]
+        public string ListerId { get; set; } = null!;
+        [Required]
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
         [Required]
@@ -20,8 +22,6 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         public double? PropertySize { get; set; }
         public DateTime? AvailableStartDate { get; set; }
         public DateTime? AvailableEndDate { get; set; }
-        [Required]
-        public required User Lister { get; set; }
         public PaymentCurrency PaymentCurrency { get; set; } = PaymentCurrency.Ghs;
         public PaymentFrequency PaymentFrequency { get; set; } = PaymentFrequency.Once;
         [Required]
@@ -41,9 +41,9 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         public double Longitude { get; set; }
         [Required, Range(-180, 180, ErrorMessage = "Latitude must be between -180 and 180.")]
         public double Latitude { get; set; }
-        public List<Amenity>? Amenities { get; set; }
-        public List<string>? Images { get; set; }
-        public List<string>? Videos { get; set; }
+        // public List<PropertyAmenity>? Amenities { get; set; }
+        // public List<string>? Images { get; set; }
+        // public List<string>? Videos { get; set; }
     }
 }
 
