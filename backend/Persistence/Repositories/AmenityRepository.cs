@@ -14,6 +14,13 @@ public class AmenityRepository : IAmenityRepository
         _context = context;
     }
     
+    public async Task<PropertyAmenity?> AddAmenityAsync(PropertyAmenity amenity)
+    {
+        var result = await _context.PropertyAmenities.AddAsync(amenity);
+        if (result == null) return null;
+        return amenity;
+    }
+
     public async Task<List<Amenity>> GetAllAmenitiesAsync(string? filterOn = null, string? filterQuery = null, string? sortBy = null,
         bool isAscending = true)
     {

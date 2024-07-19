@@ -10,10 +10,12 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
-        public CreateHouseListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository)
+        private readonly IAmenityRepository _amenityRepository;
+        public CreateHouseListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
+            _amenityRepository = amenityRepository;
         }
 
         public async Task<Result<House>> Handle(CreateHouseListingCommand request, CancellationToken cancellationToken)
@@ -40,7 +42,6 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
                         PropertySize = request.PropertySize,
                         AvailableStartDate = request.AvailableStartDate,
                         AvailableEndDate = request.AvailableEndDate,
-                        // PropertyAmenities = request.Amenities,
                         Lister = user
                     };
 
@@ -79,6 +80,27 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
                         NumberOfWashrooms = request.NumberOfWashrooms,
                         NumberOfKitchens = request.NumberOfKitchens
                     };
+
+                    var amenities = new List<PropertyAmenity>();
+
+                    if (request.Amenities != null)
+                    {
+                        foreach (var amenity in request.Amenities)
+                        {
+                            var response = await _amenityRepository.GetAllAmenitiesAsync("Name", amenity, "Name", true);
+                            if (response != null && response.Count() > 0)
+                            {
+                                var propertyAmenity = new PropertyAmenity
+                                {
+                                    PropertyId = property.Id,
+                                    Property = property,
+                                    AmenityId = response[0].Id,
+                                    Amenity = response[0]
+                                };
+                                await _amenityRepository.AddAmenityAsync(propertyAmenity);
+                            }
+                        }
+                    }
 
                     await _listingRepository.AddPropertyLocationAsync(propertyLocation);
                     await _listingRepository.AddPaymentInformationAsync(paymentInformation);
