@@ -140,5 +140,22 @@ namespace Persistence.Repositories
 
             return new PaginatedList<Property>(properties, pageIndex, totalPages);
         }
+
+        public async Task<List<Property>> GetAllListingsAsync(string? filterOn = null, string? filterQuery = null, 
+            string? sortBy = null, bool isAscending = true, int pageNumber = 1, int pageSize = 50)
+        {
+            var properties = _context.Properties.Include("Lister").AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filterOn) && !string.IsNullOrWhiteSpace(filterQuery))
+            {
+                if (filterOn.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                    properties = properties.Where(x => x.Title.Contains(filterQuery));
+            }
+
+            if (!string.IsNullOrWhiteSpace(sortBy) && sortBy.Equals("Name", StringComparison.OrdinalIgnoreCase)) 
+                properties = isAscending ? properties.OrderBy(x => x.Title) : properties.OrderByDescending(x => x.Title);
+        
+            return await properties.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.Features.Listings.Queries.GetAllListings;
+using Application.Features.Listings.Queries.GetAllListings;
 using Domain.Entities;
 using Domain.Models;
 using MediatR;
