@@ -4,4 +4,20 @@
 @tailwind utilities;
 
 
-  
+.custom-select-single {
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='%237B8794' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    color: #000000;
+    appearance: none;
+    background-position: right 0.75rem center; 
+    background-size: 0.9rem 1rem;
+  }
+
+  .custom-select-double {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAjCAYAAADv0ujUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFcSURBVFhH7da9LwRBGMfxh1ZQ3X9AL3oSl1wiCiEkNpqraO4qjYZGid5Li5zOW0SC0AiF6nJXIHcSEkLnDvXY32QmkUvWDfs8xcZ8ksvezG7xbXaebVEhSpBWc00MHyzNB0vzwd/V3j9pbmmNjs6vzE58YsGPz6+UDnJUvrun7MwCbR+cmjsxYXBwe3h6Ub1DWZWfX9brwt6xSvUMqsL+iV7HwR7cGGtxRbMGR8VaHNFswc1irbjRbMEusZaNvrgumh13LMFv9Q+1urljVm4Ozy5V6aZiVu7856W0/xmMEdzdP07l26rZ+RmeTwd5Wt/aNTvuWII729toenKERqdmm0YjFs9BMJzR11/Rrx6TxZUN1dU3Fvn24zQZmMjpXy38/xeswRAVzREL7MHQGM0VCyLBYKMxzbhiQSwYEI0RzBUL4pOuHp4KHeEpwsWPZmk+WJoPluaDpSUsmOgL0BBwac2R3HEAAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    color: #000000;
+    appearance: none;
+    background-position: right 0.75rem center; 
+    background-size: 1.5rem 1.2rem;
+  }

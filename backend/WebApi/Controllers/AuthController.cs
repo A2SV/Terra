@@ -198,6 +198,7 @@ namespace WebApi.Controllers
             {
                 user = new User
                 {
+                    Id = user.Id,
                     Email = emailClaim,
                     UserName = emailClaim,
                     FirstName = claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value,
@@ -215,7 +216,12 @@ namespace WebApi.Controllers
             var userRoles = await userManager.GetRolesAsync(user);
             var jwtToken = tokenRepository.GenerateJwtToken(user, userRoles.ToArray());
 
-            return Ok(new { Token = jwtToken });
+            return Ok(new { Token = jwtToken, 
+                User = new {id = user.Id, 
+                    firstName = user.FirstName, 
+                    lastName = user.LastName,
+                    email = user.Email,
+                }});
         }
     }
 }
