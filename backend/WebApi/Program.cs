@@ -27,6 +27,7 @@ using Application.Features.Listings.Commands.CreateStudentHostelListing;
 using Application.Features.Listings.Commands.CreateWarehouseListing;
 using Application.Features.Listings.Commands.InitiateCreateListing;
 using Application.Features.Listings.Queries.GetAmenity;
+using Application.Features.Listings.Queries.GetListings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -80,8 +81,10 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cre
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateStudentHostelListingCommand).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateWarehouseListingCommand).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetListingsQuery).Assembly));
 
 builder.Services.AddControllers();
 
