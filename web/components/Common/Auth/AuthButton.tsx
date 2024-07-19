@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "@/components/Common/Reusable/Spinner";
 
 interface Props {
   loading: boolean;
@@ -6,14 +7,16 @@ interface Props {
   text: string;
 }
 
-const AuthButton: React.FC<Props> = ({ action }) => {
+const AuthButton: React.FC<Props> = ({ loading, action, text }) => {
   return (
-    <div className="w-2/5 ">
+    <div className="w-4/12 md:w-3/12 mt-4">
       <button
         type="submit"
-        className="w-full h-12 bg-terrablue rounded-full text-white text-xs"
+        className="w-full h-8 font-nunito font-normal bg-terrablue rounded-full text-white text-xs"
         onClick={action}
-      ></button>
+      >
+        {loading ? <Spinner /> : `${text}`}
+      </button>
     </div>
   );
 };
