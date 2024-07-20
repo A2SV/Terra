@@ -14,13 +14,25 @@ class CustomValidator {
     }
     return null;
   }
+
+  static bool validateForm(GlobalKey<FormState> formKey) {
+    final isFormValid = formKey.currentState?.validate();
+
+    if (isFormValid != true) {
+      return false;
+    }
+    formKey.currentState!.save();
+    return true;
+  }
+
   static String? validateName(String name) {
     if (name.trim().isEmpty || name.split(' ').length < 2) {
       return 'Full name is required';
     }
     return null;
   }
- static String? validatePassword(String password) {
+
+  static String? validatePassword(String password) {
     if (password.trim().isEmpty || password.trim().length < 6) {
       return 'Password length should be greater than 6';
     }
@@ -34,15 +46,11 @@ class CustomValidator {
     }
     return null;
   }
-  static bool validateForm(GlobalKey<FormState> formKey) {
-    final isFormValid = formKey.currentState?.validate();
 
-    if (isFormValid != true) {
-      return false;
+  static String? validatePasswordFields(String? password1, String? password2) {
+    if (password1 != password2) {
+      return 'Passwords do not match';
     }
-    formKey.currentState!.save();
-    return true;
+    return null;
   }
-
-
 }

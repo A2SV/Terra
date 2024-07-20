@@ -13,9 +13,12 @@ namespace Application.Features.Listings.Commands.CreateStudentHostelListing
         private readonly IUserRepository _userRepository;
         private readonly IAmenityRepository _amenityRepository;
         public CreateStudentHostelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
+        private readonly IAmenityRepository _amenityRepository;
+        public CreateStudentHostelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
+            _amenityRepository = amenityRepository;
             _amenityRepository = amenityRepository;
         }
 
