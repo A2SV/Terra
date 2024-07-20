@@ -7,8 +7,6 @@ namespace Domain.Entities
 {
     public class StudentHostel : BaseEntity
     {
-        [ForeignKey("Property")]
-        public Guid PropertyId { get; set; }
         [MinLength(1)]
         public List<StudentHostelRoomTypes> RoomTypes { get; set; } = [];
         public required StudentHostelType HostelType { get; set; }
@@ -18,7 +16,5 @@ namespace Domain.Entities
         public bool StudyAreaAvailable { get; set; }
         public bool LaundryFacilityAvailable { get; set; }
         public bool CleaningServiceAvailable { get; set; }
-
-        public required ResidentialProperty Property { get; set; }
     }
 }

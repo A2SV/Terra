@@ -6,12 +6,11 @@ namespace Domain.Entities
 {
     public class CommercialProperty : BaseEntity
     {
-        [ForeignKey("Property")]
-        public Guid PropertyId { get; set; }
+        [ForeignKey("SubTypeId")]
+        public Guid SubTypeId { get; set; }
         [Range(1, int.MaxValue)]
         public int TotalFloors { get; set; }
         public bool ParkingSpace { get; set; }
         public int FloorNumber { get; set; }
-        public required Property Property { get; set; }
     }
 }
