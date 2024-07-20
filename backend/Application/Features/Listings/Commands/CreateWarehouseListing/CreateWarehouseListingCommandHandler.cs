@@ -6,21 +6,21 @@ using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.CreateShopListing
+namespace Application.Features.Listings.Commands.CreateWarehouseListing
 {
-    public class CreateShopListingCommandHandler : IRequestHandler<CreateShopListingCommand, Result<Property>>
+    public class CreateWarehouseListingCommandHandler : IRequestHandler<CreateWarehouseListingCommand, Result<Property>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
         private readonly IAmenityRepository _amenityRepository;
-        public CreateShopListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
+        public CreateWarehouseListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Property>> Handle(CreateShopListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Property>> Handle(CreateWarehouseListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -32,17 +32,19 @@ namespace Application.Features.Listings.Commands.CreateShopListing
                         return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
-                    var shop = new Shop
+                    var warehouse = new Warehouse
                     {
-                        DisplayWindowAvailable = request.DisplayWindowAvailable,
-                        StorageRoomSize = request.StorageRoomSize
+                        CeilingHeight = request.CeilingHeight,
+                        LoadingDockAvailable = request.LoadingDockAvailable,
+                        OfficeSpaceAvailable = request.OfficeSpaceAvailable,
+                        SuitableGoods = request.SuitableGoods
                     };
 
-                    await _listingRepository.AddPropertyAsync(shop);
+                    await _listingRepository.AddPropertyAsync(warehouse);
 
                     var commercialProperty = new CommercialProperty
                     {
-                        SubTypeId = shop.Id,
+                        SubTypeId = warehouse.Id,
                         TotalFloors = request.TotalFloors,
                         ParkingSpace = request.ParkingSpace,
                         FloorNumber = request.FloorNumber
@@ -64,13 +66,14 @@ namespace Application.Features.Listings.Commands.CreateShopListing
 
                     await _listingRepository.SaveChangesAsync();
 
+
                     scope.Complete();
 
-                    return new Result<Property>(true, ResultStatusCode.Success, property, "Shop created successfully");
+                    return new Result<Property>(true, ResultStatusCode.Success, property, "Warehouse created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating shop: {ex.Message}");
+                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating warehouse: {ex.Message}");
                 }
 
             }
