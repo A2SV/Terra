@@ -4,13 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
-import 'package:mobile/src/features/auth/presentation/bloc/login/login_bloc.dart';
-import 'package:mobile/src/features/auth/presentation/bloc/login/login_event.dart';
-import 'package:mobile/src/features/auth/presentation/bloc/login/login_state.dart';
+import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_field.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -35,13 +32,27 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
 
-    final loginBloc = BlocProvider.of<LoginBloc>(context);
+    return BlocConsumer<AuthenticationBloc,AuthenticationState>(
+      listener: (BuildContext context, AuthenticationState state) async {
+        switch(state){
+          case LoginSuccess():
+            print('login done');
+            Navigator.pushReplacementNamed(context, '/dashboard');
+            CustomSnackBar.successSnackBar(context: context, message: 'Login success' );
+          case LoginFailed():
+            final Box userBox=await Hive.openBox('userData');
+            final String message=await userBox.get('errormessage',defaultValue: 'error');
+            setState(() {
+              CustomSnackBar.errorSnackBar(context: context, message: message );
+            });
 
+          default:
+            // TODO: Handle this case.
+        }
+      },
 
-    return BlocBuilder<LoginBloc,LoginState>(builder: (context,state){
-      switch(state){
-        case Initial():
-          return Form(
+        builder: (context,state){
+        return Form(
             key: _formKey,
             child: Scaffold(
               backgroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -123,36 +134,13 @@ class _SignInPageState extends State<SignInPage> {
                       CustomButton(
                         text: 'Log In',
                         onPressed: () async {
-                          context.read<LoginBloc>().add(await LoginUserEvent(
-                            username: emailController.text,
-                            password: passwordController.text,
-                          ));
-
                           final valid = CustomValidator.validateForm(_formKey);
                           if (valid) {
-                            context.read<LoginBloc>().add(await LoginUserEvent(
+                            context.read<AuthenticationBloc>().add(await LoginUserEvent(
                               username: emailController.text,
                               password: passwordController.text,
                             ));
-
-                            final Box userBox=await Hive.openBox('userData');
-                            print('start login');
-                            String username=await userBox.get('username',defaultValue: '');
-                            String password=await userBox.get('password',defaultValue: '');
-                            bool isLoggedIn=await userBox.get('isLoggedIn',defaultValue: false);
-                            print('logged in ? ${userBox.get('isLoggedIn')}');
-
-                            if (isLoggedIn==true){
-                              print('login done');
-                              Navigator.pushReplacementNamed(context, '/dashboard');
-                              CustomSnackBar.successSnackBar(context: context, message: 'Login success' );
-                            }else if (isLoggedIn==false && username=='' && password==''){
-                              final String message=await userBox.get('errormessage',defaultValue: 'error');
-
-                                CustomSnackBar.errorSnackBar(context: context, message: message );
-                            }
-
-                          }
+                          };
                         },
                         horizontalPadding: 0,
                         borderColor: Theme.of(context).colorScheme.onPrimary,
@@ -207,18 +195,6 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
           );
-        default:
-          return Container(
-              color: Colors.white,
-              child: Center(
-                child:Text(
-                    'Something wrong has happened',
-                  style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.textFieldTextColor).bodyMedium,
-                ),
-              )
-          );
-
-      }
-    });
+    },);
   }
 }

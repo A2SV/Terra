@@ -21,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
   });
   @override
   Future<Either<Failure, LoginReturn>> login(String email, String password) async {
-    Either<Failure,UserModel> response= await  AuthRemoteDataSourceImpl().login(email, password);
+    Either<Failure,UserModel> response= await remoteDataSource.login(email, password);
 
     var output;
     response.fold(
