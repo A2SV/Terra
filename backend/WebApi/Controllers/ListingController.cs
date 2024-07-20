@@ -8,15 +8,18 @@ using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 
+using Application.Features.Listings.Queries.GetPropertyById;
+
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ListingController : ControllerBase
+
+    public class ListingsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ListingController(IMediator mediator)
+        public ListingsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -71,5 +74,20 @@ namespace WebApi.Controllers
 
             return Ok(listings);
         }
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> GetPropertyById([FromRoute] Guid id)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetPropertyById(id));
+
+                return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
+                
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new Result<Property>(false, ResultStatusCode.BadRequest, null, ex.Message));
+            }
+            }
     }
 }

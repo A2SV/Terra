@@ -1,4 +1,3 @@
-
 using Application.Contracts;
 using Domain.Entities;
 using MediatR;
@@ -8,16 +7,16 @@ namespace Application.Features.Listings.Queries.GetPropertyById
 {
     public class GetPropertyByIdHandler : IRequestHandler<GetPropertyById, Result<Property>>
     {
-        private readonly IPropertyRepository _propertyRepository;
+        private readonly IListingRepository _propertyRepository;
 
-        public GetPropertyByIdHandler(IPropertyRepository propertyRepository)
+        public GetPropertyByIdHandler(IListingRepository propertyRepository)
         {
             _propertyRepository = propertyRepository;
         }
 
         public async Task<Result<Property>> Handle(GetPropertyById request, CancellationToken cancellationToken)
         {
-            var property = await _propertyRepository.GetPropertyByIdAsync(request.Id);
+            var property = await _propertyRepository.GetListingByIdAsync(request.Id);
 
             if (property == null)
             {
