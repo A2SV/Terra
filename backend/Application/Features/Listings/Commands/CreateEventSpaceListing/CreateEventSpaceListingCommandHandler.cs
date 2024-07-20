@@ -18,7 +18,6 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
-            _amenityRepository = amenityRepository;
         }
 
         public async Task<Result<Property>> Handle(CreateEventSpaceListingCommand request, CancellationToken cancellationToken)

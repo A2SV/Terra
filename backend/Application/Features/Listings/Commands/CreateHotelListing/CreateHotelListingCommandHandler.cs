@@ -17,7 +17,6 @@ namespace Application.Features.Listings.Commands.CreateHotelListing
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
-            _amenityRepository = amenityRepository;
         }
 
         public async Task<Result<Property>> Handle(CreateHotelListingCommand request, CancellationToken cancellationToken)

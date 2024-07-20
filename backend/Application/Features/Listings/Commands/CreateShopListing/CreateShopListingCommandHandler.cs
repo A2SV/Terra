@@ -18,7 +18,6 @@ namespace Application.Features.Listings.Commands.CreateShopListing
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
-            _amenityRepository = amenityRepository;
         }
 
         public async Task<Result<Property>> Handle(CreateShopListingCommand request, CancellationToken cancellationToken)
