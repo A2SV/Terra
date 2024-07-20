@@ -3,12 +3,10 @@ using Application.Models.ApiResult;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.CreateResidentialListing
+namespace Application.Features.Listings.Commands.Common
 {
-    public class CreateResidentialListingCommand : IRequest<Result<ResidentialProperty>>
+    public class CreateResidentialListingCommand : InitiateCreateListingCommand
     {
-        [Required]
-        public Guid PropertyId { get; set; }
         public bool FurnishedStatus { get; set; }
         public int NumberOfBedrooms { get; set; }
         public int NumberOfBathrooms { get; set; }

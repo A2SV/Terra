@@ -1,24 +1,28 @@
 using System.Transactions;
 using Application.Contracts;
+using Application.Features.Listings.Commands.Common;
 using Application.Models.ApiResult;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateHotelListing
 {
-    public class CreateHotelListingCommandHandler : IRequestHandler<CreateHotelListingCommand, Result<Hotel>>
+    public class CreateHotelListingCommandHandler : IRequestHandler<CreateHotelListingCommand, Result<Property>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAmenityRepository _amenityRepository;
+        public CreateHotelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         private readonly IAmenityRepository _amenityRepository;
         public CreateHotelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
+            _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Hotel>> Handle(CreateHotelListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Property>> Handle(CreateHotelListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -27,53 +31,20 @@ namespace Application.Features.Listings.Commands.CreateHotelListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<Hotel>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
-                    var property = new Property
+                    var hotel = new Hotel
                     {
-                        ListerId = listerId,
-                        Title = request.Title,
-                        Description = request.Description,
-                        PropertyType = request.PropertyType,
-                        ListingType = request.ListingType,
-                        PublishStatus = request.PropertyPublishStatus,
-                        MarketStatus = request.PropertyMarketStatus,
-                        PropertySize = request.PropertySize,
-                        AvailableStartDate = request.AvailableStartDate,
-                        AvailableEndDate = request.AvailableEndDate,
-                        Lister = user
+                        StarRating = request.StarRating,
+                        RestaurantOnSite = request.RestaurantOnSite
                     };
 
-                    await _listingRepository.AddPropertyAsync(property);
+                    await _listingRepository.AddPropertyAsync(hotel);
 
-                    var propertyLocation = new PropertyLocation
-                    {
-                        PropertyId = property.Id,
-                        StreetName = request.StreetName,
-                        HouseNumber = request.HouseNumber,
-                        City = request.City,
-                        Country = request.Country,
-                        Longitude = request.Longitude,
-                        Latitude = request.Latitude,
-                        ZipCode = request.ZipCode,
-                        Property = property
-                    };
-
-                    var paymentInformation = new PaymentInformation
-                    {
-                        PropertyId = property.Id,
-                        Property = property,
-                        Currency = request.PaymentCurrency,
-                        PaymentFrequency = request.PaymentFrequency,
-                        Cost = request.Price,
-                        Negotiable = request.Negotiable
-                    };
 
                     var residentialProperty = new ResidentialProperty
                     {
-                        PropertyId = property.Id,
-                        Property = property,
                         FurnishedStatus = request.FurnishedStatus,
                         NumberOfBedrooms = request.NumberOfBedrooms,
                         NumberOfBathrooms = request.NumberOfBathrooms,
@@ -81,48 +52,28 @@ namespace Application.Features.Listings.Commands.CreateHotelListing
                         NumberOfKitchens = request.NumberOfKitchens
                     };
 
-                    if (request.Amenities != null)
-                    {
-                        foreach (var amenity in request.Amenities)
-                        {
-                            var response = await _amenityRepository.GetAllAmenitiesAsync("Name", amenity);
-                            if (response != null && response.Count() > 0)
-                            {
-                                var propertyAmenity = new PropertyAmenity
-                                {
-                                    PropertyId = property.Id,
-                                    Property = property,
-                                    AmenityId = response[0].Id,
-                                    Amenity = response[0]
-                                };
-                                await _amenityRepository.AddAmenityAsync(propertyAmenity);
-                            }
-                        }
-                    }
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
 
                     await _listingRepository.AddPropertyLocationAsync(propertyLocation);
                     await _listingRepository.AddPaymentInformationAsync(paymentInformation);
                     await _listingRepository.AddPropertyAsync(residentialProperty);
 
-                    var hotel = new Hotel
-                    {
-                        PropertyId = residentialProperty.Id,
-                        Property = residentialProperty,
-                        StarRating = request.StarRating,
-                        RestaurantOnSite = request.RestaurantOnSite
-                    };
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, residentialProperty: residentialProperty);
 
-                    await _listingRepository.AddPropertyAsync(hotel);
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
 
                     await _listingRepository.SaveChangesAsync();
-                    
+
                     scope.Complete();
 
-                    return new Result<Hotel>(true, ResultStatusCode.Success, hotel, "Hotel created successfully");
+                    return new Result<Property>(true, ResultStatusCode.Success, property, "Hotel created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Hotel>(false, ResultStatusCode.ServerError, null, $"Error in creating hotel: {ex.Message}");
+                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating hotel: {ex.Message}");
                 }
 
             }
