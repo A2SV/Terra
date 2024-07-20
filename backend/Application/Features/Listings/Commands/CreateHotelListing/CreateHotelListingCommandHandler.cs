@@ -13,8 +13,6 @@ namespace Application.Features.Listings.Commands.CreateHotelListing
         private readonly IUserRepository _userRepository;
         private readonly IAmenityRepository _amenityRepository;
         public CreateHotelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
-        private readonly IAmenityRepository _amenityRepository;
-        public CreateHotelListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;

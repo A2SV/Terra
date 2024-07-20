@@ -14,8 +14,6 @@ namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
         private readonly IUserRepository _userRepository;
         private readonly IAmenityRepository _amenityRepository;
         public CreateOfficeSpaceListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
-        private readonly IAmenityRepository _amenityRepository;
-        public CreateOfficeSpaceListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
