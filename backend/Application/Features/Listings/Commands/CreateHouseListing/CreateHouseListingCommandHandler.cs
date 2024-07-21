@@ -1,12 +1,13 @@
 using System.Transactions;
 using Application.Contracts;
+using Application.Features.Listings.Commands.Common;
 using Application.Models.ApiResult;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateHouseListing
 {
-    public class CreateHouseListingCommandHandler : IRequestHandler<CreateHouseListingCommand, Result<House>>
+    public class CreateHouseListingCommandHandler : IRequestHandler<CreateHouseListingCommand, Result<Property>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
@@ -18,7 +19,7 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<House>> Handle(CreateHouseListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Property>> Handle(CreateHouseListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -27,53 +28,21 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<House>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
-                    var property = new Property
+                    var house = new House
                     {
-                        ListerId = listerId,
-                        Title = request.Title,
-                        Description = request.Description,
-                        PropertyType = request.PropertyType,
-                        ListingType = request.ListingType,
-                        PublishStatus = request.PropertyPublishStatus,
-                        MarketStatus = request.PropertyMarketStatus,
-                        PropertySize = request.PropertySize,
-                        AvailableStartDate = request.AvailableStartDate,
-                        AvailableEndDate = request.AvailableEndDate,
-                        Lister = user
+                        NumberOfStories = request.NumberOfStories,
+                        GarageSpace = request.GarageSpace,
+                        StudentFriendly = request.StudentFriendly
                     };
 
-                    await _listingRepository.AddPropertyAsync(property);
+                    await _listingRepository.AddPropertyAsync(house);
 
-                    var propertyLocation = new PropertyLocation
-                    {
-                        PropertyId = property.Id,
-                        StreetName = request.StreetName,
-                        HouseNumber = request.HouseNumber,
-                        City = request.City,
-                        Country = request.Country,
-                        Longitude = request.Longitude,
-                        Latitude = request.Latitude,
-                        ZipCode = request.ZipCode,
-                        Property = property
-                    };
-
-                    var paymentInformation = new PaymentInformation
-                    {
-                        PropertyId = property.Id,
-                        Property = property,
-                        Currency = request.PaymentCurrency,
-                        PaymentFrequency = request.PaymentFrequency,
-                        Cost = request.Price,
-                        Negotiable = request.Negotiable
-                    };
 
                     var residentialProperty = new ResidentialProperty
                     {
-                        PropertyId = property.Id,
-                        Property = property,
                         FurnishedStatus = request.FurnishedStatus,
                         NumberOfBedrooms = request.NumberOfBedrooms,
                         NumberOfBathrooms = request.NumberOfBathrooms,
@@ -81,49 +50,29 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
                         NumberOfKitchens = request.NumberOfKitchens
                     };
 
-                    if (request.Amenities != null)
-                    {
-                        foreach (var amenity in request.Amenities)
-                        {
-                            var response = await _amenityRepository.GetAllAmenitiesAsync("Name", amenity);
-                            if (response != null && response.Count() > 0)
-                            {
-                                var propertyAmenity = new PropertyAmenity
-                                {
-                                    PropertyId = property.Id,
-                                    Property = property,
-                                    AmenityId = response[0].Id,
-                                    Amenity = response[0]
-                                };
-                                await _amenityRepository.AddAmenityAsync(propertyAmenity);
-                            }
-                        }
-                    }
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
 
                     await _listingRepository.AddPropertyLocationAsync(propertyLocation);
                     await _listingRepository.AddPaymentInformationAsync(paymentInformation);
                     await _listingRepository.AddPropertyAsync(residentialProperty);
 
-                    var House = new House
-                    {
-                        PropertyId = residentialProperty.Id,
-                        Property = residentialProperty,
-                        NumberOfStories = request.NumberOfStories,
-                        GarageSpace = request.GarageSpace,
-                        StudentFriendly = request.StudentFriendly
-                    };
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, residentialProperty: residentialProperty);
 
-                    await _listingRepository.AddPropertyAsync(House);
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
 
                     await _listingRepository.SaveChangesAsync();
-                    
+
+    
                     scope.Complete();
 
-                    return new Result<House>(true, ResultStatusCode.Success, House, "House created successfully");
+                    return new Result<Property>(true, ResultStatusCode.Success, property, "House created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<House>(false, ResultStatusCode.ServerError, null, $"Error in creating house: {ex.Message}");
+                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating house: {ex.Message}");
                 }
 
             }
