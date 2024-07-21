@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateShopListing
 {
-    public class CreateShopListingCommand : InitiateCreateListingCommand, IRequest<Result<Property>>
+    public class CreateShopListingCommand : InitiateCreateListingCommand, IRequest<Result<Shop>>
     {
         [Required]
         public int TotalFloors { get; set; }

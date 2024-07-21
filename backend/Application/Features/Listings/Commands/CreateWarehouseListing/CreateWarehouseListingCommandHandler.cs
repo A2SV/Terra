@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateWarehouseListing
 {
-    public class CreateWarehouseListingCommandHandler : IRequestHandler<CreateWarehouseListingCommand, Result<Property>>
+    public class CreateWarehouseListingCommandHandler : IRequestHandler<CreateWarehouseListingCommand, Result<Warehouse>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
@@ -20,7 +20,7 @@ namespace Application.Features.Listings.Commands.CreateWarehouseListing
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Property>> Handle(CreateWarehouseListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Warehouse>> Handle(CreateWarehouseListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -29,11 +29,34 @@ namespace Application.Features.Listings.Commands.CreateWarehouseListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<Warehouse>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
+
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
+
+                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
+                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
+
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation);
+
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
+
+                    var commercialProperty = new CommercialProperty
+                    {
+                        PropertyId = property.Id,
+                        TotalFloors = request.TotalFloors,
+                        ParkingSpace = request.ParkingSpace,
+                        FloorNumber = request.FloorNumber
+                    };
+                    
+                    await _listingRepository.AddPropertyAsync(commercialProperty);
 
                     var warehouse = new Warehouse
                     {
+                        CommercialPropertyId = commercialProperty.Id,
                         CeilingHeight = request.CeilingHeight,
                         LoadingDockAvailable = request.LoadingDockAvailable,
                         OfficeSpaceAvailable = request.OfficeSpaceAvailable,
@@ -42,38 +65,15 @@ namespace Application.Features.Listings.Commands.CreateWarehouseListing
 
                     await _listingRepository.AddPropertyAsync(warehouse);
 
-                    var commercialProperty = new CommercialProperty
-                    {
-                        SubTypeId = warehouse.Id,
-                        TotalFloors = request.TotalFloors,
-                        ParkingSpace = request.ParkingSpace,
-                        FloorNumber = request.FloorNumber
-                    };
-
-                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
-                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
-
-                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
-                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
-                    await _listingRepository.AddPropertyAsync(commercialProperty);
-
-
-                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, commercialProperty: commercialProperty);
-
-                    await _listingRepository.AddPropertyAsync(property);
-
-                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
-
                     await _listingRepository.SaveChangesAsync();
-
 
                     scope.Complete();
 
-                    return new Result<Property>(true, ResultStatusCode.Success, property, "Warehouse created successfully");
+                    return new Result<Warehouse>(true, ResultStatusCode.Success, warehouse, "Warehouse created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating warehouse: {ex.Message}");
+                    return new Result<Warehouse>(false, ResultStatusCode.ServerError, null, $"Error in creating warehouse: {ex.Message}");
                 }
 
             }
