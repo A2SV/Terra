@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateEventSpaceListing
 {
-    public class CreateEventSpaceListingCommand : InitiateCreateListingCommand, IRequest<Result<Property>>
+    public class CreateEventSpaceListingCommand : InitiateCreateListingCommand, IRequest<Result<EventSpace>>
     {
         [Required]
         public int TotalFloors { get; set; }

@@ -5,28 +5,13 @@ namespace Application.Features.Listings.Commands.Common
 {
     public class InitiateCreateListingCommandHandler
     {
-        public static Property CreateProperty<TCommand>(TCommand request, string listerId, PropertyLocation propertyLocation, PaymentInformation paymentInformation, ResidentialProperty? residentialProperty = null, CommercialProperty? commercialProperty = null)
+        public static Property CreateProperty<TCommand>(TCommand request, string listerId, PropertyLocation propertyLocation, PaymentInformation paymentInformation)
             where TCommand : InitiateCreateListingCommand
         {
-            Guid typeId;
-            if (residentialProperty != null)
-            {
-                typeId = residentialProperty.Id;
-            }
-            else if (commercialProperty != null)
-            {
-                typeId = commercialProperty.Id;
-            }
-            else
-            {
-                throw new System.Exception("Invalid property type");
-            }
-
             return new Property
             {
                 PaymentInformationId = paymentInformation.Id,
                 PropertyLocationId = propertyLocation.Id,
-                TypeId = typeId,
                 ListerId = listerId,
                 Title = request.Title,
                 Description = request.Description,
