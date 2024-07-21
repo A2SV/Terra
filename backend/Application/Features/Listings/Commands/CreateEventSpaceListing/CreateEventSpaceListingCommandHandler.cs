@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateEventSpaceListing
 {
-    public class CreateEventSpaceListingCommandHandler : IRequestHandler<CreateEventSpaceListingCommand, Result<Property>>
+    public class CreateEventSpaceListingCommandHandler : IRequestHandler<CreateEventSpaceListingCommand, Result<EventSpace>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
@@ -20,7 +20,7 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Property>> Handle(CreateEventSpaceListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<EventSpace>> Handle(CreateEventSpaceListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -29,11 +29,34 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<EventSpace>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
+
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
+
+                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
+                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
+
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation);
+
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
+
+                    var commercialProperty = new CommercialProperty
+                    {
+                        PropertyId = property.Id,
+                        TotalFloors = request.TotalFloors,
+                        ParkingSpace = request.ParkingSpace,
+                        FloorNumber = request.FloorNumber
+                    };
+                    
+                    await _listingRepository.AddPropertyAsync(commercialProperty);
 
                     var eventSpace = new EventSpace
                     {
+                        CommercialPropertyId = commercialProperty.Id,
                         MaximumCapacity = request.MaximumCapacity,
                         CateringServiceAvailable = request.CateringServiceAvailable,
                         AudioVisualEquipmentsAvailable = request.AudioVisualEquipmentsAvailable,
@@ -41,38 +64,16 @@ namespace Application.Features.Listings.Commands.CreateEventSpaceListing
                     };
 
                     await _listingRepository.AddPropertyAsync(eventSpace);
-
-                    var commercialProperty = new CommercialProperty
-                    {
-                        SubTypeId = eventSpace.Id,
-                        TotalFloors = request.TotalFloors,
-                        ParkingSpace = request.ParkingSpace,
-                        FloorNumber = request.FloorNumber
-                    };
-
-                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
-                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
-
-                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
-                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
-                    await _listingRepository.AddPropertyAsync(commercialProperty);
-
-
-                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, commercialProperty: commercialProperty);
-
-                    await _listingRepository.AddPropertyAsync(property);
-
-                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
-
+                    
                     await _listingRepository.SaveChangesAsync();
                     
                     scope.Complete();
 
-                    return new Result<Property>(true, ResultStatusCode.Success, property, "Event space created successfully");
+                    return new Result<EventSpace>(true, ResultStatusCode.Success, eventSpace, "Event space created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating event space: {ex.Message}");
+                    return new Result<EventSpace>(false, ResultStatusCode.ServerError, null, $"Error in creating event space: {ex.Message}");
                 }
 
             }

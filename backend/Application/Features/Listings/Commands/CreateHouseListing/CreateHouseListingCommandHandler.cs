@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateHouseListing
 {
-    public class CreateHouseListingCommandHandler : IRequestHandler<CreateHouseListingCommand, Result<Property>>
+    public class CreateHouseListingCommandHandler : IRequestHandler<CreateHouseListingCommand, Result<House>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
@@ -19,7 +19,7 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Property>> Handle(CreateHouseListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<House>> Handle(CreateHouseListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -28,11 +28,36 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<House>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
+
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
+
+                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
+                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
+
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation);
+
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    var residentialProperty = new ResidentialProperty
+                    {
+                        PropertyId = property.Id,
+                        FurnishedStatus = request.FurnishedStatus,
+                        NumberOfBedrooms = request.NumberOfBedrooms,
+                        NumberOfBathrooms = request.NumberOfBathrooms,
+                        NumberOfWashrooms = request.NumberOfWashrooms,
+                        NumberOfKitchens = request.NumberOfKitchens
+                    };
+                    
+                    await _listingRepository.AddPropertyAsync(residentialProperty);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
 
                     var house = new House
                     {
+                        ResidentialPropertyId = residentialProperty.Id,
                         NumberOfStories = request.NumberOfStories,
                         GarageSpace = request.GarageSpace,
                         StudentFriendly = request.StudentFriendly
@@ -40,39 +65,15 @@ namespace Application.Features.Listings.Commands.CreateHouseListing
 
                     await _listingRepository.AddPropertyAsync(house);
 
-
-                    var residentialProperty = new ResidentialProperty
-                    {
-                        FurnishedStatus = request.FurnishedStatus,
-                        NumberOfBedrooms = request.NumberOfBedrooms,
-                        NumberOfBathrooms = request.NumberOfBathrooms,
-                        NumberOfWashrooms = request.NumberOfWashrooms,
-                        NumberOfKitchens = request.NumberOfKitchens
-                    };
-
-                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
-                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
-
-                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
-                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
-                    await _listingRepository.AddPropertyAsync(residentialProperty);
-
-                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, residentialProperty: residentialProperty);
-
-                    await _listingRepository.AddPropertyAsync(property);
-
-                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
-
                     await _listingRepository.SaveChangesAsync();
-
     
                     scope.Complete();
 
-                    return new Result<Property>(true, ResultStatusCode.Success, property, "House created successfully");
+                    return new Result<House>(true, ResultStatusCode.Success, house, "House created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating house: {ex.Message}");
+                    return new Result<House>(false, ResultStatusCode.ServerError, null, $"Error in creating house: {ex.Message}");
                 }
 
             }

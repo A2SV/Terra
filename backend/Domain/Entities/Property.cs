@@ -13,8 +13,7 @@ namespace Domain.Entities
         public Guid PaymentInformationId { get; set; }
         [ForeignKey(nameof(PropertyLocation))]
         public Guid PropertyLocationId { get; set; }
-        [ForeignKey("TypeId")]
-        public Guid TypeId { get; set; }
+
         [MaxLength(100)]
         public required string Title { get; set; }
         public string? Description { get; set; }
