@@ -33,8 +33,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
@@ -45,7 +43,6 @@ class _SignUpPageState extends State<SignUpPage> {
             message: state.message,
           );
         } else if (state is AuthenticationSuccess) {
-          
           Navigator.pushNamed(context, '/otp');
         }
       },
@@ -204,22 +201,23 @@ class _SignUpPageState extends State<SignUpPage> {
                     CustomButton(
                       showSuffixWidget: true,
                       suffixWidget: state is AuthenticationLoading
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal : 25.0),
-                              child: SizedBox(
-                                height:30.0,
-                                width:30.0,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
+                          ? const Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                child: SizedBox(
+                                  height: 30.0,
+                                  width: 30.0,
+                                  child: CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : Container(),
-                        disabled: state is AuthenticationLoading,
-
-                      text: 'Create Account',
+                            )
+                          : Container(),
+                      disabled: state is AuthenticationLoading,
+                      text: state is AuthenticationLoading
+                          ? ""
+                          : 'Create Account',
                       onPressed: () {
                         final isValid = CustomValidator.validateForm(_formKey);
 
@@ -232,7 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             );
                             return;
                           }
-                           
+
                           context.read<AuthenticationBloc>().add(
                               AuthenticationRegisterUserEvent(
                                   firstName: firstNameController.text.trim(),
@@ -298,6 +296,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
   }
+
   @override
   void dispose() {
     firstNameController.dispose();
@@ -305,7 +304,7 @@ class _SignUpPageState extends State<SignUpPage> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-  
+
     super.dispose();
   }
 
@@ -317,5 +316,5 @@ class _SignUpPageState extends State<SignUpPage> {
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     super.initState();
-}
+  }
 }

@@ -65,7 +65,7 @@ class _CustomButtonState extends State<CustomButton>
       onTapCancel: () {
         _animationController.reverse();
       },
-      onTap: widget.onPressed,
+      onTap: widget.disabled == true ? null : widget.onPressed,
       child: AnimatedBuilder(
         animation: _scaleAnimation,
         builder: (BuildContext context, Widget? child) {

@@ -28,173 +28,191 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
-
-    return BlocConsumer<AuthenticationBloc,AuthenticationState>(
+    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) async {
-        switch(state){
-          case LoginSuccess():
-            print('login done');
-            Navigator.pushReplacementNamed(context, '/dashboard');
-            CustomSnackBar.successSnackBar(context: context, message: 'Login success' );
-          case LoginFailed():
-            final Box userBox=await Hive.openBox('userData');
-            final String message=await userBox.get('errormessage',defaultValue: 'error');
-            setState(() {
-              CustomSnackBar.errorSnackBar(context: context, message: message );
-            });
+        print(state);
+        if (state is LoginSuccess) {
+          CustomSnackBar.successSnackBar(
+              context: context, message: 'Login success');
+          Navigator.pushReplacementNamed(context, '/dashboard');
+        }
 
-          default:
-            // TODO: Handle this case.
+        if (state is LoginFailed) {
+          final Box userBox = await Hive.openBox('userData');
+          final String message =
+              await userBox.get('errormessage', defaultValue: 'error');
+          CustomSnackBar.errorSnackBar(context: context, message: message);
         }
       },
-
-        builder: (context,state){
+      builder: (context, state) {
         return Form(
-            key: _formKey,
-            child: Scaffold(
-              backgroundColor: Theme.of(context).colorScheme.onPrimary,
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.8.h, horizontal: 4.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        height: 7.h,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(width: 36.w),
-                          SvgPicture.asset(
-                            "assets/svg/terra_logo.svg",
-                            height: 20.w,
-                          ),
-                          SizedBox(width: 19.w),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(context, "/dashboard");
-                            },
-                            child: const SkipButton(),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 2.h),
-                      Text(
-                        'Sign In',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w600,
-                            color: AppLightThemeColors.kBlackColor), //black
-                      ),
-                      const Text(
-                        'Welcome to the Terra family',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 4.h),
-                      AuthTextFormField(
-                          firstNameController: emailController,
-                          icon: Icons.email_outlined,
-                          labelText: 'Email',
-                          validator: (email) =>
-                              CustomValidator.validateEmail(email ?? "")),
-                      SizedBox(height: 2.h),
-                      AuthTextFormField(
-                        firstNameController: passwordController,
-                        icon: Icons.lock_outline,
-                        labelText: 'Password',
-                        validator: (password) =>
-                            CustomValidator.validatePassword(password ?? ""),
-                        obscureText: passwordVisibility1,
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              passwordVisibility1 = !passwordVisibility1;
-                            });
+          key: _formKey,
+          child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.onPrimary,
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.8.h, horizontal: 4.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: 7.h,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 36.w),
+                        SvgPicture.asset(
+                          "assets/svg/terra_logo.svg",
+                          height: 20.w,
+                        ),
+                        SizedBox(width: 19.w),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, "/dashboard");
                           },
-                          color: AppCommonColors.fieldBorderColor,
-                          icon: passwordVisibility1
-                              ? const Icon(Icons.visibility_outlined)
-                              : const Icon(Icons.visibility_off_outlined),
+                          child: const SkipButton(),
                         ),
-                      ),
-                      SizedBox(height: 3.h),
-                      Text(
-                        "Forgot password?",
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                      SizedBox(height: 5.h),
-                      CustomButton(
-                        text: 'Log In',
-                        onPressed: () async {
-                          final valid = CustomValidator.validateForm(_formKey);
-                          if (valid) {
-                            context.read<AuthenticationBloc>().add(await LoginUserEvent(
-                              username: emailController.text,
-                              password: passwordController.text,
-                            ));
-                          };
+                      ],
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      'Sign In',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppLightThemeColors.kBlackColor), //black
+                    ),
+                    const Text(
+                      'Welcome to the Terra family',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(height: 4.h),
+                    AuthTextFormField(
+                        firstNameController: emailController,
+                        icon: Icons.email_outlined,
+                        labelText: 'Email',
+                        validator: (email) =>
+                            CustomValidator.validateEmail(email ?? "")),
+                    SizedBox(height: 2.h),
+                    AuthTextFormField(
+                      firstNameController: passwordController,
+                      icon: Icons.lock_outline,
+                      labelText: 'Password',
+                      validator: (password) =>
+                          CustomValidator.validatePassword(password ?? ""),
+                      obscureText: passwordVisibility1,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordVisibility1 = !passwordVisibility1;
+                          });
                         },
-                        horizontalPadding: 0,
-                        borderColor: Theme.of(context).colorScheme.onPrimary,
+                        color: AppCommonColors.fieldBorderColor,
+                        icon: passwordVisibility1
+                            ? const Icon(Icons.visibility_outlined)
+                            : const Icon(Icons.visibility_off_outlined),
                       ),
-                      SizedBox(
-                        height: 2.h,
+                    ),
+                    SizedBox(height: 3.h),
+                    Text(
+                      "Forgot password?",
+                      style: TextStyle(
+                        fontSize: 15.sp,
                       ),
-                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Text(
-                          "Don't have an account? ",
+                      textAlign: TextAlign.end,
+                    ),
+                    SizedBox(height: 5.h),
+                    CustomButton(
+                      showSuffixWidget: true,
+                      suffixWidget: state is AuthenticationLoading
+                          ? const Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                child: SizedBox(
+                                  height: 30.0,
+                                  width: 30.0,
+                                  child: CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
+                      disabled: state is AuthenticationLoading,
+                      text: state is AuthenticationLoading ? "" : 'Log In',
+                      onPressed: () async {
+                        final valid = CustomValidator.validateForm(_formKey);
+                        if (valid) {
+                          context.read<AuthenticationBloc>().add(
+                                LoginUserEvent(
+                                  username: emailController.text,
+                                  password: passwordController.text,
+                                ),
+                              );
+                        }
+                        ;
+                      },
+                      horizontalPadding: 0,
+                      borderColor: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            color: AppCommonColors.fieldBorderColor),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Sign Up',
                           style: TextStyle(
                               fontSize: 15.sp,
+                              color: AppCommonColors.defaultLink),
+                        ),
+                      ),
+                    ]),
+                    SizedBox(height: 4.h),
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            thickness: 0.5,
+                            color: AppCommonColors.fieldBorderColor,
+                          ),
+                        ),
+                        Text(
+                          '  Or  ',
+                          style: TextStyle(
                               color: AppCommonColors.fieldBorderColor),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                                fontSize: 15.sp, color: AppCommonColors.defaultLink),
+                        Expanded(
+                          child: Divider(
+                            thickness: 0.5,
+                            color: AppCommonColors.fieldBorderColor,
                           ),
                         ),
-                      ]),
-                      SizedBox(height: 4.h),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.5,
-                              color: AppCommonColors.fieldBorderColor,
-                            ),
-                          ),
-                          Text(
-                            '  Or  ',
-                            style: TextStyle(color: AppCommonColors.fieldBorderColor),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.5,
-                              color: AppCommonColors.fieldBorderColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 2.h),
-                      SignInWithGoogleBtn(onPressed: () {})
-                    ],
-                  ),
+                      ],
+                    ),
+                    SizedBox(height: 2.h),
+                    SignInWithGoogleBtn(onPressed: () {})
+                  ],
                 ),
               ),
             ),
-          );
-    },);
+          ),
+        );
+      },
+    );
   }
 }
