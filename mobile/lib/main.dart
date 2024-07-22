@@ -51,7 +51,7 @@ class MainApp extends StatelessWidget {
             darkTheme: ThemeConfig().darkTheme,
             theme: ThemeConfig().lightTheme,
             themeMode: ThemeMode.light,
-          ),
+          ), // checking if there's a change
         );
       },
     );
