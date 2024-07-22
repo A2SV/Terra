@@ -12,7 +12,7 @@ const CreateListing = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-1/2 w-full flex flex-row items-center justify-center px-auto">
+        <div className="md:w-1/2 w-full flex flex-row items-center justify-center pl-[40px]">
           <div className="flex flex-col space-y-6 relative z-20">
             <div className="md:w-[400px] w-[300px]">
               <h1 className="text-[28px] font-bold text-normalTextColor font-nunito">
