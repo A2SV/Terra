@@ -16,39 +16,38 @@ const ListingCard = () => {
     "https://images.unsplash.com/photo-1483097365279-e8acd3bf9f18?q=80&w=1411&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
   return (
-    <div className="w-[345.75px] h-[455px] my-4 me-auto ms-auto">
-      <Link href="">
-        <div className="w-[382.75px] h-[455px] bg-white rounded-3xl hover:shadow-xl mx-2 transform transition-transform duration-300 hover:translate-y-1 hover:scale-105">
-          <div className="picture relative overflow-x-hidden rounded-3xl">
-            <Carousel images={images} />
-            <div className="flex justify-center items-center absolute top-4 font-nunito left-5 bg-yellow-600 opacity-80 text-white rounded text-[13px] w-[72px] pt-[2px]">
-              Featured
-            </div>
+    <div className="md:w-[345.75px] w-[400px] h-[455px] my-4 me-auto ms-auto  flex justify-center ">
+      <div className="md:w-[382.75px] w-[400px] h-[455px]  bg-white rounded-3xl hover:shadow-xl mx-2 transform transition-transform duration-300 hover:translate-y-1 hover:scale-105">
+        <div className="picture relative overflow-x-hidden rounded-3xl">
+          <Carousel images={images} />
+          <div className="flex justify-center items-center absolute top-4 font-nunito left-5 bg-yellow-600 opacity-80 text-white rounded text-[13px] w-[72px] pt-[2px]">
+            Featured
+          </div>
 
-            <div className="flex justify-center items-center absolute top-4 right-5 font-nunito bg-slate-700 text-white rounded text-[13px] w-[68px] pt-[2px]">
-              For Rent
-            </div>
+          <div className="flex justify-center items-center absolute top-4 right-5 font-nunito bg-slate-700 text-white rounded text-[13px] w-[68px] pt-[2px]">
+            For Rent
+          </div>
 
-            <div className="details flex items-center w-full absolute bottom-4 justify-between">
-              <Image
-                src={ListingProfile}
-                alt="Single Listing Profile"
-                className="ml-5 size-10 transform transition-transform duration-300 hover:translate-y-1 hover:scale-105 "
-              />
-              <div className="actions flex space-x-1 mr-5">
-                <div className="bottom-5 size-9 text-white hover:bg-white hover:text-black bg-black opacity-75 rounded-md flex justify-center items-center">
-                  <HiOutlineBookmark className="size-5" />
-                </div>
-                <div className="bottom-5 size-9 bg-black text-white hover:bg-white hover:text-black opacity-75 rounded-md flex justify-center items-center">
-                  <RiExpandDiagonalLine className="size-5" />
-                </div>
-                <div className="bottom-5 size-9 bg-black text-white hover:bg-white hover:text-black opacity-75 rounded-md flex justify-center items-center">
-                  <IoIosAddCircleOutline className="size-5" />
-                </div>
+          <div className="details flex items-center w-full absolute bottom-4 justify-between">
+            <Image
+              src={ListingProfile}
+              alt="Single Listing Profile"
+              className="ml-5 size-10 transform transition-transform duration-300 hover:translate-y-1 hover:scale-105 "
+            />
+            <div className="actions flex space-x-1 mr-5">
+              <div className="bottom-5 size-9 text-white hover:bg-white hover:text-black bg-black opacity-75 rounded-md flex justify-center items-center">
+                <HiOutlineBookmark className="size-5" />
+              </div>
+              <div className="bottom-5 size-9 bg-black text-white hover:bg-white hover:text-black opacity-75 rounded-md flex justify-center items-center">
+                <RiExpandDiagonalLine className="size-5" />
+              </div>
+              <div className="bottom-5 size-9 bg-black text-white hover:bg-white hover:text-black opacity-75 rounded-md flex justify-center items-center">
+                <IoIosAddCircleOutline className="size-5" />
               </div>
             </div>
           </div>
-
+        </div>
+        <Link href="">
           <div className="p-2 pl-1 pr-1 flex justify-between">
             <div className="pl-4 ">
               <h2 className="font-nunito font-bold text-[24px] text-btnColor">$321,347</h2>
@@ -80,8 +79,8 @@ const ListingCard = () => {
               <p className="font-nunito font-bold text-base text-gray-700 pt-2">3000 sq.ft</p>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };
