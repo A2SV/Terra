@@ -116,12 +116,11 @@ namespace Persistence.Repositories
             {
                 if (Enum.TryParse<StudentHostelLocation>(studentAccommodation, out var parsedStudentAccommodation))
                 {
-                    query = query.Join(_context.StudentHostels,
-                        property => property.Id,
-                        hostel => hostel.PropertyId,
-                        (property, hostel) => new { Property = property, Hostel = hostel })
-                        .Where(x => x.Hostel.HostelLocation == parsedStudentAccommodation)
-                        .Select(x => x.Property);
+                    query = _context.StudentHostels
+                        .Include(hostel => hostel.ResidentialProperty)
+                        .ThenInclude(resProp => resProp.Property)
+                        .Where(hostel => hostel.HostelLocation == parsedStudentAccommodation)
+                        .Select(hostel => hostel.ResidentialProperty.Property);
                 }
             }
 
