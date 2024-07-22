@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
-import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/core/widgets/custom_google_widget.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
@@ -12,6 +12,7 @@ import 'package:mobile/src/features/dashboard/presentation/widgets/property_card
 import 'package:mobile/src/features/dashboard/presentation/widgets/review_card.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 
 class ListingDetail extends StatefulWidget {
   const ListingDetail({super.key});
@@ -455,7 +456,7 @@ class _ListingDetailState extends State<ListingDetail> {
                     FacilityChip(label: otherFacilities[index]),
               ),
             ),
-            _buildMapCard(context),
+            const CustomGoogleMap(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -766,38 +767,6 @@ class _ListingDetailState extends State<ListingDetail> {
           style: context.textTheme.bodyMedium!.copyWith(fontSize: 15.sp),
         ),
       ],
-    );
-  }
-
-  Container _buildMapCard(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 2.h, left: 4.5.w, right: 4.5.w),
-      decoration: BoxDecoration(
-        color: AppCommonColors.disabledFieldColor,
-        borderRadius: BorderRadius.circular(20.sp),
-      ),
-      width: context.width,
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Container(
-            color: Colors.red,
-            height: 25.h,
-          ),
-          CustomButton(
-            text: 'View all on map',
-            onPressed: () {},
-            horizontalPadding: 0,
-            borderRadius: 0,
-            height: 5.h,
-            backgroundColor: AppCommonColors.disabledFieldColor,
-            borderColor: Colors.transparent,
-            textStyle: context.textTheme.bodyMedium!.copyWith(
-              fontSize: 13.sp,
-            ),
-          )
-        ],
-      ),
     );
   }
 
