@@ -3,7 +3,7 @@ using Domain.Models;
 
 namespace Application.Contracts
 {
-    public interface IListingsRepository
+    public interface IListingRepository
     {
         Task SaveChangesAsync();
         Task <TEntity?> AddPropertyAsync<TEntity>(TEntity property) where TEntity : class;
