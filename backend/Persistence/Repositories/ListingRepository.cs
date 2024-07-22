@@ -162,10 +162,15 @@ namespace Persistence.Repositories
         public async Task<Property?> GetListingByIdAsync(Guid id)
         {
             var property = await _context.Properties
-            .FirstOrDefaultAsync(p => p.Id == id);
+                .Include(p => p.Lister)
+                .Include(p => p.PaymentInformation)
+                .Include(p => p.PropertyLocation)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
-            return property;
+                return property;
         }
+
+
     }
 }
 
