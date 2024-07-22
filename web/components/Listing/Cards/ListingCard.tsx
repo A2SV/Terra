@@ -16,8 +16,8 @@ const ListingCard = () => {
     "https://images.unsplash.com/photo-1483097365279-e8acd3bf9f18?q=80&w=1411&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
   return (
-    <div className="md:w-[345.75px] w-[400px] h-[455px] my-4 me-auto ms-auto  flex justify-center ">
-      <div className="md:w-[382.75px] w-[400px] h-[455px]  bg-white rounded-3xl hover:shadow-xl mx-2 transform transition-transform duration-300 hover:translate-y-1 hover:scale-105">
+    <div className="w-[345.75px]  h-[455px] my-4 me-auto ms-auto  flex justify-center ">
+      <div className="w-[382.75px]  h-[455px]  bg-white rounded-3xl hover:shadow-xl mx-2">
         <div className="picture relative overflow-x-hidden rounded-3xl">
           <Carousel images={images} />
           <div className="flex justify-center items-center absolute top-4 font-nunito left-5 bg-yellow-600 opacity-80 text-white rounded text-[13px] w-[72px] pt-[2px]">
