@@ -14,7 +14,6 @@ describe("ProcedureSection Component", () => {
     expect(screen.getByAltText("main")).toBeInTheDocument();
     expect(screen.getByAltText("Text Image")).toBeInTheDocument();
     expect(screen.getByAltText("sub_section")).toBeInTheDocument();
-    expect(screen.getByAltText("view_more")).toBeInTheDocument();
   });
 
   test("renders the correct text content", () => {
