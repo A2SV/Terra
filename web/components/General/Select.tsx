@@ -52,11 +52,11 @@ const Select = () => {
   };
 
   return (
-    <div className="md:mx-24 h-[120px] lg:mt-10 flex flex-col justify-between md:mt-[160px] mt-[210px] px-5">
+    <div className="md:mx-24 h-[230px] lg:mt-10 flex flex-col  md:mt-[160px] mt-[210px] px-5 ">
       <div>
         <p className="font-nunito text-[26px] font-bold px-5">Select from a variety of suites</p>
       </div>
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center mt-8">
         <div>
           <ul className="flex flex-wrap">
             {items.slice(0, visibleItemsCount).map((item, index) => (
