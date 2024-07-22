@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using Domain.Entities;
@@ -26,14 +25,14 @@ namespace Application.Tests.Features.Users.RegisterUser
         public async Task Handle_UserNotFound_ReturnsNotFound()
         {
             // Arrange
-             _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync((User)null);
+            _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync((User)null);
 
-             // Act
-             var result = await _handler.Handle(new ForgotPasswordCommand("none@example.com"), CancellationToken.None);
+            // Act
+            var result = await _handler.Handle(new ForgotPasswordCommand("none@example.com"), CancellationToken.None);
 
-             // Assert
-             Assert.False(result.IsSuccess);
-             Assert.Equal(ResultStatusCode.NotFound, result.StatusCode);
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(ResultStatusCode.NotFound, result.StatusCode);
         }
 
         [Fact]
@@ -41,7 +40,7 @@ namespace Application.Tests.Features.Users.RegisterUser
         {
 
             // Arrange
-            var user = new User { FirstName = "Eben", LastName = "Success", Email = "aebenezer237@gmail.com"};
+            var user = new User { FirstName = "Eben", LastName = "Success", Email = "aebenezer237@gmail.com" };
             _userManagerMock.Setup(x => x.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
             _userManagerMock.Setup(x => x.GeneratePasswordResetTokenAsync(user)).ReturnsAsync("token");
             _userManagerMock.Setup(x => x.GetEmailAsync(user)).ReturnsAsync(user.Email);
@@ -53,8 +52,6 @@ namespace Application.Tests.Features.Users.RegisterUser
             Assert.True(result.IsSuccess);
             _emailServiceMock.Verify(x => x.SendEmailAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
-
-        
 
     }
 }

@@ -8,7 +8,7 @@ using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 
-using Application.Features.Listings.Queries.GetPropertyById;
+using Application.Features.Listings.Queries.GetListingById;
 
 namespace WebApi.Controllers
 {
@@ -75,19 +75,19 @@ namespace WebApi.Controllers
             return Ok(listings);
         }
         [HttpGet("{id:Guid}")]
-        public async Task<IActionResult> GetPropertyById([FromRoute] Guid id)
+        public async Task<IActionResult> GetListingById([FromRoute] Guid id)
         {
             try
             {
-                var result = await _mediator.Send(new GetPropertyById(id));
+                var result = await _mediator.Send(new GetListingByIdRequest(id));
 
                 return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(new Result<Property>(false, ResultStatusCode.BadRequest, null, ex.Message));
             }
-            }
+        }
     }
 }
