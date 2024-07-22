@@ -26,7 +26,8 @@ namespace Application.Features.Accounts.ForgotPassword.Command
                 return new Result<string>(false, ResultStatusCode.NotFound, string.Empty, "User not found or email not confirmed.");
             }
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var resetUrl = $"https://yourwebsite.com/reset-password/{token}/{user.Email}";
+            var mainResetUrl = System.Environment.GetEnvironmentVariable("RESET_PASSWORD_URL");
+            var resetUrl = $"{mainResetUrl}{token}/{user.Email}";
 
             var message = $"<p>Please reset your password by clicking <a href='{resetUrl}'>here</a>.</p>";
             await _emailService.SendEmailAsync(user.Email, "Reset Password", message);
