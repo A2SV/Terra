@@ -11,7 +11,7 @@ import Footer from "./Footer";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Navbar />
       <HeroSection />
       <div className="lg:mt-10  mt-0">
@@ -19,7 +19,7 @@ const HomePage = () => {
       </div>
 
       <div className="flex justify-center items-center lg:mx-24 mt-[50px] mb-[50px]">
-        <div className="flex flex-wrap justify-center gap-[50px]">
+        <div className="flex flex-wrap justify-center gap-[40px]  ">
           <ListingCard />
           <ListingCard />
           <ListingCard />

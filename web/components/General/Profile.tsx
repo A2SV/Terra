@@ -37,13 +37,13 @@ export function ProfilePic() {
 
   return (
     <div
-      className="relative flex justify-center"
+      className="relative flex justify-start cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Avatar alt="User settings" img="/header_image.jpg" rounded />
       {isDropdownVisible && (
-        <div className="absolute top-full mt-2 z-10 w-48 bg-white border rounded-lg shadow-lg">
+        <div className="absolute top-full mt-2 z-10 w-48 bg-white border rounded-lg shadow-lg ">
           <div className="dropdown-menu rounded-lg">
             <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-t-lg">
               <FiPlusCircle className="mr-3" /> <p className="text-[14px]"> Add Listings </p>

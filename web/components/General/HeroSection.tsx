@@ -9,9 +9,9 @@ import Link from "next/link";
 const HeroSection: React.FC = () => {
   return (
     <div className="relative mt-[100px]">
-      <div className="flex justify-center h-screen">
+      <div className="flex justify-center lg:h-screen ">
         <div className="relative rounded-3xl flex w-full h-[690px]  mx-8 ">
-          <div className="flex flex-col absolute inset-0 z-40 mx-[12%] sm:w-[40%] h-1/3 mt-[508px] md:mt-[480px] md:w-[60%] md:mx-40 lg:w-[64%] lg:ml-[80px] lg:mt-[380px]">
+          <div className="flex flex-col absolute inset-0 z-40 lg:mx-[12%] mx-[3%] sm:w-[40%] h-1/3 mt-[508px] md:mt-[480px] md:w-[60%] md:mx-40 lg:w-[64%] lg:ml-[80px] lg:mt-[380px]">
             <div className="flex w-[300px] h-[70px] bg-slate-200 rounded-t-3xl bg-opacity-80 md:w-[300px] lg:w-[290px] ">
               <Link href={""}>
                 <div className="flex justify-center items-center bg-white bg-opacity-70 w-[100px] h-[60px] rounded-t-3xl font-nunito text-lg font-semibold hover:bg-white lg:w-[90px] lg:h-[60px]">

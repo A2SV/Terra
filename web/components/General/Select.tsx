@@ -12,15 +12,12 @@ const Select = () => {
     "Apartments",
     "Hotels",
     "Hostels",
+    "House",
     "Guest House",
     "Office space",
     "Shops",
     "Event Space",
     "Warehouse",
-    "Co-working Space",
-    "Studio",
-    "Villa",
-    "Bungalow",
   ];
   const visibleItemsCount = showAll ? items.length : { lg: 9, md: 4, sm: 3 }[screenSize] || 0;
 
@@ -55,7 +52,7 @@ const Select = () => {
   };
 
   return (
-    <div className="md:mx-24 h-[120px] lg:mt-10 flex flex-col justify-between md:mt-[160px] mt-[210px]">
+    <div className="md:mx-24 h-[120px] lg:mt-10 flex flex-col justify-between md:mt-[160px] mt-[210px] px-5">
       <div>
         <p className="font-nunito text-[26px] font-bold px-5">Select from a variety of suites</p>
       </div>
