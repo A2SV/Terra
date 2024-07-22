@@ -33,6 +33,7 @@ using DotNetEnv;
 using Application.Mappings;
 using Google.Cloud.Storage.V1;
 using Infrastructure.StorageService;
+using Swashbuckle.AspNetCore.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,7 +86,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Ini
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
 
-builder.Services.AddSingleton(StorageClient.Create());
+// builder.Services.AddSingleton(StorageClient.Create());
 
 builder.Services.AddControllers();
 
@@ -97,7 +98,10 @@ builder.Services.AddApiVersioning(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    // options.OperationFilter<Swashbuckle.AspNetCore.Filters.FileUploadOperationFilter>();
+});
 
 builder.Services.AddIdentity<User, IdentityRole>();
 builder.Services.AddIdentityCore<User>()
