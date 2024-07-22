@@ -6,14 +6,14 @@ namespace Domain.Entities
 {
     public class Apartment : BaseEntity
     {
-        [ForeignKey("Property")]
-        public Guid PropertyId { get; set; }
+        [ForeignKey(nameof(ResidentialProperty))]
+        public Guid ResidentialPropertyId { get; set; }
         public int NumberOfFloorsInBuilding { get; set; }
         public int FloorNumberOfUnit { get; set; }
         public bool LaundryFacilityAvailable { get; set; }
         public bool CleaningServiceAvailable { get; set; }
         public bool StudentFriendly { get; set; }
 
-        public required ResidentialProperty Property { get; set; }
+        public ResidentialProperty ResidentialProperty { get; set; } = null!;
     }
 }

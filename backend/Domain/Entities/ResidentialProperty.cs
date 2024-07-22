@@ -5,7 +5,7 @@ namespace Domain.Entities
 {
     public class ResidentialProperty : BaseEntity
     {
-        [ForeignKey("Property")]
+        [ForeignKey(nameof(Property))]
         public Guid PropertyId { get; set; }
         public bool FurnishedStatus { get; set; }
         public int NumberOfBedrooms { get; set; }
@@ -13,6 +13,6 @@ namespace Domain.Entities
         public int NumberOfWashrooms { get; set; }
         public int NumberOfKitchens { get; set; }
 
-        public required Property Property { get; set; }
+        public Property Property { get; set; } = null!;
     }
 }

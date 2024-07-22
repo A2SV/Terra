@@ -3,23 +3,24 @@ using Application.Contracts;
 using Application.Features.Listings.Commands.Common;
 using Application.Models.ApiResult;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.CreateGuestHouseListing
+namespace Application.Features.Listings.Commands.CreateWarehouseListing
 {
-    public class CreateGuestHouseListingCommandHandler : IRequestHandler<CreateGuestHouseListingCommand, Result<GuestHouse>>
+    public class CreateWarehouseListingCommandHandler : IRequestHandler<CreateWarehouseListingCommand, Result<Warehouse>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
         private readonly IAmenityRepository _amenityRepository;
-        public CreateGuestHouseListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
+        public CreateWarehouseListingCommandHandler(IListingRepository listingRepository, IUserRepository userRepository, IAmenityRepository amenityRepository)
         {
             _listingRepository = listingRepository;
             _userRepository = userRepository;
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<GuestHouse>> Handle(CreateGuestHouseListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Warehouse>> Handle(CreateWarehouseListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -28,7 +29,7 @@ namespace Application.Features.Listings.Commands.CreateGuestHouseListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<GuestHouse>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<Warehouse>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
 
                     var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
@@ -43,36 +44,36 @@ namespace Application.Features.Listings.Commands.CreateGuestHouseListing
 
                     await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
 
-                    var residentialProperty = new ResidentialProperty
+                    var commercialProperty = new CommercialProperty
                     {
                         PropertyId = property.Id,
-                        FurnishedStatus = request.FurnishedStatus,
-                        NumberOfBedrooms = request.NumberOfBedrooms,
-                        NumberOfBathrooms = request.NumberOfBathrooms,
-                        NumberOfWashrooms = request.NumberOfWashrooms,
-                        NumberOfKitchens = request.NumberOfKitchens
+                        TotalFloors = request.TotalFloors,
+                        ParkingSpace = request.ParkingSpace,
+                        FloorNumber = request.FloorNumber
                     };
                     
-                    await _listingRepository.AddPropertyAsync(residentialProperty);
+                    await _listingRepository.AddPropertyAsync(commercialProperty);
 
-                    var guestHouse = new GuestHouse
+                    var warehouse = new Warehouse
                     {
-                        ResidentialPropertyId = residentialProperty.Id,
-                        StarRating = request.StarRating,
-                        RestaurantOnSite = request.RestaurantOnSite
+                        CommercialPropertyId = commercialProperty.Id,
+                        CeilingHeight = request.CeilingHeight,
+                        LoadingDockAvailable = request.LoadingDockAvailable,
+                        OfficeSpaceAvailable = request.OfficeSpaceAvailable,
+                        SuitableGoods = request.SuitableGoods
                     };
 
-                    await _listingRepository.AddPropertyAsync(guestHouse);
+                    await _listingRepository.AddPropertyAsync(warehouse);
 
                     await _listingRepository.SaveChangesAsync();
-                    
+
                     scope.Complete();
 
-                    return new Result<GuestHouse>(true, ResultStatusCode.Success, guestHouse, "Guest house created successfully");
+                    return new Result<Warehouse>(true, ResultStatusCode.Success, warehouse, "Warehouse created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<GuestHouse>(false, ResultStatusCode.ServerError, null, $"Error in creating guest house: {ex.Message}");
+                    return new Result<Warehouse>(false, ResultStatusCode.ServerError, null, $"Error in creating warehouse: {ex.Message}");
                 }
 
             }

@@ -4,9 +4,9 @@ using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 
-namespace Application.Features.Listings.Commands.InitiateCreateListing
+namespace Application.Features.Listings.Commands.Common
 {
-    public class InitiateCreateListingCommand : IRequest<Result<Property>>
+    public class InitiateCreateListingCommand
     {
         [Required]
         public string ListerId { get; set; } = null!;
@@ -41,7 +41,7 @@ namespace Application.Features.Listings.Commands.InitiateCreateListing
         public double Longitude { get; set; }
         [Required, Range(-180, 180, ErrorMessage = "Latitude must be between -180 and 180.")]
         public double Latitude { get; set; }
-        // public List<PropertyAmenity>? Amenities { get; set; }
+        public List<string>? Amenities { get; set; }
         // public List<string>? Images { get; set; }
         // public List<string>? Videos { get; set; }
     }

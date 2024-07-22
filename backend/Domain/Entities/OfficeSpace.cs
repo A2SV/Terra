@@ -6,12 +6,12 @@ namespace Domain.Entities
 {
     public class OfficeSpace : BaseEntity
     {
-        [ForeignKey("Property")]
-        public Guid PropertyId { get; set; }
+        [ForeignKey(nameof(CommercialProperty))]
+        public Guid CommercialPropertyId { get; set; }
         public OfficeSpaceType OfficeSpaceType { get; set; }
         public bool MeetingRoomsAvailable { get; set; }
         public bool ReceptionAreaAvailable { get; set; }
 
-        public required CommercialProperty Property { get; set; }
+        public CommercialProperty CommercialProperty { get; set; } = null!;
     }
 }

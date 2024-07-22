@@ -36,6 +36,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   mocktail: ^1.0.4
   syncfusion_flutter_sliders: ^26.1.42
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   bloc_test: ^9.1.7
