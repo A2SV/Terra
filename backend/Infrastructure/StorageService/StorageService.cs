@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using Application.Contracts;
 using Microsoft.AspNetCore.Http;
 using Application.Contracts;
+using Google.Apis.Auth.OAuth2;
 
 namespace Infrastructure.StorageService;
 
 public class StorageService : IStorageService
 {
+    private readonly GoogleCredential googleCredential;
     private readonly StorageClient _storageClient;
     private readonly string _bucketName;
     private readonly string _profileImagesFolder;
@@ -19,7 +21,8 @@ public class StorageService : IStorageService
 
     public StorageService()
     {
-        _storageClient = StorageClient.Create();
+        googleCredential = GoogleCredential.FromJson(System.Environment.GetEnvironmentVariable("terra-427922-ae51e66636d9.json"));
+        _storageClient = StorageClient.Create(googleCredential);
         _bucketName = System.Environment.GetEnvironmentVariable("Bucket_Name");
         _profileImagesFolder = System.Environment.GetEnvironmentVariable("ProfileImagesFolder");
         _propertyImagesFolder = System.Environment.GetEnvironmentVariable("PropertyImagesFolder");

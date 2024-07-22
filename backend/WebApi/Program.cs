@@ -31,6 +31,8 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using DotNetEnv;
 using Application.Mappings;
+using Google.Cloud.Storage.V1;
+using Infrastructure.StorageService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,6 +66,7 @@ builder.Services.AddScoped<IOTPService, OTPService>();
 builder.Services.AddScoped<IOTPRepository, OTPRepository>();
 builder.Services.AddScoped<IListingRepository, ListingRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
+builder.Services.AddScoped<IStorageService, StorageService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));
@@ -81,6 +84,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cre
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
+
+builder.Services.AddSingleton(StorageClient.Create());
 
 builder.Services.AddControllers();
 
