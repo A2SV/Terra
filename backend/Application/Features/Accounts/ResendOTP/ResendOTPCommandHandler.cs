@@ -50,7 +50,7 @@ namespace Application.Features.Accounts.ResendOTP
             };
 
             await _otpRepository.UpdateOtpEntryAsync(otpEntry);
-            //await _otpService.SendOtpEmailAsync(user.Email, otp);
+            await _otpService.SendOtpEmailAsync(user.Email, otp);
 
             return new Result(true, ResultStatusCode.Success, "OTP has been resent successfully.");
 
