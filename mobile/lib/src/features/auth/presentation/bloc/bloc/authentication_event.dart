@@ -23,3 +23,17 @@ class AuthenticationRegisterUserEvent extends AuthenticationEvent {
   });
   
 }
+
+
+class LoginUserEvent extends AuthenticationEvent{
+  final String username;
+  final String password;
+
+  LoginUserEvent({
+    required this.username,
+    required this.password
+  });
+
+  @override
+  List<Object> get props=>[username,password];
+}

@@ -10,8 +10,8 @@ class LoginUseCase extends UseCase<LoginReturn,LoginParams> {
   LoginUseCase(this._authRepository,);
   final AuthRepository _authRepository;
   @override
-  Future<Either<Failure, LoginReturn>> call(LoginParams params){
-    return _authRepository.login(params.email, params.password);
+  Future<Either<Failure, LoginReturn>> call(LoginParams params)async{
+    return await _authRepository.login(params.email, params.password);
   }
 }
 

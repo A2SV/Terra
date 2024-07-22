@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mobile/src/core/network/network_info.dart';
@@ -12,31 +14,33 @@ import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_b
 final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
+  await Hive.initFlutter();
+  await Hive.openBox('userData');
+
   //App Logic
   sl
+  ..registerLazySingleton<Box>(
+    ()=>Hive.box('userData')
+  )
     ..registerFactory(
         () => AuthenticationBloc(registerWithEmailPasswordUseCase: sl()))
 
     //UseCases
     ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
 
- 
     //Repository
     ..registerLazySingleton<AuthRepository>(
         () => AuthRepositoryImpl(remoteDataSource: sl(), network: sl()))
 
-       // Internet Connection
+    // Internet Connection
     ..registerLazySingleton(() => NetworkImpl(sl()))
 
-
     //DataSources
-    
+
     ..registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImpl(sl()))
 
     //External dependencies
     ..registerLazySingleton(InternetConnectionChecker.new)
-
     ..registerLazySingleton(http.Client.new);
-    
 }
