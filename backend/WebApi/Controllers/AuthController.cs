@@ -80,7 +80,6 @@ namespace WebApi.Controllers
 
                 var command = new ResetPasswordCommand(
                     resetPasswordDto.Email,
-                    resetPasswordDto.Token,
                     resetPasswordDto.NewPassword,
                     resetPasswordDto.ConfirmPassword
                 );
