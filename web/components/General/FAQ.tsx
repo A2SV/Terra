@@ -7,6 +7,13 @@ const FAQ = () => {
   return (
     <div className="w-screen h-auto flex justify-center mt-5 ">
       <div className="w-10/12 lg:w-9/12 flex flex-col lg:flex-row">
+        <div className="order-1 lg:order-2 w-full lg:w-1/2 px-10 mb-20 lg:mb-0">
+          <p className="text-xs text-terrablue font-montserrat mb-3">Got Questions</p>
+          <h1 className="font-montserrat font-semibold text-gray-700 text-xl md:text-3xl mb-5">
+            Frequently Asked Questions
+          </h1>
+          <Image className="w-11/12" src={FAQImage} alt="Woman thinking about a question" />
+        </div>
         <div className="order-2 lg:order-2 divide-y space-y-2 flex flex-col border w-full lg:w-1/2">
           <Accordion
             title="What types of properties can I list on Terra?"
@@ -32,13 +39,6 @@ const FAQ = () => {
             title="Is there a fee for listing a property on Terra?"
             answer="No, currently there is no fee for listing a property on Terra. You can list your properties for free."
           />
-        </div>
-        <div className="order-1 lg:order-2 w-full lg:w-1/2 px-10 mb-20 lg:mb-0">
-          <p className="text-xs text-terrablue font-montserrat mb-3">Got Questions</p>
-          <h1 className="font-montserrat font-semibold text-gray-700 text-xl md:text-3xl mb-5">
-            Frequently Asked Questions
-          </h1>
-          <Image className="w-11/12" src={FAQImage} alt="Woman thinking about a question" />
         </div>
       </div>
     </div>
