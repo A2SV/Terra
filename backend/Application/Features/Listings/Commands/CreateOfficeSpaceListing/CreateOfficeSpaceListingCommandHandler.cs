@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
 {
-    public class CreateOfficeSpaceListingCommandHandler : IRequestHandler<CreateOfficeSpaceListingCommand, Result<Property>>
+    public class CreateOfficeSpaceListingCommandHandler : IRequestHandler<CreateOfficeSpaceListingCommand, Result<OfficeSpace>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IUserRepository _userRepository;
@@ -20,7 +20,7 @@ namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
             _amenityRepository = amenityRepository;
         }
 
-        public async Task<Result<Property>> Handle(CreateOfficeSpaceListingCommand request, CancellationToken cancellationToken)
+        public async Task<Result<OfficeSpace>> Handle(CreateOfficeSpaceListingCommand request, CancellationToken cancellationToken)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -29,11 +29,34 @@ namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
                     var listerId = request.ListerId.ToString();
                     var user = await _userRepository.GetUserByIdAsync(listerId);
                     if (user == null) {
-                        return new Result<Property>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
+                        return new Result<OfficeSpace>(false, ResultStatusCode.NotFound, null, "Lister of property not found");
                     }
+
+                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
+                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
+
+                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
+                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
+
+                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation);
+
+                    await _listingRepository.AddPropertyAsync(property);
+
+                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
+
+                    var commercialProperty = new CommercialProperty
+                    {
+                        PropertyId = property.Id,
+                        TotalFloors = request.TotalFloors,
+                        ParkingSpace = request.ParkingSpace,
+                        FloorNumber = request.FloorNumber
+                    };
+                    
+                    await _listingRepository.AddPropertyAsync(commercialProperty);
 
                     var officeSpace = new OfficeSpace
                     {
+                        CommercialPropertyId = commercialProperty.Id,
                         OfficeSpaceType = request.OfficeSpaceType,
                         MeetingRoomsAvailable = request.MeetingRoomsAvailable,
                         ReceptionAreaAvailable = request.ReceptionAreaAvailable,
@@ -41,37 +64,15 @@ namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
 
                     await _listingRepository.AddPropertyAsync(officeSpace);
 
-                    var commercialProperty = new CommercialProperty
-                    {
-                        SubTypeId = officeSpace.Id,
-                        TotalFloors = request.TotalFloors,
-                        ParkingSpace = request.ParkingSpace,
-                        FloorNumber = request.FloorNumber
-                    };
-
-                    var propertyLocation = InitiateCreateListingCommandHandler.CreatePropertyLocation(request);
-                    var paymentInformation = InitiateCreateListingCommandHandler.CreatePaymentInformation(request);
-
-                    await _listingRepository.AddPropertyLocationAsync(propertyLocation);
-                    await _listingRepository.AddPaymentInformationAsync(paymentInformation);
-                    await _listingRepository.AddPropertyAsync(commercialProperty);
-
-
-                    var property = InitiateCreateListingCommandHandler.CreateProperty(request, listerId, propertyLocation, paymentInformation, commercialProperty: commercialProperty);
-
-                    await _listingRepository.AddPropertyAsync(property);
-
-                    await InitiateCreateListingCommandHandler.AddAmenitiesAsync(_amenityRepository, request, property);
-
                     await _listingRepository.SaveChangesAsync();
                     
                     scope.Complete();
 
-                    return new Result<Property>(true, ResultStatusCode.Success, property, "Office space created successfully");
+                    return new Result<OfficeSpace>(true, ResultStatusCode.Success, officeSpace, "Office space created successfully");
                 }
                 catch (Exception ex)
                 {
-                    return new Result<Property>(false, ResultStatusCode.ServerError, null, $"Error in creating Office space: {ex.Message}");
+                    return new Result<OfficeSpace>(false, ResultStatusCode.ServerError, null, $"Error in creating Office space: {ex.Message}");
                 }
 
             }
