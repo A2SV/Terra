@@ -16,7 +16,7 @@ public class FileController : ControllerBase
     }
 
     [HttpPost("upload")]
-    public async Task<IActionResult> UploadFile([FromForm] IFormFile file, [FromQuery] string fileType)
+    public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string fileType)
     {
         if (file == null || file.Length == 0)
             return BadRequest("File is empty");
