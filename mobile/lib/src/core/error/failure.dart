@@ -1,6 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable{
+class APIFailure extends Failure {
+  const APIFailure(super.message);
+}
+
+abstract class Failure extends Equatable {
   final String message;
   const Failure(this.message);
 
@@ -8,18 +12,22 @@ abstract class Failure extends Equatable{
   List<Object> get props => [message];
 }
 
-class APIFailure extends Failure{
-  const APIFailure(super.message);
+class LoginFailure extends Failure {
+  const LoginFailure(super.message);
 }
-class NetworkFailure extends Failure{
+
+class NetworkFailure extends Failure {
   const NetworkFailure(super.message);
 }
 
-class ServerFailure extends Failure{
-  ServerFailure(super.message);
+class OTPFailure extends Failure {
+  const OTPFailure(super.message);
 }
 
+class ResendOTPFailure extends Failure {
+  const ResendOTPFailure(super.message);
+}
 
-class LoginFailure extends Failure{
-  LoginFailure(super.message);
+class ServerFailure extends Failure {
+  const ServerFailure(super.message);
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
-import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
@@ -18,7 +17,7 @@ class _DashBoardState extends State<DashBoard> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Dashboard"),
+          const Text("Dashboard"),
           ElevatedButton(
               onPressed: () async {
                 final Box userBox = sl();
@@ -28,7 +27,7 @@ class _DashBoardState extends State<DashBoard> {
                 print('logged in ? ${userBox.get('isLoggedIn')}');
                 Navigator.pushReplacementNamed(context, '/signin');
               },
-              child: Text('Logout')),
+              child: const Text('Logout')),
         ],
       ),
     ));
