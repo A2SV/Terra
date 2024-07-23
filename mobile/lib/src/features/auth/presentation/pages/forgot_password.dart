@@ -19,8 +19,8 @@ bool passwordVisibility = true;
 TextEditingController passwordController1 = TextEditingController();
 bool passwordVisibility1 = true;
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with SingleTickerProviderStateMixin {
-
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                       Icons.arrow_back,
                       size: 7.w,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ],
               ),
@@ -53,8 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                         margin: EdgeInsets.fromLTRB(2.w, 0, 2.w, 0),
                         child: PageIndicator(
                           width: 10.w,
-                          color: AppCommonColors.mainBlueButton
-                          ,
+                          color: AppCommonColors.mainBlueButton,
                         ),
                       ),
                       Container(
@@ -88,7 +89,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                   'assets/images/mail.png',
                   width: 23.w,
                   height: 23.w,
-
                 ),
               ),
               Container(
@@ -97,7 +97,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                 child: Text(
                   'Forgot Password?',
                   style: CustomTextStyles.kDefaultTextTheme(
-                      AppCommonColors.defaultLink)
+                          AppCommonColors.defaultLink)
                       .displayMedium,
                 ),
               ),
@@ -106,17 +106,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                   margin: EdgeInsets.all(1.h),
                   alignment: Alignment.center,
                   width: 85.w,
-
                   child: Center(
-                    child:Text(
+                    child: Text(
                       'Forgot your password?  Reset it now and get back to the Terra family!',
                       style: CustomTextStyles.kDefaultTextTheme(
-                          AppCommonColors.signInWithGoogleBgnd)
+                              AppCommonColors.signInWithGoogleBgnd)
                           .bodyMedium,
                       textAlign: TextAlign.center,
                     ),
-                  )
-              ),
+                  )),
               SizedBox(
                 height: 2.h,
               ),
@@ -145,11 +143,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                         ),
                       ),
                       hintStyle: CustomTextStyles.kDefaultTextTheme(
-                          AppCommonColors.textFieldTextColor)
+                              AppCommonColors.textFieldTextColor)
                           .bodyMedium,
                       contentPadding: EdgeInsets.symmetric(vertical: 5.w),
                       style: CustomTextStyles.kDefaultTextTheme(
-                          AppCommonColors.textFieldTextColor)
+                              AppCommonColors.textFieldTextColor)
                           .bodyMedium,
                     )),
               ),
@@ -157,7 +155,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                 key: const Key('button'),
                 width: 100.w,
                 child: CustomButton(
-                  onPressed: (){},
+                  onPressed: () {},
                   backgroundColor: AppCommonColors.mainBlueButton,
                   text: 'Continue',
                   borderColor: AppCommonColors.mainBlueButton,

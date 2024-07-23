@@ -98,12 +98,17 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
                 SizedBox(height: 3.h),
-                Text(
-                  "Forgot password?",
-                  style: TextStyle(
-                    fontSize: 15.sp,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/forgot-password'); 
+                  },
+                  child: Text(
+                    "Forgot password?",
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                    ),
+                    textAlign: TextAlign.end,
                   ),
-                  textAlign: TextAlign.end,
                 ),
                 SizedBox(height: 5.h),
                 CustomButton(
