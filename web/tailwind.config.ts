@@ -25,6 +25,13 @@ const config = {
     },
     extend: {
       colors: {
+        breadCrumb: "#6C757D",
+        listBlue: "#409FFF",
+        terraGreen: "#34C37A",
+        lightGray: "#636363",
+        listingBlack: "#222222",
+        listingGray: "rgba(0, 0, 0, 0.65)",
+        terraLemon: "rgba(119, 199, 32, 1)",
         terrablue: "#1779F3",
         terrapurple: "#605DEC14",
         terragray: "#3A3A3A99",
@@ -57,6 +64,7 @@ const config = {
         pops: ["Poppins", "sans-serif", "Arial"],
         nunito: ["Nunito Sans", "sans-serif"],
         imCanon: ['"IM Fell French Canon"', "serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
