@@ -148,7 +148,7 @@ namespace Persistence.Repositories
             var totalPages = (int)Math.Ceiling(count / (double)pageSize);
 
 
-            return new PaginatedList<Property>(properties, pageIndex, totalPages);
+            return  new PaginatedList<Property>(properties, pageIndex, totalPages);
             }
 
     }
