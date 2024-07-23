@@ -136,7 +136,7 @@ namespace Persistence.Repositories
                     .Select(x => x.Property);
             }
 
-                var count = await query.CountAsync();
+            var count = await query.CountAsync();
 
 
             var properties = await query
