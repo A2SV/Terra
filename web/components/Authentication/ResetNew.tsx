@@ -3,6 +3,7 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import SuccessMessage from "../Common/Reusable/SuccessMessage";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import AuthButton from "../Common/Auth/AuthButton";
 
 interface ResetNewProps {
   email: string;
@@ -42,7 +43,7 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
 
         setTimeout(() => {
           setSuccessMessage("");
-          router.push("/");
+          router.push("/auth");
         }, 1000);
       } else {
         try {
@@ -52,7 +53,7 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
 
           setTimeout(() => {
             setSuccessMessage("");
-            router.push("reset-success");
+            router.push("/auth");
           }, 1000);
         } catch (error: any) {
           setError(error.message);
@@ -64,7 +65,7 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const resetPasswordApi = async () => {
     try {
-      const response = await axios({
+      await axios({
         method: "POST",
         url: `${baseUrl}/auth/reset-password`,
         data: {
@@ -77,7 +78,11 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
           "Content-Type": "application/json",
         },
       });
-      setSuccessMessage(response.data.msg);
+
+      setTimeout(() => {
+        setSuccessMessage("");
+        router.push("/auth");
+      }, 1000);
     } catch (error: any) {
       setError(error.response.data.message || "Failed to reset password");
       setLoading(false);
@@ -137,17 +142,9 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
             </div>
           </div>
 
-          <button
-            className="w-full md:w-4/12 flex justify-center items-center bg-terrablue rounded-full mt-10 py-3 px-6 text-white text-sm"
-            type="submit"
-            onClick={handlePasswordReset}
-          >
-            {loading ? (
-              <div className="h-6 w-6 border-2 border-t-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-            ) : (
-              "Set new password"
-            )}
-          </button>
+          <div>
+            <AuthButton loading={loading} text="Set new password" action={handlePasswordReset} />
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import HamburgerMenu from "./Hamburger";
 import { ProfilePic } from "./Profile";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState("Home");
@@ -54,9 +55,11 @@ const Navbar = () => {
                 width={40}
                 className="object-cover"
               />
-              <p className="lg:flex hidden items-center px-4 font-nunito">
-                Login <span className="text-[20px] pl-3"> &#124;</span>
-              </p>
+              <Link href="/auth">
+                <p className="lg:flex hidden items-center px-4 font-nunito">
+                  Login <span className="text-[20px] pl-3"> &#124;</span>
+                </p>
+              </Link>
             </div>
           )}
 

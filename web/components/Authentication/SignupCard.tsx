@@ -94,8 +94,12 @@ const SignUpCard: React.FC = () => {
       try {
         const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "auth/register";
         const res = await axios.post(baseUrl, user);
-
         setSuccess(res.data.message);
+
+        setTimeout(() => {
+          setSuccess("");
+          window.location.reload();
+        }, 1000);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           setMessage(
@@ -228,7 +232,7 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="lower-section font-nunito w-full flex flex-col items-center text-sm space-y-3">
-            <AuthButton loading={loading} text="Login" action={handleSubmit} />
+            <AuthButton loading={loading} text="Register" action={handleSubmit} />
             <p className="font-sans font-normal text-sm">or</p>
 
             <button
