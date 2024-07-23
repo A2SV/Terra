@@ -33,8 +33,8 @@ class CustomValidator {
   }
 
   static String? validatePassword(String password) {
-    if (password.trim().isEmpty || password.trim().length < 6) {
-      return 'Password length should be greater than 6';
+    if (password.trim().isEmpty || password.trim().length < 10) {
+      return 'Password length should be greater than 9 characters';
     }
 
     if (!password.trim().contains(RegExp(r'[a-zA-Z]'))) {
