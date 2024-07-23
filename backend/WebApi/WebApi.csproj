@@ -10,6 +10,8 @@
     <ItemGroup>
         <PackageReference Include="DotNetEnv" Version="3.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters.Abstractions" Version="8.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
       <_ContentIncludedByDefault Remove="appsettings.json" />
     </ItemGroup>
 

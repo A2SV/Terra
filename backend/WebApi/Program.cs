@@ -100,7 +100,7 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    // options.OperationFilter<Swashbuckle.AspNetCore.Filters.FileUploadOperationFilter>();
+    // options.OperationFilter<Swashbuckle.AspNetCore.Filters.FileUploadFilter>();
 });
 
 builder.Services.AddIdentity<User, IdentityRole>();
