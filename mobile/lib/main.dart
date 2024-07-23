@@ -33,7 +33,7 @@ class MainApp extends StatelessWidget {
         return BlocProvider(
           create: (context) => sl<AuthenticationBloc>(),
           child: MaterialApp(
-            initialRoute: '/listing-detail',
+            initialRoute: '/',
             routes: {
               '/': (context) => const OnboardingScreen(),
               '/signup': (context) => const SignUpPage(),
@@ -41,7 +41,7 @@ class MainApp extends StatelessWidget {
               "/otp": (context) => const OTPage(),
               '/password-reset': (context) => const PasswordResetScreen(),
               '/forgot-password': (context) => const ForgotPasswordScreen(),
-              '/dashboard': (context) => const HomePage(),
+              '/dashboard': (context) => const DashBoard(),
               '/listing-detail': (context) => const ListingDetail(),
               '/identify-student-identity': (context) =>
                   const IdentifyStudent(),
@@ -50,7 +50,7 @@ class MainApp extends StatelessWidget {
             darkTheme: ThemeConfig().darkTheme,
             theme: ThemeConfig().lightTheme,
             themeMode: ThemeMode.light,
-          ),
+          ), // checking if there's a change
         );
       },
     );

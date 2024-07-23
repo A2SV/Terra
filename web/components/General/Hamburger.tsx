@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Avatar } from "flowbite-react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: session } = useSession();
+  const userIsLoggedIn = !!session;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -53,10 +58,25 @@ const HamburgerMenu = () => {
             </button>
             <ul className="mt-2 space-y-2 bg-gray-100">
               <li className="px-4 py-2 rounded-md">
-                <div className="flex flex-row">
-                  <Avatar img="/header_image.jpg" alt="avatar of Jese" rounded />
-                  <p className="flex items-center px-4">Daniel Shimelis</p>
-                </div>
+                {userIsLoggedIn ? (
+                  <div className="flex flex-row">
+                    <Avatar img="/header_image.jpg" alt="avatar of Jese" rounded />
+                    <p className="flex  items-center px-4 font-nunito">
+                      Daniel Shimelis <span className="text-[20px] pl-3"> &#124;</span>
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-row">
+                    <Image
+                      src="/profilePic.svg"
+                      alt="login"
+                      height={40}
+                      width={40}
+                      className="object-cover"
+                    />
+                    <p className="flex  items-center px-4 font-nunito text-terrablue">Login</p>
+                  </div>
+                )}
               </li>
               <li className="px-4 py-2 rounded-md">Home</li>
               <li className="px-4 py-2 rounded-md">Search</li>
@@ -64,7 +84,7 @@ const HamburgerMenu = () => {
               <li className="px-4 py-2 rounded-md">About us</li>
               <li className="px-4 py-2  rounded-md">Contact us</li>
               <li className="px-4 py-2 rounded-md">
-                <button className="bg-[#1779F3] text-white font-semibold text-[13px] px-7 py-3 rounded-[25px]">
+                <button className="bg-terrablue text-white font-semibold text-[13px] px-7 py-3 rounded-[25px]">
                   Custom Listing
                 </button>
               </li>

@@ -14,3 +14,12 @@ class APIFailure extends Failure{
 class NetworkFailure extends Failure{
   const NetworkFailure(super.message);
 }
+
+class ServerFailure extends Failure{
+  ServerFailure(super.message);
+}
+
+
+class LoginFailure extends Failure{
+  LoginFailure(super.message);
+}
