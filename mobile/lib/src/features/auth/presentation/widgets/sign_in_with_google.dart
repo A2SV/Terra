@@ -16,7 +16,7 @@ class SignInWithGoogleBtn extends StatelessWidget {
       onPressed: onPressed,
       showSuffixWidget: true,
       suffixWidget:
-          SvgPicture.asset('assets/svg/google.svg').rightPadding(16.0),
+          SvgPicture.asset('assets/svg/google.svg').leftPadding(16.0),
       backgroundColor: AppCommonColors.signInWithGoogleBgnd.withOpacity(0.1),
       borderColor: AppCommonColors.mainBlueButton,
       horizontalPadding: 20.w,
