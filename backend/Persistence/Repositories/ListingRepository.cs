@@ -14,7 +14,7 @@ namespace Persistence.Repositories
         {
             _context = context;
         }
-        
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync(CancellationToken.None);
@@ -41,7 +41,7 @@ namespace Persistence.Repositories
             return paymentInformation;
         }
 
-        public async Task<PaginatedList<Property>> GetAllListings(int pageIndex,int pageSize)
+        public async Task<PaginatedList<Property>> GetAllListings(int pageIndex, int pageSize)
         {
 
             IQueryable<Property> query = _context.Properties;
@@ -90,11 +90,11 @@ namespace Persistence.Repositories
                 {
                     query = query.Where(p => (int)p.PropertyType % 2 != 0);
                 }
-            
 
-            if (!string.IsNullOrEmpty(subType) && Enum.TryParse<PropertyType>(subType , out var  parsedSubType))
+
+            if (!string.IsNullOrEmpty(subType) && Enum.TryParse<PropertyType>(subType, out var parsedSubType))
             {
-                query = query.Where (x => x.PropertyType == parsedSubType);
+                query = query.Where(x => x.PropertyType == parsedSubType);
 
             }
 
@@ -104,15 +104,16 @@ namespace Persistence.Repositories
                     Include(p => p.PaymentInformation)
                     .Where(x => (!minPrice.HasValue || x.PaymentInformation.Cost >= minPrice.Value) &&
                                 (!maxPrice.HasValue || x.PaymentInformation.Cost <= maxPrice.Value));
-                    
+            }
+
 
 
             if (!string.IsNullOrEmpty(subType) && Enum.TryParse<PaymentFrequency>(paymentFrequency, out var parsedPaymentFrequency))
             {
-                    query = query.
-                            Include(p => p.PaymentInformation)
-                            .Where(x => x.PaymentInformation.PaymentFrequency == parsedPaymentFrequency);
-     
+                query = query.
+                        Include(p => p.PaymentInformation)
+                        .Where(x => x.PaymentInformation.PaymentFrequency == parsedPaymentFrequency);
+
 
             }
 
@@ -135,16 +136,7 @@ namespace Persistence.Repositories
                     .Select(x => x.Property);
             }
 
-
-
-
-
-
-
-
-
-
-                var count = await query.CountAsync();
+            var count = await query.CountAsync();
 
 
             var properties = await query
@@ -157,7 +149,8 @@ namespace Persistence.Repositories
 
 
             return new PaginatedList<Property>(properties, pageIndex, totalPages);
-        }
+            }
 
     }
 }
+
