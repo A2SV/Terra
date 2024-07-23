@@ -17,7 +17,7 @@ class _DashBoardState extends State<DashBoard> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Dashboard"),
+          const Text("Dashboard"),
           ElevatedButton(
               onPressed: () async {
                 final Box userBox = sl();
@@ -27,7 +27,7 @@ class _DashBoardState extends State<DashBoard> {
                 print('logged in ? ${userBox.get('isLoggedIn')}');
                 Navigator.pushReplacementNamed(context, '/signin');
               },
-              child: Text('Logout')),
+              child: const Text('Logout')),
         ],
       ),
     ));

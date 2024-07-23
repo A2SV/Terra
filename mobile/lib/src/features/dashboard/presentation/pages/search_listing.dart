@@ -178,7 +178,6 @@ class _SearchListingPageState extends State<SearchListingPage> {
   @override
   void initState() {
     super.initState();
-    Widget recent = Container();
     _focusNode.addListener(_onFocusChange);
     _loadCachedTexts();
   }
@@ -208,9 +207,6 @@ class _SearchListingPageState extends State<SearchListingPage> {
         ),
       );
     }
-
-    for (String item in items) {}
-
     return Container(
       margin: EdgeInsets.all(4.5.w),
       child: Column(

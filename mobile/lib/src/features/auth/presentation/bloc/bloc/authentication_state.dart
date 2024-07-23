@@ -27,7 +27,6 @@ final class RegisterUserSuccess extends AuthenticationSuccess{
 }
 
 
-
 class Empty extends AuthenticationState{}
 
 class Initial extends AuthenticationState{
