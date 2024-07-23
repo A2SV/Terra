@@ -65,7 +65,7 @@ class _CustomButtonState extends State<CustomButton>
       onTapCancel: () {
         _animationController.reverse();
       },
-      onTap: widget.onPressed,
+      onTap: widget.disabled == true ? null : widget.onPressed,
       child: AnimatedBuilder(
         animation: _scaleAnimation,
         builder: (BuildContext context, Widget? child) {
@@ -100,21 +100,22 @@ class _CustomButtonState extends State<CustomButton>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (widget.showSuffixWidget == true &&
-                    widget.suffixWidget != null)
-                  widget.suffixWidget!,
+                if (widget.showPrefixWidget == true &&
+                    widget.prefixWidget != null)
+                  widget.prefixWidget!,
                 Text(
                   widget.text,
                   style: widget.textStyle ??
                       context.textTheme.bodyMedium!.copyWith(
                         fontSize: 16.sp,
-                        color: widget.textColor ?? context.colorScheme.onPrimary,
+                        color:
+                            widget.textColor ?? context.colorScheme.onPrimary,
                         fontWeight: FontWeight.w400,
                       ),
                 ),
-                if (widget.showPrefixWidget == true &&
-                    widget.prefixWidget != null)
-                  widget.prefixWidget!,
+                if (widget.showSuffixWidget == true &&
+                    widget.suffixWidget != null)
+                  widget.suffixWidget!,
               ],
             ),
           ),

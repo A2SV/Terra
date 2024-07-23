@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between my-10">
             <div className="flex-row justify-between">
               <Image className="pb-4" src="/terra_black.png" alt="Logo" height={90} width={126} />
-              <p>
+              <p className=" text-[14px] text-gray-400">
                 We are a dedicated team of agents ready, <br /> to give you the best deals on
                 properties for <br /> sale, rent or lease
               </p>
@@ -45,24 +45,24 @@ const Footer = () => {
             {/* Menu */}
             <div className="">
               <h3 className="text-lg font-bold pb-7">Menu</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-4">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Search
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Contact Us
                   </a>
                 </li>
@@ -72,24 +72,24 @@ const Footer = () => {
             {/* Socials */}
             <div>
               <h3 className="text-lg font-bold pb-7">Social</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-4">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Facebook
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Twitter
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 text-[18px]">
                     Youtube
                   </a>
                 </li>
@@ -98,24 +98,27 @@ const Footer = () => {
             {/* Contact */}
             <div className="lg:my-0">
               <h3 className="text-lg font-bold pb-7">Contact</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-4">
                 <li>
                   <a
                     href="mailto:info@example.com"
-                    className="text-gray-400 hover:text-blue-500 flex"
+                    className="text-gray-400 hover:text-blue-500 flex text-[18px]"
                   >
                     <RxEnvelopeClosed className="mr-2" />
                     terra@gmail.com
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+15551234567" className="text-gray-400 hover:text-blue-500 flex">
+                  <a
+                    href="tel:+15551234567"
+                    className="text-gray-400 hover:text-blue-500 flex text-[18px]"
+                  >
                     <FiPhone className="mr-2" />
                     terra_company
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-blue-500 flex">
+                  <a href="#" className="text-gray-400 hover:text-blue-500 flex text-[18px]">
                     <CiLocationOn className="mr-2" /> American House, Accra
                   </a>
                 </li>

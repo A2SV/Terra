@@ -61,6 +61,7 @@ namespace Application.Features.Accounts.RegisterUser
                 Expiry = DateTime.UtcNow.AddSeconds(120)
             };
             await _otpRepository.AddOtpEntryAsync(otpEntry);
+
             // await _otpService.SendOtpEmailAsync(newUser.Email, otp);
 
             return new Result<User>(true, ResultStatusCode.Created, newUser, "Registration successful");
