@@ -32,4 +32,6 @@ class OTPLoading extends OTPState {}
 
 class OTPSuccess extends OTPState {}
 
+class OTPResendLoading extends OTPState {}
+
 class ResendOTPSuccess extends OTPState {}

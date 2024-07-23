@@ -39,7 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       //final Box userBox=await Hive.openBox('userData');
-      //await userBox.put('isLoggedIn', true);
+      //await userBox.put('isLoggedIn',   true);
       print(response.body);
       return Right(UserModel(username: username, password: password));
     } else if (response.statusCode == 400) {

@@ -21,10 +21,10 @@ class OTPBloc extends Bloc<OTPEvent, OTPState> {
   }
 
   void _resendOtp(ResendOTP event, Emitter<OTPState> emit) async {
-    emit(OTPLoading());
+    emit(OTPResendLoading());
     final Either<Failure, OTPSent> result =
         await resendOtpUseCase(OTPResendParams(email: event.email));
-    Future.delayed(const Duration(seconds: 2));
+
     emit(result.fold(
       (failure) => const ResendOTPFailure(message: 'failure'),
       (oTPMatched) => ResendOTPSuccess(),
@@ -35,7 +35,7 @@ class OTPBloc extends Bloc<OTPEvent, OTPState> {
     emit(OTPLoading());
     final Either<Failure, OTPMatched> result =
         await otpUseCase(OTPParams(code: event.code, email: event.email));
-    Future.delayed(const Duration(seconds: 2));
+
     emit(result.fold(
       (failure) => const OTPFailure(message: 'failure'),
       (oTPMatched) => OTPSuccess(),

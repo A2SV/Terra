@@ -55,7 +55,7 @@ class MainApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-            initialRoute: '/otp',
+            initialRoute: '/',
             routes: {
               '/': (context) => const OnboardingScreen(),
               '/signup': (context) => const SignUpPage(),

@@ -5,16 +5,18 @@ import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class OTPage extends StatelessWidget {
   const OTPage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final pinController = TextEditingController();
+    final registerState = context.read<AuthenticationBloc>().state;
 
     return BlocConsumer<OTPBloc, OTPState>(listener: (context, state) {
       if (state is OTPFailure) {
@@ -129,26 +131,41 @@ class OTPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                (state is OTPLoading)
-                    ? const CircularProgressIndicator()
-                    : CustomButton(
-                        horizontalPadding: 0,
-                        text: 'Verify',
-                        onPressed: () {
-                          var value = pinController.value.text;
-                          if (value.length < 6) {
-                            return;
-                          }
-                          context
-                              .read<OTPBloc>()
-                              .add(SubmitOTP(pinController.text, 'jasrogers7@gmail.com'));
-                        },
-                        height: 50,
-                        borderColor: AppCommonColors.mainBlueButton, //
-                        borderRadius: 10,
-                        backgroundColor: AppCommonColors.mainBlueButton, //
-                        textColor: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                CustomButton(
+                  showSuffixWidget: true,
+                  suffixWidget: state is OTPLoading
+                      ? const Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 25.0),
+                            child: SizedBox(
+                              height: 30.0,
+                              width: 30.0,
+                              child: CircularProgressIndicator.adaptive(
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  text: state is OTPLoading ? "" : 'Verify',
+                  horizontalPadding: 0,
+                  onPressed: () {
+                    var value = pinController.value.text;
+                    if (value.length < 6) {
+                      return;
+                    }
+
+                    if (registerState is RegisterUserSuccess) {
+                      context.read<OTPBloc>().add(
+                          SubmitOTP(pinController.text, registerState.email));
+                    }
+                  },
+                  height: 50,
+                  borderColor: AppCommonColors.mainBlueButton, //
+                  borderRadius: 10,
+                  backgroundColor: AppCommonColors.mainBlueButton, //
+                  textColor: Theme.of(context).colorScheme.onPrimary,
+                ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,28 +177,42 @@ class OTPage extends StatelessWidget {
                             color: AppLightThemeColors.kBlackTextColor,
                             fontSize: 12), //
                         children: [
-                          TextSpan(
-                            text: 'Resend OTP',
-                            style: const TextStyle(
-                              color: AppCommonColors.mainBlueButton, //
-                              fontSize: 12,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                context.read<OTPBloc>().add(
-                                    const ResendOTP('jasrogers7@gmail.com'));
-                              },
-                          ),
+                          if (state is OTPResendLoading)
+                            TextSpan(
+                              text: ' Sending..',
+                              style: TextStyle(
+                                color: Colors.teal[700],
+                                fontSize: 12,
+                              ),
+                            )
+                          // AppCommonColors.mainBlueButton
+                          else
+                            TextSpan(
+                              text: ' Resend OTP',
+                              style: const TextStyle(
+                                color: AppCommonColors.mainBlueButton, //
+                                fontSize: 12,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  if (registerState is RegisterUserSuccess) {
+                                    context
+                                        .read<OTPBloc>()
+                                        .add(ResendOTP(registerState.email));
+                                  }
+                                },
+                            )
                         ],
                       ),
                     ),
-                    const Text(
-                      'Incorrect Try again',
-                      style: TextStyle(
-                        color: AppCommonColors.red, //red
-                        fontSize: 12,
+                    if (state is OTPFailure)
+                      const Text(
+                        'Incorrect Try again',
+                        style: TextStyle(
+                          color: AppCommonColors.red, //red
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
                   ],
                 )
               ],
