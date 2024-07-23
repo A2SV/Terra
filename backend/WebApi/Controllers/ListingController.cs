@@ -60,7 +60,7 @@ namespace WebApi.Controllers
             string? amenities = null                                                
             )
         {
-            var command = new FilterCommand(pageIndex, pageSize,listingType,propertyType,
+            var command = new FilterQuery(pageIndex, pageSize,listingType,propertyType,
                 subType,minPrice,maxPrice,priceFrequency,minPropertySize,maxPropertySize, amenities);
 
             var listings = await _mediator.Send(command);

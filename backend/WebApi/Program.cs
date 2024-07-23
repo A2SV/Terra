@@ -83,7 +83,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cre
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(FilterCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(FilterQuery).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAllListingQuery).Assembly));
 
 builder.Services.AddControllers();
