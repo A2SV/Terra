@@ -12,7 +12,7 @@ namespace Infrastructure.StorageService;
 
 public class StorageService : IStorageService
 {
-    private readonly GoogleCredential googleCredential;
+    // private readonly GoogleCredential googleCredential;
     private readonly StorageClient _storageClient;
     private readonly string _bucketName;
     private readonly string _profileImagesFolder;
@@ -21,8 +21,9 @@ public class StorageService : IStorageService
 
     public StorageService()
     {
-        googleCredential = GoogleCredential.FromJson(System.Environment.GetEnvironmentVariable("terra-427922-ae51e66636d9.json"));
-        _storageClient = StorageClient.Create(googleCredential);
+        // googleCredential = GoogleCredential.FromJson(System.Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS"));
+        GoogleCredential GOOGLE_APPLICATION_CREDENTIALS = GoogleCredential.FromFile("terra-427922-ae51e66636d9.json");
+        _storageClient = StorageClient.Create(GOOGLE_APPLICATION_CREDENTIALS);
         _bucketName = System.Environment.GetEnvironmentVariable("Bucket_Name");
         _profileImagesFolder = System.Environment.GetEnvironmentVariable("ProfileImagesFolder");
         _propertyImagesFolder = System.Environment.GetEnvironmentVariable("PropertyImagesFolder");
