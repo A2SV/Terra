@@ -21,11 +21,7 @@ namespace Application.Features.Listings.Queries.GetAllListings
 
         public async Task<PaginatedList<Property>> Handle(GetAllListingQuery request, CancellationToken cancellationToken)
         {
-            return await _listingRepository.GetAllListings(request.pageIndex, request.pageSize,
-                                                            request.propertyType, request.minPrice,
-                                                            request.maxPrice, request.bedrooms,
-                                                            request.bathrooms, request.propertiesFacilities,
-                                                            request.studentAccommodation);
+            return await _listingRepository.GetAllListings(request.pageIndex, request.pageSize);
         }
 
     }
