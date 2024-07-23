@@ -69,7 +69,7 @@ const LocationForm: React.FC = () => {
 
   return (
     <div className="p-4">
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="virtual-tour">
           Virtual Tour
         </label>
@@ -79,7 +79,7 @@ const LocationForm: React.FC = () => {
           placeholder="Paste virtual tour URL"
           className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
         />
-      </div>
+      </div> */}
 
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="video">
