@@ -33,7 +33,7 @@ const LoginCard: React.FC = () => {
       });
 
       if (response?.error) {
-        setError("Incorrect email or Password");
+        setError("Incorrect Email or Password");
         setTimeout(() => {
           setError("");
         }, 5000);
@@ -155,7 +155,7 @@ const LoginCard: React.FC = () => {
           <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={"/forgot-password"}>
+              <Link href={"/reset"}>
                 <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
@@ -163,7 +163,7 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
+            <AuthButton loading={loading} text="Login" action={handleSubmit} />
 
             <p className="font-nunito font-normal text-sm">or</p>
 
