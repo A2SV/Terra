@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import SuccessMessage from "../Common/Reusable/SuccessMessage";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,7 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const router = useRouter();
 
   const togglePasswordVisibility1 = () => {
@@ -27,6 +28,13 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
   const togglePasswordVisibility2 = () => {
     setShowPassword2(true);
   };
+
+  useEffect(() => {
+    const isPasswordValid =
+      password1.length >= 10 && password1 === password2 && password1.length > 0;
+
+    setIsButtonDisabled(!isPasswordValid);
+  }, [password1, password2]);
 
   const handlePasswordReset = () => {
     setLoading(true);
@@ -143,7 +151,12 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
           </div>
 
           <div>
-            <AuthButton loading={loading} text="Set new password" action={handlePasswordReset} />
+            <AuthButton
+              loading={loading}
+              isButtonDisabled={isButtonDisabled}
+              text="Set new password"
+              action={handlePasswordReset}
+            />
           </div>
         </div>
       </div>

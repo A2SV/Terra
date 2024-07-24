@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Avatar } from "flowbite-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,14 +68,18 @@ const HamburgerMenu = () => {
                   </div>
                 ) : (
                   <div className="flex flex-row">
-                    <Image
-                      src="/profilePic.svg"
-                      alt="login"
-                      height={40}
-                      width={40}
-                      className="object-cover"
-                    />
-                    <p className="flex  items-center px-4 font-nunito text-terrablue">Login</p>
+                    <Link href="/auth">
+                      <Image
+                        src="/profilePic.svg"
+                        alt="login"
+                        height={40}
+                        width={40}
+                        className="object-cover"
+                      />
+                    </Link>
+                    <Link href="/auth">
+                      <p className="flex  items-center px-4 font-nunito text-terrablue">Login</p>
+                    </Link>
                   </div>
                 )}
               </li>

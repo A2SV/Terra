@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
@@ -20,6 +20,7 @@ const SignUpCard: React.FC = () => {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const [user, setUser] = useState({
     firstName: "",
@@ -82,6 +83,14 @@ const SignUpCard: React.FC = () => {
     setConfirmPassword(event.target.value);
   };
 
+  useEffect(() => {
+    const isPasswordValid = password.length > 0;
+    const isNameValid = user.firstName !== "" && user.lastName !== "";
+    const isEmailValid = emailError === "";
+
+    setIsButtonDisabled(!(isEmailValid && isPasswordValid && isNameValid));
+  }, [password, confirmPassword, user.firstName, user.lastName, emailError]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -102,15 +111,21 @@ const SignUpCard: React.FC = () => {
         }, 1000);
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          setMessage(
-            error.response?.data.message ||
-              setPasswordError(
-                "Passwords must have at least one non alphanumeric character and a minimum length of 10 characters"
-              )
-          );
-          setTimeout(() => {
-            setMessage("");
-          }, 5000);
+          console.log(error.response?.data.errors);
+          if (error.response?.data.errors) {
+            setPasswordError(
+              "Passwords must have at least one non alphanumeric character and a minimum length of 10 characters"
+            );
+
+            setTimeout(() => {
+              setPasswordError("");
+            }, 5000);
+          } else if (error.response?.data.message) {
+            setMessage(error.response?.data.message);
+            setTimeout(() => {
+              setMessage("");
+            }, 5000);
+          }
         } else {
           setMessage("An error occurred. Please try again later.");
           setTimeout(() => {
@@ -232,7 +247,12 @@ const SignUpCard: React.FC = () => {
           </div>
 
           <div className="lower-section font-nunito w-full flex flex-col items-center text-sm space-y-3">
-            <AuthButton loading={loading} text="Register" action={handleSubmit} />
+            <AuthButton
+              loading={loading}
+              isButtonDisabled={isButtonDisabled}
+              text="Register"
+              action={handleSubmit}
+            />
             <p className="font-sans font-normal text-sm">or</p>
 
             <button

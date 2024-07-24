@@ -71,15 +71,12 @@ const authOptions: NextAuthOptions = {
             role: "user",
           }),
         });
-      }
-
-      if (user) {
+      } else if (user) {
         token.accessToken = user.token;
         token.id = user.user.id;
         token.firstName = user.user.firstName;
         token.lastName = user.user.lastName;
         token.email = user.user.email;
-        token.profilePicture = user.user.profilePicture;
       }
       return token;
     },

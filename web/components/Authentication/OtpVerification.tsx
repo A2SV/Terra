@@ -100,7 +100,12 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
                   <span className="text-btnColor underline hover:cursor-pointer">Resend</span>
                 </p>
               </div>
-              <AuthButton loading={loading} text="Submit" action={handleSubmit} />
+              <AuthButton
+                loading={loading}
+                isButtonDisabled={false}
+                text="Submit"
+                action={handleSubmit}
+              />
             </div>
           </div>
 
