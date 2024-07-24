@@ -34,6 +34,8 @@ using Application.Mappings;
 using Google.Cloud.Storage.V1;
 using Infrastructure.StorageService;
 using WebApi.Filters;
+using Application.Features.Listings.Queries.Filtering;
+using Application.Features.Listings.Queries.GetAllListings;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,6 +87,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cre
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(FilterQuery).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAllListingQuery).Assembly));
 
 // builder.Services.AddSingleton(StorageClient.Create());
 

@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Models;
 
 namespace Application.Contracts
 {
@@ -8,5 +9,14 @@ namespace Application.Contracts
         Task <TEntity?> AddPropertyAsync<TEntity>(TEntity property) where TEntity : class;
         Task<PropertyLocation?> AddPropertyLocationAsync(PropertyLocation propertyLocation);
         Task<PaymentInformation?> AddPaymentInformationAsync(PaymentInformation paymentInformation);
+        Task<PaginatedList<Property>> GetAllListings(int pageIndex,int pageSize);
+
+        Task<PaginatedList<Property>> Filter(
+            int pageIndex, int pageSize,
+            string? listingType, string? propertyType,
+            string? subType, int? minPrice,
+            int? maxPrice, string? paymentFrequency,
+            int? minPropertySize, int? maxPropertySize,
+            string? amenities);
     }
 }
