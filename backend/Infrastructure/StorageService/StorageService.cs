@@ -63,4 +63,9 @@ public class StorageService : IStorageService
         memoryStream.Position = 0;
         return memoryStream;
     }
+    
+    // public async Task DeleteFileAsync(string fileName)
+    // {
+    //     await _storageClient.DeleteObjectAsync(_bucketName, fileName);
+    // }
 }
