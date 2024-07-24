@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { env } from "next-runtime-env";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,20 @@ const ResetInputEmail = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [emailError, setEmailError] = useState<string>("");
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = event.target;
+    setEmail(value);
+    console.log("event", email);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -59,14 +73,20 @@ const ResetInputEmail = () => {
                 type="email"
                 value={email}
                 placeholder="Email Address"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 required
                 className="font-nunito rounded-3xl w-full h-10 border border-terragray px-3 py-2 text-sm focus:outline-none focus:border-terrablue"
               />
             </label>
+            {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
           </div>
           <div className="flex justify-center items-center pt-9 text-sm font-sans">
-            <AuthButton loading={loading} text="Continue" action={handleSubmit} />
+            <AuthButton
+              loading={loading}
+              isButtonDisabled={false}
+              text="Continue"
+              action={handleSubmit}
+            />
           </div>
         </form>
       </div>

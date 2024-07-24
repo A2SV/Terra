@@ -48,15 +48,17 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex flex-row">
-              <Image
-                src="/profilePic.svg"
-                alt="login"
-                height={40}
-                width={40}
-                className="object-cover"
-              />
               <Link href="/auth">
-                <p className="lg:flex hidden items-center px-4 font-nunito">
+                <Image
+                  src="/profilePic.svg"
+                  alt="login"
+                  height={40}
+                  width={40}
+                  className="object-cover"
+                />
+              </Link>
+              <Link href="/auth">
+                <p className="lg:flex hidden items-center px-4 font-nunito hover:cursor-pointer">
                   Login <span className="text-[20px] pl-3"> &#124;</span>
                 </p>
               </Link>
