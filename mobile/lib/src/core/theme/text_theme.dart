@@ -4,7 +4,8 @@ import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CustomTextStyles {
-  static TextTheme kDefaultTextTheme(Color textColor) => TextTheme(
+  static TextTheme 
+  kDefaultTextTheme(Color textColor) => TextTheme(
     bodySmall: TextStyle(
       color: AppCommonColors.detailsDirtyWhiteTextColor,
       fontSize: 16.sp,

@@ -16,6 +16,9 @@ import 'package:mobile/src/features/auth/presentation/pages/identify_student.dar
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
