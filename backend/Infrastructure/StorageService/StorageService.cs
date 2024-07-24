@@ -21,7 +21,7 @@ public class StorageService : IStorageService
 
     public StorageService()
     {
-        GoogleCredential GOOGLE_APPLICATION_CREDENTIALS = GoogleCredential.FromFile("./terra-427922-ae51e66636d9.json");
+        GoogleCredential GOOGLE_APPLICATION_CREDENTIALS = GoogleCredential.FromFile("/etc/secrets/terra-427922-ae51e66636d9.json");
         _storageClient = StorageClient.Create(GOOGLE_APPLICATION_CREDENTIALS);
         _bucketName = System.Environment.GetEnvironmentVariable("Bucket_Name");
         _profileImagesFolder = System.Environment.GetEnvironmentVariable("ProfileImagesFolder");
@@ -63,4 +63,9 @@ public class StorageService : IStorageService
         memoryStream.Position = 0;
         return memoryStream;
     }
+    
+    // public async Task DeleteFileAsync(string fileName)
+    // {
+    //     await _storageClient.DeleteObjectAsync(_bucketName, fileName);
+    // }
 }

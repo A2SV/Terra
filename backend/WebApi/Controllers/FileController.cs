@@ -36,4 +36,12 @@ public class FileController : ControllerBase
         var fileName = Path.GetFileName(new Uri(fileUrl).AbsolutePath);
         return File(fileStream, "application/octet-stream", fileName);
     }
+
+    // [HttpDelete("delete/{fileName}")]
+    // public async Task<IActionResult> DeleteFile(string fileName)
+    // {
+    //     await _storageService.DeleteFileAsync(fileName, [FromQuery] string fileType);
+    //     return NoContent();
+    // }
+    
 }
