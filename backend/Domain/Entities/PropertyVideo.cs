@@ -9,6 +9,6 @@ namespace Domain.Entities
         public Guid PropertyId { get; set; }
         public required string Url { get; set; }
         
-        public required Property Property { get; set; }
+        public Property Property { get; set; } = null!;
     }
 }

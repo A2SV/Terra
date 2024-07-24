@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateOfficeSpaceListing
 {
-    public class CreateOfficeSpaceListingCommand : InitiateCreateListingCommand, IRequest<Result<OfficeSpace>>
+    public class CreateOfficeSpaceListingCommand
     {
         [Required]
         public int TotalFloors { get; set; }

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.CreateStudentHostelListing
 {
-    public class CreateStudentHostelListingCommand : InitiateCreateListingCommand, IRequest<Result<StudentHostel>>
+    public class CreateStudentHostelListingCommand
     {
         public bool FurnishedStatus { get; set; }
         public int NumberOfBedrooms { get; set; }
