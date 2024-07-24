@@ -46,6 +46,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/images/help/
+    - assets/images/listingIcons/
 
   fonts:
     - family: Nunito
