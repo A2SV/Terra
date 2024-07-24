@@ -11,8 +11,6 @@ class AppCommonColors {
   static const reviewCard = Color(0xFFF5F4F8);
   static const reviewStars = Color(0xFFEEA651);
   static const defaultLink = Color(0xFF007DFC);
-  static const unfilledForm = Color(0xFFACACAC);
-  static const filledForm = Color(0xFF3A3A3A);
   static const hoverButton = Color(0xFFC3922E);
   static const incorrectTextColor = Color(0xFFDE1F1F);
   static const fieldBorderColor = Color.fromRGBO(58, 58, 58, 0.6);
