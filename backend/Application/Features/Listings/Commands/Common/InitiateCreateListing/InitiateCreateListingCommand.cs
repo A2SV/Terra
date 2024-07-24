@@ -1,12 +1,22 @@
 using System.ComponentModel.DataAnnotations;
+using Application.Features.Listings.Commands.CreateApartmentListing;
+using Application.Features.Listings.Commands.CreateEventSpaceListing;
+using Application.Features.Listings.Commands.CreateGuestHouseListing;
+using Application.Features.Listings.Commands.CreateHotelListing;
+using Application.Features.Listings.Commands.CreateHouseListing;
+using Application.Features.Listings.Commands.CreateOfficeSpaceListing;
+using Application.Features.Listings.Commands.CreateShopListing;
+using Application.Features.Listings.Commands.CreateStudentHostelListing;
+using Application.Features.Listings.Commands.CreateWarehouseListing;
 using Application.Models.ApiResult;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Features.Listings.Commands.Common
 {
-    public class InitiateCreateListingCommand
+    public class InitiateCreateListingCommand : IRequest<Result<Property>>
     {
         [Required]
         public string ListerId { get; set; } = null!;
@@ -42,8 +52,18 @@ namespace Application.Features.Listings.Commands.Common
         [Required, Range(-180, 180, ErrorMessage = "Latitude must be between -180 and 180.")]
         public double Latitude { get; set; }
         public List<string>? Amenities { get; set; }
-        // public List<string>? Images { get; set; }
-        // public List<string>? Videos { get; set; }
+        public List<string>? Pictures { get; set; } 
+        public List<string>? Videos { get; set; } 
+        public CreateApartmentListingCommand? Apartment { get; set; }
+        public CreateEventSpaceListingCommand? EventSpace { get; set; }
+        public CreateGuestHouseListingCommand? GuestHouse { get; set; }
+        public CreateHotelListingCommand? Hotel { get; set; }
+        public CreateHouseListingCommand? House { get; set; }
+        public CreateOfficeSpaceListingCommand? OfficeSpace { get; set; }
+        public CreateShopListingCommand? Shop { get; set; }
+        public CreateStudentHostelListingCommand? StudentHostel { get; set; }
+        public CreateWarehouseListingCommand? Warehouse { get; set; }
+        
     }
 }
 
