@@ -17,7 +17,6 @@ const ResetInputEmail = () => {
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setEmail(value);
-    console.log("event", email);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
