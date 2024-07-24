@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
@@ -35,6 +37,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+              if (Platform.isAndroid)
+                 SizedBox(height: 2.h),
             Padding(
               padding: EdgeInsets.only(left: 2.w, right: 2.w, bottom: 1.3.h),
               child: const HomepageCard(),
