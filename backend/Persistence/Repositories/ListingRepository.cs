@@ -165,17 +165,10 @@ namespace Persistence.Repositories
                 .Include(p => p.Lister)
                 .Include(p => p.PaymentInformation)
                 .Include(p => p.PropertyLocation)
-                .Include(p => p.ListingType)
-                .Include(p => p.MarketStatus)
-                .Include(p => p.PropertySize)
-                .Include(p => p.PropertyType)
-                .Include(p => p.PublishStatus)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-                return property;
+            return property;
         }
-
-
     }
 }
 
