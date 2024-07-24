@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppCommonColors {
   static const appBlack = Color.fromARGB(255, 0, 0, 0);
   static const activeButton = Color(0xFF043174);
+  static const unfilledForm = Color(0xFFACACAC);
+  static const filledForm = Color(0xFF3A3A3A);
   static const activeFilter = Color(0xFF1F4C6B);
   static const reviewText = Color(0xFF53587A);
   static const reviewHeading = Color(0xFF252B5C);
