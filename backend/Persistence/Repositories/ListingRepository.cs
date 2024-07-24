@@ -84,11 +84,11 @@ namespace Persistence.Repositories
             if (!string.IsNullOrEmpty(propertyType))
                 if (propertyType == "Residential")
                 {
-                    query = query.Where(p => (int)p.PropertyType % 2 == 0);
+                    query = query.Where(p => (int)p.PropertyType < 5);
                 }
                 else
                 {
-                    query = query.Where(p => (int)p.PropertyType % 2 != 0);
+                    query = query.Where(p => (int)p.PropertyType >5);
                 }
 
 
