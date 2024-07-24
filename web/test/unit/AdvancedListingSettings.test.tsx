@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import AdvancedListingSettings from "../../components/Common/Reusable/AdvancedListingSettings";
 
@@ -8,6 +8,7 @@ describe("AdvancedListingSettings Component", () => {
     render(<AdvancedListingSettings />);
     expect(screen.getByText("Amenities")).toBeInTheDocument();
     expect(screen.getByText("Land size")).toBeInTheDocument();
+
     expect(screen.getByText("Price Range")).toBeInTheDocument();
     expect(screen.getByText("Search")).toBeInTheDocument();
   });

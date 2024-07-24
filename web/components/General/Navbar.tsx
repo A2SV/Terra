@@ -66,9 +66,11 @@ const Navbar = () => {
           )}
 
           <div className="lg:flex hidden items-center">
-            <button className="bg-[#1779F3] text-white font-nunito font-semibold text-[13px] px-5 py-3 rounded-[25px] ">
-              Custom Listing
-            </button>
+            <Link href="/add-listing">
+              <button className="bg-[#1779F3] text-white font-nunito font-semibold text-[13px] px-5 py-3 rounded-[25px] ">
+                Create Listing
+              </button>
+            </Link>
           </div>
           <HamburgerMenu />
         </div>
