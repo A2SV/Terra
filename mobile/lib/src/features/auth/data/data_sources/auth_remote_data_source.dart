@@ -75,7 +75,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String phoneNumber,
     required String role,
   }) async {
-    final result = await _client.post(Uri.parse('$baseUrl$registerUrl'),
+    final result = await _client.post(Uri.parse(AppStrings.registerUrl),
         headers: {
           'Content-type': 'application/json',
         },
