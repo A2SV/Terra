@@ -22,11 +22,8 @@ const ListDesc: React.FC = () => {
     "Window Coverings",
   ];
   return (
-    <div className="w-screen h-auto bg-gray-300 pb-10">
-      <div>
-        <p>wertyuikkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjj</p>
-      </div>
-      <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 py-6 ml-14">
+    <div className="w-screen bg-gray-300 pb-10">
+      <div className="w-[69%] bg-white px-12 rounded mb-16  py-6 ml-14">
         <p className="border-b-2 py-8">Description</p>
         <p className="py-10">
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -213,11 +210,12 @@ const ListDesc: React.FC = () => {
       <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12 ml-14">
         <p className="font-medium border-b-2 pt-4 pb-12 mb-10">Video</p>
         <iframe
-          width="560"
-          height="315"
-          src="https://youtu.be/-NInBEdSvp8?si=QJdg1WwO4ktWUp7P"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          width="866"
+          height="487"
+          src="https://www.youtube.com/embed/-NInBEdSvp8"
+          title="Dubai Luxury Property Highlight The Glass Penthouse"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
       </div>
