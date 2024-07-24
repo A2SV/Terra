@@ -111,7 +111,6 @@ const SignUpCard: React.FC = () => {
         }, 1000);
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          console.log(error.response?.data.errors);
           if (error.response?.data.errors) {
             setPasswordError(
               "Passwords must have at least one non alphanumeric character and a minimum length of 10 characters"
