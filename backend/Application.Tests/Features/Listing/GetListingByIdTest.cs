@@ -3,7 +3,6 @@ using Domain.Entities;
 using Domain.Enums;
 using Application.Contracts;
 using Application.Features.Listings.Queries.GetListingById;
-using Application.Features.Listings.Queries.GetListingId;
 using Application.Models.ApiResult;
 
 
@@ -36,7 +35,7 @@ namespace Application.Tests.Features.Listing
 
             _mockReposity.Setup(repo => repo.GetListingByIdAsync(propertyId)).ReturnsAsync(property);
 
-            var request = new GetListingByIdRequest(propertyId);
+            var request = new GetListingByIdQuery(propertyId);
 
             // Act
             var result = await _handler.Handle(request, CancellationToken.None);
@@ -56,7 +55,7 @@ namespace Application.Tests.Features.Listing
             var propertyId = Guid.NewGuid();
             _mockReposity.Setup(repo => repo.GetListingByIdAsync(propertyId)).ReturnsAsync((Property)null);
 
-            var request = new GetListingByIdRequest(propertyId);
+            var request = new GetListingByIdQuery(propertyId);
 
             // Act
             var result = await _handler.Handle(request, CancellationToken.None);

@@ -2,11 +2,11 @@ using Application.Contracts;
 using Domain.Entities;
 using MediatR;
 using Application.Models.ApiResult;
-using Application.Features.Listings.Queries.GetListingById;
 
-namespace Application.Features.Listings.Queries.GetListingId
+
+namespace Application.Features.Listings.Queries.GetListingById
 {
-    public class GetListingByIdHandler : IRequestHandler<GetListingByIdRequest, Result<Property>>
+    public class GetListingByIdHandler : IRequestHandler<GetListingByIdQuery, Result<Property>>
     {
         private readonly IListingRepository _propertyRepository;
 
@@ -15,7 +15,7 @@ namespace Application.Features.Listings.Queries.GetListingId
             _propertyRepository = propertyRepository;
         }
 
-        public async Task<Result<Property>> Handle(GetListingByIdRequest request, CancellationToken cancellationToken)
+        public async Task<Result<Property>> Handle(GetListingByIdQuery request, CancellationToken cancellationToken)
         {
             var property = await _propertyRepository.GetListingByIdAsync(request.Id);
 

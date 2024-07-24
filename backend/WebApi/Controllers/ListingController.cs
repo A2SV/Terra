@@ -79,7 +79,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetListingByIdRequest(id));
+                var result = await _mediator.Send(new GetListingByIdQuery(id));
 
                 return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
 

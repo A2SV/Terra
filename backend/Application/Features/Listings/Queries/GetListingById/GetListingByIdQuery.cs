@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Application.Features.Listings.Queries.GetListingById
 {
-    public class GetListingByIdRequest: IRequest<Result<Property>>
+    public class GetListingByIdQuery : IRequest<Result<Property>>
     {
-        public Guid Id {get; }
+        public Guid Id { get; }
 
-        public GetListingByIdRequest(Guid id)
+        public GetListingByIdQuery(Guid id)
         {
             Id = id;
         }
