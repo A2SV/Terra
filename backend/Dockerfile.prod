@@ -42,7 +42,8 @@ ENV ASPNETCORE_URLS=http://*:${PORT:-5183}
 ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Copy the secret file into the container
-COPY backend/WebApi/terra-427922-ae51e66636d9.json /app/terra-427922-ae51e66636d9.json
+COPY /WebApi/terra-427922-ae51e66636d9.json /app/terra-427922-ae51e66636d9.json
+
 
 # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
 ENV GOOGLE_APPLICATION_CREDENTIALS=/app/terra-427922-ae51e66636d9.json
