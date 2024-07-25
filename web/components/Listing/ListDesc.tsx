@@ -22,8 +22,8 @@ const ListDesc: React.FC = () => {
     "Window Coverings",
   ];
   return (
-    <div className="w-screen bg-gray-300 pb-10">
-      <div className="w-[69%] bg-white px-12 rounded mb-16  py-6 ml-14">
+    <div className="w-full pb-10">
+      <div className="w-full bg-white px-12 rounded mb-16  py-6 ">
         <p className="border-b-2 py-8">Description</p>
         <p className="py-10">
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -46,10 +46,10 @@ const ListDesc: React.FC = () => {
         </p>
       </div>
 
-      <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12 ml-14">
+      <div className="w-full bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
           <p className="font-medium">Address</p>
-          <button className="bg-[#00aeffc5] py-1 w-[28%] px-3 rounded flex items-center justify-between text-white">
+          <button className="bg-sky-400 py-1 w-[28%] px-3 rounded flex items-center text-xs justify-between text-white">
             <SlMap />
             Open on Google Maps
           </button>
@@ -86,13 +86,13 @@ const ListDesc: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="w-[69%] bg-white px-12 rounded py-14 ml-14">
+      <div className="w-full bg-white px-12 rounded py-14">
         <div className="flex flex-row justify-between border-b-2 items-center pt-4 pb-8">
           <p className="font-medium text-xl">Details</p>
           <p>Updated on April 4, 2020 at 5:18 pm</p>
         </div>
 
-        <div className="flex flex-row justify-between border bg-terrablue bg-opacity-10 border-[#00aeffdc] mt-8 mb-3 px-8 rounded">
+        <div className="flex flex-row justify-between border bg-terrablue bg-opacity-10 border-sky-500 mt-8 mb-3 px-8 rounded">
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Property ID:</p>
@@ -173,7 +173,7 @@ const ListDesc: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 py-6 ml-14">
+      <div className="w-full bg-white px-12 rounded mb-16 mt-14 py-6">
         <p className="border-b-2 py-10 text-xl font-medium">Features</p>
         <div className="grid grid-cols-3 space-y-5 my-6">
           {features.map((feature, index) => (
@@ -190,7 +190,7 @@ const ListDesc: React.FC = () => {
         </div>
       </div>
 
-      <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12 ml-14">
+      <div className="w-full bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <p className="font-medium border-b-2 py-6">Floor Plans</p>
         <div className="flex flex-row justify-between border-b-2 py-4">
           <p className="font-bold flex items-center">
@@ -207,10 +207,10 @@ const ListDesc: React.FC = () => {
           <p>Florida</p>
         </div>
       </div>
-      <div className="w-[69%] bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12 ml-14">
+      <div className="w-full bg-white px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <p className="font-medium border-b-2 pt-4 pb-12 mb-10">Video</p>
         <iframe
-          width="866"
+          width="710"
           height="487"
           src="https://www.youtube.com/embed/-NInBEdSvp8"
           title="Dubai Luxury Property Highlight The Glass Penthouse"

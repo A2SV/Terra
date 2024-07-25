@@ -16,7 +16,7 @@ const ReviewForm = () => {
     setShowDropdown(false);
   };
   return (
-    <div className="w-full md:w-9/12 flex flex-col justify-center items-center p-12">
+    <div className="w-full bg-white rounded flex flex-col justify-center items-center p-12">
       <div className="w-full border-b">
         <p className="mb-10 font-roboto">Leave A Review</p>
       </div>

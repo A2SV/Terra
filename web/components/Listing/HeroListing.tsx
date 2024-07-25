@@ -1,14 +1,13 @@
 "use client";
-import React, { useState } from "react";
 import houseIcon from "@/public/houseIcon.svg";
 import angle from "@/public/angle.svg";
 import locationIcon from "@/public/locationIcon.svg";
 import bookmarkIcon from "@/public/bookmarkIcon.svg";
 import shareIcon from "@/public/shareIcon.svg";
 import printIcon from "@/public/printIcon.svg";
-import listImg from "@/public/listImg.jpeg";
-import proIcon from "@/public/proIcon.svg";
-import whatsappIcon from "@/public/whatsappIcon.svg";
+// import listImg from "@/public/listImg.jpeg";
+// import proIcon from "@/public/proIcon.svg";
+// import whatsappIcon from "@/public/whatsappIcon.svg";
 import bedIcon2 from "@/public/bedIcon2.svg";
 import showerIcon2 from "@/public/showerIcon2.svg";
 import carIcon from "@/public/carIcon.svg";
@@ -16,7 +15,10 @@ import rulerIcon from "@/public/rulerIcon.svg";
 import calendarIcon from "@/public/calendarIcon.svg";
 import Image from "next/image";
 import DetailCarousel from "@/components/DetailCarousel/DetailCarousel";
-
+import ListDescription from "@/components/Listing/ListDesc";
+import Review from "@/components/Listing/Review";
+import ListingCard from "@/components/Listing/Cards/ListingCard";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 const HeroListing = () => {
   const images = [
     "https://images.unsplash.com/photo-1522050212171-61b01dd24579?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Ds",
@@ -25,20 +27,20 @@ const HeroListing = () => {
     "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
+  // const handleCheckboxChange = () => {
+  //   setIsChecked(!isChecked);
+  // };
 
   return (
     <div>
-      <div className="bg-slate-200 mt-[88px] h-full">
+      <div className="mt-[88px]">
         <div className="flex justify-between pt-[50px]">
           <div>
-            <nav className="flex pl-[92px] font-roboto text-sm ju">
+            <nav className="flex pl-[92px] font-roboto text-sm ">
               <ol className="flex">
-                <li className="flex ustify-center items-center text-btnColor">
+                <li className="flex justify-center items-center text-btnColor">
                   <Image src={houseIcon} alt="house" className="size-4 mr-3 mt-o" />
                   Home
                 </li>
@@ -46,7 +48,7 @@ const HeroListing = () => {
                   <Image src={angle} alt="angle" className="size-8" />
                   Apartment
                 </li>
-                <li className="flex ustify-center items-center text-breadCrumb">
+                <li className="flex justify-center items-center text-breadCrumb">
                   <Image src={angle} alt="angle" className="size-8 " />
                   Light and modern apartment
                 </li>
@@ -76,7 +78,7 @@ const HeroListing = () => {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="">
           <div className="w-[72%]">
             <div className="overflow-x-hidden w-[790px] ml-[92px] mt-6">
               <DetailCarousel images={images} />
@@ -137,9 +139,21 @@ const HeroListing = () => {
                 </div>
               </div>
             </div>
+            <div className="w-[790px] ml-[92px]">
+              <ListDescription />
+              <Review />
+              <div className="flex justify-center space-x-2 my-40">
+                <button className="size-10 bg-white text-sky-500 text-lg flex items-center justify-center rounded ">
+                  <FaChevronLeft />
+                </button>
+                <button className="size-10 bg-white text-sky-500 text-lg flex items-center justify-center rounded ">
+                  <FaChevronRight />
+                </button>
+              </div>
+            </div>
           </div>
           <div className="w-[28%]">
-            <div className="w-[326px] h-[650px] pr-1 mb-4 bg-white mt-6 rounded-md sticky top-2">
+            {/* <div className="w-[326px] h-[650px] pr-1 mb-4 bg-white mt-6 rounded-md sticky top-2">
               <div className="flex px-7 pt-10 items-center">
                 <Image src={listImg} alt="listImg" className="size-[72px] rounded-md" />
                 <div className="flex flex-col">
@@ -230,7 +244,15 @@ const HeroListing = () => {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
+          </div>
+          <div className="flex flex-wrap w-[80%] justify-center mb-60">
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
+            <ListingCard />
           </div>
         </div>
       </div>

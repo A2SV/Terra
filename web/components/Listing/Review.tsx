@@ -8,7 +8,7 @@ const Review = () => {
   return (
     <div className="">
       <ReviewForm />
-      <div className="flex flex-col lg:flex-row w-screen md:w-9/12 items-center justify-between lg:p-12">
+      <div className="flex flex-col lg:flex-row w-full items-center justify-between lg:p-12">
         <div className="flex mb-5 lg:mb-0 items-center">
           <p className="font-roboto text-base lg:text-xl font-normal mr-4">6 Reviews</p>
           <ReviewStars rating={4} />
@@ -40,6 +40,30 @@ const Review = () => {
         heading="Konda"
         description="Hup"
         star={5}
+        upvote={3}
+        downvote={0}
+        time="1 year ago"
+      />
+      <ReviewCard
+        heading="Get"
+        description="Nice"
+        star={3}
+        upvote={2}
+        downvote={1}
+        time="1 year ago"
+      />
+      <ReviewCard
+        heading="Rashmi"
+        description="Good"
+        star={3}
+        upvote={2}
+        downvote={1}
+        time="1 year ago"
+      />
+      <ReviewCard
+        heading="Sra Jkawgb"
+        description="Good"
+        star={4}
         upvote={3}
         downvote={0}
         time="1 year ago"
