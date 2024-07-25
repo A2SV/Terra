@@ -5,5 +5,5 @@ class AppStrings {
   static String loginUrl = '$baseUrl/api/auth/login';
   static String otpEndPoint = '$baseUrl/api/auth/VerifyOTP';
   static String resendOtpEndPoint = '$baseUrl/api/auth/ResendOTP';
-  static String getAllListingsEndPoint = '$baseUrl/api/listing';
+  static String getAllListingsEndPoint = '$baseUrl/api/listing/getalllisting';
 }
