@@ -58,6 +58,7 @@ const config = {
         terraOrange: "#FFA72A",
         light: "#F9F9F9",
         reviewGold: "#F5A623",
+        listingBg: " #F7F8F9",
       },
 
       fontFamily: {
