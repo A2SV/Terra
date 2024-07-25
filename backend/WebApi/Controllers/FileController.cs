@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Application.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers;
 
@@ -15,6 +16,7 @@ public class FileController : ControllerBase
         _storageService = storageService;
     }
 
+    [Authorize]
     [HttpPost("upload")]
     public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string fileType)
     {
@@ -24,8 +26,8 @@ public class FileController : ControllerBase
         var fileUrl = await _storageService.UploadFileAsync(file, fileType);
         return Ok(new { Url = fileUrl });
     }
-    
 
+    [Authorize]
     [HttpGet("download")]
     public async Task<IActionResult> GetFile([FromQuery] string fileUrl)
     {
