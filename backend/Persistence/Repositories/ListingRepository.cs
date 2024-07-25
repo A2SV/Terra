@@ -86,6 +86,8 @@ namespace Persistence.Repositories
 
 
 
+
+
             if (!string.IsNullOrEmpty(listingType) && Enum.TryParse<PropertyListingType>(listingType, out var parsedListingType))
             {
                 query = query.Where(x => x.ListingType == parsedListingType);
