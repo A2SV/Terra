@@ -43,10 +43,11 @@ namespace Persistence.Repositories
 
         public async Task<PaginatedList<Property>> GetAllListings(int pageIndex, int pageSize)
         {
+            
 
             IQueryable<Property> query = _context.Properties;
-
-
+            
+            
             var count = await query.CountAsync();
 
 
@@ -69,11 +70,16 @@ namespace Persistence.Repositories
             string? subType, int? minPrice,
             int? maxPrice, string? paymentFrequency,
             int? minPropertySize, int? maxPropertySize,
-            string? amenities
+            List<string>? amenities
                 )
         {
 
-            IQueryable<Property> query = _context.Properties;
+            IQueryable<Property> query = _context.Properties
+                .Include(p => p.PaymentInformation)
+                .Include(p => p.PropertyLocation);
+                
+
+
 
 
             if (!string.IsNullOrEmpty(listingType) && Enum.TryParse<PropertyListingType>(listingType, out var parsedListingType))
@@ -126,13 +132,13 @@ namespace Persistence.Repositories
             }
 
 
-            if (!string.IsNullOrEmpty(amenities))
+            if (amenities != null)
             {
                 query = query.Join(_context.PropertyAmenities,
                     property => property.Id,
                     propertyAmenity => propertyAmenity.PropertyId,
                     (property, propertyAmenity) => new { Property = property, PropertyAmenity = propertyAmenity })
-                    .Where(x => (x.PropertyAmenity.Amenity.Name == amenities))
+                    .Where(x => (amenities.Contains(x.PropertyAmenity.Amenity.Name)))
                     .Select(x => x.Property);
             }
 
