@@ -21,7 +21,7 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
         {
@@ -34,7 +34,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<Property>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             return Ok(listings);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("Filter")]
 
         public async Task<ActionResult<PaginatedList<Property>>> Filter(
