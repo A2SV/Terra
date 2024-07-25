@@ -25,6 +25,8 @@ class ListingEntity extends Equatable {
   final double longitude;
   final double latitude;
   final List<String> amenities;
+  final List<String> pictures;
+  final List<String> videos;
 
   const ListingEntity({
     required this.listerId,
@@ -49,6 +51,8 @@ class ListingEntity extends Equatable {
     required this.longitude,
     required this.latitude,
     required this.amenities,
+    required this.pictures,
+    required this.videos,
   });
 
   @override
@@ -75,5 +79,7 @@ class ListingEntity extends Equatable {
         longitude,
         latitude,
         amenities,
+        pictures,
+        videos,
       ];
 }

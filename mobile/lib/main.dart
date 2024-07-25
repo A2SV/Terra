@@ -72,7 +72,7 @@ class MainApp extends StatelessWidget {
               "/otp": (context) => const OTPage(),
               '/password-reset': (context) => const PasswordResetScreen(),
               '/forgot-password': (context) => const ForgotPasswordScreen(),
-              '/dashboard': (context) => const DashBoard(),
+              '/dashboard': (context) => const DashboardPage(),
               '/listing-detail': (context) => const ListingDetail(),
               '/identify-student-identity': (context) =>
                   const IdentifyStudent(),

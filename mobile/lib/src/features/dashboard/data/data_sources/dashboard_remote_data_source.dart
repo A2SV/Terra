@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
+import 'package:mobile/src/features/dashboard/data/models/get_all_listings.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
+import 'package:mobile/src/features/dashboard/domain/entities/get_all_listing_return.dart';
 
 abstract class DashboardRemoteDataSource {
   Future<List<ListingModel>> getAllListings();
@@ -16,21 +18,23 @@ class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
 
   @override
   Future<List<ListingModel>> getAllListings() async {
-    String token = '';
-    final response = await _client.post(
-      Uri.parse(AppStrings.otpEndPoint),
+    // String token = '';
+    final response = await _client.get(
+      Uri.parse(AppStrings.getAllListingsEndPoint),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
       },
     );
     if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      List<ListingModel> listings = [];
-      for (var item in data) {
-        listings.add(ListingModel.fromJson(item));
-      }
-      return listings;
+      // List<dynamic> data = json.decode(response.body);
+      // List<ListingModel> listings = [];
+      // for (var item in data) {
+      //   listings.add(ListingModel.fromJson(item));
+      // }
+      print(json.decode(response.body));
+      final listingReturn =
+          GetAllListingsModel.fromJson(json.decode(response.body));
+      return listingReturn.items;
     }
     throw ApiException(response.body);
   }

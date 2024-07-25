@@ -3,29 +3,32 @@ import 'package:mobile/src/features/dashboard/domain/entities/listing.dart';
 import '../../domain/entities/enums.dart';
 
 class ListingModel extends ListingEntity {
-  const ListingModel(
-      {required super.listerId,
-      required super.title,
-      required super.description,
-      required super.propertyType,
-      required super.listingType,
-      required super.propertyPublishStatus,
-      required super.propertyMarketStatus,
-      required super.propertySize,
-      required super.availableStartDate,
-      required super.availableEndDate,
-      required super.paymentCurrency,
-      required super.paymentFrequency,
-      required super.price,
-      required super.negotiable,
-      required super.streetName,
-      required super.houseNumber,
-      required super.city,
-      required super.country,
-      required super.zipCode,
-      required super.longitude,
-      required super.latitude,
-      required super.amenities});
+  const ListingModel({
+    required super.listerId,
+    required super.title,
+    required super.description,
+    required super.propertyType,
+    required super.listingType,
+    required super.propertyPublishStatus,
+    required super.propertyMarketStatus,
+    required super.propertySize,
+    required super.availableStartDate,
+    required super.availableEndDate,
+    required super.paymentCurrency,
+    required super.paymentFrequency,
+    required super.price,
+    required super.negotiable,
+    required super.streetName,
+    required super.houseNumber,
+    required super.city,
+    required super.country,
+    required super.zipCode,
+    required super.longitude,
+    required super.latitude,
+    required super.amenities,
+    required super.pictures,
+    required super.videos,
+  });
 
   factory ListingModel.fromJson(Map<String, dynamic> json) {
     return ListingModel(
@@ -53,6 +56,8 @@ class ListingModel extends ListingEntity {
       longitude: json['longitude'].toDouble(),
       latitude: json['latitude'].toDouble(),
       amenities: List<String>.from(json['amenities']),
+      pictures: List<String>.from(json['pictures']),
+      videos: List<String>.from(json['videos']),
     );
   }
 
@@ -80,6 +85,8 @@ class ListingModel extends ListingEntity {
       'longitude': longitude,
       'latitude': latitude,
       'amenities': amenities,
+      'pictures': pictures,
+      'videos': videos,
     };
   }
 }
