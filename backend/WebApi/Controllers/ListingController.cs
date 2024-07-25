@@ -6,6 +6,7 @@ using Application.Features.Listings.Queries.GetAllListings;
 using Domain.Models;
 using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
@@ -20,7 +21,7 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
         {
@@ -33,8 +34,8 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-
-        [HttpGet("GetAllListing")]
+        [Authorize]
+        [HttpGet]
         public async Task<ActionResult<PaginatedList<Property>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
 
@@ -44,9 +45,10 @@ namespace WebApi.Controllers
             return Ok(listings);
         }
 
+        [Authorize]
         [HttpGet("Filter")]
 
-        public async Task<ActionResult<PaginatedList<Property>>> Filter (
+        public async Task<ActionResult<PaginatedList<Property>>> Filter(
             int pageIndex = 1,
             int pageSize = 5,
             string? listingType = null,
@@ -57,7 +59,7 @@ namespace WebApi.Controllers
             string? priceFrequency = null,
             int? minPropertySize = null,
             int? maxPropertySize = null,
-            string? amenities = null                                                
+            [FromQuery] List<string>? amenities = null                                     
             )
         {
             var command = new FilterQuery(pageIndex, pageSize,listingType,propertyType,
