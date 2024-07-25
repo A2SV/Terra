@@ -9,6 +9,7 @@ using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 
 using Application.Features.Listings.Queries.GetListingById;
+using Application.Models.Dto.ListingDto.GetListingByIdDto;
 
 namespace WebApi.Controllers
 {
@@ -54,6 +55,7 @@ namespace WebApi.Controllers
         [HttpGet("Filter")]
 
         public async Task<ActionResult<PaginatedList<Property>>> Filter(
+        public async Task<ActionResult<PaginatedList<Property>>> Filter(
             int pageIndex = 1,
             int pageSize = 5,
             string? listingType = null,
@@ -64,16 +66,17 @@ namespace WebApi.Controllers
             string? priceFrequency = null,
             int? minPropertySize = null,
             int? maxPropertySize = null,
-            [FromQuery] List<string>? amenities = null                                     
+            string? amenities = null
             )
         {
-            var command = new FilterQuery(pageIndex, pageSize,listingType,propertyType,
-                subType,minPrice,maxPrice,priceFrequency,minPropertySize,maxPropertySize, amenities);
+            var command = new FilterQuery(pageIndex, pageSize, listingType, propertyType,
+                subType, minPrice, maxPrice, priceFrequency, minPropertySize, maxPropertySize, amenities);
 
             var listings = await _mediator.Send(command);
 
             return Ok(listings);
         }
+
         [HttpGet("{id:Guid}")]
         public async Task<IActionResult> GetListingById([FromRoute] Guid id)
         {
@@ -82,12 +85,12 @@ namespace WebApi.Controllers
                 var result = await _mediator.Send(new GetListingByIdQuery(id));
 
                 return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
-
             }
             catch (Exception ex)
             {
-                return BadRequest(new Result<Property>(false, ResultStatusCode.BadRequest, null, ex.Message));
+                return BadRequest(new Result<GetListingByIdDto>(false, ResultStatusCode.BadRequest, null, ex.Message));
             }
         }
+
     }
 }
