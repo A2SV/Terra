@@ -17,6 +17,7 @@ namespace WebApi.Controllers
             this.mediator = mediator;
         }
 
+
         //[Authorize]
         [HttpGet]
         [Route("{id:Guid}")]

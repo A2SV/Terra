@@ -17,6 +17,7 @@ public class FileController : ControllerBase
     }
 
     //[Authorize]
+
     [HttpPost("upload")]
     public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string fileType)
     {

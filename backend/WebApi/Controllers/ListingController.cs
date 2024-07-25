@@ -21,6 +21,7 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
+
         //[Authorize]
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
@@ -33,6 +34,7 @@ namespace WebApi.Controllers
             // Will change to createdAt action once 'get' feature is done
             return Ok(result);
         }
+
 
         //[Authorize]
         [HttpGet]
