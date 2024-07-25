@@ -23,6 +23,7 @@ import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_loc
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -60,7 +61,7 @@ class MainApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-            initialRoute: '',
+            initialRoute: '/',
             routes: {
               '/': (context) => const OnboardingScreen(),
               '/signup': (context) => const SignUpPage(),
@@ -75,6 +76,7 @@ class MainApp extends StatelessWidget {
               '/add-listing-media': (context) => AddListingMediaPage(),
               '/add-listing-contact': (context) =>
                   const AddListingContactPage(),
+              '/filters-page': (context) => const ListingsFilters(),
             },
             debugShowCheckedModeBanner: false,
             darkTheme: ThemeConfig().darkTheme,

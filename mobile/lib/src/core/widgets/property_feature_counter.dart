@@ -14,7 +14,19 @@ class CounterCubit extends Cubit<int> {
 
 class PropertyFeatureCounter extends StatelessWidget {
   final String label;
-  const PropertyFeatureCounter({super.key, required this.label});
+  final Color? backgroundColor;
+  final TextStyle? labelStyle;
+  final double? verticalPadding;
+  final double? horizontalPadding;
+
+  const PropertyFeatureCounter({
+    super.key,
+    required this.label,
+    this.backgroundColor,
+    this.labelStyle,
+    this.verticalPadding,
+    this.horizontalPadding,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +35,12 @@ class PropertyFeatureCounter extends StatelessWidget {
       child: BlocBuilder<CounterCubit, int>(
         builder: (context, state) {
           return Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8.0,
-              vertical: 16.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding ?? 8.0,
+              vertical: verticalPadding ?? 16.0,
             ),
             decoration: BoxDecoration(
-              color: AppCommonColors.disabledFieldColor,
+              color: backgroundColor ?? AppCommonColors.disabledFieldColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -36,16 +48,19 @@ class PropertyFeatureCounter extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: context.textTheme.displaySmall!.copyWith(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: labelStyle ??
+                      context.textTheme.displaySmall!.copyWith(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 Row(
                   children: [
                     _buildButton(
                       context,
-                      color: state == 0 ?AppCommonColors.fieldBorderColor :AppCommonColors.mainBlueButton,
+                      color: state == 0
+                          ? AppCommonColors.fieldBorderColor
+                          : AppCommonColors.mainBlueButton,
                       icon: Icons.remove,
                       onTap: () =>
                           BlocProvider.of<CounterCubit>(context).decrement(),
