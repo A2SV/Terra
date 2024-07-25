@@ -200,7 +200,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "$landSize",
+                                  landSize,
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,

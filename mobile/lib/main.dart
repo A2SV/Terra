@@ -4,18 +4,8 @@ import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
 
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
-import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
-import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
-import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
-import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listings.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'src/features/dashboard/presentation/pages/dashboard.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,19 +23,20 @@ class MainApp extends StatelessWidget {
         return BlocProvider(
           create: (context) => sl<AuthenticationBloc>(),
           child: MaterialApp(
-            initialRoute: '/listing-detail',
-            routes: {
-              '/': (context) => const OnboardingScreen(),
-              '/signup': (context) => const SignUpPage(),
-              '/signin': (context) => const SignInPage(),
-              "/otp": (context) => const OTPage(),
-              '/password-reset': (context) => const PasswordResetScreen(),
-              '/forgot-password': (context) => const ForgotPasswordScreen(),
-              '/dashboard': (context) => const HomePage(),
-              '/listing-detail': (context) => const ListingDetail(),
-              '/identify-student-identity': (context) =>
-                  const IdentifyStudent(),
-            },
+            // initialRoute: '/add-listing',
+            // routes: {
+            //   '/': (context) => const OnboardingScreen(),
+            //   '/signup': (context) => const SignUpPage(),
+            //   '/signin': (context) => const SignInPage(),
+            //   "/otp": (context) => const OTPage(),
+            //   '/password-reset': (context) => const PasswordResetScreen(),
+            //   '/forgot-password': (context) => const ForgotPasswordScreen(),
+            //   '/dashboard': (context) => const HomePage(),
+            //   '/listing-detail': (context) => const ListingDetail(),
+            //   '/identify-student-identity': (context) => const IdentifyStudent(),
+            //   '/add-listing': (context) => const AddListings(),
+            // },
+            home: const AddListings(),
             debugShowCheckedModeBanner: false,
             darkTheme: ThemeConfig().darkTheme,
             theme: ThemeConfig().lightTheme,
