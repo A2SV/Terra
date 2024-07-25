@@ -16,7 +16,7 @@ public class FileController : ControllerBase
         _storageService = storageService;
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost("upload")]
     public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string fileType)
     {
@@ -27,7 +27,7 @@ public class FileController : ControllerBase
         return Ok(new { Url = fileUrl });
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet("download")]
     public async Task<IActionResult> GetFile([FromQuery] string fileUrl)
     {
