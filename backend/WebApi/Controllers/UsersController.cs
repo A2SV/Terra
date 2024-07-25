@@ -17,7 +17,8 @@ namespace WebApi.Controllers
             this.mediator = mediator;
         }
 
-        [Authorize]
+
+        //[Authorize]
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetUserById([FromRoute] Guid id)
