@@ -3,18 +3,34 @@ import React, { useState } from "react";
 import addImage from "../../public/add_listing_screen/addImage.svg";
 import Image from "next/image";
 
-const ImageSelector: React.FC = () => {
+const ImageSelector: React.FC<{ handleInputChange: (name: string, value: string[]) => void }> = ({
+  handleInputChange,
+}) => {
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setSelectedImages([...selectedImages, ...Array.from(e.target.files)]);
+      const newImages = Array.from(e.target.files);
+      setSelectedImages((prevImages) => {
+        const updatedImages = [...prevImages, ...newImages];
+        handleInputChange(
+          "selectedImages",
+          updatedImages.map((img) => URL.createObjectURL(img))
+        );
+        return updatedImages;
+      });
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    const updatedImages = selectedImages.filter((_, i) => i !== index);
-    setSelectedImages(updatedImages);
+    setSelectedImages((prevImages) => {
+      const updatedImages = prevImages.filter((_, i) => i !== index);
+      handleInputChange(
+        "selectedImages",
+        updatedImages.map((img) => URL.createObjectURL(img))
+      );
+      return updatedImages;
+    });
   };
 
   return (

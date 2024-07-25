@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-const OfficeSpaceFeatures: React.FC = () => {
+const OfficeSpaceFeatures: React.FC<{
+  handleInputChange: (name: string, value: string | number | boolean | string[]) => void;
+}> = ({ handleInputChange }) => {
+  const [officeType, setOfficeType] = useState<string>("Open Plan");
+  const [meetingRooms, setMeetingRooms] = useState<string>("Yes");
+  const [receptionArea, setReceptionArea] = useState<string>("Yes");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    handleInputChange(name, value);
+    if (name === "officeType") setOfficeType(value);
+    if (name === "meetingRooms") setMeetingRooms(value);
+    if (name === "receptionArea") setReceptionArea(value);
+  };
+
   return (
     <div className="p-6">
       <form action="" className="space-y-4">
@@ -14,6 +28,8 @@ const OfficeSpaceFeatures: React.FC = () => {
               id="openPlan"
               name="officeType"
               value="Open Plan"
+              checked={officeType === "Open Plan"}
+              onChange={handleChange}
               className="mt-1"
             />
           </div>
@@ -29,6 +45,8 @@ const OfficeSpaceFeatures: React.FC = () => {
               id="individualOffices"
               name="officeType"
               value="Individual Offices"
+              checked={officeType === "Individual Offices"}
+              onChange={handleChange}
               className="mt-1"
             />
           </div>
@@ -44,6 +62,8 @@ const OfficeSpaceFeatures: React.FC = () => {
                 id="meetingRoomsYes"
                 name="meetingRooms"
                 value="Yes"
+                checked={meetingRooms === "Yes"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="meetingRoomsYes" className="pl-2">
@@ -56,6 +76,8 @@ const OfficeSpaceFeatures: React.FC = () => {
                 id="meetingRoomsNo"
                 name="meetingRooms"
                 value="No"
+                checked={meetingRooms === "No"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="meetingRoomsNo" className="pl-2">
@@ -73,6 +95,8 @@ const OfficeSpaceFeatures: React.FC = () => {
                 id="receptionYes"
                 name="receptionArea"
                 value="Yes"
+                checked={receptionArea === "Yes"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="receptionYes" className="pl-2">
@@ -85,6 +109,8 @@ const OfficeSpaceFeatures: React.FC = () => {
                 id="receptionNo"
                 name="receptionArea"
                 value="No"
+                checked={receptionArea === "No"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="receptionNo" className="pl-2">

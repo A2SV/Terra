@@ -1,10 +1,13 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
 
 const GoogleMapComponent = dynamic(() => import("./GoogleMapComponent"), { ssr: false });
 
-const LocationForm: React.FC = () => {
+const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => void }> = ({
+  handleInputChange,
+}) => {
   const [location, setLocation] = useState("");
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number } | null>(null);
   const [suggestions, setSuggestions] = useState<any[]>([]);
@@ -31,6 +34,8 @@ const LocationForm: React.FC = () => {
       setCoordinates({ lat: location.lat, lng: location.lng });
       setLocation(response.data.result.name);
       setSuggestions([]);
+      handleInputChange("location", response.data.result.name);
+      handleInputChange("coordinates", { lat: location.lat, lng: location.lng });
     } catch (error) {
       console.error("Error fetching place details:", error);
     }
@@ -49,6 +54,8 @@ const LocationForm: React.FC = () => {
             const location = place.geometry.location;
             setCoordinates({ lat: location.lat(), lng: location.lng() });
             setLocation(place.formatted_address || "");
+            handleInputChange("location", place.formatted_address || "");
+            handleInputChange("coordinates", { lat: location.lat(), lng: location.lng() });
           }
         });
       }
@@ -69,18 +76,6 @@ const LocationForm: React.FC = () => {
 
   return (
     <div className="p-4">
-      {/* <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="virtual-tour">
-          Virtual Tour
-        </label>
-        <input
-          id="virtual-tour"
-          type="url"
-          placeholder="Paste virtual tour URL"
-          className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-        />
-      </div> */}
-
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="video">
           Video
@@ -90,6 +85,7 @@ const LocationForm: React.FC = () => {
           type="url"
           placeholder="Copy any online video link e.g. YouTube, Facebook, Instagram or .mp4"
           className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+          onChange={(e) => handleInputChange("video", e.target.value)}
         />
       </div>
 

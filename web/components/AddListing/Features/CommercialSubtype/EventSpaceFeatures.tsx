@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const EventSpaceFeatures: React.FC = () => {
+const EventSpaceFeatures: React.FC<{ handleInputChange: (name: string, value: any) => void }> = ({
+  handleInputChange,
+}) => {
+  const [maxCapacity, setMaxCapacity] = useState<number | string>("");
   const [selectedeventTypes, setSelectedeventTypes] = useState<string[]>([]);
+  const [cateringServices, setCateringServices] = useState<string>("Yes");
+  const [audioVisualEquipment, setAudioVisualEquipment] = useState<string>("Yes");
 
   const eventTypes = [
     "religious",
@@ -15,10 +20,20 @@ const EventSpaceFeatures: React.FC = () => {
     "party",
   ];
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    handleInputChange(name, value);
+    if (name === "maxCapacity") setMaxCapacity(value);
+    if (name === "cateringServices") setCateringServices(value);
+    if (name === "audioVisualEquipment") setAudioVisualEquipment(value);
+  };
+
   const toggleeventType = (eventType: string) => {
-    setSelectedeventTypes((prev) =>
-      prev.includes(eventType) ? prev.filter((item) => item !== eventType) : [...prev, eventType]
-    );
+    const updatedEventTypes = selectedeventTypes.includes(eventType)
+      ? selectedeventTypes.filter((item) => item !== eventType)
+      : [...selectedeventTypes, eventType];
+    setSelectedeventTypes(updatedEventTypes);
+    handleInputChange("selectedeventTypes", updatedEventTypes);
   };
 
   return (
@@ -30,6 +45,9 @@ const EventSpaceFeatures: React.FC = () => {
             <input
               className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
               type="number"
+              name="maxCapacity"
+              value={maxCapacity}
+              onChange={handleChange}
               placeholder="Enter value"
             />
           </div>
@@ -66,6 +84,8 @@ const EventSpaceFeatures: React.FC = () => {
                 id="cateringYes"
                 name="cateringServices"
                 value="Yes"
+                checked={cateringServices === "Yes"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="cateringYes" className="pl-2">
@@ -78,6 +98,8 @@ const EventSpaceFeatures: React.FC = () => {
                 id="cateringNo"
                 name="cateringServices"
                 value="No"
+                checked={cateringServices === "No"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="cateringNo" className="pl-2">
@@ -95,6 +117,8 @@ const EventSpaceFeatures: React.FC = () => {
                 id="audioVisualYes"
                 name="audioVisualEquipment"
                 value="Yes"
+                checked={audioVisualEquipment === "Yes"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="audioVisualYes" className="pl-2">
@@ -107,6 +131,8 @@ const EventSpaceFeatures: React.FC = () => {
                 id="audioVisualNo"
                 name="audioVisualEquipment"
                 value="No"
+                checked={audioVisualEquipment === "No"}
+                onChange={handleChange}
                 className="mt-1"
               />
               <label htmlFor="audioVisualNo" className="pl-2">
