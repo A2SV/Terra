@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "243 properties in Accra",
+                            "${state.listings.length} properties in Accra",
                             style: TextStyle(
                               fontSize: 15.sp,
                               color: AppLightThemeColors.kLightTextColor,
@@ -200,8 +200,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )
                     else
-                      const Center(
-                        child: Text("No listings found"),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 3.h, horizontal: 10.w),
+                        child: const Center(
+                          child: Text("No listings found"),
+                        ),
                       ),
                   ] else if (state is DashboardLoading)
                     const Center(
