@@ -4,6 +4,11 @@
   --slide-height: 20rem;
 }
 
+.main{
+  display: flex;
+  position: relative;
+}
+
 .embla__container {
   backface-visibility: hidden;
   display: flex;
@@ -45,6 +50,8 @@
   cursor: pointer;
   width: 4rem;
   height: 4rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 .embla__button:disabled {
   opacity: 0.5;
@@ -83,7 +90,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }
+
+.main:hover .embla__dots{
+  opacity: 1;
+}
+
+.main:hover .embla__button{
+  opacity: 1;
+}
+
 .embla__dot {
   width: 0.4rem;
   height: 2rem;
