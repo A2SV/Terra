@@ -18,6 +18,7 @@ import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart'
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
@@ -59,7 +60,7 @@ class MainApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-            initialRoute: '/',
+            initialRoute: '',
             routes: {
               '/': (context) => const OnboardingScreen(),
               '/signup': (context) => const SignUpPage(),
@@ -72,6 +73,8 @@ class MainApp extends StatelessWidget {
               '/identify-student-identity': (context) =>
                   const IdentifyStudent(),
               '/add-listing-media': (context) => AddListingMediaPage(),
+              '/add-listing-contact': (context) =>
+                  const AddListingContactPage(),
             },
             debugShowCheckedModeBanner: false,
             darkTheme: ThemeConfig().darkTheme,
