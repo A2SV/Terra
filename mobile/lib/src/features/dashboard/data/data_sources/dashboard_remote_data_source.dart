@@ -5,7 +5,6 @@ import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/features/dashboard/data/models/get_all_listings.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
-import 'package:mobile/src/features/dashboard/domain/entities/get_all_listing_return.dart';
 
 abstract class DashboardRemoteDataSource {
   Future<List<ListingModel>> getAllListings();
@@ -36,6 +35,7 @@ class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
           GetAllListingsModel.fromJson(json.decode(response.body));
       return listingReturn.items;
     }
+    print(response.body);
     throw ApiException(response.body);
   }
 }

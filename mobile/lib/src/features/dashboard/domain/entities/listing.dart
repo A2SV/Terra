@@ -1,9 +1,14 @@
 import 'package:equatable/equatable.dart';
-
-import 'enums.dart';
+import 'package:mobile/src/features/dashboard/data/models/models.dart';
+import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 class ListingEntity extends Equatable {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
   final String listerId;
+  final String paymentInformationId;
+  final String propertyLocationId;
   final String title;
   final String description;
   final PropertyType propertyType;
@@ -13,23 +18,17 @@ class ListingEntity extends Equatable {
   final int propertySize;
   final DateTime availableStartDate;
   final DateTime availableEndDate;
-  final PaymentCurrency paymentCurrency;
-  final PaymentFrequency paymentFrequency;
-  final double price;
-  final bool negotiable;
-  final String streetName;
-  final String houseNumber;
-  final String city;
-  final String country;
-  final String zipCode;
-  final double longitude;
-  final double latitude;
-  final List<String> amenities;
-  final List<String> pictures;
-  final List<String> videos;
+  final ListerModel lister;
+  final PaymentInformationModel paymentInformation;
+  final PropertyLocationModel propertyLocation;
 
   const ListingEntity({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
     required this.listerId,
+    required this.paymentInformationId,
+    required this.propertyLocationId,
     required this.title,
     required this.description,
     required this.propertyType,
@@ -39,25 +38,19 @@ class ListingEntity extends Equatable {
     required this.propertySize,
     required this.availableStartDate,
     required this.availableEndDate,
-    required this.paymentCurrency,
-    required this.paymentFrequency,
-    required this.price,
-    required this.negotiable,
-    required this.streetName,
-    required this.houseNumber,
-    required this.city,
-    required this.country,
-    required this.zipCode,
-    required this.longitude,
-    required this.latitude,
-    required this.amenities,
-    required this.pictures,
-    required this.videos,
+    required this.lister,
+    required this.paymentInformation,
+    required this.propertyLocation,
   });
 
   @override
   List<Object?> get props => [
+        id,
+        createdAt,
+        updatedAt,
         listerId,
+        paymentInformationId,
+        propertyLocationId,
         title,
         description,
         propertyType,
@@ -67,19 +60,8 @@ class ListingEntity extends Equatable {
         propertySize,
         availableStartDate,
         availableEndDate,
-        paymentCurrency,
-        paymentFrequency,
-        price,
-        negotiable,
-        streetName,
-        houseNumber,
-        city,
-        country,
-        zipCode,
-        longitude,
-        latitude,
-        amenities,
-        pictures,
-        videos,
+        lister,
+        paymentInformation,
+        propertyLocation,
       ];
 }

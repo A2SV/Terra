@@ -39,8 +39,10 @@ class _HomePageState extends State<HomePage> {
       child: BlocConsumer<DashboardBloc, DashboardState>(
         listener: (context, state) {
           if (state is DashboardError) {
-            CustomSnackBar.errorSnackBar(
-                context: context, message: state.message);
+            if (state.message.isNotEmpty) {
+              CustomSnackBar.errorSnackBar(
+                  context: context, message: state.message);
+            }
           }
         },
         builder: (context, state) {
@@ -208,13 +210,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                   ] else if (state is DashboardLoading)
-                    const Center(
-                      child: CircularProgressIndicator.adaptive(),
+                    Padding(
+                      padding: EdgeInsets.all(6.h),
+                      child: const Center(
+                          child: CircularProgressIndicator.adaptive()),
                     )
                   else if (state is DashboardError)
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 3.h),
-                      child: CustomButton(
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 6.h),
+                          child: const Text('Something went wrong'),
+                        ),
+                        CustomButton(
                           text: 'Retry',
                           backgroundColor: Colors.red,
                           borderColor: Colors.transparent,
@@ -222,7 +230,9 @@ class _HomePageState extends State<HomePage> {
                             context
                                 .read<DashboardBloc>()
                                 .add(GetAllListingsEvent());
-                          }),
+                          },
+                        ),
+                      ],
                     )
                   // Padding(
                   //   padding: EdgeInsets.only(left: 4.5.w, right: 12.w),

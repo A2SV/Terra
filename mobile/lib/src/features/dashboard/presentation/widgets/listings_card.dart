@@ -66,7 +66,7 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: listing.pictures[0],
+                      image: '',//listing.[0],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -88,7 +88,7 @@ class ListingsCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "Starting GHC ${listing.price}",
+                            "Starting GHC ${listing.paymentInformation.cost}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
@@ -121,15 +121,15 @@ class ListingsCard extends StatelessWidget {
                           style: TextStyle(fontSize: 15.sp, color: Colors.black),
                         ),
                       ),
-                      // SizedBox(
-                      //   width: 4.h,
-                      //   height: 4.h,
-                      //   child: FadeInImage.memoryNetwork(
-                      //     placeholder: kTransparentImage,
-                      //     image: listing,
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // )
+                      SizedBox(
+                        width: 4.h,
+                        height: 4.h,
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: listing.lister.profilePictureUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -143,7 +143,7 @@ class ListingsCard extends StatelessWidget {
                       ),
                       SizedBox(width: 2.w),
                       Text(
-                        '${listing.city}, ${listing.country}',
+                        '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
