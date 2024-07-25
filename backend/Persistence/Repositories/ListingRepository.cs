@@ -4,6 +4,8 @@ using Domain.Enums;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
+using Application.Models.Dto.ListingDto.GetListingByIdDto;
+
 
 namespace Persistence.Repositories
 {
@@ -156,18 +158,54 @@ namespace Persistence.Repositories
             var totalPages = (int)Math.Ceiling(count / (double)pageSize);
 
 
-            return  new PaginatedList<Property>(properties, pageIndex, totalPages);
-            }
+            return new PaginatedList<Property>(properties, pageIndex, totalPages);
+        }
 
-        public async Task<Property?> GetListingByIdAsync(Guid id)
+        public async Task<GetListingByIdDto> GetListingByIdAsync(Guid id)
         {
             var property = await _context.Properties
-                .Include(p => p.Lister)
                 .Include(p => p.PaymentInformation)
                 .Include(p => p.PropertyLocation)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
-            return property;
+            if (property == null)
+                return null;
+
+            var propertyPhotos = await _context.PropertyPhotos
+                .Where(pp => pp.PropertyId == id)
+                .Select(pp => new PropertyPhotoDto
+                {
+                    Url = pp.Url,
+                    CreatedAt = pp.CreatedAt,
+                    UpdatedAt = pp.UpdatedAt,
+                    PropertyId = pp.PropertyId
+                }).ToListAsync();
+
+            var propertyVideos = await _context.PropertyVideos
+                .Where(pv => pv.PropertyId == id)
+                .Select(pv => new PropertyVideoDto
+                {
+                    Url = pv.Url,
+                    CreatedAt = pv.CreatedAt,
+                    UpdatedAt = pv.UpdatedAt,
+                    PropertyId = pv.PropertyId
+                }).ToListAsync();
+
+            var residentialProperties = await _context.ResidentialProperties.FirstOrDefaultAsync(rp => rp.PropertyId == id);
+            var propertyAmenity = await _context.PropertyAmenities.Where(pa => pa.PropertyId == id).ToListAsync();
+            var commercialProperties = await _context.CommercialProperties.FirstOrDefaultAsync(cp => cp.PropertyId == id);
+
+
+
+            return new GetListingByIdDto
+            {
+                Property = property,
+                ResidentialProperty = residentialProperties,
+                CommercialProperty = commercialProperties,
+                PropertyAmenity = propertyAmenity,
+                PropertyPhotos = propertyPhotos,
+                PropertyVideos = propertyVideos
+            };
         }
     }
 }

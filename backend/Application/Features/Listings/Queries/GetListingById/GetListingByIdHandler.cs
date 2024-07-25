@@ -2,11 +2,11 @@ using Application.Contracts;
 using Domain.Entities;
 using MediatR;
 using Application.Models.ApiResult;
-
+using Application.Models.Dto.ListingDto.GetListingByIdDto;
 
 namespace Application.Features.Listings.Queries.GetListingById
 {
-    public class GetListingByIdHandler : IRequestHandler<GetListingByIdQuery, Result<Property>>
+    public class GetListingByIdHandler : IRequestHandler<GetListingByIdQuery, Result<GetListingByIdDto>>
     {
         private readonly IListingRepository _propertyRepository;
 
@@ -15,16 +15,16 @@ namespace Application.Features.Listings.Queries.GetListingById
             _propertyRepository = propertyRepository;
         }
 
-        public async Task<Result<Property>> Handle(GetListingByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetListingByIdDto>> Handle(GetListingByIdQuery request, CancellationToken cancellationToken)
         {
-            var property = await _propertyRepository.GetListingByIdAsync(request.Id);
+            var propertyDto = await _propertyRepository.GetListingByIdAsync(request.Id);
 
-            if (property == null)
+            if (propertyDto == null)
             {
-                return new Result<Property>(false, ResultStatusCode.NotFound, null, "Property not found.");
+                return new Result<GetListingByIdDto>(false, ResultStatusCode.NotFound, null, "Property not found.");
             }
 
-            return new Result<Property>(true, ResultStatusCode.Success, property, "Property found.");
+            return new Result<GetListingByIdDto>(true, ResultStatusCode.Success, propertyDto, "Property found.");
         }
     }
 }

@@ -1,5 +1,6 @@
 using Domain.Entities;
 using Domain.Models;
+using Application.Models.Dto.ListingDto.GetListingByIdDto;
 
 namespace Application.Contracts
 {
@@ -19,6 +20,6 @@ namespace Application.Contracts
             int? minPropertySize, int? maxPropertySize,
             List<string>? amenities);
 
-        Task<Property?> GetListingByIdAsync(Guid id);
+        Task<GetListingByIdDto> GetListingByIdAsync(Guid id);
     }
 }
