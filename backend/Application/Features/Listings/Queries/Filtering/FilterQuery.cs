@@ -30,14 +30,14 @@ namespace Application.Features.Listings.Queries.Filtering
 
         public int? maxPropertySize { get; set;}
 
-        public string? amenities { get; set; }
+        public List<string>? amenities { get; set; }
 
 
         public FilterQuery(
             int PageIndex, int PageSize, string? ListingType,
             string? PropertyType, string? SubType , int? MinPrice, 
             int? MaxPrice, string? PriceFrequency, int? MinPropertySize, 
-            int? MaxPropertySize, string? Amenities
+            int? MaxPropertySize, List<string>? Amenities
 
             )
         {

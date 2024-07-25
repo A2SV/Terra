@@ -17,6 +17,6 @@ namespace Application.Contracts
             string? subType, int? minPrice,
             int? maxPrice, string? paymentFrequency,
             int? minPropertySize, int? maxPropertySize,
-            string? amenities);
+            List<string>? amenities);
     }
 }
