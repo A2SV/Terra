@@ -10,7 +10,7 @@ interface SubmitButtonProps {
   setError: (message: string) => void;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, setError  }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, setError }) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -178,26 +178,25 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         body: JSON.stringify(finalData),
       });
 
-      console.log(response)
+      console.log(response);
 
       if (response.ok) {
         setSuccessMessage("Listing Has Been Added Sucessfully");
-          setTimeout(() => {
-            setSuccessMessage("");
-            router.push("/");
-          }, 5000);
+        setTimeout(() => {
+          setSuccessMessage("");
+          router.push("/");
+        }, 5000);
       } else {
         setError("Failed To Add listing. Please try again.");
         setTimeout(() => {
           setError("");
         }, 5000);
       }
-      
     } catch (error) {
       setError("Failed To Add listing. Please try again.");
-        setTimeout(() => {
-          setError("");
-        }, 5000);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
 
     setLoading(false);
