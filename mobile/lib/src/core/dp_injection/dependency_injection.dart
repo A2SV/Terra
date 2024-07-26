@@ -10,6 +10,9 @@ import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_pa
 import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
+import 'package:mobile/src/features/dashboard/data/data.dart';
+import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -46,4 +49,27 @@ Future<void> init() async {
       () => OTPBloc(otpUseCase: sl(), resendOtpUseCase: sl()));
 
   sl.registerLazySingleton(() => OTPUseCase(sl()));
+
+  sl
+    ..registerLazySingleton(
+      () => DashboardRemoteDataSourceImpl(
+        sl<http.Client>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => DashboardRepositoryImpl(
+        remoteDataSource: sl<DashboardRemoteDataSourceImpl>(),
+        network: sl<NetworkImpl>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GetListingsUseCase(
+        dashboardRepository: sl<DashboardRepositoryImpl>(),
+      ),
+    )
+    ..registerFactory(
+      () => DashboardBloc(
+        getListingsUseCase: sl<GetListingsUseCase>(),
+      ),
+    );
 }

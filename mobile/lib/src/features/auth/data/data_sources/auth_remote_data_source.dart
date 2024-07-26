@@ -32,9 +32,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Either<Failure, UserModel>> login(
       String username, String password) async {
-    String url = 'http://terra.runasp.net/api/Auth/login';
+    // String url = 'http://terra.runasp.net/api/Auth/login';
 
-    final response = await http.post(Uri.parse(url),
+    final response = await http.post(Uri.parse(AppStrings.loginUrl),
         body: jsonEncode({'username': username, 'password': password}),
         headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
@@ -75,7 +75,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String phoneNumber,
     required String role,
   }) async {
-    final result = await _client.post(Uri.parse('$baseUrl$registerUrl'),
+    final result = await _client.post(Uri.parse(AppStrings.registerUrl),
         headers: {
           'Content-type': 'application/json',
         },

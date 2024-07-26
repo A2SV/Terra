@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 // import 'package:mobile/src/core/theme/light_theme_colors.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -44,7 +45,11 @@ class OnboardingScreen1 extends StatelessWidget {
                   SizedBox(width: 19.w),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, "/signup");
+                      switchScreen(
+                              context: context,
+                              routeName: AppRoutes.signup,
+                              popAndPush: true,
+                            );
                     },
                     child: const SkipButton(),
                   ),
