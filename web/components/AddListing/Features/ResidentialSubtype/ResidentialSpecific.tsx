@@ -39,7 +39,6 @@ const ResidentialSpecific: React.FC<{
     <div className="rounded-lg font-nunito flex">
       <div>
         <div className="p-6">
-          <form className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-black font-semibold">Bedrooms</label>
@@ -102,7 +101,6 @@ const ResidentialSpecific: React.FC<{
                 </select>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </div>

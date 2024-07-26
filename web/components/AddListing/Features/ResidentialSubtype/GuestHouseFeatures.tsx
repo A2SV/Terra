@@ -15,7 +15,6 @@ const GuestHouseFeatures: React.FC<{
 
   return (
     <div className="p-6">
-      <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-black font-semibold">Star rating</label>
@@ -41,7 +40,6 @@ const GuestHouseFeatures: React.FC<{
             </select>
           </div>
         </div>
-      </form>
     </div>
   );
 };

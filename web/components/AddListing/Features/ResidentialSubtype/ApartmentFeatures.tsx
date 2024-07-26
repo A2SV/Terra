@@ -29,7 +29,6 @@ const ApartmentFeatures: React.FC<{
   return (
     <div>
       <div className="p-6">
-        <form className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-black font-semibold">
@@ -59,9 +58,9 @@ const ApartmentFeatures: React.FC<{
             </div>
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center my-3">
             <div className="flex">
-              <label className="block text-sm text-black font-semibold pr-3">
+              <label className=" text-sm text-black font-semibold pr-3">
                 Student-Friendly
               </label>
               <input
@@ -96,7 +95,6 @@ const ApartmentFeatures: React.FC<{
               />
             </div>
           </div>
-        </form>
       </div>
     </div>
   );

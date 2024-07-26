@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation";
 
 interface SubmitButtonProps {
   data: any;
+  setSuccessMessage: (message: string) => void;
+  setError: (message: string) => void;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, setError  }) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -176,14 +178,26 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
         body: JSON.stringify(finalData),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Request failed: ${errorText}`);
-      }
+      console.log(response)
 
-      router.push("/");
+      if (response.ok) {
+        setSuccessMessage("Listing Has Been Added Sucessfully");
+          setTimeout(() => {
+            setSuccessMessage("");
+            router.push("/");
+          }, 5000);
+      } else {
+        setError("Failed To Add listing. Please try again.");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      }
+      
     } catch (error) {
-      console.error("Error:", error);
+      setError("Failed To Add listing. Please try again.");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
     }
 
     setLoading(false);

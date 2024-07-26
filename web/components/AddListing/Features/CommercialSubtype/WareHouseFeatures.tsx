@@ -19,7 +19,6 @@ const WareHouseFeatures: React.FC<{
 
   return (
     <div className="p-6">
-      <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-black font-semibold">Ceiling height</label>
@@ -120,7 +119,6 @@ const WareHouseFeatures: React.FC<{
             </select>
           </div>
         </div>
-      </form>
     </div>
   );
 };

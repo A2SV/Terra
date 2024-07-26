@@ -24,7 +24,6 @@ const HouseFeatures: React.FC<{
   return (
     <div>
       <div className="p-6">
-        <form className="space-y-4">
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm text-black font-semibold pt-2 pr-5">
@@ -63,7 +62,6 @@ const HouseFeatures: React.FC<{
               />
             </div>
           </div>
-        </form>
       </div>
     </div>
   );
