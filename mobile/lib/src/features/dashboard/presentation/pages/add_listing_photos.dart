@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
+import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/upload_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/utils/utils.dart';
 
 class AddListingMediaPage extends StatefulWidget {
-  AddListingMediaPage({Key? key}) : super(key: key);
+  const AddListingMediaPage({super.key});
 
   @override
   State<AddListingMediaPage> createState() => _AddListingMediaPageState();
-
-  static void _onUploadTap() {
-    // Handle upload property pictures tap
-  }
 }
 
 class _AddListingMediaPageState extends State<AddListingMediaPage> {
@@ -66,8 +62,8 @@ class _AddListingMediaPageState extends State<AddListingMediaPage> {
               ),
             ),
             SizedBox(height: 4.h),
-            const UploadField(
-              onTap: AddListingMediaPage._onUploadTap,
+            UploadField(
+              onTap: _onUploadTap,
             ),
             SizedBox(height: 5.h),
             const Text('Video Link (YouTube)'),
@@ -115,5 +111,8 @@ class _AddListingMediaPageState extends State<AddListingMediaPage> {
         ),
       ),
     );
+  }
+
+  void _onUploadTap() {
   }
 }

@@ -7,15 +7,13 @@ import 'package:mobile/src/core/error/error_pages/404_page.dart';
 import 'package:mobile/src/core/error/error_pages/no_network_page.dart';
 import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/core/network/network_info.dart';
-import 'package:mobile/src/core/theme/theme_config.dart';
+import 'package:mobile/src/core/routes/routes_config.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
-import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
-import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
@@ -29,8 +27,6 @@ import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dar
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'src/features/dashboard/presentation/pages/dashboard.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
