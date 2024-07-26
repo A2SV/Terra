@@ -52,6 +52,8 @@ namespace Persistence.Repositories
 
 
             var properties = await query
+                .Include(p => p.PaymentInformation)
+                .Include(p => p.PropertyLocation)
                 .OrderBy(p => p.CreatedAt)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
