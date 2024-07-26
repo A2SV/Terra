@@ -5,7 +5,7 @@ using Domain.Enums;
 
 namespace Application.Features.Listings.Dtos
 {
-    public class PropertyDto
+    public class DetailedPropertyDto
     {
         [Key]
         public Guid Id { get; set; }
@@ -33,5 +33,8 @@ namespace Application.Features.Listings.Dtos
         public PropertyLocation PropertyLocation { get; set; } = null!;
         public List<PropertyPhotoDto>? PropertyPhotos { get; set; }
         public List<PropertyVideoDto>? PropertyVideos { get; set; }
+        public List<AmenityDto>? PropertyAmenities { get; set; }
+        public CommercialPropertyDto? CommercialProperty { get; set; }
+        public ResidentialPropertyDto? ResidentialProperty { get; set; }
     }
 }

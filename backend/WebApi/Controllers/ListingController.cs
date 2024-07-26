@@ -8,6 +8,7 @@ using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 using Application.Features.Listings.Dtos;
+using Application.Features.Listings.Queries.GetListingById;
 
 namespace WebApi.Controllers
 {
@@ -46,6 +47,14 @@ namespace WebApi.Controllers
             var listings = await _mediator.Send(command);
 
             return Ok(listings);
+        }
+
+        [HttpGet("id")]
+        public async Task<ActionResult<DetailedPropertyDto>> GetListingById([FromQuery] GetListingByIdQuery query)
+        {
+            var listing = await _mediator.Send(query);
+            
+            return Ok(listing);
         }
 
         //[Authorize]
