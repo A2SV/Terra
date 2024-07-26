@@ -1,6 +1,6 @@
 "use client";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {env} from "next-runtime-env"
+import { env } from "next-runtime-env";
 
 const fetchWithToken = async (args: any, api: any, extraOptions: any) => {
   const token = sessionStorage.getItem("token");
