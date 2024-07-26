@@ -76,7 +76,7 @@ class _CustomButtonState extends State<CustomButton>
         },
         child: Container(
           decoration: BoxDecoration(
-            color: widget.backgroundColor ?? AppCommonColors.mainBlueButton,
+            color: widget.disabled==true? Colors.grey:widget.backgroundColor ?? AppCommonColors.mainBlueButton,
             borderRadius: BorderRadius.circular(
               widget.borderRadius ?? 14.0,
             ),
@@ -92,7 +92,7 @@ class _CustomButtonState extends State<CustomButton>
                       widget.borderRadius ?? 10,
                     ),
                     side: BorderSide(
-                      color: widget.borderColor ?? AppCommonColors.activeButton,
+                      color: widget.disabled==true?Colors.grey:widget.borderColor ?? AppCommonColors.activeButton,
                     ),
                   ),
               padding: EdgeInsets.zero,
