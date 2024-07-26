@@ -6,9 +6,12 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
+import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 final routes = <GoRoute>[
   GoRoute(
@@ -38,7 +41,7 @@ final routes = <GoRoute>[
   ),
   GoRoute(
     name: AppRoutes.dashboard,
-    path: '/${AppRoutes.home}',
+    path: '/${AppRoutes.dashboard}',
     builder: (context, state) => const DashboardPage(),
   ),
   GoRoute(
@@ -56,6 +59,22 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.addListingMedia}',
     builder: (context, state) => const AddListingMediaPage(),
   ),
+  GoRoute(
+    name: AppRoutes.addListingContact,
+    path: '/${AppRoutes.addListingContact}',
+    builder: (context, state) => const AddListingContactPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.listingFilters,
+    path: '/${AppRoutes.addListingMedia}',
+    builder: (context, state) => const ListingsFilters(),
+  ),
+  GoRoute(
+    name: AppRoutes.onboarding,
+    path: '/${AppRoutes.onboarding}',
+    builder: (context, state) => const OnboardingScreen(),
+  ),
+
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
   //   path: '/${EditBlogScreen.routeName}',
@@ -105,13 +124,14 @@ class AppRoutes {
   static const String otp = 'otp';
   static const String home = '';
   static const String signup = 'signup';
+  static const String onboarding = 'onboarding';
   static const String signin = 'signin';
   static const String passwordReset = 'password-reset';
   static const String forgotPassword = 'forgot-password';
   static const String dashboard = 'dashboard';
   static const String listingDetail = 'listing-detail';
+  static const String listingFilters = 'listing-filters';
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
-  static const String blogsDashboard = "blogs-dashboard";
-  static const String myblogs = "my-blogs";
+  static const String addListingContact = "add-listing-contact";
 }
