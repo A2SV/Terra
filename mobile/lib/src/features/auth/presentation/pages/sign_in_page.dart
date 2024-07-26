@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
@@ -72,8 +73,11 @@ class _SignInPageState extends State<SignInPage> {
                         SizedBox(width: 19.w),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, "/dashboard");
+                            switchScreen(
+                              context: context,
+                              routeName: AppRoutes.dashboard,
+                              popAndPush: true,
+                            );
                           },
                           child: const SkipButton(),
                         ),
