@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Domain.Common;
+using Domain.Entities;
 using Domain.Enums;
 
-namespace Domain.Entities
+namespace Application.Features.Listings.Dtos
 {
-    public class Property : BaseEntity
+    public class PropertyDto
     {
         [ForeignKey(nameof(Lister))]
         public string ListerId { get; set; } = null!;
@@ -17,7 +17,8 @@ namespace Domain.Entities
         [MaxLength(100)]
         public required string Title { get; set; }
         public string? Description { get; set; }
-        public required PropertyType PropertyType { get; set; }
+        public required ResidentialOrCommercial PropertyType { get; set;}
+        public required PropertyType PropertySubType { get; set; }
         public PropertyPublishStatus PublishStatus { get; set; } = PropertyPublishStatus.Unpublished;
         public PropertyMarketStatus MarketStatus { get; set; } = PropertyMarketStatus.Unavailable;
         public required PropertyListingType ListingType { get; set; }
@@ -28,5 +29,7 @@ namespace Domain.Entities
         public User Lister { get; set; } = null!;
         public PaymentInformation PaymentInformation { get; set; } = null!;
         public PropertyLocation PropertyLocation { get; set; } = null!;
+        public List<PropertyPhotoDto>? PropertyPhotos { get; set; }
+        public List<PropertyVideoDto>? PropertyVideos { get; set; }
     }
 }
