@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import OtpInput from "react-otp-input";
 import axios from "axios";
 import { env } from "next-runtime-env";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "../Common/Reusable/ErrorMessage";
+import AuthButton from "../Common/Auth/AuthButton";
 
 interface OtpVerificationProps {
   email: string;
@@ -15,18 +16,22 @@ interface OtpVerificationProps {
 const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
   const [otp, setOtp] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const baseUrl = env("NEXT_PUBLIC_BASE_URL");
   const router = useRouter();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
       const response = await axios.post(baseUrl + "Auth/VerifyOTP", {
         otp,
         email,
       });
       if (response.status === 200) {
-        router.push(`/reset/${email}`);
+        router.push(`/auth`);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -36,6 +41,8 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
         setMessage("An error occurred. Please try again later.");
       }
     }
+
+    setLoading(false);
   };
 
   const handleReset = () => {
@@ -89,15 +96,16 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
               />
               <div className="pt-7 pb-10">
                 <p className="text-[#3A3A3A80]" onClick={handleReset}>
-                  Didn&apos;t receive OTP? <span className="text-btnColor underline">Resend</span>
+                  Didn&apos;t receive OTP?{" "}
+                  <span className="text-btnColor underline hover:cursor-pointer">Resend</span>
                 </p>
               </div>
-              <button
-                onClick={handleSubmit}
-                className="bg-btnColor text-btnTextColor px-12 py-3 rounded-[24px]"
-              >
-                Submit
-              </button>
+              <AuthButton
+                loading={loading}
+                isButtonDisabled={false}
+                text="Submit"
+                action={handleSubmit}
+              />
             </div>
           </div>
 

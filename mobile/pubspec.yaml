@@ -37,6 +37,7 @@ dependencies:
   mocktail: ^1.0.4
   syncfusion_flutter_sliders: ^26.1.42
   dotted_border: ^2.1.0
+  http: ^1.2.2
 
 dev_dependencies:
   bloc_test: ^9.1.7
@@ -53,6 +54,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/images/help/
+    - assets/images/listingIcons/
 
   fonts:
     - family: Nunito

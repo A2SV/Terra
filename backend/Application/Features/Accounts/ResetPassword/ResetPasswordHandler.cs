@@ -26,7 +26,9 @@ public class ResetPasswordHandler : IRequestHandler<ResetPasswordCommand, Result
             return new Result(false, ResultStatusCode.NotFound, "User not found.");
         }
 
-        var result = await _userManager.ResetPasswordAsync(user, request.Token, request.NewPassword);
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        var result = await _userManager.ResetPasswordAsync(user, token, request.NewPassword);
 
         if (!result.Succeeded)
         {

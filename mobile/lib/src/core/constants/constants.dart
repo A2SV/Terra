@@ -1,3 +1,9 @@
-const String baseUrl = 'http://terra.runasp.net';
+class AppStrings {
+  static String baseUrl = 'https://terra-wb9c.onrender.com';
 
-const String registerUrl = '/api/Auth/register';
+  static String registerUrl = '$baseUrl/api/auth/register';
+  static String loginUrl = '$baseUrl/api/auth/login';
+  static String otpEndPoint = '$baseUrl/api/auth/VerifyOTP';
+  static String resendOtpEndPoint = '$baseUrl/api/auth/ResendOTP';
+  static String getAllListingsEndPoint = '$baseUrl/api/listing';
+}

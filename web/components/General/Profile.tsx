@@ -6,6 +6,7 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { GrPowerShutdown } from "react-icons/gr";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export function ProfilePic() {
   const [isHovering, setIsHovering] = useState(false);
@@ -64,9 +65,11 @@ export function ProfilePic() {
               <p className="text-[14px]"> Settings </p>
             </div>
             <div className="border-t my-2"></div>
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-b-lg">
-              <GrPowerShutdown className="mr-3" /> <p className="text-[14px]"> Sign out </p>
-            </div>
+            <Link href="/auth">
+              <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-b-lg">
+                <GrPowerShutdown className="mr-3" /> <p className="text-[14px]"> Sign out </p>
+              </div>
+            </Link>
           </div>
         </div>
       )}

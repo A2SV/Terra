@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
@@ -33,8 +34,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
@@ -45,18 +44,10 @@ class _SignUpPageState extends State<SignUpPage> {
             message: state.message,
           );
         } else if (state is AuthenticationSuccess) {
-          
           Navigator.pushNamed(context, '/otp');
         }
       },
       builder: (context, state) {
-        // if (state is AuthenticationLoading) {
-        //   return const Scaffold(
-        //     body: Center(
-        //       child: CircularProgressIndicator(),
-        //     ),
-        //   );
-        // }
         return Form(
           key: _formKey,
           child: Scaffold(
@@ -80,8 +71,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         SizedBox(width: 19.w),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, "/dashboard");
+                            switchScreen(
+                              context: context,
+                              routeName: AppRoutes.dashboard,
+                              popAndPush: true,
+                            );
                           },
                           child: const SkipButton(),
                         ),
@@ -204,22 +198,23 @@ class _SignUpPageState extends State<SignUpPage> {
                     CustomButton(
                       showSuffixWidget: true,
                       suffixWidget: state is AuthenticationLoading
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal : 25.0),
-                              child: SizedBox(
-                                height:30.0,
-                                width:30.0,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
+                          ? const Center(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                child: SizedBox(
+                                  height: 30.0,
+                                  width: 30.0,
+                                  child: CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : Container(),
-                        disabled: state is AuthenticationLoading,
-
-                      text: 'Create Account',
+                            )
+                          : Container(),
+                      disabled: state is AuthenticationLoading,
+                      text: state is AuthenticationLoading
+                          ? ""
+                          : 'Create Account',
                       onPressed: () {
                         final isValid = CustomValidator.validateForm(_formKey);
 
@@ -232,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             );
                             return;
                           }
-                           
+
                           context.read<AuthenticationBloc>().add(
                               AuthenticationRegisterUserEvent(
                                   firstName: firstNameController.text.trim(),
@@ -298,6 +293,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
   }
+
   @override
   void dispose() {
     firstNameController.dispose();
@@ -305,7 +301,7 @@ class _SignUpPageState extends State<SignUpPage> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-  
+
     super.dispose();
   }
 
@@ -317,5 +313,5 @@ class _SignUpPageState extends State<SignUpPage> {
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
     super.initState();
-}
+  }
 }

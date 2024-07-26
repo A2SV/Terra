@@ -14,9 +14,9 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
     return NextResponse.redirect(url);
   }
 
-  if (pathname.startsWith("/admin")) {
+  if (pathname.startsWith("/add-listing")) {
     if (session === null) {
-      url.pathname = "/auth/login";
+      url.pathname = "/auth";
       return NextResponse.redirect(url);
     }
   }
@@ -25,7 +25,7 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 };
 
 export const config = {
-  matcher: ["/admin/:path*", "/auth/:path*", "/(am|en)/:path*"],
+  matcher: ["/admin/:path*", "/auth/:path*", "/(am|en)/:path*", "/add-listing"],
 };
 
 export default createMiddleware({

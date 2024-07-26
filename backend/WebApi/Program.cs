@@ -31,6 +31,11 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using DotNetEnv;
 using Application.Mappings;
+using Google.Cloud.Storage.V1;
+using Infrastructure.StorageService;
+using WebApi.Filters;
+using Application.Features.Listings.Queries.Filtering;
+using Application.Features.Listings.Queries.GetAllListings;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,6 +69,7 @@ builder.Services.AddScoped<IOTPService, OTPService>();
 builder.Services.AddScoped<IOTPRepository, OTPRepository>();
 builder.Services.AddScoped<IListingRepository, ListingRepository>();
 builder.Services.AddScoped<IAmenityRepository, AmenityRepository>();
+builder.Services.AddScoped<IStorageService, StorageService>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));
@@ -81,6 +87,10 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(Cre
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(InitiateCreateListingCommand).Assembly));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAmenityQuery).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(FilterQuery).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(GetAllListingQuery).Assembly));
+
+// builder.Services.AddSingleton(StorageClient.Create());
 
 builder.Services.AddControllers();
 
@@ -92,7 +102,10 @@ builder.Services.AddApiVersioning(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.OperationFilter<WebApi.Filters.FileUploadOperationFilter>();
+});
 
 builder.Services.AddIdentity<User, IdentityRole>();
 builder.Services.AddIdentityCore<User>()
@@ -170,6 +183,10 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
+
+        policy.WithOrigins("https://terra-web-deployment.onrender.com/")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
     });
 });
 
@@ -179,25 +196,25 @@ var app = builder.Build();
 
 // Apply migrations at startup
 // Apply migrations at startup
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        // Migrate AppAuthDbContext
-        var authDbContext = services.GetRequiredService<AppAuthDbContext>();
-        authDbContext.Database.Migrate();
-
-        // Migrate PropertyListingDbContext
-        var propertyListingDbContext = services.GetRequiredService<PropertyDbContext>();
-        propertyListingDbContext.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating the database.");
-    }
-}
+// using (var scope = app.Services.CreateScope())
+// {
+//     var services = scope.ServiceProvider;
+//     try
+//     {
+//         // Migrate AppAuthDbContext
+//         var authDbContext = services.GetRequiredService<AppAuthDbContext>();
+//         authDbContext.Database.Migrate();
+//
+//         // Migrate PropertyListingDbContext
+//         var propertyListingDbContext = services.GetRequiredService<PropertyDbContext>();
+//         propertyListingDbContext.Database.Migrate();
+//     }
+//     catch (Exception ex)
+//     {
+//         var logger = services.GetRequiredService<ILogger<Program>>();
+//         logger.LogError(ex, "An error occurred while migrating the database.");
+//     }
+// }
 
 
 // Configure the HTTP request pipeline.

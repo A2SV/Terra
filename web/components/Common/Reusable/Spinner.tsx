@@ -1,9 +1,7 @@
-import React from "react";
+"use client";
 
-const Spinner = () => {
-  return (
-    <div className="border-2 border-t-4 border-t-transparent border-white rounded-full animate-spin size-5 mx-auto"></div>
-  );
-};
+import { Spinner } from "flowbite-react";
 
-export default Spinner;
+export default function SpinnerComponent() {
+  return <Spinner aria-label="Default status example" className="text-terrablue" />;
+}

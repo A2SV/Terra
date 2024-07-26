@@ -33,7 +33,7 @@ describe("OtpVerification", () => {
       otp: expect.any(String),
       email: "test@example.com",
     });
-    expect(push).toHaveBeenCalledWith(`/reset/test@example.com`);
+    expect(push).toHaveBeenCalledWith(`/auth`);
   });
 
   test("handles OTP resend", () => {

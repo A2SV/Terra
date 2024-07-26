@@ -89,9 +89,7 @@ class TopBarSearchListingInput extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: sideContainerColor!.withOpacity(0.25) ??
-                    Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
+                color: sideContainerColor!.withOpacity(0.25), spreadRadius: 2,
                 blurRadius: 8,
                 offset: const Offset(2, 3), // changes position of shadow
               ),
