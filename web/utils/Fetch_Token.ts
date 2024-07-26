@@ -1,5 +1,6 @@
 "use client";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { env } from "next-runtime-env";
 
 const fetchWithToken = async (args: any, api: any, extraOptions: any) => {
   const token = sessionStorage.getItem("token");
@@ -9,7 +10,7 @@ const fetchWithToken = async (args: any, api: any, extraOptions: any) => {
   }
 
   return fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    baseUrl: env("NEXT_PUBLIC_BASE_URL"),
     prepareHeaders: (headers) => {
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
