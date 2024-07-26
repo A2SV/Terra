@@ -105,7 +105,7 @@ const Footer = () => {
                     className="text-gray-400 hover:text-blue-500 flex text-[18px]"
                   >
                     <RxEnvelopeClosed className="mr-2" />
-                    terra@gmail.com
+                    terra@a2sv.org
                   </a>
                 </li>
                 <li>
@@ -114,12 +114,12 @@ const Footer = () => {
                     className="text-gray-400 hover:text-blue-500 flex text-[18px]"
                   >
                     <FiPhone className="mr-2" />
-                    terra_company
+                    +233544726002
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-gray-400 hover:text-blue-500 flex text-[18px]">
-                    <CiLocationOn className="mr-2" /> American House, Accra
+                    <CiLocationOn className="mr-2" /> East Legon, Accra
                   </a>
                 </li>
               </ul>
