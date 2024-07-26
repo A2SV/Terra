@@ -1,38 +1,125 @@
 "use client";
 import React from "react";
 import { env } from "next-runtime-env";
+import Spinner from "@/components/Common/Reusable/Spinner";
+import { useRouter } from "next/navigation";
 
 interface SubmitButtonProps {
   data: any;
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const images = data.selectedImages;
+    setLoading(true);
+    const images = data.selectedImages || [];
     const uploadedImageUrls = [];
+
+    type EnumMapping = {
+      [key: string]: { [key: string]: number };
+    };
+
+    const enumMapping: EnumMapping = {
+      propertyType: {
+        House: 0,
+        Apartment: 1,
+        StudentHostel: 2,
+        Hotel: 3,
+        GuestHouse: 4,
+        OfficeSpace: 5,
+        Shop: 6,
+        Warehouse: 7,
+        EventSpace: 8,
+      },
+      listingType: {
+        Rent: 0,
+        Sale: 1,
+      },
+      paymentCurrency: {
+        Ghs: 0,
+        Usd: 1,
+        Eur: 2,
+        Gbp: 3,
+      },
+      paymentFrequency: {
+        Daily: 0,
+        Weekly: 1,
+        Monthly: 2,
+        Annually: 3,
+        PerSemester: 4,
+        PerAcademicYear: 5,
+        Once: 6,
+      },
+      propertyMarketStatus: {
+        Unavailable: 0,
+        Available: 1,
+        Rented: 2,
+        Sold: 3,
+      },
+      propertyPublishStatus: {
+        Unpublished: 0,
+        Published: 1,
+        InReview: 2,
+      },
+      studentHostelLocation: {
+        OnCampus: 0,
+        OffCampus: 1,
+      },
+      studentHostelRoomTypes: {
+        Single: 0,
+        Double: 1,
+        Triple: 2,
+        Quad: 3,
+        Dormitory: 4,
+      },
+      studentHostelType: {
+        Male: 0,
+        Female: 1,
+        Coed: 2,
+      },
+      warehouseSuitableGoods: {
+        GeneralMerchandise: 0,
+        PerishableGoods: 1,
+        HazardousMaterials: 2,
+        Electronics: 3,
+        IndustrialOrConstructionMaterials: 4,
+      },
+      eventSpaceSuitableEvents: {
+        Wedding: 0,
+        Religious: 1,
+        Funeral: 2,
+        Festival: 3,
+        Conference: 4,
+        Party: 5,
+        Concert: 6,
+      },
+      officeSpaceType: {
+        OpenPlan: 0,
+        IndividualOffice: 1,
+      },
+    };
+
+    const getEnumValue = (category: keyof EnumMapping, value: string | number) => {
+      return enumMapping[category]?.[value] ?? value;
+    };
 
     try {
       const baseUrl = env("NEXT_PUBLIC_BASE_URL");
 
       for (const imageUrl of images) {
-        // Fetch the blob from the URL
         const response = await fetch(imageUrl);
         const blob = await response.blob();
-
-        // Convert the blob to a File object
         const file = new File([blob], "property-image.png", { type: blob.type });
-
         const formData = new FormData();
         formData.append("file", file);
 
-        // Send the image to the server
         const imageUploadResponse = await fetch(`${baseUrl}file/upload?fileType=property-image`, {
           method: "POST",
           body: formData,
         });
-
-        console.log("imageUploadResponse", imageUploadResponse);
 
         if (!imageUploadResponse.ok) {
           throw new Error("Image upload failed");
@@ -42,130 +129,21 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
         uploadedImageUrls.push(imageResult.url);
       }
 
-      const apartment = {
-        furnishedStatus: data.furnishedStatus,
-        numberOfBedrooms: data.bedrooms,
-        numberOfBathrooms: data.bathrooms,
-        numberOfWashrooms: data.washrooms,
-        numberOfKitchens: data.kitchens,
-        numberOfFloorsInBuilding: data.numFloors,
-        floorNumberOfUnit: data.floorNumber,
-        laundryFacilityAvailable: data.laundryFacility,
-        cleaningServiceAvailable: data.cleaningService,
-        studentFriendly: data.studentFriendly,
-      };
-
-      const eventSpace = {
-        totalFloors: data.totalFloors,
-        floorNumber: data.floorNumber,
-        parkingSpace: data.parkingSpaces,
-        maximumCapacity: data.maxCapacity,
-        cateringServiceAvailable: data.cateringServices === "Yes",
-        audioVisualEquipmentsAvailable: data.audioVisualEquipment === "Yes",
-        suitableEvents: data.selectedeventTypes,
-      };
-
-      const guestHouse = {
-        furnishedStatus: data.furnishedStatus,
-        numberOfBedrooms: data.bedrooms,
-        numberOfBathrooms: data.bathrooms,
-        numberOfWashrooms: data.washrooms,
-        numberOfKitchens: data.kitchens,
-        starRating: data.starRating,
-        restaurantOnSite: data.restaurantOnSite === "Yes",
-      };
-
-      const hotel = {
-        furnishedStatus: data.furnishedStatus,
-        numberOfBedrooms: data.bedrooms,
-        numberOfBathrooms: data.bathrooms,
-        numberOfWashrooms: data.washrooms,
-        numberOfKitchens: data.kitchens,
-        starRating: data.starRating,
-        restaurantOnSite: data.restaurantOnSite === "Yes",
-      };
-
-      const house = {
-        furnishedStatus: data.furnishedStatus,
-        numberOfBedrooms: data.bedrooms,
-        numberOfBathrooms: data.bathrooms,
-        numberOfWashrooms: data.washrooms,
-        numberOfKitchens: data.kitchens,
-        numberOfStories: data.numStories,
-        garageSpace: data.garageSpaces,
-        studentFriendly: data.studentFriendly,
-      };
-
-      const officeSpace = {
-        totalFloors: data.totalFloors,
-        floorNumber: data.floorNumber,
-        parkingSpace: data.parkingSpaces,
-        officeSpaceType: data.officeType,
-        meetingRoomsAvailable: data.meetingRooms === "Yes",
-        receptionAreaAvailable: data.receptionArea === "Yes",
-      };
-
-      const shop = {
-        totalFloors: data.totalFloors,
-        floorNumber: data.floorNumber,
-        parkingSpace: data.parkingSpaces,
-        displayWindowAvailable: data.displayWindow === "Yes",
-        storageRoomSize: data.storageRoom,
-      };
-
-      const studentHostel = {
-        furnishedStatus: data.furnishedStatus,
-        numberOfBedrooms: data.bedrooms,
-        numberOfBathrooms: data.bathrooms,
-        numberOfWashrooms: data.washrooms,
-        numberOfKitchens: data.kitchens,
-        roomTypes: data.selectedroomTypes,
-        studentHostelType: data.hostelType,
-        studentHostelLocation: data.location,
-        sharedFacilities: data.sharedFacilities === "Yes",
-        mealPlanAvailable: data.mealPlanAvailable === "Yes",
-        studyAreaAvailable: data.studyAreaAvailable === "Yes",
-        laundryFacilityAvailable: data.laundryFacility,
-        cleaningServiceAvailable: data.cleaningService,
-      };
-
-      const warehouse = {
-        totalFloors: data.totalFloors,
-        floorNumber: data.floorNumber,
-        parkingSpace: data.parkingSpaces,
-        ceilingHeight: data.ceilingHeight,
-        loadingDockAvailable: data.loadingDocks === "Yes",
-        officeSpaceAvailable: data.officeSpaceIncluded === "Yes",
-        suitableGoods: data.goodsType,
-      };
-
-      const properties = {
-        apartment,
-        eventSpace,
-        guestHouse,
-        hotel,
-        house,
-        officeSpace,
-        shop,
-        studentHostel,
-        warehouse,
-      };
-
       const finalData = {
         listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
         title: data.listingName,
         description: data.listingDescription,
-        propertyType: data.type,
-        listingType: data.category,
-        propertyPublishStatus: 1,
-        propertyMarketStatus: 1,
+        propertyType: getEnumValue("propertyType", 0),
+        listingType: getEnumValue("listingType", 0),
+        propertyPublishStatus: getEnumValue("propertyPublishStatus", 1),
+        propertyMarketStatus: getEnumValue("propertyMarketStatus", 1),
         propertySize: data.landSize,
         availableStartDate: "2024-07-25T12:35:32.051Z",
         availableEndDate: "2024-07-25T12:35:32.051Z",
-        paymentCurrency: 1,
-        paymentFrequency: data.frequency,
+        paymentCurrency: getEnumValue("paymentCurrency", 0),
+        paymentFrequency: getEnumValue("paymentFrequency", 0),
         price: data.price,
-        negotiable: data.negotiable,
+        negotiable: true,
         streetName: "Afariwa RD",
         houseNumber: "GC-0825-261",
         city: "Accra",
@@ -175,11 +153,20 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
         latitude: 180,
         amenities: data.selectedAmenities,
         pictures: uploadedImageUrls,
-        videos: data.video,
-        propertyFeatures: properties,
+        videos: [data.video],
+        apartment: {
+          furnishedStatus: true,
+          numberOfBedrooms: data.bedrooms,
+          numberOfBathrooms: data.bathrooms,
+          numberOfWashrooms: data.washrooms,
+          numberOfKitchens: data.kitchens,
+          numberOfFloorsInBuilding: data.numFloors,
+          floorNumberOfUnit: data.floorNumber,
+          laundryFacilityAvailable: data.laundryFacility,
+          cleaningServiceAvailable: data.cleaningService,
+          studentFriendly: data.studentFriendly,
+        },
       };
-
-      console.log("finalData", finalData);
 
       const response = await fetch(`${baseUrl}listing`, {
         method: "POST",
@@ -190,16 +177,16 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorText = await response.text();
+        throw new Error(`Request failed: ${errorText}`);
       }
 
-      const result = await response.json();
-      console.log("Success:", result);
+      router.push("/");
     } catch (error) {
       console.error("Error:", error);
     }
 
-    console.log("lengthhhh", uploadedImageUrls.length);
+    setLoading(false);
   };
 
   return (
@@ -207,9 +194,9 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data }) => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-btnColor text-white text-sm rounded-full hover:bg-orange-500"
+          className="w-full py-2 px-4 bg-btnColor text-white text-sm rounded-full"
         >
-          Add listing
+          {loading ? <Spinner /> : "Add Listing"}
         </button>
       </form>
     </div>
