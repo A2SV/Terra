@@ -64,8 +64,18 @@ public class StorageService : IStorageService
         return memoryStream;
     }
     
-    // public async Task DeleteFileAsync(string fileName)
-    // {
-    //     await _storageClient.DeleteObjectAsync(_bucketName, fileName);
-    // }
+    public async Task DeleteFileAsync(string fileUrl)
+    {
+        var uri = new Uri(fileUrl);
+        var objectName = uri.AbsolutePath.TrimStart('/'); // Get the object name without leading '/'
+
+        // Ensure the object name does not contain the bucket name twice
+        if (objectName.StartsWith(_bucketName + "/"))
+        {
+            objectName = objectName.Substring(_bucketName.Length + 1);
+        }
+
+        await _storageClient.DeleteObjectAsync(_bucketName, objectName);
+    }
+
 }
