@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile/src/core/error/error_pages/404_page.dart';
+import 'package:mobile/src/core/error/error_pages/no_network_page.dart';
+import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
 import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
@@ -74,6 +77,22 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.onboarding}',
     builder: (context, state) => const OnboardingScreen(),
   ),
+  GoRoute(
+    name: AppRoutes.serverError,
+    path: '/${AppRoutes.serverError}',
+    builder: (context, state) => const ServerErrorPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.noNetwork,
+    path: '/${AppRoutes.noNetwork}',
+    builder: (context, state) => const NetworkErrorPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.notFound,
+    path: '/${AppRoutes.notFound}',
+    builder: (context, state) => const Page404(),
+  ),
+  
 
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
@@ -126,6 +145,9 @@ class AppRoutes {
   static const String signup = 'signup';
   static const String onboarding = 'onboarding';
   static const String signin = 'signin';
+  static const String notFound = 'notFound';
+  static const String serverError = 'serverError';
+  static const String noNetwork = 'noNetwork';
   static const String passwordReset = 'password-reset';
   static const String forgotPassword = 'forgot-password';
   static const String dashboard = 'dashboard';
