@@ -15,7 +15,6 @@ const ShopFeatures: React.FC<{
 
   return (
     <div className="p-6 pt-0">
-      <form>
         <div className="flex">
           <div>
             <label className="block text-sm text-black font-semibold pr-5 pt-1">
@@ -82,7 +81,6 @@ const ShopFeatures: React.FC<{
             </div>
           </div>
         </div>
-      </form>
     </div>
   );
 };

@@ -20,7 +20,6 @@ const CommercialSpecific: React.FC<{
     <div className="rounded-lg font-nunito flex">
       <div>
         <div className="p-6">
-          <form className="space-y-4">
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm text-black font-semibold">Total Floors</label>
@@ -56,7 +55,6 @@ const CommercialSpecific: React.FC<{
                 />
               </div>
             </div>
-          </form>
         </div>
       </div>
     </div>

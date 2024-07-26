@@ -38,7 +38,6 @@ const StudentHostelFeatures: React.FC<{
 
   return (
     <div className="p-6">
-      <form className="space-y-4">
         <div>
           <label className="block text-sm text-black font-semibold">Room type</label>
           <div className="flex flex-wrap gap-2 mt-1">
@@ -91,7 +90,6 @@ const StudentHostelFeatures: React.FC<{
           <label className="block text-sm text-black font-semibold pr-5">Student-Friendly</label>
           <input type="checkbox" checked={studentFriendly} onChange={handleStudentFriendlyChange} />
         </div>
-      </form>
     </div>
   );
 };

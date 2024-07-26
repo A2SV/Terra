@@ -17,7 +17,6 @@ const OfficeSpaceFeatures: React.FC<{
 
   return (
     <div className="p-6">
-      <form action="" className="space-y-4">
         <div className="grid grid-cols-2 gap-4 mb-5">
           <div className="flex">
             <label className="block text-sm text-black font-semibold pr-5 pt-1" htmlFor="openPlan">
@@ -119,7 +118,6 @@ const OfficeSpaceFeatures: React.FC<{
             </div>
           </div>
         </div>
-      </form>
     </div>
   );
 };

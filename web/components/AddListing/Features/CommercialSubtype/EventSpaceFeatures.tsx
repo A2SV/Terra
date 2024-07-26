@@ -38,7 +38,6 @@ const EventSpaceFeatures: React.FC<{ handleInputChange: (name: string, value: an
 
   return (
     <div className="p-6">
-      <form className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-black font-semibold">Maximum capacity</label>
@@ -141,7 +140,6 @@ const EventSpaceFeatures: React.FC<{ handleInputChange: (name: string, value: an
             </div>
           </div>
         </div>
-      </form>
     </div>
   );
 };

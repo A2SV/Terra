@@ -11,6 +11,8 @@ import {
   commercialFeatureComponents,
 } from "./Features/FeatureMapping";
 import SubmitButton from "./SubmitButton";
+import ErrorMessage from "../Common/Reusable/ErrorMessage";
+import SuccessMessage from "../Common/Reusable/SuccessMessage";
 
 const typeOptions: { [key: string]: string[] } = {
   Residential: ["Apartment", "House", "Student's Hostels", "Hotel", "Guest House"],
@@ -100,6 +102,8 @@ const GeneralInfo: React.FC = () => {
   const [commercialSubtype, setCommercialSubtype] = useState<string>("Office Space");
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const amenities = [
     "Air Conditioning",
@@ -236,6 +240,10 @@ const GeneralInfo: React.FC = () => {
 
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
+      {error && <ErrorMessage message={error}></ErrorMessage>}
+      {!error && successMessage && (
+        <SuccessMessage message={successMessage}></SuccessMessage> 
+      )}
       <div className="w-full lg:w-1/2 px-9 lg:mb-16">
         <p className="text-black font-bold text-lg mb-2">General Info</p>
         <div className="border border-gray-300 p-6">
@@ -447,7 +455,7 @@ const GeneralInfo: React.FC = () => {
           <LocationForm handleInputChange={handleInputChange} />
         </div>
         <div>
-          <SubmitButton data={formData} />
+          <SubmitButton setSuccessMessage={setSuccessMessage} setError={setError} data={formData} /> 
         </div>
       </div>
     </div>
