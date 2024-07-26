@@ -43,17 +43,20 @@ namespace Persistence.Repositories
 
         public async Task<PaginatedList<Property>> GetAllListings(int pageIndex, int pageSize)
         {
-            
 
-            IQueryable<Property> query = _context.Properties;
-            
-            
+
+
+            IQueryable<Property> query = _context.Properties
+                                            .Include(p => p.PaymentInformation)
+                                            .Include(p => p.PropertyLocation)
+                                            .Include(p => p.ResidentialProperty)
+                                            .Include(p => p.CommercialProperty);
+
+
             var count = await query.CountAsync();
 
 
             var properties = await query
-                .Include(p => p.PaymentInformation)
-                .Include(p => p.PropertyLocation)
                 .OrderBy(p => p.CreatedAt)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
