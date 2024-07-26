@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import HamburgerMenu from "./Hamburger";
 import { ProfilePic } from "./Profile";
@@ -8,10 +9,30 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar = () => {
-  const [activeItem, setActiveItem] = useState("Home");
+  const router = useRouter();
+  const [activeItem, setActiveItem] = useState<string>("Home");
 
   const handleItemClick = (item: string) => {
     setActiveItem(item);
+    switch (item) {
+      case "Home":
+        router.push("/");
+        break;
+      case "Search":
+        router.push("/");
+        break;
+      case "Student":
+        router.push("/");
+        break;
+      case "About us":
+        router.push("/aboutUs");
+        break;
+      case "Contact us":
+        router.push("/");
+        break;
+      default:
+        router.push("/");
+    }
   };
 
   const { data: session } = useSession();
@@ -32,7 +53,7 @@ const Navbar = () => {
                   className={`px-3 font-nunito ${activeItem === item ? "text-[#03045E]" : "text-black"}`}
                   onClick={() => handleItemClick(item)}
                 >
-                  {item}
+                  <Link href={`/${item.toLowerCase().replace(" ", "")}`}>{item}</Link>
                 </li>
               ))}
             </ul>
