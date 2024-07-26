@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
+import 'package:mobile/src/core/error/error_pages/404_page.dart';
+import 'package:mobile/src/core/error/error_pages/no_network_page.dart';
+import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/core/theme/theme_config.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
@@ -77,6 +80,9 @@ class MainApp extends StatelessWidget {
               '/add-listing-contact': (context) =>
                   const AddListingContactPage(),
               '/filters-page': (context) => const ListingsFilters(),
+              '/404-page': (context) => const Page404(),
+              '/server-error-page': (context) => const ServerErrorPage(),
+              '/network-error-page': (context) => const NetworkErrorPage(),
             },
             debugShowCheckedModeBanner: false,
             darkTheme: ThemeConfig().darkTheme,
