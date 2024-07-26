@@ -10,6 +10,9 @@ import {
   residentialFeatureComponents,
   commercialFeatureComponents,
 } from "./Features/FeatureMapping";
+import SubmitButton from "./SubmitButton";
+import ErrorMessage from "../Common/Reusable/ErrorMessage";
+import SuccessMessage from "../Common/Reusable/SuccessMessage";
 
 const typeOptions: { [key: string]: string[] } = {
   Residential: ["Apartment", "House", "Student's Hostels", "Hotel", "Guest House"],
@@ -24,33 +27,186 @@ const priceFrequencyOptions: { [key: string]: string[] } = {
 };
 
 const GeneralInfo: React.FC = () => {
+  const [formData, setFormData] = useState({
+    listingName: "",
+    category: "",
+    type: "",
+    residentialSubtype: "",
+    commercialSubtype: "",
+    landSize: "",
+    price: 0,
+    frequency: "",
+    negotiable: "",
+    listingDescription: "",
+    selectedAmenities: [],
+    features: {
+      numFloors: 0,
+      floorNumber: 0,
+      studentFriendly: false,
+      laundryFacility: false,
+      cleaningService: false,
+      openPlan: false,
+      individualOffices: false,
+      meetingRooms: false,
+      receptionArea: false,
+      numStories: 0,
+      garageSpaces: false,
+      starRating: 0,
+      restaurantOnSite: "",
+      loadingDocks: "",
+      officeSpaceIncluded: "",
+      goodsSuitableForStorage: "",
+      displayWindow: "",
+      storageRoom: "",
+      maximumCapacity: 0,
+      eventTypes: [],
+      cateringFacilities: "",
+      audioVisualEquipment: "",
+      selectedRoomTypes: [],
+      hostelType: "Male only",
+      hostelLocation: "On campus",
+      furnishedStatus: false,
+      numberOfBedrooms: 0,
+      numberOfBathrooms: 0,
+      numberOfWashrooms: 0,
+      numberOfKitchens: 0,
+      ceilingHeight: 0,
+      parkingSpaces: 0,
+      suitableGoods: [],
+      officeType: "Open Plan",
+      meetingRoomsAvailable: "Yes",
+      receptionAreaAvailable: "Yes",
+      totalFloors: 0,
+      studentHostelType: "",
+      studentHostelLocation: "",
+      sharedFacilities: false,
+      mealPlanAvailable: false,
+      studyAreaAvailable: false,
+      laundryFacilityAvailable: false,
+      cleaningServiceAvailable: false,
+    },
+    images: [],
+    location: {
+      address: "",
+      coordinates: {
+        lat: 0,
+        lng: 0,
+      },
+      video: "",
+    },
+  });
+
   const [type, setType] = useState<string>("Residential");
   const [category, setCategory] = useState<string>("Rent");
   const [residentialSubtype, setResidentialSubtype] = useState<string>("Apartment");
   const [commercialSubtype, setCommercialSubtype] = useState<string>("Office Space");
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const amenities = [
-    "wifi",
-    "Furnished",
-    "Air conditioning",
-    "Ceiling fan",
+    "Air Conditioning",
+    "Heating",
+    "Balcony",
+    "Deck",
+    "Patio",
     "Garden",
-    "Allow oven and stove",
-    "Study room",
-    "Cable tv",
-    "Parking space",
-    "High speed internet",
+    "Garage",
+    "Parking Space",
+    "Security System",
+    "Gated Community",
+    "Elevator",
+    "High-Speed Internet",
+    "Cable TV",
+    "Wi-Fi",
+    "Study Room",
+    "Library",
+    "Cafe",
+    "Fireplace",
+    "Furnished",
+    "Unfurnished",
+    "Wheelchair Accessible",
+    "Pet-Friendly",
+    "Non-Smoking",
+    "Utilities Included",
+    "Swimming Pool",
+    "Washrooms",
+    "Bathrooms",
+    "Kitchen",
+    "Toilet Facilities",
+    "Bedrooms",
+    "Gym",
+    "Spa",
+    "Sauna",
+    "Playground",
+    "Tennis Court",
+    "Basketball Court",
+    "Clubhouse",
+    "Laundry Room",
+    "In-Unit Washer/Dryer",
+    "Shared Laundry Facilities",
+    "Storage Space",
+    "Walk-In Closet",
+    "Dishwasher",
+    "Microwave",
+    "Refrigerator",
+    "Stove/Oven",
+    "Conference Room",
+    "Meeting Room",
+    "Reception Area",
+    "Break Room",
+    "Kitchenette",
+    "On-Site Management",
+    "Business Center",
+    "Loading Dock",
+    "Shipping Area",
+    "24/7 Access",
+    "Printing Facilities",
+    "Copying Facilities",
+    "Mail Room",
+    "Server Room",
+    "Backup Power Supply",
+    "CCTV Surveillance",
+    "Concierge Service",
+    "Cleaning Service",
+    "Maintenance Service",
+    "Guest Parking",
+    "Rooftop Access",
+    "Community Events",
+    "Public Transport Access",
+    "Bike Storage",
+    "Recycling Facilities",
+    "Electric Vehicle Charging Station",
+    "Smart Home Technology",
+    "Solar Panels",
+    "Green Building Certification",
+    "Walking Trails",
+    "Scenic View",
+    "Waterfront Access",
+    "Private Beach",
+    "Beach View",
+    "Dock Access",
   ];
 
+  const handleInputChange = (name: string, value: string | number | boolean | string[]) => {
+    setFormData((prevState: any) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const toggleAmenity = (amenity: string) => {
-    setSelectedAmenities((prev) =>
-      prev.includes(amenity) ? prev.filter((item) => item !== amenity) : [...prev, amenity]
-    );
+    const updatedAmenities = selectedAmenities.includes(amenity)
+      ? selectedAmenities.filter((item) => item !== amenity)
+      : [...selectedAmenities, amenity];
+    setSelectedAmenities(updatedAmenities);
+    handleInputChange("selectedAmenities", updatedAmenities);
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value);
+    handleInputChange("category", event.target.value);
   };
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,21 +214,34 @@ const GeneralInfo: React.FC = () => {
     setType(selectedType);
     setResidentialSubtype(typeOptions[selectedType][0]);
     setCommercialSubtype(typeOptions[selectedType][0]);
+    handleInputChange("type", selectedType);
   };
 
   const handleSubtypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (type === "Residential") {
       setResidentialSubtype(event.target.value);
+      handleInputChange("residentialSubtype", event.target.value);
     } else {
       setCommercialSubtype(event.target.value);
+      handleInputChange("commercialSubtype", event.target.value);
     }
   };
+
+  const handleSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredAmenities = searchQuery
+    ? amenities.filter((amenity) => amenity.toLowerCase().includes(searchQuery.toLowerCase()))
+    : amenities.slice(0, 10); // Default to the first 10 amenities if no search query
 
   const ResidentialFeatureComponent = residentialFeatureComponents[residentialSubtype];
   const CommercialFeatureComponent = commercialFeatureComponents[commercialSubtype];
 
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
+      {error && <ErrorMessage message={error}></ErrorMessage>}
+      {!error && successMessage && <SuccessMessage message={successMessage}></SuccessMessage>}
       <div className="w-full lg:w-1/2 px-9 lg:mb-16">
         <p className="text-black font-bold text-lg mb-2">General Info</p>
         <div className="border border-gray-300 p-6">
@@ -82,6 +251,7 @@ const GeneralInfo: React.FC = () => {
               <input
                 type="text"
                 placeholder="Your Name"
+                onChange={(e) => handleInputChange("listingName", e.target.value)}
                 className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
               />
             </div>
@@ -130,6 +300,7 @@ const GeneralInfo: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Enter value"
+                  onChange={(e) => handleInputChange("landSize", e.target.value)}
                   className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
                 />
               </div>
@@ -141,6 +312,7 @@ const GeneralInfo: React.FC = () => {
                 <input
                   type="number"
                   placeholder="Enter value"
+                  onChange={(e) => handleInputChange("price", e.target.value)}
                   className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
                 />
               </div>
@@ -149,7 +321,10 @@ const GeneralInfo: React.FC = () => {
                 !["Student's Hostels", "Hotel", "Guest House"].includes(residentialSubtype) && (
                   <div>
                     <label className="block text-sm text-black font-semibold">Frequency</label>
-                    <select className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400">
+                    <select
+                      className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+                      onChange={(e) => handleInputChange("frequency", e.target.value)}
+                    >
                       {priceFrequencyOptions[type].map((option) => (
                         <option key={option}>{option}</option>
                       ))}
@@ -159,7 +334,10 @@ const GeneralInfo: React.FC = () => {
               {category === "Rent" && type === "Commercial" && (
                 <div>
                   <label className="block text-sm text-black font-semibold">Frequency</label>
-                  <select className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400">
+                  <select
+                    className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+                    onChange={(e) => handleInputChange("frequency", e.target.value)}
+                  >
                     {priceFrequencyOptions.Commercial.map((option) => (
                       <option key={option}>{option}</option>
                     ))}
@@ -171,7 +349,10 @@ const GeneralInfo: React.FC = () => {
                 residentialSubtype === "Student's Hostels" && (
                   <div>
                     <label className="block text-sm text-black font-semibold">Frequency</label>
-                    <select className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400">
+                    <select
+                      className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+                      onChange={(e) => handleInputChange("frequency", e.target.value)}
+                    >
                       {priceFrequencyOptions["Student's Hostels"].map((option) => (
                         <option key={option}>{option}</option>
                       ))}
@@ -183,7 +364,10 @@ const GeneralInfo: React.FC = () => {
                 ["Hotel", "Guest House"].includes(residentialSubtype) && (
                   <div>
                     <label className="block text-sm text-black font-semibold">Frequency</label>
-                    <select className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400">
+                    <select
+                      className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+                      onChange={(e) => handleInputChange("frequency", e.target.value)}
+                    >
                       {priceFrequencyOptions["Hotel/Guest House"].map((option) => (
                         <option key={option}>{option}</option>
                       ))}
@@ -193,7 +377,10 @@ const GeneralInfo: React.FC = () => {
               {category === "Sale" && (
                 <div>
                   <label className="block text-sm text-black font-semibold">Negotiable</label>
-                  <select className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400">
+                  <select
+                    className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+                    onChange={(e) => handleInputChange("negotiable", e.target.value)}
+                  >
                     <option>Yes</option>
                     <option>No</option>
                   </select>
@@ -205,53 +392,68 @@ const GeneralInfo: React.FC = () => {
               <label className="block text-sm text-black font-semibold">Listing Description</label>
               <textarea
                 placeholder="Type Description"
+                onChange={(e) => handleInputChange("listingDescription", e.target.value)}
                 className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
               ></textarea>
             </div>
-          </form>
-        </div>
 
-        <div className="mt-10">
-          <h2 className="text-black font-bold text-lg mb-2">Features</h2>
-          <div className="border border-gray-300">
-            {type === "Residential" ? <ResidentialSpecific /> : <CommercialSpecific />}
-            {type === "Residential" && ResidentialFeatureComponent && (
-              <ResidentialFeatureComponent />
-            )}
-            {type === "Commercial" && CommercialFeatureComponent && <CommercialFeatureComponent />}
-            <div className="p-6 pt-0">
-              <label className="block text-sm text-black font-semibold">Amenities</label>
-              <input
-                type="text"
-                placeholder="Type to add"
-                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
-              />
-              <div className="flex flex-wrap gap-2">
-                {amenities.map((amenity) => (
-                  <button
-                    key={amenity}
-                    type="button"
-                    className={`px-3 py-1 rounded-md ${selectedAmenities.includes(amenity) ? "bg-neutral-300 text-terrablue text-sm" : "bg-gray-100 text-sm text-gray-400"}`}
-                    onClick={() => toggleAmenity(amenity)}
-                  >
-                    <FontAwesomeIcon
-                      className="text-xs mr-1"
-                      icon={selectedAmenities.includes(amenity) ? faCheck : faPlus}
-                    />
-                    {amenity}
-                  </button>
-                ))}
+            <div className="mt-10">
+              <h2 className="text-black font-bold text-lg mb-2">Features</h2>
+              <div className="border border-gray-300">
+                {type === "Residential" ? (
+                  <ResidentialSpecific handleInputChange={handleInputChange} />
+                ) : (
+                  <CommercialSpecific handleInputChange={handleInputChange} />
+                )}
+                {type === "Residential" && ResidentialFeatureComponent && (
+                  <ResidentialFeatureComponent handleInputChange={handleInputChange} />
+                )}
+                {type === "Commercial" && CommercialFeatureComponent && (
+                  <CommercialFeatureComponent handleInputChange={handleInputChange} />
+                )}
+                <div className="p-6 pt-0">
+                  <label className="block text-sm text-black font-semibold">Amenities</label>
+                  <input
+                    type="text"
+                    placeholder="Type to add"
+                    onChange={handleSearchQueryChange}
+                    className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
+                  />
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {filteredAmenities.slice(0, 10).map((amenity) => (
+                      <button
+                        key={amenity}
+                        type="button"
+                        className={`px-3 py-1 rounded-md ${
+                          selectedAmenities.includes(amenity)
+                            ? "bg-neutral-300 text-terrablue text-sm"
+                            : "bg-gray-100 text-sm text-gray-400"
+                        }`}
+                        onClick={() => toggleAmenity(amenity)}
+                      >
+                        <FontAwesomeIcon
+                          className="text-xs mr-1"
+                          icon={selectedAmenities.includes(amenity) ? faCheck : faPlus}
+                        />
+                        {amenity}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <div className="w-full lg:w-1/2">
         <div className="mb-10">
-          <ImageSelector />
+          <ImageSelector handleInputChange={handleInputChange} />
         </div>
         <div className="mt-20 lg:mt-0">
-          <LocationForm />
+          <LocationForm handleInputChange={handleInputChange} />
+        </div>
+        <div>
+          <SubmitButton setSuccessMessage={setSuccessMessage} setError={setError} data={formData} />
         </div>
       </div>
     </div>
