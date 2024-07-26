@@ -12,7 +12,7 @@ import Footer from "./Footer";
 import { Listing } from "@/types/listingTypes";
 import { useGetAllListingsQuery } from "../../redux/getAllListingApi";
 import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
-
+import SpinnerComponent from "@/components/Common/Reusable/Spinner";
 const HomePage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const { data, error, isLoading } = useGetAllListingsQuery();
@@ -34,13 +34,15 @@ const HomePage = () => {
 
       <div className="flex justify-center items-center lg:mx-24 mt-[50px] mb-[50px]">
         {isLoading ? (
-          <div>Loading...</div>
+          <div>
+            <SpinnerComponent />
+          </div>
         ) : error ? (
           <ErrorMessage message="Error fetching listings" />
         ) : (
           <div className="flex flex-wrap justify-center gap-[40px]">
             {listings.map((listing: Listing) => (
-              <ListingCard key={listing.id} item={listing} />
+              <ListingCard key={listing.listerId} item={listing} />
             ))}
           </div>
         )}
