@@ -24,7 +24,7 @@ const Header: React.FC = () => {
           </li>
         </ul>
         <div>
-          <Image src={header} alt="header" className="w-full" width={100} height={40} />
+          <Image src={header} alt="header" className="w-full mt-20" width={100} height={40} />
         </div>
       </nav>
       <div className="font-nunito px-10 text-black">
