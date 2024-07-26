@@ -69,7 +69,7 @@ class ListingsCard extends StatelessWidget {
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       image: listing.propertyPhotos.first.url,//listing.[0],
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       height: 20.h,
                     ),
                   ),
@@ -84,7 +84,7 @@ class ListingsCard extends StatelessWidget {
                     left: 0,
                     bottom: 0,
                     right: 0,
-                    height: 4.h,
+                    height: 3.h,
                     child: Container(
                       color: Colors.black.withOpacity(0.7),
                       child: Row(
