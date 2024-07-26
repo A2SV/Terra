@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
@@ -18,6 +18,7 @@ const LoginCard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -33,7 +34,7 @@ const LoginCard: React.FC = () => {
       });
 
       if (response?.error) {
-        setError("Incorrect email or Password");
+        setError("Incorrect Email or Password");
         setTimeout(() => {
           setError("");
         }, 5000);
@@ -96,6 +97,17 @@ const LoginCard: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const isPasswordValid = password.length >= 10;
+    let isValidEmail = true;
+
+    if (emailError) {
+      isValidEmail = false;
+    }
+
+    setIsButtonDisabled(!(isValidEmail && isPasswordValid));
+  }, [emailError, email, password]);
+
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
   };
@@ -155,7 +167,7 @@ const LoginCard: React.FC = () => {
           <div className="pass-info w-full flex justify-between md:px-3">
             <RememberMeCheckbox />
             <div className="forgot">
-              <Link href={"/forgot-password"}>
+              <Link href={"/reset"}>
                 <p className="font-sans font-light text-sm hover:underline hover:text-terrablue">
                   Forgot Password ?
                 </p>
@@ -163,7 +175,12 @@ const LoginCard: React.FC = () => {
             </div>
           </div>
           <div className="lower-section w-full flex flex-col items-center space-y-3">
-            <AuthButton loading={loading} text="Sign Up" action={handleSubmit} />
+            <AuthButton
+              loading={loading}
+              isButtonDisabled={isButtonDisabled}
+              text="Login"
+              action={handleSubmit}
+            />
 
             <p className="font-nunito font-normal text-sm">or</p>
 

@@ -6,6 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
+import 'dart:io';
 
 class OnboardingScreen1 extends StatelessWidget {
   const OnboardingScreen1({super.key, required this.onNext});
@@ -19,8 +20,8 @@ class OnboardingScreen1 extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppLightThemeColors.kGradientBlue, 
-              AppLightThemeColors.kGradientYellow, 
+              AppLightThemeColors.kGradientBlue,
+              AppLightThemeColors.kGradientYellow,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -32,6 +33,7 @@ class OnboardingScreen1 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (Platform.isAndroid) SizedBox(height: 3.h),
               Row(
                 children: [
                   SizedBox(width: 40.w),

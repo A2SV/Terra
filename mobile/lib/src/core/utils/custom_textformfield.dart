@@ -230,7 +230,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadiusValue ?? 14),
         borderSide: BorderSide(
-          color: widget.borderSideColor ?? AppCommonColors.incorrectTextColor,
+          color: widget.borderSideColor ?? AppCommonColors.fieldBorderColor,
         ),
         gapPadding: 10,
       ),

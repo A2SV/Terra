@@ -21,6 +21,7 @@ class OnboardingScreen2 extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
+            fit: BoxFit.cover,
             image: const AssetImage("assets/images/onboarding_image2.png"),
             colorFilter: ColorFilter.mode(
                 AppLightThemeColors.kBlackColor.withOpacity(0.5),

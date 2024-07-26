@@ -1,5 +1,8 @@
 using Application.Contracts;
+using Application.Features.Listings.Dtos;
 using Domain.Entities;
+using Domain.Enums;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 
@@ -12,7 +15,7 @@ namespace Persistence.Repositories
         {
             _context = context;
         }
-        
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync(CancellationToken.None);
@@ -38,5 +41,173 @@ namespace Persistence.Repositories
             if (result == null) return null;
             return paymentInformation;
         }
+
+        public async Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex, int pageSize)
+        {
+            IQueryable<Property> query = _context.Properties;
+            
+            var count = await query.CountAsync();
+
+            var properties = await query
+                .Include(p => p.PaymentInformation)
+                .Include(p => p.PropertyLocation)
+                .OrderBy(p => p.CreatedAt)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var totalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+            var propertyDto = new List<PropertyDto>();
+            foreach (var property in properties)
+            {
+                var propertyPhotos = await _context.PropertyPhotos.Where(p => p.PropertyId == property.Id).ToListAsync();
+                
+                var propertyPhotosDto = new List<PropertyPhotoDto>();
+
+                foreach (var photo in propertyPhotos)
+                {
+                    propertyPhotosDto.Add(new PropertyPhotoDto
+                    {
+                        Id = photo.Id,
+                        Url = photo.Url
+                    });
+                }
+                var propertyVideos = await _context.PropertyVideos.Where(p => p.PropertyId == property.Id).ToListAsync();
+
+                var propertyVideosDto = new List<PropertyVideoDto>();
+
+                foreach (var video in propertyVideos)
+                {
+                    propertyVideosDto.Add(new PropertyVideoDto
+                    {
+                        Id = video.Id,
+                        Url = video.Url
+                    });
+                }
+                ResidentialOrCommercial residentialOrCommercial = ResidentialOrCommercial.Residential;
+                if (property.PropertyType > PropertyType.GuestHouse)
+                {
+                    residentialOrCommercial = ResidentialOrCommercial.Commercial;
+                }
+                propertyDto.Add(new PropertyDto
+                {
+                    ListerId = property.ListerId,
+                    PaymentInformationId = property.PaymentInformationId,
+                    PropertyLocationId = property.PropertyLocationId,
+                    Title = property.Title,
+                    Description = property.Description,
+                    PropertyType = residentialOrCommercial,
+                    PropertySubType = property.PropertyType,
+                    PublishStatus = property.PublishStatus,
+                    MarketStatus = property.MarketStatus,
+                    ListingType = property.ListingType,
+                    PropertySize = property.PropertySize,
+                    AvailableStartDate = property.AvailableStartDate,
+                    AvailableEndDate = property.AvailableEndDate,
+                    Lister = property.Lister,
+                    PaymentInformation = property.PaymentInformation,
+                    PropertyLocation = property.PropertyLocation,
+                    PropertyPhotos = propertyPhotosDto,
+                    PropertyVideos = propertyVideosDto
+                });
+            }
+
+
+            return new PaginatedList<PropertyDto>(propertyDto, pageIndex, totalPages);
+        }
+
+
+        public async Task<PaginatedList<Property>> Filter(
+            int pageIndex, int pageSize,
+            string? listingType, string? propertyType,
+            string? subType, int? minPrice,
+            int? maxPrice, string? paymentFrequency,
+            int? minPropertySize, int? maxPropertySize,
+            List<string>? amenities
+                )
+        {
+
+            IQueryable<Property> query = _context.Properties
+                .Include(p => p.PaymentInformation)
+                .Include(p => p.PropertyLocation);
+                
+
+            if (!string.IsNullOrEmpty(listingType) && Enum.TryParse<PropertyListingType>(listingType, out var parsedListingType))
+            {
+                query = query.Where(x => x.ListingType == parsedListingType);
+            }
+
+            if (!string.IsNullOrEmpty(propertyType))
+                if (propertyType == "Residential")
+                {
+                    query = query.Where(p => (int)p.PropertyType < 5);
+                }
+                else
+                {
+                    query = query.Where(p => (int)p.PropertyType >5);
+                }
+
+
+            if (!string.IsNullOrEmpty(subType) && Enum.TryParse<PropertyType>(subType, out var parsedSubType))
+            {
+                query = query.Where(x => x.PropertyType == parsedSubType);
+
+            }
+
+            if (minPrice.HasValue || maxPrice.HasValue)
+            {
+                query = query.
+                    Include(p => p.PaymentInformation)
+                    .Where(x => (!minPrice.HasValue || x.PaymentInformation.Cost >= minPrice.Value) &&
+                                (!maxPrice.HasValue || x.PaymentInformation.Cost <= maxPrice.Value));
+            }
+
+
+
+            if (!string.IsNullOrEmpty(subType) && Enum.TryParse<PaymentFrequency>(paymentFrequency, out var parsedPaymentFrequency))
+            {
+                query = query.
+                        Include(p => p.PaymentInformation)
+                        .Where(x => x.PaymentInformation.PaymentFrequency == parsedPaymentFrequency);
+
+
+            }
+
+
+            if (minPropertySize.HasValue || maxPropertySize.HasValue)
+            {
+                query = query
+                    .Where(x => (!minPropertySize.HasValue || x.PropertySize >= minPropertySize.Value) &&
+                                (!maxPrice.HasValue || x.PropertySize <= maxPrice.Value));
+            }
+
+
+            if (amenities != null)
+            {
+                query = query.Join(_context.PropertyAmenities,
+                    property => property.Id,
+                    propertyAmenity => propertyAmenity.PropertyId,
+                    (property, propertyAmenity) => new { Property = property, PropertyAmenity = propertyAmenity })
+                    .Where(x => (amenities.Contains(x.PropertyAmenity.Amenity.Name)))
+                    .Select(x => x.Property);
+            }
+
+            var count = await query.CountAsync();
+
+
+            var properties = await query
+                .OrderBy(p => p.CreatedAt)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var totalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+
+            return  new PaginatedList<Property>(properties, pageIndex, totalPages);
+            }
+
     }
 }
+

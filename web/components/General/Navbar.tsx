@@ -5,6 +5,7 @@ import Image from "next/image";
 import HamburgerMenu from "./Hamburger";
 import { ProfilePic } from "./Profile";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [activeItem, setActiveItem] = useState("Home");
@@ -47,23 +48,29 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex flex-row">
-              <Image
-                src="/profilePic.svg"
-                alt="login"
-                height={40}
-                width={40}
-                className="object-cover"
-              />
-              <p className="lg:flex hidden items-center px-4 font-nunito">
-                Login <span className="text-[20px] pl-3"> &#124;</span>
-              </p>
+              <Link href="/auth">
+                <Image
+                  src="/profilePic.svg"
+                  alt="login"
+                  height={40}
+                  width={40}
+                  className="object-cover"
+                />
+              </Link>
+              <Link href="/auth">
+                <p className="lg:flex hidden items-center px-4 font-nunito hover:cursor-pointer">
+                  Login <span className="text-[20px] pl-3"> &#124;</span>
+                </p>
+              </Link>
             </div>
           )}
 
           <div className="lg:flex hidden items-center">
-            <button className="bg-[#1779F3] text-white font-nunito font-semibold text-[13px] px-5 py-3 rounded-[25px] ">
-              Custom Listing
-            </button>
+            <Link href="/add-listing">
+              <button className="bg-[#1779F3] text-white font-nunito font-semibold text-[13px] px-5 py-3 rounded-[25px] ">
+                Create Listing
+              </button>
+            </Link>
           </div>
           <HamburgerMenu />
         </div>

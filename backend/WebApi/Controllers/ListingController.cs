@@ -2,6 +2,12 @@ using Application.Features.Listings.Commands.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Models.ApiResult;
+using Application.Features.Listings.Queries.GetAllListings;
+using Domain.Models;
+using Domain.Entities;
+using Application.Features.Listings.Queries.Filtering;
+using Microsoft.AspNetCore.Authorization;
+using Application.Features.Listings.Dtos;
 
 namespace WebApi.Controllers
 {
@@ -17,6 +23,7 @@ namespace WebApi.Controllers
         }
 
 
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
         {
@@ -29,5 +36,41 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+
+        //[Authorize]
+        [HttpGet]
+        public async Task<ActionResult<PaginatedList<PropertyDto>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
+        {
+
+            var command = new GetAllListingQuery(pageIndex, pageSize);
+            var listings = await _mediator.Send(command);
+
+            return Ok(listings);
+        }
+
+        //[Authorize]
+        [HttpGet("Filter")]
+
+        public async Task<ActionResult<PaginatedList<Property>>> Filter(
+            int pageIndex = 1,
+            int pageSize = 5,
+            string? listingType = null,
+            string? propertyType = null,
+            string? subType = null,
+            int? minPrice = null,
+            int? maxPrice = null,
+            string? priceFrequency = null,
+            int? minPropertySize = null,
+            int? maxPropertySize = null,
+            [FromQuery] List<string>? amenities = null                                     
+            )
+        {
+            var command = new FilterQuery(pageIndex, pageSize,listingType,propertyType,
+                subType,minPrice,maxPrice,priceFrequency,minPropertySize,maxPropertySize, amenities);
+
+            var listings = await _mediator.Send(command);
+
+            return Ok(listings);
+        }
     }
 }

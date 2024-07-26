@@ -47,13 +47,6 @@ class _SignUpPageState extends State<SignUpPage> {
         }
       },
       builder: (context, state) {
-        // if (state is AuthenticationLoading) {
-        //   return const Scaffold(
-        //     body: Center(
-        //       child: CircularProgressIndicator(),
-        //     ),
-        //   );
-        // }
         return Form(
           key: _formKey,
           child: Scaffold(
