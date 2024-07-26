@@ -8,7 +8,7 @@ const CreateListing = () => {
         <div className="flex flex-row relative items-center justify-center md:w-1/2 w-full">
           <div className="z-20 relative">
             <div className="md:w-[600px] md:h-[600px] w-[400px] h-[400px]">
-              <Image src="/houseSmall.svg" fill={true} alt="house" />
+              <Image src="/createListing.svg" fill={true} alt="house" />
             </div>
           </div>
         </div>

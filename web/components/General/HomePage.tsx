@@ -49,7 +49,7 @@ const HomePage = () => {
       <div className="mt-[10px] mb-[50px]">
         <ExploreProperty />
       </div>
-      <div className="mt-[150px] ">
+      <div className="mt-[60px] ">
         <ProcedureSection />
       </div>
       <div className=" mb-[50px]">
