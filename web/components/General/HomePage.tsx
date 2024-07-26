@@ -25,7 +25,7 @@ const HomePage = () => {
   }, [data]);
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col min-w-[100%]">
       <Navbar />
       <HeroSection />
       <div className="lg:mt-10  mt-0">
@@ -46,10 +46,10 @@ const HomePage = () => {
         )}
       </div>
 
-      <div className="mt-[140px] mb-[50px]">
+      <div className="mt-[10px] mb-[50px]">
         <ExploreProperty />
       </div>
-      <div className="mt-[150px] ">
+      <div className="mt-[60px] ">
         <ProcedureSection />
       </div>
       <div className=" mb-[50px]">
