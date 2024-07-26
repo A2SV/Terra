@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.Features.Listings.Dtos;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Models;
@@ -41,15 +42,11 @@ namespace Persistence.Repositories
             return paymentInformation;
         }
 
-        public async Task<PaginatedList<Property>> GetAllListings(int pageIndex, int pageSize)
+        public async Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex, int pageSize)
         {
-            
-
             IQueryable<Property> query = _context.Properties;
             
-            
             var count = await query.CountAsync();
-
 
             var properties = await query
                 .Include(p => p.PaymentInformation)
@@ -61,8 +58,63 @@ namespace Persistence.Repositories
 
             var totalPages = (int)Math.Ceiling(count / (double)pageSize);
 
+            var propertyDto = new List<PropertyDto>();
+            foreach (var property in properties)
+            {
+                var propertyPhotos = await _context.PropertyPhotos.Where(p => p.PropertyId == property.Id).ToListAsync();
+                
+                var propertyPhotosDto = new List<PropertyPhotoDto>();
 
-            return new PaginatedList<Property>(properties, pageIndex, totalPages);
+                foreach (var photo in propertyPhotos)
+                {
+                    propertyPhotosDto.Add(new PropertyPhotoDto
+                    {
+                        Id = photo.Id,
+                        Url = photo.Url
+                    });
+                }
+                var propertyVideos = await _context.PropertyVideos.Where(p => p.PropertyId == property.Id).ToListAsync();
+
+                var propertyVideosDto = new List<PropertyVideoDto>();
+
+                foreach (var video in propertyVideos)
+                {
+                    propertyVideosDto.Add(new PropertyVideoDto
+                    {
+                        Id = video.Id,
+                        Url = video.Url
+                    });
+                }
+                ResidentialOrCommercial residentialOrCommercial = ResidentialOrCommercial.Residential;
+                if (property.PropertyType > PropertyType.GuestHouse)
+                {
+                    residentialOrCommercial = ResidentialOrCommercial.Commercial;
+                }
+                propertyDto.Add(new PropertyDto
+                {
+                    ListerId = property.ListerId,
+                    PaymentInformationId = property.PaymentInformationId,
+                    PropertyLocationId = property.PropertyLocationId,
+                    Title = property.Title,
+                    Description = property.Description,
+                    PropertyType = residentialOrCommercial,
+                    PropertySubType = property.PropertyType,
+                    PublishStatus = property.PublishStatus,
+                    MarketStatus = property.MarketStatus,
+                    ListingType = property.ListingType,
+                    PropertySize = property.PropertySize,
+                    AvailableStartDate = property.AvailableStartDate,
+                    AvailableEndDate = property.AvailableEndDate,
+                    Lister = property.Lister,
+                    PaymentInformation = property.PaymentInformation,
+                    PropertyLocation = property.PropertyLocation,
+                    PropertyPhotos = propertyPhotosDto,
+                    PropertyVideos = propertyVideosDto
+                });
+            }
+
+
+            return new PaginatedList<PropertyDto>(propertyDto, pageIndex, totalPages);
         }
 
 
@@ -78,13 +130,8 @@ namespace Persistence.Repositories
 
             IQueryable<Property> query = _context.Properties
                 .Include(p => p.PaymentInformation)
-                .Include(p => p.PropertyLocation)
-                .Include(p => p.ResidentialProperty)
-                .Include(p => p.CommercialProperty);
+                .Include(p => p.PropertyLocation);
                 
-
-
-
 
             if (!string.IsNullOrEmpty(listingType) && Enum.TryParse<PropertyListingType>(listingType, out var parsedListingType))
             {

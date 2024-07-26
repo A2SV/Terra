@@ -1,3 +1,4 @@
+using Application.Features.Listings.Dtos;
 using Domain.Entities;
 using Domain.Models;
 using MediatR;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Listings.Queries.GetAllListings
 {
-    public class GetAllListingQuery : IRequest<PaginatedList<Property>>
+    public class GetAllListingQuery : IRequest<PaginatedList<PropertyDto>>
     {
         public int pageIndex { get; set; }
         public int pageSize { get; set; }
