@@ -164,27 +164,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("myAppCors", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-    });
-});
-
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("myAppCors", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-
-        policy.WithOrigins("https://terra-web-deployment.onrender.com/")
+        policy.WithOrigins("http://localhost:3000", "https://terra-web-deployment.onrender.com/")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
     });
