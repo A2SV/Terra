@@ -8,7 +8,7 @@ export const getAllListingApi = createApi({
   endpoints: (builder) => ({
     getAllListings: builder.query<ListingsResponse, void>({
       query: () => ({
-        url: `listing`,
+        url: `listing/?pageSize=8`,
         method: "GET",
       }),
     }),

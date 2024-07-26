@@ -32,11 +32,11 @@ const Select = () => {
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`${
+                className={`hover:text-terrablue cursor-pointer ${
                   item === "Guest House" || item === "Office space" || item === "Event Space"
                     ? "w-[140px]"
                     : "w-auto"
-                } px-4 font-nunito text-[16px] ${activeItem === item ? "text-[#1779F3] underline decoration-blue-[#1779F3] underline-offset-4 " : "text-black"}`}
+                } px-4 font-nunito text-[16px] ${activeItem === item ? "text-[#1779F3] underline decoration-blue-[#1779F3] underline-offset-4" : "text-black"}`}
                 onClick={() => handleItemClick(item)}
               >
                 {item}
