@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import bedIcon from "@/public/bed_icon.svg";
-import showerIcon from "@/public/shower_icon.svg";
+// import bedIcon from "@/public/bed_icon.svg";
+// import showerIcon from "@/public/shower_icon.svg";
 import constructionIcon from "@/public/construction_icon.svg";
 import ListingProfile from "@/public/ListingProfile.svg";
 import { HiOutlineLocationMarker, HiOutlineBookmark } from "react-icons/hi";
@@ -14,8 +14,12 @@ import { Listing } from "@/types/listingTypes";
 interface ListingCardProps {
   item: Listing;
 }
-
 const propertyTypeMapping: { [key: number]: string } = {
+  0: "Residential",
+  1: "Commercial",
+};
+
+const propertySubTypeMapping: { [key: number]: string } = {
   0: "House",
   1: "Apartment",
   2: "Student Hostel",
@@ -37,17 +41,13 @@ const getTextFromMapping = (value: number, mapping: { [key: number]: string }): 
 };
 
 const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
-  const images = [
-    "https://images.unsplash.com/photo-1522050212171-61b01dd24579?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Ds",
-    "https://images.unsplash.com/photo-1483097365279-e8acd3bf9f18?q=80&w=1411&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  ];
   return (
     <div className="md:w-[400px] w-[345.75px]  h-[455px] md:h-[480px] my-4 me-auto ms-auto  flex justify-center ">
       <div className="md:w-[400px] w-[382.75px] h-[480px]   bg-white rounded-3xl  mx-2">
         <div className="picture relative overflow-x-hidden rounded-3xl">
-          <Carousel images={images} />
+          <Carousel images={item.propertyPhotos.map((photo) => photo.url)} />
           <div className="flex justify-center items-center absolute top-4 font-nunito left-5 bg-yellow-600 opacity-80 text-white rounded text-[13px] w-[72px] pt-[2px]">
-            Featured
+            {getTextFromMapping(item.propertyType, propertyTypeMapping)}
           </div>
 
           <div className="flex justify-center items-center absolute top-4 right-5 font-nunito bg-slate-700 text-white rounded text-[13px] w-[68px] pt-[2px]">
@@ -76,10 +76,12 @@ const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
         <Link href="">
           <div className="p-2 pl-1 pr-1 flex justify-between">
             <div className="pl-4 ">
-              <h2 className="font-nunito font-bold text-[24px] text-btnColor">$400</h2>
+              <h2 className="font-nunito font-bold text-[24px] text-btnColor">
+                ${item.paymentInformation.cost}
+              </h2>
             </div>
             <p className="my-auto text-slate-400 font-nunito font-bold pr-4 text-sm">
-              {getTextFromMapping(item.propertyType, propertyTypeMapping)}
+              {getTextFromMapping(item.propertyType, propertySubTypeMapping)}
             </p>
           </div>
 
@@ -88,18 +90,20 @@ const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
           </div>
           <div className="flex pl-4 pr-3 my-2">
             <HiOutlineLocationMarker className="mr-2 w-5 h-5 text-slate-400" />
-            <p className="text-[15px] text-slate-400 font-nunito font-bold">Accra | Taifa</p>
+            <p className="text-[15px] text-slate-400 font-nunito font-bold">
+              {item.propertyLocation.city} | {item.propertyLocation.streetName}
+            </p>
           </div>
 
           <div className="flex pl-4 space-x-5">
-            <div className="flex space-x-2 justify-center items-center">
+            {/* <div className="flex space-x-2 justify-center items-center">
               <Image src={bedIcon} alt="bed" className="size-5" />
               <p className="font-nunito font-bold text-base text-gray-700 pt-1">3</p>
             </div>
             <div className="flex space-x-2 justify-center items-center">
               <Image src={showerIcon} alt="shower" className="size-5" />
               <p className="font-nunito font-bold text-base text-gray-700 pt-1">2</p>
-            </div>
+            </div> */}
             <div className="flex space-x-2 justify-center items-center">
               <Image src={constructionIcon} alt="construction" className="size-5" />
               <p className="font-nunito font-bold text-base text-gray-700 pt-2">
