@@ -3,12 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
-import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ListingsCard extends StatelessWidget {
+  final ListingModel listing;
   const ListingsCard({
     super.key,
     required this.listing,
@@ -23,7 +23,6 @@ class ListingsCard extends StatelessWidget {
     // required this.imageUrl,
     // required this.profileImageUrl,
   });
-  final ListingModel listing;
   // final String imageUrl;
   // final String profileImageUrl;
   // final int startingPrice;
@@ -69,8 +68,7 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      // image: listing.,//listing.[0],
-                      image: 'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',//listing.[0],
+                      image: listing.propertyPhotos.first.url,//listing.[0],
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
@@ -123,18 +121,19 @@ class ListingsCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           listing.title,
-                          style: TextStyle(fontSize: 15.sp, color: Colors.black),
+                          style:
+                              TextStyle(fontSize: 15.sp, color: Colors.black),
                         ),
                       ),
-                      SizedBox(
-                        width: 4.h,
-                        height: 4.h,
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: listing.lister.profilePictureUrl,
-                          fit: BoxFit.cover,
-                        ).circularClip(50),
-                      )
+                      // SizedBox(
+                      //   width: 4.h,
+                      //   height: 4.h,
+                      //   child: FadeInImage.memoryNetwork(
+                      //     placeholder: kTransparentImage,
+                      //     image: listing.lister.profilePictureUrl,
+                      //     fit: BoxFit.cover,
+                      //   ).circularClip(50),
+                      // )
                     ],
                   ),
                 ),
