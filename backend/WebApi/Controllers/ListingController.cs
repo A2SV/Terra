@@ -7,6 +7,7 @@ using Domain.Models;
 using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
+using Application.Features.Listings.Dtos;
 
 namespace WebApi.Controllers
 {
@@ -38,7 +39,7 @@ namespace WebApi.Controllers
 
         //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<Property>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
+        public async Task<ActionResult<PaginatedList<PropertyDto>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
 
             var command = new GetAllListingQuery(pageIndex, pageSize);
