@@ -43,7 +43,7 @@ const Navbar = () => {
             <div className="flex flex-row">
               <ProfilePic />
               <p className="lg:flex hidden items-center px-4 font-nunito">
-                Daniel Shimelis <span className="text-[20px] pl-3"> &#124;</span>
+                {session?.user?.firstName} <span className="text-[20px] pl-3"> &#124;</span>
               </p>
             </div>
           ) : (

@@ -247,10 +247,10 @@ const GeneralInfo: React.FC = () => {
         <div className="border border-gray-300 p-6">
           <form className="space-y-4">
             <div>
-              <label className="block text-sm text-black font-semibold">Listing Name</label>
+              <label className="block text-sm text-black font-semibold">Listing Title</label>
               <input
                 type="text"
-                placeholder="Your Name"
+                placeholder="Listing Title"
                 onChange={(e) => handleInputChange("listingName", e.target.value)}
                 className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
               />

@@ -40,7 +40,7 @@ const HomePage = () => {
         ) : error ? (
           <ErrorMessage message="Error fetching listings" />
         ) : (
-          <div className="flex flex-wrap justify-center gap-[40px]">
+          <div className="flex flex-wrap justify-center">
             {listings.map((listing: Listing) => (
               <ListingCard key={listing.listerId} item={listing} />
             ))}
