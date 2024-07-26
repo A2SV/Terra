@@ -51,15 +51,15 @@ const HamburgerMenu = () => {
                   ) : (
                     <div className="flex flex-row">
                       <Link href="/auth">
-                      <Image
-                        src="/profilePic.svg"
-                        alt="login"
-                        height={40}
-                        width={40}
-                        className="object-cover"
+                        <Image
+                          src="/profilePic.svg"
+                          alt="login"
+                          height={40}
+                          width={40}
+                          className="object-cover"
                         />
-                      <p className="flex  items-center px-4 font-nunito text-terrablue">Login</p>
-                        </Link>
+                        <p className="flex  items-center px-4 font-nunito text-terrablue">Login</p>
+                      </Link>
                     </div>
                   )}
                 </li>
