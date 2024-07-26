@@ -20,41 +20,41 @@ const CommercialSpecific: React.FC<{
     <div className="rounded-lg font-nunito flex">
       <div>
         <div className="p-6">
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm text-black font-semibold">Total Floors</label>
-                <input
-                  type="number"
-                  name="totalFloors"
-                  value={totalFloors}
-                  onChange={handleChange}
-                  placeholder="Type Value"
-                  className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-black font-semibold">Floor Number</label>
-                <input
-                  type="number"
-                  name="floorNumber"
-                  value={floorNumber}
-                  onChange={handleChange}
-                  placeholder="Type Value"
-                  className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-black font-semibold">Parking spaces</label>
-                <input
-                  type="number"
-                  name="parkingSpaces"
-                  value={parkingSpaces}
-                  onChange={handleChange}
-                  placeholder="Type to add"
-                  className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
-                />
-              </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm text-black font-semibold">Total Floors</label>
+              <input
+                type="number"
+                name="totalFloors"
+                value={totalFloors}
+                onChange={handleChange}
+                placeholder="Type Value"
+                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
+              />
             </div>
+            <div>
+              <label className="block text-sm text-black font-semibold">Floor Number</label>
+              <input
+                type="number"
+                name="floorNumber"
+                value={floorNumber}
+                onChange={handleChange}
+                placeholder="Type Value"
+                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-black font-semibold">Parking spaces</label>
+              <input
+                type="number"
+                name="parkingSpaces"
+                value={parkingSpaces}
+                onChange={handleChange}
+                placeholder="Type to add"
+                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

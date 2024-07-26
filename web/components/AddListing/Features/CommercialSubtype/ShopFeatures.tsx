@@ -15,72 +15,70 @@ const ShopFeatures: React.FC<{
 
   return (
     <div className="p-6 pt-0">
-        <div className="flex">
+      <div className="flex">
+        <div>
+          <label className="block text-sm text-black font-semibold pr-5 pt-1">Display window</label>
           <div>
-            <label className="block text-sm text-black font-semibold pr-5 pt-1">
-              Display window
+            <input
+              type="radio"
+              id="displayWindowYes"
+              name="displayWindow"
+              value="Yes"
+              checked={displayWindow === "Yes"}
+              onChange={handleChange}
+              className="mt-1"
+            />
+            <label htmlFor="displayWindowYes" className="pl-2">
+              Yes
             </label>
-            <div>
-              <input
-                type="radio"
-                id="displayWindowYes"
-                name="displayWindow"
-                value="Yes"
-                checked={displayWindow === "Yes"}
-                onChange={handleChange}
-                className="mt-1"
-              />
-              <label htmlFor="displayWindowYes" className="pl-2">
-                Yes
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="displayWindowNo"
-                name="displayWindow"
-                value="No"
-                checked={displayWindow === "No"}
-                onChange={handleChange}
-                className="mt-1"
-              />
-              <label htmlFor="displayWindowNo" className="pl-2">
-                No
-              </label>
-            </div>
           </div>
-          <div className="pl-14">
-            <label className="block text-sm text-black font-semibold pr-5 pt-1">Storage room</label>
-            <div>
-              <input
-                type="radio"
-                id="storageRoomYes"
-                name="storageRoom"
-                value="Yes"
-                checked={storageRoom === "Yes"}
-                onChange={handleChange}
-                className="mt-1"
-              />
-              <label htmlFor="storageRoomYes" className="pl-2">
-                Yes
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="storageRoomNo"
-                name="storageRoom"
-                value="No"
-                checked={storageRoom === "No"}
-                onChange={handleChange}
-                className="mt-1"
-              />
-              <label htmlFor="storageRoomNo" className="pl-2">
-                No
-              </label>
-            </div>
+          <div>
+            <input
+              type="radio"
+              id="displayWindowNo"
+              name="displayWindow"
+              value="No"
+              checked={displayWindow === "No"}
+              onChange={handleChange}
+              className="mt-1"
+            />
+            <label htmlFor="displayWindowNo" className="pl-2">
+              No
+            </label>
           </div>
         </div>
+        <div className="pl-14">
+          <label className="block text-sm text-black font-semibold pr-5 pt-1">Storage room</label>
+          <div>
+            <input
+              type="radio"
+              id="storageRoomYes"
+              name="storageRoom"
+              value="Yes"
+              checked={storageRoom === "Yes"}
+              onChange={handleChange}
+              className="mt-1"
+            />
+            <label htmlFor="storageRoomYes" className="pl-2">
+              Yes
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="storageRoomNo"
+              name="storageRoom"
+              value="No"
+              checked={storageRoom === "No"}
+              onChange={handleChange}
+              className="mt-1"
+            />
+            <label htmlFor="storageRoomNo" className="pl-2">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

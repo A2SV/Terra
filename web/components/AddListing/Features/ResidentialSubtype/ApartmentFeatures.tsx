@@ -29,72 +29,70 @@ const ApartmentFeatures: React.FC<{
   return (
     <div>
       <div className="p-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm text-black font-semibold">
-                Number of floors in building
-              </label>
-              <input
-                type="number"
-                name="numFloors"
-                value={numFloors}
-                onChange={handleChange}
-                placeholder="Enter value"
-                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-black font-semibold">
-                Floor number of the unit
-              </label>
-              <input
-                type="number"
-                name="floorNumber"
-                value={floorNumber}
-                onChange={handleChange}
-                placeholder="Enter value"
-                className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
-              />
-            </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm text-black font-semibold">
+              Number of floors in building
+            </label>
+            <input
+              type="number"
+              name="numFloors"
+              value={numFloors}
+              onChange={handleChange}
+              placeholder="Enter value"
+              className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+            />
           </div>
+          <div>
+            <label className="block text-sm text-black font-semibold">
+              Floor number of the unit
+            </label>
+            <input
+              type="number"
+              name="floorNumber"
+              value={floorNumber}
+              onChange={handleChange}
+              placeholder="Enter value"
+              className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
+            />
+          </div>
+        </div>
 
-          <div className="flex justify-between items-center my-3">
-            <div className="flex">
-              <label className=" text-sm text-black font-semibold pr-3">
-                Student-Friendly
-              </label>
-              <input
-                type="checkbox"
-                name="studentFriendly"
-                checked={studentFriendly}
-                onChange={handleChange}
-                className="pl-5"
-              />
-            </div>
-            <div className="flex">
-              <label className=" text-sm text-black font-semibold pr-3">
-                Laundry Facility Available
-              </label>
-              <input
-                type="checkbox"
-                name="laundryFacility"
-                checked={laundryFacility}
-                onChange={handleChange}
-                className="pl-5"
-              />
-            </div>
-            <div className="flex">
-              <label className="block text-sm text-black font-semibold pr-3">
-                Cleaning Service Available
-              </label>
-              <input
-                type="checkbox"
-                name="cleaningService"
-                checked={cleaningService}
-                onChange={handleChange}
-              />
-            </div>
+        <div className="flex justify-between items-center my-3">
+          <div className="flex">
+            <label className=" text-sm text-black font-semibold pr-3">Student-Friendly</label>
+            <input
+              type="checkbox"
+              name="studentFriendly"
+              checked={studentFriendly}
+              onChange={handleChange}
+              className="pl-5"
+            />
           </div>
+          <div className="flex">
+            <label className=" text-sm text-black font-semibold pr-3">
+              Laundry Facility Available
+            </label>
+            <input
+              type="checkbox"
+              name="laundryFacility"
+              checked={laundryFacility}
+              onChange={handleChange}
+              className="pl-5"
+            />
+          </div>
+          <div className="flex">
+            <label className="block text-sm text-black font-semibold pr-3">
+              Cleaning Service Available
+            </label>
+            <input
+              type="checkbox"
+              name="cleaningService"
+              checked={cleaningService}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
