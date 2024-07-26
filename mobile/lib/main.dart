@@ -23,6 +23,7 @@ import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_loc
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/widgets/location_modal.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
