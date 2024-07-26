@@ -1,6 +1,6 @@
 import React from "react";
 import Accordion from "@/components/General/Accordion";
-import FAQImage from "@/public/faq_woman.svg";
+import FAQImage from "@/public/woman.svg";
 import Image from "next/image";
 
 const FAQ = () => {
@@ -12,7 +12,11 @@ const FAQ = () => {
           <h1 className="font-montserrat font-semibold text-gray-700 text-xl md:text-3xl mb-5">
             Frequently Asked Questions
           </h1>
-          <Image className="w-11/12" src={FAQImage} alt="Woman thinking about a question" />
+          <Image
+            className="w-11/12 rounded-lg"
+            src={FAQImage}
+            alt="Woman thinking about a question"
+          />
         </div>
         <div className="order-2 lg:order-2 divide-y space-y-2 flex flex-col border w-full lg:w-1/2">
           <Accordion

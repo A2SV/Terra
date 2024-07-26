@@ -55,43 +55,47 @@ const EmblaCarousel: FC<EmblaCarouselProps> = ({ options, images }: EmblaCarouse
   const action = <button onClick={handleClose}>Close</button>;
 
   return (
-    <div className="relative">
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={message}
-        action={action}
-        className="absolute"
-      />
-      <div className="embla h-72">
-        <div className="embla__viewport h-full" ref={emblaRef}>
-          <div className="embla__container h-full">
-            {slides.map((index) => (
-              <div className="embla__slide h-full" key={index}>
-                <img
-                  className="embla__slide__img h-full object-cover"
-                  src={imageByIndex(index)}
-                  alt="image"
-                />
-              </div>
-            ))}
+    <div>
+      <div className="main relative">
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message={message}
+          action={action}
+          className="absolute"
+        />
+        <div className="embla h-72">
+          <div className="embla__viewport h-full" ref={emblaRef}>
+            <div className="embla__container h-full">
+              {slides.map((index) => (
+                <div className="embla__slide h-full" key={index}>
+                  <img
+                    className="embla__slide__img h-full object-cover"
+                    src={imageByIndex(index)}
+                    alt="image"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="embla__buttons relative bottom-[12rem] flex justify-between">
+            <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
+            <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
           </div>
         </div>
-        <div className="embla__buttons relative bottom-[12rem] flex justify-between">
-          <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
-          <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
-        </div>
-      </div>
 
-      <div className="embla__dots w-24 mx-32">
-        {scrollSnaps.map((_, index) => (
-          <DotButton
-            key={index}
-            onClick={() => scrollTo(index)}
-            className={"embla__dot".concat(index === selectedIndex ? " embla__dot--selected" : "")}
-          />
-        ))}
+        <div className="embla__dots w-24 mx-32">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={"embla__dot".concat(
+                index === selectedIndex ? " embla__dot--selected" : ""
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
