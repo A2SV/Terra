@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
+import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -66,8 +69,10 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: '',//listing.[0],
-                      fit: BoxFit.cover,
+                      // image: listing.,//listing.[0],
+                      image: 'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',//listing.[0],
+                      fit: BoxFit.fill,
+                      height: 20.h,
                     ),
                   ),
                   // if (isPremium)
@@ -95,7 +100,7 @@ class ListingsCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            listing.propertyType.name,
+                            listing.propertyType.name.toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
@@ -128,7 +133,7 @@ class ListingsCard extends StatelessWidget {
                           placeholder: kTransparentImage,
                           image: listing.lister.profilePictureUrl,
                           fit: BoxFit.cover,
-                        ),
+                        ).circularClip(50),
                       )
                     ],
                   ),
@@ -168,7 +173,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "2",
+                                  "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -186,7 +191,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "3",
+                                  "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
