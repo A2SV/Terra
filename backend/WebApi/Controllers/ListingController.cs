@@ -7,20 +7,17 @@ using Domain.Models;
 using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
-
-using Application.Features.Listings.Queries.GetListingById;
 using Application.Models.Dto.ListingDto.GetListingDto;
-
+using Application.Features.Listings.Queries.GetListingById;
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
-    public class ListingsController : ControllerBase
+    public class ListingController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ListingsController(IMediator mediator)
+        public ListingController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -55,7 +52,6 @@ namespace WebApi.Controllers
         [HttpGet("Filter")]
 
         public async Task<ActionResult<PaginatedList<Property>>> Filter(
-        public async Task<ActionResult<PaginatedList<Property>>> Filter(
             int pageIndex = 1,
             int pageSize = 5,
             string? listingType = null,
@@ -66,7 +62,7 @@ namespace WebApi.Controllers
             string? priceFrequency = null,
             int? minPropertySize = null,
             int? maxPropertySize = null,
-            string? amenities = null
+            [FromQuery] List<string>? amenities = null
             )
         {
             var command = new FilterQuery(pageIndex, pageSize, listingType, propertyType,
@@ -91,6 +87,5 @@ namespace WebApi.Controllers
                 return BadRequest(new Result<GetListingDto>(false, ResultStatusCode.BadRequest, null, ex.Message));
             }
         }
-
     }
 }
