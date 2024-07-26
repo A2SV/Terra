@@ -4,7 +4,8 @@ using Domain.Enums;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
-using Application.Models.Dto.ListingDto.GetListingByIdDto;
+using Application.Models.Dto.ListingDto;
+using Application.Models.Dto.ListingDto.GetListingDto;
 
 
 namespace Persistence.Repositories
@@ -161,11 +162,12 @@ namespace Persistence.Repositories
             return new PaginatedList<Property>(properties, pageIndex, totalPages);
         }
 
-        public async Task<GetListingByIdDto> GetListingByIdAsync(Guid id)
+        public async Task<GetListingDto> GetListingByIdAsync(Guid id)
         {
             var property = await _context.Properties
                 .Include(p => p.PaymentInformation)
                 .Include(p => p.PropertyLocation)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (property == null)
@@ -179,7 +181,9 @@ namespace Persistence.Repositories
                     CreatedAt = pp.CreatedAt,
                     UpdatedAt = pp.UpdatedAt,
                     PropertyId = pp.PropertyId
-                }).ToListAsync();
+                })
+                .AsNoTracking()
+                .ToListAsync();
 
             var propertyVideos = await _context.PropertyVideos
                 .Where(pv => pv.PropertyId == id)
@@ -189,24 +193,168 @@ namespace Persistence.Repositories
                     CreatedAt = pv.CreatedAt,
                     UpdatedAt = pv.UpdatedAt,
                     PropertyId = pv.PropertyId
-                }).ToListAsync();
+                })
+                .AsNoTracking()
+                .ToListAsync();
 
-            var residentialProperties = await _context.ResidentialProperties.FirstOrDefaultAsync(rp => rp.PropertyId == id);
-            var propertyAmenity = await _context.PropertyAmenities.Where(pa => pa.PropertyId == id).ToListAsync();
-            var commercialProperties = await _context.CommercialProperties.FirstOrDefaultAsync(cp => cp.PropertyId == id);
+            var residentialProperties = await _context.ResidentialProperties
+                .AsNoTracking()
+                .FirstOrDefaultAsync(rp => rp.PropertyId == id);
 
+            var commercialProperties = await _context.CommercialProperties
+                .AsNoTracking()
+                .FirstOrDefaultAsync(cp => cp.PropertyId == id);
 
+            var propertyAmenities = await _context.PropertyAmenities
+                .Where(pa => pa.PropertyId == id)
+                .Include(pa => pa.Amenity)
+                .Select(pa => new AmenityDto
+                {
+                    AmenityName = pa.Amenity.Name,
+                    CreatedAt = pa.Amenity.CreatedAt,
+                    UpdatedAt = pa.Amenity.UpdatedAt
+                })
+                .AsNoTracking()
+                .ToListAsync();
 
-            return new GetListingByIdDto
+            var residentialPropertyDetailsDto = residentialProperties != null ? new ResidentialPropertyDetailsDto
+            {
+                PropertyId = residentialProperties.PropertyId,
+                FurnishedStatus = residentialProperties.FurnishedStatus,
+                NumberOfBedrooms = residentialProperties.NumberOfBedrooms,
+                NumberOfBathrooms = residentialProperties.NumberOfBathrooms,
+                NumberOfWashrooms = residentialProperties.NumberOfWashrooms,
+                NumberOfKitchens = residentialProperties.NumberOfKitchens,
+                CreatedAt = residentialProperties.CreatedAt,
+                UpdatedAt = residentialProperties.UpdatedAt,
+                Apartments = await _context.Apartments
+                    .Where(a => a.ResidentialPropertyId == residentialProperties.Id)
+                    .Select(a => new ApartmentDto
+                    {
+                        ResidentialPropertyId = a.ResidentialPropertyId,
+                        NumberOfFloorsInBuilding = a.NumberOfFloorsInBuilding,
+                        FloorNumberOfUnit = a.FloorNumberOfUnit,
+                        LaundryFacilityAvailable = a.LaundryFacilityAvailable,
+                        CleaningServiceAvailable = a.CleaningServiceAvailable,
+                        StudentFriendly = a.StudentFriendly,
+                        CreatedAt = a.CreatedAt,
+                        UpdatedAt = a.UpdatedAt
+                    }).ToListAsync(),
+                GuestHouses = await _context.GuestHouses
+                    .Where(gh => gh.ResidentialPropertyId == residentialProperties.Id)
+                    .Select(gh => new GuestHouseDto
+                    {
+                        ResidentialPropertyId = gh.ResidentialPropertyId,
+                        StarRating = gh.StarRating,
+                        RestaurantOnSite = gh.RestaurantOnSite,
+                        CreatedAt = gh.CreatedAt,
+                        UpdatedAt = gh.UpdatedAt
+                    }).ToListAsync(),
+                Hotels = await _context.Hotels
+                    .Where(h => h.ResidentialPropertyId == residentialProperties.Id)
+                    .Select(h => new HotelDto
+                    {
+                        ResidentialPropertyId = h.ResidentialPropertyId,
+                        StarRating = h.StarRating,
+                        RestaurantOnSite = h.RestaurantOnSite,
+                        CreatedAt = h.CreatedAt,
+                        UpdatedAt = h.UpdatedAt
+                    }).ToListAsync(),
+                Houses = await _context.Houses
+                    .Where(h => h.ResidentialPropertyId == residentialProperties.Id)
+                    .Select(h => new HouseDto
+                    {
+                        ResidentialPropertyId = h.ResidentialPropertyId,
+                        NumberOfStories = h.NumberOfStories,
+                        GarageSpace = h.GarageSpace,
+                        StudentFriendly = h.StudentFriendly,
+                        CreatedAt = h.CreatedAt,
+                        UpdatedAt = h.UpdatedAt
+                    }).ToListAsync(),
+                StudentHostels = await _context.StudentHostels
+                    .Where(sh => sh.ResidentialPropertyId == residentialProperties.Id)
+                    .Select(sh => new StudentHostelDto
+                    {
+                        ResidentialPropertyId = sh.ResidentialPropertyId,
+                        RoomTypes = sh.RoomTypes,
+                        HostelType = (int)sh.HostelType,
+                        HostelLocation = (int)sh.HostelLocation,
+                        SharedFacilities = sh.SharedFacilities,
+                        MealPlanAvailable = sh.MealPlanAvailable,
+                        StudyAreaAvailable = sh.StudyAreaAvailable,
+                        LaundryFacilityAvailable = sh.LaundryFacilityAvailable,
+                        CleaningServiceAvailable = sh.CleaningServiceAvailable,
+                        CreatedAt = sh.CreatedAt,
+                        UpdatedAt = sh.UpdatedAt
+                    }).ToListAsync()
+            } : null;
+
+            var commercialPropertyDetailsDto = commercialProperties != null ? new CommercialPropertyDetailsDto
+            {
+                PropertyId = commercialProperties.PropertyId,
+                TotalFloors = commercialProperties.TotalFloors,
+                ParkingSpace = commercialProperties.ParkingSpace,
+                FloorNumber = commercialProperties.FloorNumber,
+                CreatedAt = commercialProperties.CreatedAt,
+                UpdatedAt = commercialProperties.UpdatedAt,
+                EventSpaces = await _context.EventSpaces
+                    .Where(es => es.CommercialPropertyId == commercialProperties.Id)
+                    .Select(es => new EventSpaceDto
+                    {
+                        CommercialPropertyId = es.CommercialPropertyId,
+                        MaximumCapacity = es.MaximumCapacity,
+                        CateringServiceAvailable = es.CateringServiceAvailable,
+                        AudioVisualEquipmentsAvailable = es.AudioVisualEquipmentsAvailable,
+                        SuitableEvents = es.SuitableEvents,
+                        CreatedAt = es.CreatedAt,
+                        UpdatedAt = es.UpdatedAt
+                    }).ToListAsync(),
+                OfficeSpaces = await _context.OfficeSpaces
+                    .Where(os => os.CommercialPropertyId == commercialProperties.Id)
+                    .Select(os => new OfficeSpaceDto
+                    {
+                        CommercialPropertyId = os.CommercialPropertyId,
+                        OfficeSpaceType = (int)os.OfficeSpaceType,
+                        MeetingRoomsAvailable = os.MeetingRoomsAvailable,
+                        ReceptionAreaAvailable = os.ReceptionAreaAvailable,
+                        CreatedAt = os.CreatedAt,
+                        UpdatedAt = os.UpdatedAt
+                    }).ToListAsync(),
+                Shops = await _context.Shops
+                    .Where(s => s.CommercialPropertyId == commercialProperties.Id)
+                    .Select(s => new ShopDto
+                    {
+                        CommercialPropertyId = s.CommercialPropertyId,
+                        DisplayWindowAvailable = s.DisplayWindowAvailable,
+                        StorageRoomSize = s.StorageRoomSize,
+                        CreatedAt = s.CreatedAt,
+                        UpdatedAt = s.UpdatedAt
+                    }).ToListAsync(),
+                Warehouses = await _context.Warehouses
+                    .Where(w => w.CommercialPropertyId == commercialProperties.Id)
+                    .Select(w => new WarehouseDto
+                    {
+                        CommercialPropertyId = w.CommercialPropertyId,
+                        CeilingHeight = w.CeilingHeight,
+                        LoadingDockAvailable = w.LoadingDockAvailable,
+                        OfficeSpaceAvailable = w.OfficeSpaceAvailable,
+                        SuitableGoods = w.SuitableGoods,
+                        CreatedAt = w.CreatedAt,
+                        UpdatedAt = w.UpdatedAt
+                    }).ToListAsync()
+            } : null;
+
+            return new GetListingDto
             {
                 Property = property,
-                ResidentialProperty = residentialProperties,
-                CommercialProperty = commercialProperties,
-                PropertyAmenity = propertyAmenity,
+                ResidentialProperty = residentialPropertyDetailsDto,
+                CommercialProperty = commercialPropertyDetailsDto,
+                PropertyAmenity = propertyAmenities,
                 PropertyPhotos = propertyPhotos,
                 PropertyVideos = propertyVideos
             };
         }
+
     }
 }
 

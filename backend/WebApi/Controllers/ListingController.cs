@@ -9,7 +9,7 @@ using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 
 using Application.Features.Listings.Queries.GetListingById;
-using Application.Models.Dto.ListingDto.GetListingByIdDto;
+using Application.Models.Dto.ListingDto.GetListingDto;
 
 namespace WebApi.Controllers
 {
@@ -88,7 +88,7 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new Result<GetListingByIdDto>(false, ResultStatusCode.BadRequest, null, ex.Message));
+                return BadRequest(new Result<GetListingDto>(false, ResultStatusCode.BadRequest, null, ex.Message));
             }
         }
 

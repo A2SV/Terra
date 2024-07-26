@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.Models.Dto.ListingDto.GetListingByIdDto
+namespace Application.Models.Dto.ListingDto
 {
     public class PropertyVideoDto
     {
