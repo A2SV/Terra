@@ -98,7 +98,7 @@ class ListingModel extends ListingEntity {
       // propertyAmenities: (json['propertyAmenities'] as List)
       //     .map((photo) => PropertyAmenity.fromJson(photo))
       //     .toList(),
-      propertyAmenities: [],
+      propertyAmenities: const [],
       commercialProperty: CommercialProperty.fromJson(json['propertyLocation']),
 
       //       PropertyLocationModel(

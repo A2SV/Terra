@@ -22,6 +22,17 @@ class ListingsCard extends StatelessWidget {
     // required this.isPremium,
     // required this.imageUrl,
     // required this.profileImageUrl,
+    required this.listing,
+    // required this.startingPrice,
+    // required this.propertyType,
+    // required this.title,
+    // required this.location,
+    // required this.bedroomNumber,
+    // required this.washroomNumber,
+    // required this.landSize,
+    // required this.isPremium,
+    // required this.imageUrl,
+    // required this.profileImageUrl,
   });
   // final String imageUrl;
   // final String profileImageUrl;
@@ -68,11 +79,18 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: listing.propertyPhotos.first.url,//listing.[0],
+                      image: listing.propertyPhotos.first.url, //listing.[0],
                       fit: BoxFit.cover,
                       height: 20.h,
                     ),
                   ),
+                  // if (isPremium)
+                  //   Positioned(
+                  //     right: 0,
+                  //     top: 0,
+                  //     width: 30.w,
+                  //     child: SvgPicture.asset('assets/svg/premium_banner.svg'),
+                  //   ),
                   // if (isPremium)
                   //   Positioned(
                   //     right: 0,
@@ -92,12 +110,14 @@ class ListingsCard extends StatelessWidget {
                         children: [
                           Text(
                             "Starting GHC ${listing.paymentInformation.cost}",
+                            "Starting GHC ${listing.paymentInformation.cost}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
                             ),
                           ),
                           Text(
+                            listing.propertyType.name.toUpperCase(),
                             listing.propertyType.name.toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
@@ -148,6 +168,7 @@ class ListingsCard extends StatelessWidget {
                       SizedBox(width: 2.w),
                       Text(
                         '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
+                        '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
@@ -173,6 +194,7 @@ class ListingsCard extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${Random().nextInt(10)}",
+                                  "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -191,6 +213,7 @@ class ListingsCard extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${Random().nextInt(10)}",
+                                  "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -208,6 +231,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
+                                  "${listing.propertySize} sqft",
                                   "${listing.propertySize} sqft",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,

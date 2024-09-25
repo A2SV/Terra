@@ -11,6 +11,7 @@ namespace Application.Contracts
         Task<PropertyLocation?> AddPropertyLocationAsync(PropertyLocation propertyLocation);
         Task<PaymentInformation?> AddPaymentInformationAsync(PaymentInformation paymentInformation);
         Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex,int pageSize);
+        Task<DetailedPropertyDto?> GetListingByIdAsync(Guid id);
 
         Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,
