@@ -9,6 +9,7 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
@@ -50,7 +51,12 @@ final routes = <GoRoute>[
   GoRoute(
     name: AppRoutes.listingDetail,
     path: '/${AppRoutes.listingDetail}',
-    builder: (context, state) => const ListingDetail(),
+    builder: (context, state) {
+      final ListingModel listing = state.extra as ListingModel;
+      return ListingDetail(
+        listing: listing,
+      );
+    },
   ),
   GoRoute(
     name: AppRoutes.identifyStudentIdentity,
@@ -72,6 +78,7 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.addListingMedia}',
     builder: (context, state) => const ListingsFilters(),
   ),
+
   GoRoute(
     name: AppRoutes.onboarding,
     path: '/${AppRoutes.onboarding}',
@@ -92,16 +99,15 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.notFound}',
     builder: (context, state) => const Page404(),
   ),
-  
 
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
   //   path: '/${EditBlogScreen.routeName}',
   //   builder: (context, state) {
-  //     Blog blog = state.extra as Blog;
-  //     return EditBlogScreen(
-  //       blog: blog,
-  //     );
+  // Blog blog = state.extra as Blog;
+  // return EditBlogScreen(
+  //   blog: blog,
+  // );
   //   },
   // ),
   // GoRoute(

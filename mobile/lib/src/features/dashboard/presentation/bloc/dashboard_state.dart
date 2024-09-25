@@ -10,6 +10,7 @@ final class DashboardError extends DashboardState {
 class DashboardInitial extends DashboardState {}
 
 class DashboardLoading extends DashboardState {}
+class DashboardILoading extends DashboardState {}
 
 @immutable
 sealed class DashboardState extends Equatable {
@@ -20,4 +21,8 @@ sealed class DashboardState extends Equatable {
 class DashboardSuccess extends DashboardState {
   final List<ListingModel> listings;
   DashboardSuccess({required this.listings}) : super();
+}
+class GetListingSuccess extends DashboardSuccess {
+  final ListingModel listing;
+  GetListingSuccess({required this.listing}) : super(listings: [listing]);
 }

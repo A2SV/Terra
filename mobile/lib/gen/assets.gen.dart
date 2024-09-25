@@ -24,6 +24,9 @@ class $AssetsImagesGen {
   AssetGenImage get estatesCard =>
       const AssetGenImage('assets/images/estates_card.png');
 
+  /// File path: assets/images/gmap.png
+  AssetGenImage get gmap => const AssetGenImage('assets/images/gmap.png');
+
   /// Directory path: assets/images/help
   $AssetsImagesHelpGen get help => const $AssetsImagesHelpGen();
 
@@ -43,6 +46,13 @@ class $AssetsImagesGen {
   AssetGenImage get identityVerifiedLogo =>
       const AssetGenImage('assets/images/identity_verified_logo.jpg');
 
+  /// File path: assets/images/illustration.png
+  AssetGenImage get illustration =>
+      const AssetGenImage('assets/images/illustration.png');
+
+  /// File path: assets/images/image6.png
+  AssetGenImage get image6 => const AssetGenImage('assets/images/image6.png');
+
   /// File path: assets/images/images.png
   AssetGenImage get images => const AssetGenImage('assets/images/images.png');
 
@@ -53,6 +63,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/kurt_profile.png
   AssetGenImage get kurtProfile =>
       const AssetGenImage('assets/images/kurt_profile.png');
+
+  /// Directory path: assets/images/listingIcons
+  $AssetsImagesListingIconsGen get listingIcons =>
+      const $AssetsImagesListingIconsGen();
 
   /// File path: assets/images/loading.png
   AssetGenImage get loading => const AssetGenImage('assets/images/loading.png');
@@ -70,6 +84,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/messageIcon.png
   AssetGenImage get messageIcon =>
       const AssetGenImage('assets/images/messageIcon.png');
+
+  /// File path: assets/images/network_error.png
+  AssetGenImage get networkError =>
+      const AssetGenImage('assets/images/network_error.png');
 
   /// File path: assets/images/notification_icon.png
   AssetGenImage get notificationIcon =>
@@ -99,6 +117,10 @@ class $AssetsImagesGen {
   AssetGenImage get searchIcon =>
       const AssetGenImage('assets/images/search_icon.png');
 
+  /// File path: assets/images/server_error.png
+  AssetGenImage get serverError =>
+      const AssetGenImage('assets/images/server_error.png');
+
   /// File path: assets/images/star.png
   AssetGenImage get star => const AssetGenImage('assets/images/star.png');
 
@@ -107,10 +129,13 @@ class $AssetsImagesGen {
         rectangle86,
         rectangle89,
         estatesCard,
+        gmap,
         houseImage1,
         houseImage2,
         houseImage3,
         identityVerifiedLogo,
+        illustration,
+        image6,
         images,
         kayProfile,
         kurtProfile,
@@ -119,6 +144,7 @@ class $AssetsImagesGen {
         lockBubble,
         mail,
         messageIcon,
+        networkError,
         notificationIcon,
         onboardingImage2,
         onboardingImage3,
@@ -126,6 +152,7 @@ class $AssetsImagesGen {
         property,
         samProfile,
         searchIcon,
+        serverError,
         star
       ];
 }
@@ -196,6 +223,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/mail.svg
   String get mail => 'assets/svg/mail.svg';
 
+  /// File path: assets/svg/message-text.svg
+  String get messageText => 'assets/svg/message-text.svg';
+
   /// File path: assets/svg/person.svg
   String get person => 'assets/svg/person.svg';
 
@@ -216,6 +246,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/search_normal.svg
   String get searchNormal => 'assets/svg/search_normal.svg';
+
+  /// File path: assets/svg/tag.svg
+  String get tag => 'assets/svg/tag.svg';
 
   /// File path: assets/svg/terra_logo.svg
   String get terraLogo => 'assets/svg/terra_logo.svg';
@@ -243,6 +276,7 @@ class $AssetsSvgGen {
         location,
         logo,
         mail,
+        messageText,
         person,
         premiumBanner,
         profile,
@@ -250,6 +284,7 @@ class $AssetsSvgGen {
         riverView,
         saved,
         searchNormal,
+        tag,
         terraLogo
       ];
 }
@@ -266,6 +301,79 @@ class $AssetsImagesHelpGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [ghLogo, home];
+}
+
+class $AssetsImagesListingIconsGen {
+  const $AssetsImagesListingIconsGen();
+
+  /// File path: assets/images/listingIcons/Streets.png
+  AssetGenImage get streets =>
+      const AssetGenImage('assets/images/listingIcons/Streets.png');
+
+  /// File path: assets/images/listingIcons/city.png
+  AssetGenImage get city =>
+      const AssetGenImage('assets/images/listingIcons/city.png');
+
+  /// File path: assets/images/listingIcons/country.png
+  AssetGenImage get country =>
+      const AssetGenImage('assets/images/listingIcons/country.png');
+
+  /// File path: assets/images/listingIcons/facebook.png
+  AssetGenImage get facebook =>
+      const AssetGenImage('assets/images/listingIcons/facebook.png');
+
+  /// File path: assets/images/listingIcons/house.png
+  AssetGenImage get house =>
+      const AssetGenImage('assets/images/listingIcons/house.png');
+
+  /// File path: assets/images/listingIcons/insta.png
+  AssetGenImage get insta =>
+      const AssetGenImage('assets/images/listingIcons/insta.png');
+
+  /// File path: assets/images/listingIcons/phone.png
+  AssetGenImage get phone =>
+      const AssetGenImage('assets/images/listingIcons/phone.png');
+
+  /// File path: assets/images/listingIcons/pin.png
+  AssetGenImage get pin =>
+      const AssetGenImage('assets/images/listingIcons/pin.png');
+
+  /// File path: assets/images/listingIcons/snapchat.png
+  AssetGenImage get snapchat =>
+      const AssetGenImage('assets/images/listingIcons/snapchat.png');
+
+  /// File path: assets/images/listingIcons/twitter.png
+  AssetGenImage get twitter =>
+      const AssetGenImage('assets/images/listingIcons/twitter.png');
+
+  /// File path: assets/images/listingIcons/website.png
+  AssetGenImage get website =>
+      const AssetGenImage('assets/images/listingIcons/website.png');
+
+  /// File path: assets/images/listingIcons/whatsapp.png
+  AssetGenImage get whatsapp =>
+      const AssetGenImage('assets/images/listingIcons/whatsapp.png');
+
+  /// File path: assets/images/listingIcons/zip.png
+  AssetGenImage get zip =>
+      const AssetGenImage('assets/images/listingIcons/zip.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        streets,
+        city,
+        country,
+        facebook,
+        house,
+        insta,
+        phone,
+        pin,
+        snapchat,
+        twitter,
+        website,
+        whatsapp,
+        zip
+      ];
 }
 
 class Assets {

@@ -5,6 +5,7 @@ import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_google_widget.dart';
+import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
@@ -12,10 +13,11 @@ import 'package:mobile/src/features/dashboard/presentation/widgets/property_card
 import 'package:mobile/src/features/dashboard/presentation/widgets/review_card.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
+import 'package:transparent_image/transparent_image.dart';
 
 class ListingDetail extends StatefulWidget {
-  const ListingDetail({super.key});
+  final ListingModel listing;
+  const ListingDetail({required this.listing, super.key});
 
   @override
   State<ListingDetail> createState() => _ListingDetailState();
@@ -114,11 +116,19 @@ class _ListingDetailState extends State<ListingDetail> {
                 fit: StackFit.loose,
                 clipBehavior: Clip.none,
                 children: [
-                  Assets.images.help.home.path.asAssetImage(
+                  FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: widget.listing.propertyPhotos.first.url,
                     height: context.height * 0.57,
                     width: context.width,
                     fit: BoxFit.fill,
                   ),
+                  // FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: image)
+                  // Assets.images.help.home.path.asAssetImage(
+                  // height: context.height * 0.57,
+                  // width: context.width,
+                  // fit: BoxFit.fill,
+                  // ),
                   SafeArea(
                     bottom: false,
                     child: Column(
@@ -194,7 +204,8 @@ class _ListingDetailState extends State<ListingDetail> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: Text(
-                                'Apartment',
+                                widget.listing.propertySubType.name
+                                    .toUpperCase(),
                                 style: context.textTheme.labelMedium!.copyWith(
                                   color: Colors.white,
                                   fontSize: 14.sp,
@@ -205,29 +216,30 @@ class _ListingDetailState extends State<ListingDetail> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: List.generate(
-                                min(3, apartmentImages.length),
+                                min(3, widget.listing.propertyPhotos.length),
                                 (index) {
                                   return Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      Container(
-                                        margin: EdgeInsets.all(5.sp),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15.sp),
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 7.sp,
-                                          ),
-                                        ),
-                                        clipBehavior: Clip.antiAlias,
-                                        child: apartmentImages[index]
-                                            .asAssetImage(
-                                              height: 5.5.h,
-                                              width: 12.w,
-                                            )
-                                            .circularClip(15.sp),
-                                      ),
+                                      // Container(
+                                      //   margin: EdgeInsets.all(5.sp),
+                                      //   decoration: BoxDecoration(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(15.sp),
+                                      //     border: Border.all(
+                                      //       color: Colors.white,
+                                      //       width: 7.sp,
+                                      //     ),
+                                      //   ),
+                                      //   clipBehavior: Clip.antiAlias,
+                                      // child: FadeInImage.memoryNetwork(
+                                      //   placeholder: kTransparentImage,
+                                      //   image: widget.listing.propertyPhotos
+                                      //       .first.url, //listing.[0],
+                                      //     fit: BoxFit.cover,
+                                      //     height: 20.h,
+                                      //   ).circularClip(15.sp),
+                                      // ),
                                       if (index == 2 &&
                                           apartmentImages.length - (index + 1) >
                                               0)
@@ -258,17 +270,19 @@ class _ListingDetailState extends State<ListingDetail> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Airport Residential',
-                      style: context.textTheme.labelMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.sp,
+                    Expanded(
+                      child: Text(
+                        widget.listing.title,
+                        style: context.textTheme.labelMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
+                        ),
                       ),
                     ),
                     Column(
                       children: [
                         Text(
-                          '\$200',
+                          '\$${widget.listing.paymentInformation.cost}',
                           style: context.textTheme.labelMedium!.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 20.sp,
@@ -293,7 +307,7 @@ class _ListingDetailState extends State<ListingDetail> {
                       size: 12,
                     ),
                     Text(
-                      'Accra, Ghana',
+                      '${widget.listing.propertyLocation.city}, ${widget.listing.propertyLocation.country}',
                       style: context.textTheme.labelMedium!.copyWith(
                         fontWeight: FontWeight.w400,
                         fontSize: 13.sp,

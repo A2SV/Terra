@@ -17,7 +17,7 @@ class PaymentInformationModel extends PaymentInformation {
       updatedAt: DateTime.parse(json['updatedAt']),
       currency: json['currency'],
       paymentFrequency: json['paymentFrequency'],
-      cost: json['cost'],
+      cost: json['cost'].toDouble(),
       negotiable: json['negotiable'],
     );
   }
@@ -34,4 +34,3 @@ class PaymentInformationModel extends PaymentInformation {
     };
   }
 }
-
