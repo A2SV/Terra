@@ -3,6 +3,8 @@ import 'package:mobile/src/features/dashboard/data/models/models.dart';
 import 'package:mobile/src/features/dashboard/data/models/property_photo.dart';
 import 'package:mobile/src/features/dashboard/data/models/property_video.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/domain/entities/commercial_property.dart';
+import 'package:mobile/src/features/dashboard/domain/entities/property_amenity.dart';
 
 class ListingEntity extends Equatable {
   final String id;
@@ -26,6 +28,9 @@ class ListingEntity extends Equatable {
   final List<PropertyPhotoModel> propertyPhotos;
   final List<PropertyVideoModel> propertyVideos;
 
+  final List<PropertyAmenity> propertyAmenities;
+  final CommercialProperty commercialProperty;
+  // final ResidentialProperty? residentialProperty;
 
   const ListingEntity({
     required this.id,
@@ -47,6 +52,9 @@ class ListingEntity extends Equatable {
     required this.propertyLocation,
     required this.propertyPhotos,
     required this.propertyVideos,
+    required this.propertyAmenities,
+    required this.commercialProperty,
+    // required this.residentialProperty,
   });
 
   @override
@@ -69,6 +77,9 @@ class ListingEntity extends Equatable {
         paymentInformation,
         propertyLocation,
         propertyPhotos,
-        propertyVideos
+        propertyVideos,
+        propertyAmenities,
+        commercialProperty,
+        // residentialProperty,
       ];
 }

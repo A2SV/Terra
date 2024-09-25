@@ -2,6 +2,8 @@ import 'package:mobile/src/features/dashboard/data/models/models.dart';
 import 'package:mobile/src/features/dashboard/data/models/property_photo.dart';
 import 'package:mobile/src/features/dashboard/data/models/property_video.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/domain/entities/commercial_property.dart';
+import 'package:mobile/src/features/dashboard/domain/entities/property_amenity.dart';
 
 class ListingModel extends ListingEntity {
   const ListingModel({
@@ -24,10 +26,12 @@ class ListingModel extends ListingEntity {
     required super.propertyLocation,
     required super.propertyPhotos,
     required super.propertyVideos,
+    required super.propertyAmenities,
+    required super.commercialProperty,
   });
   factory ListingModel.fromJson(Map<String, dynamic> json) {
     return ListingModel(
-      id: json['listerId'],
+      id: json['id'],
       // createdAt: DateTime.parse(json['createdAt']),
       // updatedAt: DateTime.parse(json['updatedAt']),
       listerId: json['listerId'],
@@ -88,9 +92,15 @@ class ListingModel extends ListingEntity {
       propertyPhotos: (json['propertyPhotos'] as List)
           .map((photo) => PropertyPhotoModel.fromJson(photo))
           .toList(),
-      propertyVideos: (json['propertyPhotos'] as List)
+      propertyVideos: (json['propertyVideos'] as List)
           .map((photo) => PropertyVideoModel.fromJson(photo))
           .toList(),
+      // propertyAmenities: (json['propertyAmenities'] as List)
+      //     .map((photo) => PropertyAmenity.fromJson(photo))
+      //     .toList(),
+      propertyAmenities: [],
+      commercialProperty: CommercialProperty.fromJson(json['propertyLocation']),
+
       //       PropertyLocationModel(
       //     id: '1',
       //     createdAt: DateTime.now(),
@@ -123,8 +133,8 @@ class ListingModel extends ListingEntity {
       // 'lister': lister.toJson(),
       'paymentInformation': paymentInformation.toJson(),
       'propertyLocation': propertyLocation.toJson(),
-      'propertyPhoto': propertyPhotos.map((photo)=> photo.toJson()).toList(),
-      'propertyVideo': propertyVideos.map((video)=> video.toJson()).toList(),
+      'propertyPhoto': propertyPhotos.map((photo) => photo.toJson()).toList(),
+      'propertyVideo': propertyVideos.map((video) => video.toJson()).toList(),
     };
   }
 }

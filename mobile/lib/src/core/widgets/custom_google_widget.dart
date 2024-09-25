@@ -1,11 +1,12 @@
-
 import 'package:flutter/material.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class CustomGoogleMap extends StatelessWidget {
+class CustomGoogleMap extends StatefulWidget {
   final bool? showPrefixIcon;
   final String text;
   const CustomGoogleMap({
@@ -14,6 +15,16 @@ class CustomGoogleMap extends StatelessWidget {
     this.text = 'View all on map',
   });
 
+  @override
+  State<CustomGoogleMap> createState() => _CustomGoogleMapState();
+}
+
+class _CustomGoogleMapState extends State<CustomGoogleMap> {
+  //  static const CameraPosition _kGoogle = CameraPosition(
+  //   target: LatLng(5.614818, -0.205874),
+  //   zoom: 14.4746,
+  // );
+  // final Completer<GoogleMapController> _controller = Completer();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,14 +38,26 @@ class CustomGoogleMap extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            color: Colors.red,
             height: 25.h,
+            decoration: BoxDecoration(
+            color: Colors.red,
+              image: DecorationImage(image: AssetImage(Assets.images.gmap.path), fit: BoxFit.fill),
+            ),
+            // child: Expanded(
+            //   child: Assets.images.gmap.path.asAssetImage(
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(image: Assets.images.gmap.path.asAssetImage())
+            // ),
           ),
+          // _buildGoogleMap(),
           CustomButton(
-            text: text,
+            text: widget.text,
             onPressed: () {},
-            showPrefixWidget: showPrefixIcon,
-            prefixWidget: showPrefixIcon!
+            showPrefixWidget: widget.showPrefixIcon,
+            prefixWidget: widget.showPrefixIcon!
                 ? const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Icon(
@@ -56,4 +79,20 @@ class CustomGoogleMap extends StatelessWidget {
       ),
     );
   }
+
+  // Widget _buildGoogleMap() {
+  //   return GoogleMap(
+  //     myLocationEnabled: true,
+  //     mapType: MapType.terrain,
+  //     buildingsEnabled: false,
+  //     // initialCameraPosition: CameraPosition(
+  //     //   zoom: 12,
+  //     //   target: LatLng(5.5486, -0.2012),
+  //     // ),
+  //     myLocationButtonEnabled: false,
+  //     initialCameraPosition: _kGoogle,
+  //     // markers: Set<Marker>.of(_markers),
+  //     onMapCreated: _controller.complete,
+  //   );
+  // }
 }

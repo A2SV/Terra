@@ -12,6 +12,7 @@ import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_b
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/domain/use_cases/get_listing_use_case.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
 final GetIt sl = GetIt.instance;
@@ -67,9 +68,15 @@ Future<void> init() async {
         dashboardRepository: sl<DashboardRepositoryImpl>(),
       ),
     )
+    ..registerLazySingleton(
+      () => GetListingUseCase(
+        dashboardRepository: sl<DashboardRepositoryImpl>(),
+      ),
+    )
     ..registerFactory(
       () => DashboardBloc(
         getListingsUseCase: sl<GetListingsUseCase>(),
+        getListingUseCase: sl<GetListingUseCase>(),
       ),
     );
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -43,6 +44,13 @@ class _HomePageState extends State<HomePage> {
               CustomSnackBar.errorSnackBar(
                   context: context, message: state.message);
             }
+          }
+          print(state);
+          if (state is GetListingSuccess) {
+            switchScreen(
+                context: context,
+                routeName: AppRoutes.listingDetail,
+                extra: state.listing);
           }
         },
         builder: (context, state) {
@@ -174,7 +182,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                               context
+                                .read<DashboardBloc>()
+                                .add(GetAllListingsEvent());
+                            },
                             child: const Text(
                               "See all",
                               style: TextStyle(
@@ -195,8 +207,16 @@ class _HomePageState extends State<HomePage> {
                           itemCount: state.listings.length,
                           primary: false,
                           itemBuilder: (context, index) {
-                            return ListingsCard(
-                              listing: state.listings[index],
+                            return GestureDetector(
+                              onTap: () {
+                                context.read<DashboardBloc>().add(
+                                      GetAllListingEvent(
+                                          id: state.listings[index].id),
+                                    );
+                              },
+                              child: ListingsCard(
+                                listing: state.listings[index],
+                              ),
                             );
                           },
                         ),

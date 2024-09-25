@@ -22,8 +22,8 @@ class PropertyLocationModel extends PropertyLocation {
       city: json['city'],
       country: json['country'],
       zipCode: json['zipCode'],
-      longitude: json['longitude'],
-      latitude: json['latitude'],
+      longitude: json['longitude'].toDouble(),
+      latitude: json['latitude'].toDouble(),
     );
   }
 
