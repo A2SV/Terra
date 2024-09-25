@@ -22,7 +22,7 @@ class ListingsCard extends StatelessWidget {
     // required this.isPremium,
     // required this.imageUrl,
     // required this.profileImageUrl,
-    required this.listing,
+    // required this.listing,
     // required this.startingPrice,
     // required this.propertyType,
     // required this.title,
@@ -110,7 +110,7 @@ class ListingsCard extends StatelessWidget {
                         children: [
                           Text(
                             "Starting GHC ${listing.paymentInformation.cost}",
-                            "Starting GHC ${listing.paymentInformation.cost}",
+                            // "Starting GHC ${listing.paymentInformation.cost}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
@@ -118,7 +118,7 @@ class ListingsCard extends StatelessWidget {
                           ),
                           Text(
                             listing.propertyType.name.toUpperCase(),
-                            listing.propertyType.name.toUpperCase(),
+                            // listing.propertyType.name.toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
@@ -168,7 +168,7 @@ class ListingsCard extends StatelessWidget {
                       SizedBox(width: 2.w),
                       Text(
                         '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
-                        '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
+                        // '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
@@ -194,7 +194,7 @@ class ListingsCard extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${Random().nextInt(10)}",
-                                  "${Random().nextInt(10)}",
+                                  // "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -213,7 +213,7 @@ class ListingsCard extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${Random().nextInt(10)}",
-                                  "${Random().nextInt(10)}",
+                                  // "${Random().nextInt(10)}",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -232,7 +232,7 @@ class ListingsCard extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${listing.propertySize} sqft",
-                                  "${listing.propertySize} sqft",
+                                  // "${listing.propertySize} sqft",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
