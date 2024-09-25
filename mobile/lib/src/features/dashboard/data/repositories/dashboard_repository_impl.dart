@@ -7,7 +7,7 @@ import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:mobile/src/features/dashboard/domain/repositories/repository.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
-  final DashboardRemoteDataSource remoteDataSource;
+  final RemoteDataSource remoteDataSource;
   final NetworkImpl network;
 
   DashboardRepositoryImpl({

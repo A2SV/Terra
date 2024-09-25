@@ -201,7 +201,6 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                     SizedBox(
                       height: 2.h,
                     ),
-
                     Container(
                       width: 92.w,
                       child: Column(
@@ -324,11 +323,9 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         ),//furnished status
                       ],
                     ),
-
                     SizedBox(
                       height: 2.h,
                     ),
-
                     Container(
                       width: 92.w,
                       child: Column(
@@ -368,11 +365,9 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         ],
                       ),
                     ),
-
                     SizedBox(
                       height: 2.h,
                     ),
-
                     CustomButton(
                         width: 95.w,
                         horizontalPadding: 5,
@@ -391,7 +386,6 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                     SizedBox(
                       height: 2.h,
                     ),
-
                   ],
                 ),
               )

@@ -6,14 +6,14 @@ import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/features/dashboard/data/models/get_all_listings.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 
-abstract class DashboardRemoteDataSource {
+abstract class RemoteDataSource {
   Future<List<ListingModel>> getAllListings();
 }
 
-class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
+class RemoteDataSourceImpl implements RemoteDataSource {
   final http.Client _client;
 
-  DashboardRemoteDataSourceImpl(this._client);
+  RemoteDataSourceImpl(this._client);
 
   @override
   Future<List<ListingModel>> getAllListings() async {
@@ -38,4 +38,5 @@ class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
     print(response.body);
     throw ApiException(response.body);
   }
+
 }
