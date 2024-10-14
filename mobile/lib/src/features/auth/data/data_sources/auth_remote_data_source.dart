@@ -7,7 +7,7 @@ import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/success/success.dart';
 
 import '../../../../core/error/failure.dart';
-import '../models/UserModel.dart';
+import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Either<Failure, UserModel>> login(String username, String password);
