@@ -5,12 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/success/success.dart';
+import 'package:mobile/src/features/auth/data/models/user_data_source_model.dart';
 
 import '../../../../core/error/failure.dart';
 import '../models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Either<Failure, UserModel>> login(String username, String password);
+  Future<Either<Failure, UserDataSourceModel>> login(String username, String password);
 
   Future<OTPMatched> otp(String code, String email);
   Future<void> registerWithEmailPassword({
@@ -30,7 +31,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._client);
 
   @override
-  Future<Either<Failure, UserModel>> login(
+  Future<Either<Failure, UserDataSourceModel>> login(
       String username, String password) async {
     // String url = 'http://terra.runasp.net/api/Auth/login';
 
@@ -41,7 +42,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       //final Box userBox=await Hive.openBox('userData');
       //await userBox.put('isLoggedIn',   true);
       print(response.body);
-      return Right(UserModel(username: username, password: password));
+
+      return Right(UserDataSourceModel(username: username, password: password));
     } else if (response.statusCode == 400) {
       print(response.body);
       return const Left(LoginFailure('User Login Failed'));

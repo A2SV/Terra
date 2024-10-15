@@ -4,6 +4,7 @@ import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:mobile/src/features/auth/data/models/user_data_source_model.dart';
 import 'package:mobile/src/features/auth/domain/entities/login_return_entity.dart';
 
 import '../../../../core/entities/user_account.dart';
@@ -21,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, LoginReturn>> login(
       String email, String password) async {
-    Either<Failure, UserModel> response =
+    Either<Failure, UserDataSourceModel> response =
         await remoteDataSource.login(email, password);
 
     var output;
