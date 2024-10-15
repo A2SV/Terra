@@ -11,13 +11,9 @@ import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_shop.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/compare_listing.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/search_listing.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 final routes = <GoRoute>[
@@ -49,7 +45,7 @@ final routes = <GoRoute>[
   GoRoute(
     name: AppRoutes.dashboard,
     path: '/${AppRoutes.dashboard}',
-    builder: (context, state) => const DashBoard(),
+    builder: (context, state) => const DashboardPage(),
   ),
   GoRoute(
     name: AppRoutes.listingDetail,
@@ -95,13 +91,6 @@ final routes = <GoRoute>[
     name: AppRoutes.notFound,
     path: '/${AppRoutes.notFound}',
     builder: (context, state) => const Page404(),
-  ),
-
-//Temporary route
-  GoRoute(
-    name: AppRoutes.temp,
-    path: '/${AppRoutes.temp}',
-    builder: (context, state) => const AddListingShop(),
   ),
   
 
@@ -167,7 +156,4 @@ class AppRoutes {
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
-
-  //Temporary routes
-  static const String temp = "listing-page";
 }

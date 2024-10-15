@@ -13,7 +13,6 @@ import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:mobile/src/features/dashboard/data/data_sources/data_sources.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -53,13 +52,13 @@ Future<void> init() async {
 
   sl
     ..registerLazySingleton(
-      () => RemoteDataSourceImpl(
+      () => DashboardRemoteDataSourceImpl(
         sl<http.Client>(),
       ),
     )
     ..registerLazySingleton(
       () => DashboardRepositoryImpl(
-        remoteDataSource: sl<RemoteDataSourceImpl>(),
+        remoteDataSource: sl<DashboardRemoteDataSourceImpl>(),
         network: sl<NetworkImpl>(),
       ),
     )

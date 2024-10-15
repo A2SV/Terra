@@ -8,7 +8,7 @@ import 'package:mobile/src/features/auth/domain/entities/login_return_entity.dar
 
 import '../../../../core/entities/user_account.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../models/UserModel.dart';
+import '../models/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;

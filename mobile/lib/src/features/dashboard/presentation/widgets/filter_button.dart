@@ -26,12 +26,12 @@ class FilterButton extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: isSelected & hasShadow
             ? [
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.27),
-            blurRadius: 30,
-            offset: Offset(3.w, 2.h), // changes position of shadow
-          ),
-        ]
+                BoxShadow(
+                  color: Colors.blue.withOpacity(0.27),
+                  blurRadius: 30,
+                  offset: Offset(3.w, 2.h), // changes position of shadow
+                ),
+              ]
             : [],
       ),
       child: ChoiceChip(
@@ -41,12 +41,12 @@ class FilterButton extends StatelessWidget {
           onSelect();
         },
         selectedColor:
-        AppLightThemeColors.kMainBlueButton, // Color for the selected chip
+            AppLightThemeColors.kMainBlueButton, // Color for the selected chip
         backgroundColor:
-        AppLightThemeColors.kMainLightButton, // Color for unselected chips
+            AppLightThemeColors.kMainLightButton, // Color for unselected chips
         labelStyle: TextStyle(
           color:
-          isSelected ? Colors.white : AppLightThemeColors.kLightTextColor,
+              isSelected ? Colors.white : AppLightThemeColors.kLightTextColor,
           fontSize: size.sp,
           fontFamily: "Nunito",
         ),
