@@ -5,6 +5,7 @@ import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/models/user_model.dart';
 
+
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String username, String password);
 

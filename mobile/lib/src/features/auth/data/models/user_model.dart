@@ -25,4 +25,3 @@ class UserModel extends UserAccount {
       lastName: map['lastName'] as String,
     );
   }
-}
