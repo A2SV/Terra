@@ -16,7 +16,7 @@ class OTPResendParams extends Equatable {
   List<Object?> get props => [email];
 }
 
-class OTPResendUseCase extends UseCase<OTPSent, OTPResendParams> {
+class OTPResendUseCase implements UseCase<OTPSent, OTPResendParams> {
   final AuthRepository _authRepository;
   OTPResendUseCase(
     this._authRepository,
