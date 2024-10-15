@@ -5,6 +5,9 @@ import 'package:mobile/src/features/auth/presentation/widgets/filter_button.dart
 import 'package:mobile/src/features/auth/presentation/widgets/user_review_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/app_light_theme_colors.dart';
+import '../../../../core/theme/text_theme.dart';
+
 class UserReviews extends StatefulWidget {
   const UserReviews({super.key});
 
@@ -30,11 +33,15 @@ class _UserReviewsState extends State<UserReviews> {
           alignment: Alignment.centerLeft,
           child: Text(
             'User Reviews',
-            style: TextStyle(
+            style:
+            CustomTextStyles.kDefaultTextTheme(
+                AppCommonColors.reviewHeading)
+                .bodySmall?.copyWith(
                 fontSize: 19.sp,
                 fontWeight: FontWeight.w700,
                 color: AppCommonColors.reviewHeading,
-                fontFamily: FontFamily.nunito),
+                fontFamily: FontFamily.nunito
+            ),
           ),
         ),
       ),

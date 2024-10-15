@@ -4,6 +4,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 
+import '../../../../core/theme/app_light_theme_colors.dart';
+
 class AddListingContactPage extends StatefulWidget {
   const AddListingContactPage({super.key});
 
@@ -97,11 +99,14 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w400,
                     ),
-                    children: const [
+                    children: [
                       TextSpan(text: 'Add your '),
                       TextSpan(
                         text: 'contact',
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                           color: AppCommonColors.mainBlueButton,
                           fontWeight: FontWeight.w800,
                         ),
@@ -217,13 +222,21 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
                       SizedBox(width: 3.5.w),
                       Text(
                         'I agree to the ',
-                        style: TextStyle(fontSize: 14.sp),
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
+                            fontSize: 14.sp)
                       ),
                       Text(
                         'Terms of service and Privacy Policy',
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                             fontSize: 14.sp,
-                            color: AppCommonColors.defaultLink),
+                            color: AppCommonColors.defaultLink
+                        ),
                       ),
                     ],
                   ),
@@ -234,7 +247,12 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'Social Links',
-                  style: TextStyle(fontSize: 16.sp),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
+                      fontSize: 16.sp
+                  ),
                 ),
               ),
               SizedBox(
@@ -345,9 +363,15 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Next',
-                    style: TextStyle(color: Colors.white),
+                    style:
+                    CustomTextStyles.kDefaultTextTheme(
+                        AppLightThemeColors.kBlackTextColor)
+                        .bodySmall?.copyWith(
+                        color: Colors.white
+                    ),
+
                   ),
                 ),
               ),

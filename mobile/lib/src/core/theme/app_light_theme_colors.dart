@@ -17,4 +17,22 @@ class AppLightThemeColors {
   static const kMainBlueButton = Color.fromRGBO(23, 121, 243, 1);
   static const kMainLightButton = Color.fromRGBO(242, 242, 243, 1);
   static const kMainLightButtonBorder = Color.fromRGBO(227, 227, 231, 1);
+
+  //the variables below are from the other light_theme_colors
+  static const fieldsForOTPLight = Color(0xFFEAEFF5);
+  static const placeholderTextForInputFieldLight = Color(0xFFACACAC);
+  static const skipButtonBgndLight = Color(0xFFD9D9D9);
+  static const smallTextColorLight = Color(0xFF3B4054);
+  static const strokeForInputFieldLight = Color(0xFFACACAC);
 }
+
+/*
+class AppLightThemeColors {
+  static const fieldsForOTPLight = Color(0xFFEAEFF5);
+  static const placeholderTextForInputFieldLight = Color(0xFFACACAC);
+  static const skipButtonBgndLight = Color(0xFFD9D9D9);
+  static const smallTextColorLight = Color(0xFF3B4054);
+  static const strokeForInputFieldLight = Color(0xFFACACAC);
+}
+
+ */

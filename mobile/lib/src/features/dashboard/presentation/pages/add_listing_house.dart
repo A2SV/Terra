@@ -22,6 +22,7 @@ import 'package:mobile/src/features/da'
     'shboard/presentation/widgets/filter_button.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../../../../../gen/fonts.gen.dart';
+import '../../../../core/theme/app_light_theme_colors.dart';
 
 
 class AddListingHouse extends StatefulWidget{
@@ -115,7 +116,10 @@ class _AddListingHouseState extends State<AddListingHouse> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Add Listing',
-                            style: TextStyle(
+                            style:
+                            CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                                .bodySmall?.copyWith(
                               color: Colors.black,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w700,

@@ -14,6 +14,8 @@ import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_fie
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -85,15 +87,26 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       'Sign Up',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w600,
-                          color: AppLightThemeColors.kBlackColor),
+                          color: AppLightThemeColors.kBlackColor
+                      ),
                     ),
-                    const Text(
+                    Text(
                       'Join the Terra family',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
+                          fontSize: 16
+                      ),
+                      //TextStyle(fontSize: 16)
+
                     ),
                     const SizedBox(height: 28),
                     Row(
@@ -184,13 +197,25 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           'I agree to the ',
-                          style: TextStyle(fontSize: 14.sp),
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
+                              fontSize: 14.sp
+                          ),
+                          //TextStyle(fontSize: 14.sp),
                         ),
                         Text(
                           'Terms of service and Privacy Policy',
-                          style: TextStyle(
-                              fontSize: 14.sp,
-                              color: AppCommonColors.defaultLink),
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
+                            fontSize: 14.sp,
+                            color: AppCommonColors.defaultLink,
+                          ),
+
+                          //TextStyle(fontSize: 14.sp, color: AppCommonColors.defaultLink,),
                         )
                       ],
                     ),
@@ -244,7 +269,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         'Already have an account? ',
-                        style: TextStyle(
+                        style: CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                             fontSize: 15.sp,
                             color: AppCommonColors.fieldBorderColor),
                       ),
@@ -254,14 +281,19 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         child: Text(
                           'Sign In',
-                          style: TextStyle(
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
                               fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink),
+                              color: AppCommonColors.defaultLink
+                          ),
+
                         ),
                       ),
                     ]),
                     const SizedBox(height: 2),
-                    const Row(
+                    Row(
                       children: [
                         Expanded(
                           child: Divider(
@@ -271,8 +303,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style: TextStyle(
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
                               color: AppCommonColors.fieldBorderColor),
+
                         ),
                         Expanded(
                           child: Divider(

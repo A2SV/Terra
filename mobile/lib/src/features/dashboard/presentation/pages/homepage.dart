@@ -11,6 +11,8 @@ import 'package:mobile/src/features/dashboard/presentation/widgets/homepage_card
 import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -63,7 +65,9 @@ class _HomePageState extends State<HomePage> {
                         EdgeInsets.only(left: 4.5.w, top: 1.3.h, bottom: 1.3.h),
                     child: Text(
                       "Welcome to Terra",
-                      style: TextStyle(
+                      style: CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w700,
                         fontSize: 16.5.sp,
@@ -90,7 +94,10 @@ class _HomePageState extends State<HomePage> {
                           vertical: 0.7.h,
                           horizontal: 1.w,
                         ),
-                        labelStyle: TextStyle(
+                        labelStyle:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                           fontSize: 17.sp,
                           fontFamily: "Nunito",
                         ),
@@ -154,11 +161,15 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(left: 4.5.w, top: 2.5.h),
                       child: Text(
                         "Near your location",
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
                           fontSize: 16.5.sp,
                         ),
+
                       ),
                     ),
                     Padding(
@@ -168,16 +179,22 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             "${state.listings.length} properties in Accra",
-                            style: TextStyle(
+                            style:
+                            CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                                .bodySmall?.copyWith(
                               fontSize: 15.sp,
                               color: AppLightThemeColors.kLightTextColor,
                             ),
                           ),
                           GestureDetector(
                             onTap: () {},
-                            child: const Text(
+                            child: Text(
                               "See all",
-                              style: TextStyle(
+                              style:
+                              CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                                  .bodySmall?.copyWith(
                                 color: AppLightThemeColors.kMainBlueButton,
                               ),
                             ),

@@ -119,7 +119,10 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Add Listing',
-                            style: TextStyle(
+                            style:
+                            CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                                .bodySmall?.copyWith(
                               color: Colors.black,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w700,
