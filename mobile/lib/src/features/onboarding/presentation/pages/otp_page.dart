@@ -7,6 +7,9 @@ import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/app_light_theme_colors.dart';
+import '../../../../core/theme/text_theme.dart';
+
 class OTPage extends StatelessWidget {
   const OTPage({super.key});
 
@@ -55,27 +58,36 @@ class OTPage extends StatelessWidget {
               Assets.images.messageIcon.path.asAssetImage(height: 9.h),
               // SvgPicture.asset('assets/svg/message.svg'),
               const SizedBox(height: 25),
-              const Text(
+              Text(
                 'Enter OTP',
-                style: TextStyle(
+                style:
+                CustomTextStyles.kDefaultTextTheme(
+                    Color(0xFF1779F3))
+                    .bodySmall?.copyWith(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF1779F3),
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 'Enter the OTP code we just sent you on your',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style:
+                CustomTextStyles.kDefaultTextTheme(
+                    Colors.black54)
+                    .bodySmall?.copyWith(
                   fontSize: 12,
                   color: Colors.black54,
                 ),
               ),
-              const Text(
+              Text(
                 'registered email',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style:
+                CustomTextStyles.kDefaultTextTheme(
+                    Colors.black54)
+                    .bodySmall?.copyWith(
                   fontSize: 12,
                   color: Colors.black54,
                 ),
@@ -118,11 +130,19 @@ class OTPage extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   text: "Didn't get OTP? ",
-                  style: const TextStyle(color: Colors.black54, fontSize: 12),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      Color(0xFF1779F3))
+                      .bodySmall?.copyWith(
+                      color: Colors.black54, fontSize: 12
+                  ),
                   children: [
                     TextSpan(
                       text: 'Resend OTP',
-                      style: const TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          Color(0xFF1779F3))
+                          .bodySmall?.copyWith(
                         color: Color(0xFF1779F3),
                         fontSize: 12,
                       ),
