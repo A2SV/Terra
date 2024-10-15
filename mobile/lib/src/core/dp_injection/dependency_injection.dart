@@ -14,6 +14,8 @@ import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
+import '../../features/dashboard/data/data_sources/remote_data_source.dart';
+
 final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
