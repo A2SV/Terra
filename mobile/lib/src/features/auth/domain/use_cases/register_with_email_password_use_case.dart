@@ -5,7 +5,7 @@ import 'package:mobile/src/core/use_case/use_case.dart';
 import 'package:mobile/src/features/auth/domain/domain.dart';
 
 
-class RegisterWithEmailPasswordUseCase extends UseCase<void,RegisterWithEmailPasswordUseCaseParams> {
+class RegisterWithEmailPasswordUseCase implements UseCase<void,RegisterWithEmailPasswordUseCaseParams> {
   
 
   RegisterWithEmailPasswordUseCase(this._authRepository,);

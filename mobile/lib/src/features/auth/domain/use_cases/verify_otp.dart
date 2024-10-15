@@ -18,7 +18,7 @@ class OTPParams extends Equatable {
   List<Object?> get props => [code, email];
 }
 
-class OTPUseCase extends UseCase<OTPMatched, OTPParams> {
+class OTPUseCase implements UseCase<OTPMatched, OTPParams> {
   final AuthRepository _authRepository;
   OTPUseCase(
     this._authRepository,
