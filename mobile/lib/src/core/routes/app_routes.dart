@@ -49,7 +49,7 @@ final routes = <GoRoute>[
   GoRoute(
     name: AppRoutes.dashboard,
     path: '/${AppRoutes.dashboard}',
-    builder: (context, state) => const DashboardPage(),
+    builder: (context, state) => const DashBoard(),
   ),
   GoRoute(
     name: AppRoutes.listingDetail,
