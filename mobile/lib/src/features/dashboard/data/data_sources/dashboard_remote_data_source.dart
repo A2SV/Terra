@@ -36,6 +36,6 @@ class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
       return listingReturn.items;
     }
     print(response.body);
-    throw ApiException(response.body);
+    throw ServerException(response.body);
   }
 }

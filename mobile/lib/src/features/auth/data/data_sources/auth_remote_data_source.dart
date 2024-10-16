@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
@@ -47,7 +48,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return UserModel.fromJson(user);
       } else {
         final responseData = jsonDecode(response.body);
-        throw ApiException(responseData['message']);
+        throw ServerException(responseData['message']);
       }
     } catch (e) {
       throw ServerException(e.toString());
@@ -60,7 +61,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         body: jsonEncode({'email': email, 'otp': otp}),
         headers: {'Content-Type': ' application/json'});
     if (otpResponse.statusCode != 200) {
-      throw OTPException(message: otpResponse.body);
+      throw ServerException(otpResponse.body);
     }
     return const OTPMatched();
   }
@@ -90,7 +91,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (result.statusCode != 201) {
         final response = jsonDecode(result.body);
-        throw ApiException(response['message']);
+        throw ServerException(response['message']);
       }
     } catch (e) {
       throw ServerException(e.toString());
@@ -104,7 +105,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         body: jsonEncode({'email': email}),
         headers: {'Content-Type': ' application/json'});
     if (otpResponse.statusCode != 200) {
-      throw ResendOTPException(message: otpResponse.body);
+      throw ServerException(otpResponse.body);
     }
     return const OTPSent();
   }

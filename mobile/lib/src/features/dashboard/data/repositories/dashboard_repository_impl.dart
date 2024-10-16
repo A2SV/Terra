@@ -3,7 +3,6 @@ import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
-import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:mobile/src/features/dashboard/domain/repositories/repository.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {
@@ -21,11 +20,12 @@ class DashboardRepositoryImpl implements DashboardRepository {
       try {
         final result = await remoteDataSource.getAllListings();
         return Right(result);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
-      return const Left(NetworkFailure('No internet connection. Check Your Internet Connection'));
+      return const Left(ServerFailure(
+          'No internet connection. Check Your Internet Connection'));
     }
   }
 }

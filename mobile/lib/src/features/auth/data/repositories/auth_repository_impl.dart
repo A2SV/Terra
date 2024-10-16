@@ -5,6 +5,7 @@ import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mobile/src/features/auth/data/models/user_model.dart';
+
 import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -24,11 +25,11 @@ class AuthRepositoryImpl implements AuthRepository {
       try {
         final response = await remoteDataSource.login(email, password);
         return right(response);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
-      return const Left(NetworkFailure(
+      return const Left(ServerFailure(
           'No internet connection. Check Your Internet Connection'));
     }
   }
@@ -45,7 +46,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final otp = await remoteDataSource.otp(code, email);
       return Right(otp);
     } catch (e) {
-      return Left(OTPFailure(e.toString()));
+      return Left(ServerFailure(e.toString()));
     }
   }
 
@@ -68,11 +69,11 @@ class AuthRepositoryImpl implements AuthRepository {
             phoneNumber: phoneNumber,
             role: role);
         return Right(result);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
-      return const Left(NetworkFailure(
+      return const Left(ServerFailure(
           'No internet connection. Check Your Internet Connection'));
     }
   }
@@ -90,10 +91,10 @@ class AuthRepositoryImpl implements AuthRepository {
         final otp = await remoteDataSource.resendOtp(email);
         return Right(otp);
       } catch (e) {
-        return Left(ResendOTPFailure(e.toString()));
+        return Left(ServerFailure(e.toString()));
       }
     } else {
-      return const Left(NetworkFailure(
+      return const Left(ServerFailure(
           'No internet connection. Check Your Internet Connection'));
     }
   }

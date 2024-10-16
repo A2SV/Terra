@@ -31,7 +31,7 @@ void main() {
           phoneNumber: 'phoneNumber',
           role: 'role');
 
-      verify(() => client.post(Uri.parse('$baseUrl$registerUrl'),
+      verify(() => client.post(Uri.parse('${AppStrings.baseUrl}${AppStrings.registerUrl}'),
        headers: {
           'Content-type': 'application/json',
         },
@@ -59,9 +59,9 @@ void main() {
             password: 'password',
             phoneNumber: 'phoneNumber',
             role: 'role'),
-        throwsA(isA<ApiException>()),
+        throwsA(isA<ServerException>()),
       );
-      verify(() => client.post(Uri.parse('$baseUrl$registerUrl'),
+      verify(() => client.post(Uri.parse('${AppStrings.baseUrl}${AppStrings.registerUrl}'),
        headers: {
           'Content-type': 'application/json',
         },

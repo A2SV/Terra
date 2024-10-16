@@ -66,7 +66,7 @@ void main() {
       ).called(1);
       verifyNoMoreInteractions(remoteDataSource);
     });
-    const tException = ApiException('Failed to register user');
+    const tException = ServerException('Failed to register user');
     test(
         'should return an APIFailure when the call'
         'todatasource.registerWithEmailPassword'
@@ -91,7 +91,7 @@ void main() {
           role: params.role
           );
       //assert
-      expect(result, Left(APIFailure(tException.message)));
+      expect(result, Left(ServerFailure(tException.message)));
       verify(() => remoteDataSource.registerWithEmailPassword(
           firstName: params.firstName,
           lastName: params.lastName,

@@ -1,5 +1,3 @@
-
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,9 +5,6 @@ import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/use_cases.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mocktail/mocktail.dart';
-
-class MockRegisterWithEmailPassword extends Mock
-    implements RegisterWithEmailPasswordUseCase {}
 
 void main() {
   late RegisterWithEmailPasswordUseCase usecase;
@@ -37,7 +32,6 @@ void main() {
     blocTest<AuthenticationBloc, AuthenticationState>(
       'should emit [AuthenticationLoading, AuthenticationSuccess]',
       build: () {
-       
         when(() => usecase(any())).thenAnswer((_) async => const Right(null));
         return bloc;
       },
@@ -54,17 +48,16 @@ void main() {
         AuthenticationSuccess(),
       ],
       verify: (_) {
- 
         verify(() => usecase(any())).called(1);
         verifyNoMoreInteractions(usecase);
       },
     );
-  
+
     blocTest<AuthenticationBloc, AuthenticationState>(
       'should emit [AuthenticationLoading, AuthenticationSuccess]',
       build: () {
-      
-        when(() => usecase(any())).thenAnswer((_) async => const Left(APIFailure('Failed')));
+        when(() => usecase(any()))
+            .thenAnswer((_) async => const Left(ServerFailure('Failed')));
         return bloc;
       },
       act: (bloc) async => bloc.add(AuthenticationRegisterUserEvent(
@@ -80,11 +73,12 @@ void main() {
         AuthenticationError('Failed'),
       ],
       verify: (_) {
-     
         verify(() => usecase(any())).called(1);
         verifyNoMoreInteractions(usecase);
       },
     );
   });
-  
 }
+
+class MockRegisterWithEmailPassword extends Mock
+    implements RegisterWithEmailPasswordUseCase {}
