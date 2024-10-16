@@ -1,7 +1,7 @@
 import React from "react";
 import { EmblaOptionsType } from "embla-carousel";
-import "@/components/Carousel/css/embla.css";
-import "@/components/Carousel/css/sandbox.css";
+import "@/components/Silders/Carousel/css/embla.css";
+import "@/components/Silders/Carousel/css/sandbox.css";
 import EmblaCarousel from "@/components/Silders/ImageCarousel/EmblaCarousel";
 
 interface Props {
