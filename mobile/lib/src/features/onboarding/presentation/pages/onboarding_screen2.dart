@@ -75,7 +75,7 @@ class OnboardingScreen2 extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style:
                 CustomTextStyles.kDefaultTextTheme(
-                    AppLightThemeColors.kBlackTextColor)
+                    Theme.of(context).colorScheme.onPrimary)
                     .bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: 18.5.sp,

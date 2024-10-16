@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
+import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -52,8 +53,13 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Home',
-                  style: TextStyle(
-                      fontSize: 15.sp, fontWeight: FontWeight.w500),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      Colors.black)
+                      .bodySmall?.copyWith(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500
+                  )
                 )
               ],
             ),
@@ -71,8 +77,13 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Chat',
-                  style: TextStyle(
-                      fontSize: 15.sp, fontWeight: FontWeight.w500),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      Colors.black)
+                      .bodySmall?.copyWith(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500
+                  ),
                 )
               ],
             ),
@@ -101,8 +112,13 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Saved',
-                  style: TextStyle(
-                      fontSize: 15.sp, fontWeight: FontWeight.w500),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      Colors.black)
+                      .bodySmall?.copyWith(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500
+                  ),
                 )
               ],
             ),
@@ -120,8 +136,13 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Profile',
-                  style: TextStyle(
-                      fontSize: 15.sp, fontWeight: FontWeight.w500),
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      Colors.black)
+                      .bodySmall?.copyWith(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500
+                  ),
                 )
               ],
             )
