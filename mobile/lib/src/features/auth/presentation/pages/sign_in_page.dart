@@ -13,6 +13,8 @@ import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_fie
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -90,10 +92,14 @@ class _SignInPageState extends State<SignInPage> {
                           fontWeight: FontWeight.w600,
                           color: AppLightThemeColors.kBlackColor), //black
                     ),
-                    const Text(
+                    Text(
                       'Welcome to the Terra family',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
+                          fontSize: 16),
                     ),
                     SizedBox(height: 4.h),
                     AuthTextFormField(
@@ -125,7 +131,10 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(height: 3.h),
                     Text(
                       "Forgot password?",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         fontSize: 15.sp,
                       ),
                       textAlign: TextAlign.end,
@@ -170,9 +179,13 @@ class _SignInPageState extends State<SignInPage> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                             fontSize: 15.sp,
-                            color: AppCommonColors.fieldBorderColor),
+                            color: AppCommonColors.fieldBorderColor
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -180,14 +193,18 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
                               fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink),
+                              color: AppCommonColors.defaultLink
+                          ),
                         ),
                       ),
                     ]),
                     SizedBox(height: 4.h),
-                    const Row(
+                    Row(
                       children: [
                         Expanded(
                           child: Divider(
@@ -197,8 +214,12 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style: TextStyle(
-                              color: AppCommonColors.fieldBorderColor),
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                              .bodySmall?.copyWith(
+                              color: AppCommonColors.fieldBorderColor
+                          ),
                         ),
                         Expanded(
                           child: Divider(

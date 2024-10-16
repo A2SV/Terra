@@ -10,6 +10,8 @@ import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class OTPage extends StatelessWidget {
   const OTPage({super.key});
 
@@ -81,27 +83,36 @@ class OTPage extends StatelessWidget {
                   height: 10.h,
                 ),
                 SizedBox(height: 5.h),
-                const Text(
+                Text(
                   'Enter OTP',
-                  style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: AppCommonColors.mainBlueButton //blue
-                      ),
+                  style:CustomTextStyles.kDefaultTextTheme(
+                      AppCommonColors.mainBlueButton)
+                      .bodySmall?.copyWith(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: AppCommonColors.mainBlueButton,
+                  ),
+
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Enter the OTP code we just sent you on your',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     fontSize: 12,
                     color: AppLightThemeColors.kBlackTextColor,
                   ),
                 ),
-                const Text(
+                Text(
                   'registered email',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     fontSize: 12,
                     color: AppLightThemeColors.kBlackTextColor,
                   ),
@@ -121,7 +132,12 @@ class OTPage extends StatelessWidget {
                     width: 50,
                     height: 50,
                     textStyle:
-                        const TextStyle(fontSize: 18, color: Colors.black), //
+                    CustomTextStyles.kDefaultTextTheme(
+                        AppLightThemeColors.kBlackTextColor)
+                        .bodySmall?.copyWith(
+                        fontSize: 18,
+                        color: Colors.black
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white, //
                       borderRadius: BorderRadius.circular(10),
@@ -173,9 +189,13 @@ class OTPage extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         text: "Didn't get OTP? ",
-                        style: const TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                             color: AppLightThemeColors.kBlackTextColor,
-                            fontSize: 12), //
+                            fontSize: 12
+                        ),
                         children: [
                           if (state is OTPResendLoading)
                             TextSpan(
@@ -189,7 +209,10 @@ class OTPage extends StatelessWidget {
                           else
                             TextSpan(
                               text: ' Resend OTP',
-                              style: const TextStyle(
+                              style:
+                              CustomTextStyles.kDefaultTextTheme(
+                                  AppCommonColors.mainBlueButton)
+                                  .bodySmall?.copyWith(
                                 color: AppCommonColors.mainBlueButton, //
                                 fontSize: 12,
                               ),
@@ -206,9 +229,12 @@ class OTPage extends StatelessWidget {
                       ),
                     ),
                     if (state is OTPFailure)
-                      const Text(
+                      Text(
                         'Incorrect Try again',
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppCommonColors.red)
+                            .bodySmall?.copyWith(
                           color: AppCommonColors.red, //red
                           fontSize: 12,
                         ),

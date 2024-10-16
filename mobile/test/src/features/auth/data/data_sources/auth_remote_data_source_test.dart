@@ -31,6 +31,8 @@ void main() {
           phoneNumber: 'phoneNumber',
           role: 'role');
 
+      var baseUrl;
+      var registerUrl;
       verify(() => client.post(Uri.parse('$baseUrl$registerUrl'),
        headers: {
           'Content-type': 'application/json',
@@ -61,6 +63,8 @@ void main() {
             role: 'role'),
         throwsA(isA<ApiException>()),
       );
+      var baseUrl;
+      var registerUrl;
       verify(() => client.post(Uri.parse('$baseUrl$registerUrl'),
        headers: {
           'Content-type': 'application/json',
