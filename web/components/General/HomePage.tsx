@@ -13,6 +13,7 @@ import { Listing } from "@/types/listingTypes";
 import { useGetAllListingsQuery } from "../../redux/getAllListingApi";
 import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
 import SpinnerComponent from "@/components/Common/Reusable/Spinner";
+
 const HomePage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const { data, error, isLoading } = useGetAllListingsQuery();

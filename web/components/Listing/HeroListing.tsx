@@ -11,7 +11,7 @@ import carIcon from "@/public/carIcon.svg";
 import rulerIcon from "@/public/rulerIcon.svg";
 import calendarIcon from "@/public/calendarIcon.svg";
 import Image from "next/image";
-import DetailCarousel from "@/components/DetailCarousel/DetailCarousel";
+import DetailCarousel from "@/components/Sliders/DetailCarousel/DetailCarousel";
 import ListDescription from "@/components/Listing/ListDesc";
 import Review from "@/components/Listing/Review";
 // import ListingCard from "@/components/Listing/Cards/ListingCard";
