@@ -3,8 +3,6 @@ import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/theme/text_theme.dart';
 
 class OnboardingScreen3 extends StatelessWidget {

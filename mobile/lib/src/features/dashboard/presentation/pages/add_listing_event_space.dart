@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
@@ -27,63 +25,77 @@ import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/utils/utils.dart';
 import '../widgets/add_listing_search_input.dart';
 
-class AddListingEvent extends StatefulWidget{
+class AddListingEvent extends StatefulWidget {
   const AddListingEvent({super.key});
   @override
   State<AddListingEvent> createState() => _AddListingEventState();
 }
 
-class Amenity{
-
+class Amenity {
   String name;
   late bool isSelected;
   Amenity({
     required this.name,
-    this.isSelected=false,
+    this.isSelected = false,
   });
-
 }
 
-class Feature{
-
+class Feature {
   String name;
   late bool isSelected;
   Feature({
     required this.name,
-    this.isSelected=false,
+    this.isSelected = false,
   });
-
 }
 
-class RadioItem{
-
+class RadioItem {
   String name;
   late String value;
   RadioItem({
     required this.name,
     required this.value,
   });
-
 }
-
 
 class _AddListingEventState extends State<AddListingEvent> {
   final _formKey = GlobalKey<FormState>();
   final _propertySizeController = TextEditingController();
   final _maximumCapacityController = TextEditingController();
-  String _audioVisualEquipment='';
-  String _cateringFacilities='';
-  List<Amenity> amenities=[Amenity(name: 'Wifi'),Amenity(name: 'Balcony'),Amenity(name: 'Security'),Amenity(name: 'Balcony'),Amenity(name: 'Free Parking'),Amenity(name: 'Kitchen'),Amenity(name: 'Air Conditioner')];
-  List<RadioItem> audioVisualEquipments=[RadioItem(name: 'Yes', value: 'Yes'),RadioItem(name: 'No', value: 'No')];
-  List<RadioItem> cateringFacilities=[RadioItem(name: 'Yes', value: 'Yes'),RadioItem(name: 'No', value: 'No')];
-  List<Feature> eventTypes=[Feature(name: 'Religious'),Feature(name: 'Wedding'),Feature(name: 'Funerals'),Feature(name: 'Festivals'),Feature(name: 'Conference'),Feature(name: 'Concert'),Feature(name: 'Party')];
+  String _audioVisualEquipment = '';
+  String _cateringFacilities = '';
+  List<Amenity> amenities = [
+    Amenity(name: 'Wifi'),
+    Amenity(name: 'Balcony'),
+    Amenity(name: 'Security'),
+    Amenity(name: 'Balcony'),
+    Amenity(name: 'Free Parking'),
+    Amenity(name: 'Kitchen'),
+    Amenity(name: 'Air Conditioner')
+  ];
+  List<RadioItem> audioVisualEquipments = [
+    RadioItem(name: 'Yes', value: 'Yes'),
+    RadioItem(name: 'No', value: 'No')
+  ];
+  List<RadioItem> cateringFacilities = [
+    RadioItem(name: 'Yes', value: 'Yes'),
+    RadioItem(name: 'No', value: 'No')
+  ];
+  List<Feature> eventTypes = [
+    Feature(name: 'Religious'),
+    Feature(name: 'Wedding'),
+    Feature(name: 'Funerals'),
+    Feature(name: 'Festivals'),
+    Feature(name: 'Conference'),
+    Feature(name: 'Concert'),
+    Feature(name: 'Party')
+  ];
 
   late bool _isButtonDisabled;
 
-
   @override
-  void initState(){
-    _isButtonDisabled=false;
+  void initState() {
+    _isButtonDisabled = false;
   }
 
   @override
@@ -118,15 +130,15 @@ class _AddListingEventState extends State<AddListingEvent> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Add Listing',
-                            style:
-                            CustomTextStyles.kDefaultTextTheme(
-                                AppLightThemeColors.kBlackTextColor)
-                                .bodySmall?.copyWith(
-                              color: Colors.black,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: FontFamily.nunito,
-                            ),
+                            style: CustomTextStyles.kDefaultTextTheme(
+                                    AppLightThemeColors.kBlackTextColor)
+                                .bodySmall
+                                ?.copyWith(
+                                  color: Colors.black,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: FontFamily.nunito,
+                                ),
                           ),
                         ), //add listing
                         SizedBox(
@@ -135,21 +147,21 @@ class _AddListingEventState extends State<AddListingEvent> {
                         Container(
                             width: 92.w,
                             child: RichText(
-                                text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:'Almost finished',
-                                        style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.mainBlueButton).titleLarge,
-                                      ),
-                                      TextSpan(
-                                        text:', complete your property listing',
-                                        style: CustomTextStyles.kDefaultTextTheme(Colors.black).titleLarge?.copyWith(fontWeight: FontWeight.w500),
-                                      ),
-
-                                    ]
-                                )
-                            )
-                        ),//almost finished
+                                text: TextSpan(children: [
+                              TextSpan(
+                                text: 'Almost finished',
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        AppCommonColors.mainBlueButton)
+                                    .titleLarge,
+                              ),
+                              TextSpan(
+                                text: ', complete your property listing',
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.w500),
+                              ),
+                            ]))), //almost finished
                         SizedBox(
                           height: 3.h,
                         ),
@@ -164,7 +176,10 @@ class _AddListingEventState extends State<AddListingEvent> {
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Maximum Capacity',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                               ),
                               AddListingTextFormField(
@@ -172,8 +187,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                                   width: 95.w,
                                   labelText: '100',
                                   validator: (size) =>
-                                      CustomValidator.isNotEmpty(size ?? " ")
-                              ),
+                                      CustomValidator.isNotEmpty(size ?? " ")),
                             ],
                           ),
                         ),
@@ -183,17 +197,20 @@ class _AddListingEventState extends State<AddListingEvent> {
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Types of Events',
-                            style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                            style:
+                                CustomTextStyles.kDefaultTextTheme(Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
                           width: 92.w,
                           child: Wrap(
-                            children:eventTypes.map((feature){
+                            children: eventTypes.map((feature) {
                               return Container(
                                 width: 23.w,
                                 child: AddListingCheckBox(
-                                  isActive:feature.isSelected,
+                                  isActive: feature.isSelected,
                                   label: feature.name,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -206,41 +223,43 @@ class _AddListingEventState extends State<AddListingEvent> {
                           ),
                         ),
 
-
                         Column(
                           children: [
                             Container(
                               child: Text(
                                 'Catering Facilities',
-                                style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               alignment: Alignment.centerLeft,
                             ),
 
                             Container(
                               child: Row(
-                                children: cateringFacilities.map(
-                                        (status){
-                                      return Row(
-                                        children: [
-                                          Radio<String>(
-                                            value: status.value,
-                                            groupValue: _cateringFacilities,
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                _cateringFacilities = value!;
-                                              });
-                                            },
-                                            fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
-                                          ),
-                                          Text(status.name)
-                                        ],
-                                      );
-                                    }
-
-                                ).toList(),
+                                children: cateringFacilities.map((status) {
+                                  return Row(
+                                    children: [
+                                      Radio<String>(
+                                        value: status.value,
+                                        groupValue: _cateringFacilities,
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            _cateringFacilities = value!;
+                                          });
+                                        },
+                                        fillColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => AppCommonColors
+                                                    .mainBlueButton),
+                                      ),
+                                      Text(status.name)
+                                    ],
+                                  );
+                                }).toList(),
                               ),
-                            ),//furnished status
+                            ), //furnished status
                           ],
                         ),
 
@@ -253,38 +272,41 @@ class _AddListingEventState extends State<AddListingEvent> {
                             Container(
                               child: Text(
                                 'Audio-Visual equipment',
-                                style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               alignment: Alignment.centerLeft,
                             ),
                             Container(
                               width: 100.w,
-                              child:Wrap(
-                                children: audioVisualEquipments.map(
-                                        (status){
-                                      return Container(
-                                        width: 19.w,
-                                        child: Row(
-                                          children: [
-                                            Radio<String>(
-                                              value: status.value,
-                                              groupValue: _audioVisualEquipment,
-                                              onChanged: (String? value) {
-                                                setState(() {
-                                                  _audioVisualEquipment = value!;
-                                                });
-                                              },
-                                              fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
-                                            ),
-                                            Text(status.name)
-                                          ],
+                              child: Wrap(
+                                children: audioVisualEquipments.map((status) {
+                                  return Container(
+                                    width: 19.w,
+                                    child: Row(
+                                      children: [
+                                        Radio<String>(
+                                          value: status.value,
+                                          groupValue: _audioVisualEquipment,
+                                          onChanged: (String? value) {
+                                            setState(() {
+                                              _audioVisualEquipment = value!;
+                                            });
+                                          },
+                                          fillColor:
+                                              MaterialStateColor.resolveWith(
+                                                  (states) => AppCommonColors
+                                                      .mainBlueButton),
                                         ),
-                                      );
-                                    }
-
-                                ).toList(),
+                                        Text(status.name)
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                            ),//furnished status
+                            ), //furnished status
                           ],
                         ),
 
@@ -302,16 +324,19 @@ class _AddListingEventState extends State<AddListingEvent> {
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                               ),
                               AddListingTextFormField(
                                   inputController: _propertySizeController,
                                   width: 95.w,
-                                  labelText: 'Enter property size in square meters',
+                                  labelText:
+                                      'Enter property size in square meters',
                                   validator: (size) =>
-                                      CustomValidator.isNotEmpty(size ?? " ")
-                              ),
+                                      CustomValidator.isNotEmpty(size ?? " ")),
                             ],
                           ),
                         ),
@@ -320,7 +345,6 @@ class _AddListingEventState extends State<AddListingEvent> {
                           height: 2.h,
                         ),
 
-
                         Container(
                           width: 92.w,
                           child: Column(
@@ -328,7 +352,10 @@ class _AddListingEventState extends State<AddListingEvent> {
                               Container(
                                 child: Text(
                                   'Additional Amenities',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                                 alignment: Alignment.centerLeft,
                               ),
@@ -338,16 +365,19 @@ class _AddListingEventState extends State<AddListingEvent> {
                               AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
-                              SizedBox(height: 1.h,),
+                              SizedBox(
+                                height: 1.h,
+                              ),
                               Wrap(
-                                children: amenities.map((amenity){
+                                children: amenities.map((amenity) {
                                   return Container(
                                     margin: EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {
                                         setState(() {
-                                          amenity.isSelected=!amenity.isSelected;
+                                          amenity.isSelected =
+                                              !amenity.isSelected;
                                         });
                                       },
                                       isSelected: amenity.isSelected ?? false,
@@ -372,7 +402,9 @@ class _AddListingEventState extends State<AddListingEvent> {
                           disabled: _isButtonDisabled,
                           onPressed: () {
                             setState(() {
-                              _isButtonDisabled=_propertySizeController.text=='' || _maximumCapacityController.text=='';
+                              _isButtonDisabled =
+                                  _propertySizeController.text == '' ||
+                                      _maximumCapacityController.text == '';
                               AddListingBottomSheetModal(
                                 context: context,
                                 error: false,
@@ -383,13 +415,9 @@ class _AddListingEventState extends State<AddListingEvent> {
                         SizedBox(
                           height: 2.h,
                         ),
-
                       ],
                     ),
-                  )
-              ),
-            )
-        )
-    );
+                  )),
+            )));
   }
 }

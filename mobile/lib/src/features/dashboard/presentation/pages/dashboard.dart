@@ -51,16 +51,11 @@ class _DashBoardViewState extends State<DashBoardView> {
                 SizedBox(
                   height: 0.3.h,
                 ),
-                Text(
-                  'Home',
-                  style:
-                  CustomTextStyles.kDefaultTextTheme(
-                      Colors.black)
-                      .bodySmall?.copyWith(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500
-                  )
-                )
+                Text('Home',
+                    style: CustomTextStyles.kDefaultTextTheme(Colors.black)
+                        .bodySmall
+                        ?.copyWith(
+                            fontSize: 15.sp, fontWeight: FontWeight.w500))
               ],
             ),
             Column(
@@ -77,13 +72,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Chat',
-                  style:
-                  CustomTextStyles.kDefaultTextTheme(
-                      Colors.black)
-                      .bodySmall?.copyWith(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500
-                  ),
+                  style: CustomTextStyles.kDefaultTextTheme(Colors.black)
+                      .bodySmall
+                      ?.copyWith(fontSize: 15.sp, fontWeight: FontWeight.w500),
                 )
               ],
             ),
@@ -112,13 +103,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Saved',
-                  style:
-                  CustomTextStyles.kDefaultTextTheme(
-                      Colors.black)
-                      .bodySmall?.copyWith(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500
-                  ),
+                  style: CustomTextStyles.kDefaultTextTheme(Colors.black)
+                      .bodySmall
+                      ?.copyWith(fontSize: 15.sp, fontWeight: FontWeight.w500),
                 )
               ],
             ),
@@ -136,13 +123,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 ),
                 Text(
                   'Profile',
-                  style:
-                  CustomTextStyles.kDefaultTextTheme(
-                      Colors.black)
-                      .bodySmall?.copyWith(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500
-                  ),
+                  style: CustomTextStyles.kDefaultTextTheme(Colors.black)
+                      .bodySmall
+                      ?.copyWith(fontSize: 15.sp, fontWeight: FontWeight.w500),
                 )
               ],
             )

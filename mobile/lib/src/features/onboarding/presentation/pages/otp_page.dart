@@ -1,13 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/theme/text_theme.dart';
 
 class OTPage extends StatelessWidget {
@@ -60,37 +57,34 @@ class OTPage extends StatelessWidget {
               const SizedBox(height: 25),
               Text(
                 'Enter OTP',
-                style:
-                CustomTextStyles.kDefaultTextTheme(
-                    Color(0xFF1779F3))
-                    .bodySmall?.copyWith(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1779F3),
-                ),
+                style: CustomTextStyles.kDefaultTextTheme(Color(0xFF1779F3))
+                    .bodySmall
+                    ?.copyWith(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1779F3),
+                    ),
               ),
               const SizedBox(height: 10),
               Text(
                 'Enter the OTP code we just sent you on your',
                 textAlign: TextAlign.center,
-                style:
-                CustomTextStyles.kDefaultTextTheme(
-                    Colors.black54)
-                    .bodySmall?.copyWith(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
+                style: CustomTextStyles.kDefaultTextTheme(Colors.black54)
+                    .bodySmall
+                    ?.copyWith(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
               ),
               Text(
                 'registered email',
                 textAlign: TextAlign.center,
-                style:
-                CustomTextStyles.kDefaultTextTheme(
-                    Colors.black54)
-                    .bodySmall?.copyWith(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
+                style: CustomTextStyles.kDefaultTextTheme(Colors.black54)
+                    .bodySmall
+                    ?.copyWith(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
               ),
               const SizedBox(height: 30),
               Pinput(
@@ -130,22 +124,19 @@ class OTPage extends StatelessWidget {
               Text.rich(
                 TextSpan(
                   text: "Didn't get OTP? ",
-                  style:
-                  CustomTextStyles.kDefaultTextTheme(
-                      Color(0xFF1779F3))
-                      .bodySmall?.copyWith(
-                      color: Colors.black54, fontSize: 12
-                  ),
+                  style: CustomTextStyles.kDefaultTextTheme(Color(0xFF1779F3))
+                      .bodySmall
+                      ?.copyWith(color: Colors.black54, fontSize: 12),
                   children: [
                     TextSpan(
                       text: 'Resend OTP',
                       style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          Color(0xFF1779F3))
-                          .bodySmall?.copyWith(
-                        color: Color(0xFF1779F3),
-                        fontSize: 12,
-                      ),
+                          CustomTextStyles.kDefaultTextTheme(Color(0xFF1779F3))
+                              .bodySmall
+                              ?.copyWith(
+                                color: Color(0xFF1779F3),
+                                fontSize: 12,
+                              ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           // Handle resend OTP action

@@ -6,7 +6,6 @@ import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/dropdown_component.dart';
 
 import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -17,14 +16,12 @@ class AddListingFilter extends StatefulWidget {
 
   @override
   State<AddListingFilter> createState() => _AddListingFilterState();
-
 }
 
 class _AddListingFilterState extends State<AddListingFilter> {
-  SfRangeValues _values = const SfRangeValues(30,59);
+  SfRangeValues _values = const SfRangeValues(30, 59);
   @override
   Widget build(BuildContext context) {
-    RangeValues values = const RangeValues(100, 3000);
     return Scaffold(
       backgroundColor: AppLightThemeColors.kFieldBackgroundColor,
       body: Padding(
@@ -40,7 +37,8 @@ class _AddListingFilterState extends State<AddListingFilter> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: TextField(
-                  style: const TextStyle(color: AppLightThemeColors.kBlackColor),
+                  style:
+                      const TextStyle(color: AppLightThemeColors.kBlackColor),
                   decoration: InputDecoration(
                     filled: true,
                     hintText: 'Add more amenities here',
@@ -61,7 +59,7 @@ class _AddListingFilterState extends State<AddListingFilter> {
                     ),
                     border: InputBorder.none,
                     contentPadding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
+                        const EdgeInsets.symmetric(vertical: 12, horizontal: 5),
                   ),
                 ),
               ),
@@ -154,7 +152,6 @@ class _AddListingFilterState extends State<AddListingFilter> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return FilterButton(
-
                     text: 'Any',
                     onSelect: () {},
                     isSelected: true,
@@ -165,64 +162,67 @@ class _AddListingFilterState extends State<AddListingFilter> {
             //Rooms and beds
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: DropdownComponent(title: 'Rooms and Beds', trail: "see more",tiles: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
+              child: DropdownComponent(
+                  title: 'Rooms and Beds',
+                  trail: "see more",
+                  tiles: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Bathroom'),
-                          const SizedBox(
-                            width: 12,
+                          Row(
+                            children: [
+                              const Text('Bathroom'),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              SvgPicture.asset(
+                                      'assets/svg/iconoir_bathroom.svg')
+                                  .rightPadding(16.0),
+                            ],
                           ),
-                          SvgPicture.asset(
-                              'assets/svg/iconoir_bathroom.svg')
-                              .rightPadding(16.0),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset('assets/svg/add-circle.svg')
-                              .rightPadding(16.0),
-                          const Text('0'),
-                          SvgPicture.asset('assets/svg/minus-cirlce.svg')
-                              .leftPadding(16.0),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const Text('Bedroom'),
-                          const SizedBox(
-                            width: 12,
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/svg/add-circle.svg')
+                                  .rightPadding(16.0),
+                              const Text('0'),
+                              SvgPicture.asset('assets/svg/minus-cirlce.svg')
+                                  .leftPadding(16.0),
+                            ],
                           ),
-                          SvgPicture.asset(
-                              'assets/svg/iconoir_bathroom.svg')
-                              .rightPadding(16.0),
                         ],
                       ),
-                      Row(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SvgPicture.asset('assets/svg/add-circle.svg')
-                              .rightPadding(16.0),
-                          const Text('0'),
-                          SvgPicture.asset('assets/svg/minus-cirlce.svg')
-                              .leftPadding(16.0),
+                          Row(
+                            children: [
+                              const Text('Bedroom'),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              SvgPicture.asset(
+                                      'assets/svg/iconoir_bathroom.svg')
+                                  .rightPadding(16.0),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/svg/add-circle.svg')
+                                  .rightPadding(16.0),
+                              const Text('0'),
+                              SvgPicture.asset('assets/svg/minus-cirlce.svg')
+                                  .leftPadding(16.0),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              ]),
+                    ),
+                  ]),
             ),
             DropdownComponent(
               title: 'Amenities',
@@ -398,14 +398,9 @@ class _AddListingFilterState extends State<AddListingFilter> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FilterButton(
-
-                    text: "Reset All",
-                    onSelect: () {},
-                    isSelected: false),
+                    text: "Reset All", onSelect: () {}, isSelected: false),
                 FilterButton(
-                    text: "Show Results",
-                    onSelect: () {},
-                    isSelected: true),
+                    text: "Show Results", onSelect: () {}, isSelected: true),
               ],
             )
             //
