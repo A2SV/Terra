@@ -13,16 +13,29 @@ import { Listing } from "@/types/listingTypes";
 import { useGetAllListingsQuery } from "../../redux/getAllListingApi";
 import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
 import SpinnerComponent from "@/components/Common/Reusable/Spinner";
+
 const HomePage = () => {
+  const [showError, setShowError] = useState<boolean>(true);
   const [listings, setListings] = useState<Listing[]>([]);
+
   const { data, error, isLoading } = useGetAllListingsQuery();
 
   useEffect(() => {
     if (data && data.items) {
-      console.log(data.items);
       setListings(data.items);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      setShowError(true);
+      const timer = setTimeout(() => {
+        setShowError(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   return (
     <div className="flex flex-col min-w-[100%]">
@@ -37,7 +50,7 @@ const HomePage = () => {
           <div>
             <SpinnerComponent />
           </div>
-        ) : error ? (
+        ) : error && showError ? (
           <ErrorMessage message="Error fetching listings" />
         ) : (
           <div className="flex flex-wrap justify-center">

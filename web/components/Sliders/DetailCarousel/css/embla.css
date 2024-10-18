@@ -56,7 +56,7 @@
   border-radius: 50%;
   background-color: white;
   padding: 7px;
-  tranisition: transform 300ms;
+  transition: transform 300ms;
 }
 
 .embla__button__svg:hover {

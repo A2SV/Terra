@@ -1,8 +1,8 @@
 import React from "react";
 import { EmblaOptionsType } from "embla-carousel";
-import "@/components/DetailCarousel/css/embla.css";
-import "@/components/DetailCarousel/css/sandbox.css";
-import EmblaCarousel from "@/components/ImageCarousel2/EmblaCarousel";
+import "@/components/Sliders/DetailCarousel/css/embla.css";
+import "@/components/Sliders/DetailCarousel/css/sandbox.css";
+import EmblaCarousel from "@/components/Sliders/ImageCarousel2/EmblaCarousel";
 
 interface Props {
   images: string[];
