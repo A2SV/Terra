@@ -1,3 +1,4 @@
+using Application.Features.Listings.Dtos;
 using Domain.Entities;
 using Domain.Models;
 
@@ -9,7 +10,8 @@ namespace Application.Contracts
         Task <TEntity?> AddPropertyAsync<TEntity>(TEntity property) where TEntity : class;
         Task<PropertyLocation?> AddPropertyLocationAsync(PropertyLocation propertyLocation);
         Task<PaymentInformation?> AddPaymentInformationAsync(PaymentInformation paymentInformation);
-        Task<PaginatedList<Property>> GetAllListings(int pageIndex,int pageSize);
+        Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex,int pageSize);
+        Task<DetailedPropertyDto?> GetListingByIdAsync(Guid id);
 
         Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,

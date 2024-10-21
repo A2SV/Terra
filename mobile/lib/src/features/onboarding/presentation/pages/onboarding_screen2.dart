@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
+
+import '../../../../core/theme/text_theme.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
   const OnboardingScreen2({
@@ -53,7 +56,11 @@ class OnboardingScreen2 extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, "/signup");
+                     switchScreen(
+                              context: context,
+                              routeName: AppRoutes.signup,
+                              popAndPush: true,
+                            );
                     },
                     child: const SkipButton(opacity: 0.86),
                   ),
@@ -66,7 +73,10 @@ class OnboardingScreen2 extends StatelessWidget {
               child: Text(
                 "Discover affordable and convenient housing options at your comfort.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style:
+                CustomTextStyles.kDefaultTextTheme(
+                    Theme.of(context).colorScheme.onPrimary)
+                    .bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: 18.5.sp,
                   fontWeight: FontWeight.w600,
@@ -98,7 +108,10 @@ class OnboardingScreen2 extends StatelessWidget {
                 onTap: onNext,
                 child: Text(
                   "Next",
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w600,

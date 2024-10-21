@@ -1,4 +1,5 @@
 using Application.Contracts;
+using Application.Features.Listings.Dtos;
 using Domain.Entities;
 using Domain.Models;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Listings.Queries.GetAllListings
 {
-    public class GetAllListingQueryHandler : IRequestHandler<GetAllListingQuery, PaginatedList<Property>>
+    public class GetAllListingQueryHandler : IRequestHandler<GetAllListingQuery, PaginatedList<PropertyDto>>
     {
         private readonly IListingRepository _listingRepository;
 
@@ -19,7 +20,7 @@ namespace Application.Features.Listings.Queries.GetAllListings
             _listingRepository = listingRepository;
         }
 
-        public async Task<PaginatedList<Property>> Handle(GetAllListingQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<PropertyDto>> Handle(GetAllListingQuery request, CancellationToken cancellationToken)
         {
             return await _listingRepository.GetAllListings(request.pageIndex, request.pageSize);
         }

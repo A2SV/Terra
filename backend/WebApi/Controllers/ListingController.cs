@@ -7,6 +7,8 @@ using Domain.Models;
 using Domain.Entities;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
+using Application.Features.Listings.Dtos;
+using Application.Features.Listings.Queries.GetListingById;
 
 namespace WebApi.Controllers
 {
@@ -21,7 +23,8 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+
+        //[Authorize]
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
         {
@@ -34,9 +37,10 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+
+        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<PaginatedList<Property>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
+        public async Task<ActionResult<PaginatedList<PropertyDto>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
 
             var command = new GetAllListingQuery(pageIndex, pageSize);
@@ -45,7 +49,15 @@ namespace WebApi.Controllers
             return Ok(listings);
         }
 
-        [Authorize]
+        [HttpGet("id")]
+        public async Task<ActionResult<DetailedPropertyDto>> GetListingById([FromQuery] GetListingByIdQuery query)
+        {
+            var listing = await _mediator.Send(query);
+            
+            return Ok(listing);
+        }
+
+        //[Authorize]
         [HttpGet("Filter")]
 
         public async Task<ActionResult<PaginatedList<Property>>> Filter(
