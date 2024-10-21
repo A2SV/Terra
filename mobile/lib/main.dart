@@ -12,18 +12,6 @@ import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
-import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/location_modal.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
-import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
