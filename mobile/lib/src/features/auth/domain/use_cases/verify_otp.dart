@@ -25,7 +25,7 @@ class OTPUseCase implements UseCase<OTPMatched, OTPParams> {
   );
 
   @override
-  Future<Either<Failure, OTPMatched>> call(OTPParams params) {
-    return _authRepository.otp(params.code, params.email);
+  Future<Either<Failure, OTPMatched>> call(OTPParams params) async {
+    return await _authRepository.otp(params.code, params.email);
   }
 }

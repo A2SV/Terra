@@ -23,7 +23,7 @@ class OTPResendUseCase implements UseCase<OTPSent, OTPResendParams> {
   );
 
   @override
-  Future<Either<Failure, OTPSent>> call(OTPResendParams params) {
-    return _authRepository.resendOtp(params.email);
+  Future<Either<Failure, OTPSent>> call(OTPResendParams params) async {
+    return await _authRepository.resendOtp(params.email);
   }
 }

@@ -65,7 +65,7 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         surfaceTintColor: Colors.white,
@@ -206,7 +206,7 @@ class _AddListingContactPageState extends State<AddListingContactPage> {
                           width: 3.6.w, // Adjust the size as needed
                           height: 1.8.h,
                           child: _agreeToTerms
-                              ? Icon(
+                              ? const Icon(
                                   Icons.check,
                                   size: 10.0, // Adjust the size as needed
                                   color: AppCommonColors.mainBlueButton,
