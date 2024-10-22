@@ -9,17 +9,23 @@ class RegisterWithEmailPasswordUseCase
     this._authRepository,
   );
   final AuthRepository _authRepository;
+
   @override
   Future<Either<Failure, void>> call(
-      RegisterWithEmailPasswordUseCaseParams params) {
-    return _authRepository.registerWithEmailPassword(
-      firstName: params.firstName,
-      lastName: params.lastName,
-      email: params.email,
-      password: params.password,
-      phoneNumber: params.phoneNumber,
-      role: params.role,
-    );
+      RegisterWithEmailPasswordUseCaseParams params) async {
+    try {
+      return await _authRepository.registerWithEmailPassword(
+        firstName: params.firstName,
+        lastName: params.lastName,
+        email: params.email,
+        password: params.password,
+        phoneNumber: params.phoneNumber,
+        role: params.role,
+      );
+    } catch (error) {
+      return Left(ServerFailure(error
+          .toString())); 
+    }
   }
 }
 

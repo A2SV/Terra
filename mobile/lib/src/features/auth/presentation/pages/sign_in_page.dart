@@ -168,7 +168,6 @@ class _SignInPageState extends State<SignInPage> {
                                 ),
                               );
                         }
-                        ;
                       },
                       horizontalPadding: 0,
                       borderColor: Theme.of(context).colorScheme.onPrimary,

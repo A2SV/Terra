@@ -9,12 +9,12 @@ class FilterButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const FilterButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

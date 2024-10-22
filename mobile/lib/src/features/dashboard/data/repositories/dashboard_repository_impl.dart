@@ -3,7 +3,6 @@ import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
-import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:mobile/src/features/dashboard/domain/repositories/repository.dart';
 
 class DashboardRepositoryImpl implements DashboardRepository {

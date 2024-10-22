@@ -10,6 +10,8 @@ import 'package:mocktail/mocktail.dart';
 
 class MockClient extends Mock implements http.Client {}
 
+// var baseUrl; //just to fix error of undefined var
+// var registerUrl; //just to fix error of undefined var
 void main() {
   late MockClient client; //dependency
   late AuthRemoteDataSourceImpl authRemoteDataSourceImpl;
@@ -21,8 +23,10 @@ void main() {
   });
   group('register With Email Password tests', () {
     test('should complete when a call to the server is successfull', () async {
-      when(() => client.post(any(), headers: any(named: 'headers'), body: any(named: 'body'))).thenAnswer(
-          (_) async => http.Response('{"message": "success"}', 201));
+      when(() => client.post(any(),
+              headers: any(named: 'headers'), body: any(named: 'body')))
+          .thenAnswer(
+              (_) async => http.Response('{"message": "success"}', 201));
       await authRemoteDataSourceImpl.registerWithEmailPassword(
           firstName: 'firstName',
           lastName: 'lastName',
@@ -49,7 +53,8 @@ void main() {
     });
     test('should throw an ApiException if the status code isn\'t 200',
         () async {
-      when(() => client.post(any(),headers: any(named: 'headers'), body: any(named: 'body')))
+      when(() => client.post(any(),
+              headers: any(named: 'headers'), body: any(named: 'body')))
           .thenAnswer((_) async => http.Response('{"message": "Error"}', 404));
       final result = authRemoteDataSourceImpl.registerWithEmailPassword;
 
