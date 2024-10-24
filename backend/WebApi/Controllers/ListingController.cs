@@ -21,14 +21,8 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
-<<<<<<< HEAD
 
         //[Authorize]
-||||||| parent of e2dd72b (feat(backend) : Remove authorization)
-        [Authorize]
-=======
-        //[Authorize]
->>>>>>> e2dd72b (feat(backend) : Remove authorization)
         [HttpPost]
         public async Task<IActionResult> PostListing([FromBody] InitiateCreateListingCommand command)
         {
@@ -41,14 +35,8 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-<<<<<<< HEAD
 
         //[Authorize]
-||||||| parent of e2dd72b (feat(backend) : Remove authorization)
-        [Authorize]
-=======
-        //[Authorize]
->>>>>>> e2dd72b (feat(backend) : Remove authorization)
         [HttpGet]
         public async Task<ActionResult<PaginatedList<Property>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
