@@ -81,9 +81,9 @@ namespace Persistence.Repositories
 
             IQueryable<Property> query = _context.Properties
                 .Include(p => p.PaymentInformation)
-                .Include(p => p.PropertyLocation)
-                .Include(p => p.ResidentialProperty)
-                .Include(p => p.CommercialProperty);
+                .Include(p => p.PropertyLocation);
+                //.Include(p => p.ResidentialProperty)
+                //.Include(p => p.CommercialProperty);
                 
 
 
