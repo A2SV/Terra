@@ -43,7 +43,7 @@ class AddListingCheckBox extends StatelessWidget {
           Text(
             label,
             style: CustomTextStyles.kDefaultTextTheme(Colors.black).displaySmall!.copyWith(
-            fontSize: 14.sp,
+            fontSize: 13.sp,
             fontWeight: FontWeight.w600,
             ),
           ),
