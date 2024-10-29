@@ -39,7 +39,7 @@ const Navbar = () => {
   const userIsLoggedIn = !!session;
 
   return (
-    <div className="pt-3 fixed top-0 z-50 w-full bg-white pb-[16px]">
+    <div className="pt-3 top-0 z-50 w-full bg-white pb-[16px]">
       <div className="flex flex-row justify-between w-full h-16 py-2 lg:px-8 px-4 pt-4 ">
         <div className="flex items-center ">
           <Image src="/headerLogo.svg" alt="Logo" height={90} width={80} className="object-cover" />
