@@ -21,7 +21,7 @@ const MissionSection = () => {
       <Navbar />
       <div className="flex justify-center">
         <div className="relative flex w-full h-[383px]">
-          <div className="absolute inset-0 z-30 pt-28 pl-18 ml-4 lg:ml-0 lg:pl-44 w-11/12 -mr-52 flex flex-col text-center md:w-9/12 md:ml-28 lg:items-start">
+          <div className="absolute inset-0 z-30 pt-28 pl-18 ml-4 lg:ml-0 lg:pl-44 w-11/12 -mr-52 flex flex-col md:w-9/12 md:ml-28 lg:items-start">
             <p className="text-lg pb-7 font-bold font-nunito text-white md:text-[42px] ">
               Discover Your Ideal Home
             </p>
@@ -43,7 +43,7 @@ const MissionSection = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center mx-[180px] mt-[90px]">
+      <div className="flex justify-between items-center mb-28 sm:mb-0 mx-[40px] mt-[60px] md:mx-[180px] md:mt-[90px] lg:mx-[180px] lg:mt-[90px] md:flex-wrap lg:flex-nowrap">
         <div className="h-[330px] w-[460px] font-nunito">
           <p className="text-4xl font-bold pb-6">Our Mission</p>
           <article className="text-[17px] leading-tight">
@@ -60,46 +60,46 @@ const MissionSection = () => {
             </p>
           </article>
         </div>
-        <div className="flex flex-col space-y-5">
+        <div className="flex-col space-y-5">
           <div className="flex space-x-5">
             <Image
               src={mission1}
               alt="missi1"
-              className="object-cover hidden h-[178px] w-[216px] lg:block"
+              className="object-cover hidden h-[178px] w-[216px] md:block"
             />
             <Image
               src={mission2}
               alt="missi2"
-              className="object-cover hidden h-[178px] w-[216px] lg:block"
+              className="object-cover hidden h-[178px] w-[216px] md:block"
             />
           </div>
           <Image
             src={mission3}
             alt="missi3"
-            className="object-cover hidden h-[180px] w-[452px] lg:block"
+            className="object-cover hidden h-[180px] w-[452px] md:block"
           />
         </div>
       </div>
 
-      <div className="flex justify-between items-center mx-[180px] mt-[90px]">
-        <div className="flex flex-col space-y-5">
+      <div className="flex justify-between items-center mx-[30px] mt-[60px] md:mx-[180px] md:mt-[90px] lg:mx-[180px] lg:mt-[90px] md:flex-wrap-reverse lg:flex-nowrap">
+        <div className="flex flex-col space-y-5 mr-4">
           <div className="flex space-x-5">
             <Image
               src={vision1}
               alt="visi"
-              className="object-cover hidden h-[178px] w-[216px] lg:block"
+              className="object-cover hidden h-[178px] w-[216px] md:block"
             />
 
             <Image
               src={vision2}
               alt="visi2"
-              className="object-cover hidden h-[178px] w-[216px] lg:block"
+              className="object-cover hidden h-[178px] w-[216px] md:block"
             />
           </div>
           <Image
             src={vision3}
             alt="visi3"
-            className="object-cover hidden h-[180px] w-[452px] lg:block"
+            className="object-cover hidden h-[180px] w-[452px] md:block"
           />
         </div>
         <div className="h-[220px] w-[460px] font-nunito">
@@ -116,15 +116,15 @@ const MissionSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-col mx-[200px] my-[90px] h-[500px]">
-        <p className="font-nunito font-bold text-4xl">Why Choose Us</p>
-        <div className="flex mt-[60px]">
+      <div className="flex flex-col mx-[50px] my-[90px] h-[500px] md:mx-[150px] md:my-[90px] md:h-[500px] lg:mx-[200px] ">
+        <p className="font-nunito font-bold text-4xl md:ml-28 lg:ml-0">Why Choose Us</p>
+        <div className="flex flex-wrap lg:flex-nowrap mt-[60px]">
           <div>
-            <Image src={one} alt="one" className="w-56 object-fill hidden lg:block" />
+            <Image src={one} alt="one" className="w-56 object-fill hidden md:block" />
             <div className="w-52 text-xl font-bold font-nunito ml-11 -mt-12">
               Transparency and Reliability
             </div>
-            <div className="w-44 text-sm font-nunito mt-2 ml-11">
+            <div className="w-44 text-sm font-nunito mt-2 ml-11 mb-16 md:mb-0">
               At Terra, we prioritize transparency in all our listings. Our robust verification
               system ensures that all properties are accurately represented, providing our users
               with reliable information they can trust.
@@ -132,11 +132,11 @@ const MissionSection = () => {
           </div>
 
           <div>
-            <Image src={two} alt="two" className="w-56 object-fill hidden lg:block" />
-            <div className="w-52 text-xl font-bold font-nunito ml-11 -mt-12">
+            <Image src={two} alt="two" className="w-56 object-fill hidden md:block" />
+            <div className="w-52 text-xl font-bold font-nunito ml-11 -mt-12 md:-mt-12 sm:-mt-5">
               Tailored Property Listings
             </div>
-            <div className="w-44 text-sm font-nunito mt-2 ml-11">
+            <div className="w-44 text-sm font-nunito mt-2 ml-11 mb-16 md:mb-0">
               We understand the unique needs of our target users. Whether you are a student, an NSP,
               or a young professional, Terra offers tailored listings that meet your specific
               requirements, making it easier to find the perfect accommodation.
@@ -144,11 +144,11 @@ const MissionSection = () => {
           </div>
 
           <div>
-            <Image src={three} alt="three" className="w-56 object-fill hidden lg:block" />
+            <Image src={three} alt="three" className="w-56 object-fill hidden md:block" />
             <div className="w-52 text-xl font-bold font-nunito ml-11 -mt-12">
               Seamless Communication
             </div>
-            <div className="w-44 text-sm font-nunito mt-2 ml-11">
+            <div className="w-44 text-sm font-nunito mt-2 ml-11 mb-16 md:mb-0">
               Our integrated real-time chat feature facilitates direct communication between tenants
               and landlords. This ensures a smooth and efficient rental process, reducing the time
               and effort required to secure a property.
@@ -156,7 +156,7 @@ const MissionSection = () => {
           </div>
 
           <div>
-            <Image src={four} alt="four" className="w-56 object-fill hidden lg:block" />
+            <Image src={four} alt="four" className="w-56 object-fill hidden md:block" />
             <div className="w-52 text-xl font-bold font-nunito ml-11 -mt-12">
               Affordable and Convenient
             </div>
@@ -168,11 +168,11 @@ const MissionSection = () => {
           </div>
         </div>
 
-        <div className="flex justify-center w-full ">
+        <div className="flex justify-center w-full">
           <Image src={a2sv} alt="a2sv" className="mt-36 object-fill lg:block w-[570px] pb-14" />
         </div>
       </div>
-      <div className="mt-80">
+      <div className="mt-[500px] md:mt-80">
         <Footer />
       </div>
     </div>

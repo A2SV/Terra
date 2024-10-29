@@ -10,17 +10,17 @@ const AboutHero = () => {
           <Image
             src={aboutpic1}
             alt="aboutpic1"
-            className="object-cover overflow-hidden w-full h-full"
+            className="overflow-hidden w-full h-full object-cover "
           />
         </div>
-        <div className="absolute inset-0 w-[250px] h-[190px] mt-[190px] ml-44">
+        <div className="absolute inset-0 w-[250px] h-[190px] mt-[190px] ml-9 md:ml-20 lg:ml-44">
           <div className="text-[60px] font-nunito font-extrabold text-white h-[84px]">Who</div>
           <div className="flex items-center text-[60px] h-[70px] font-nunito font-extrabold text-terrablue">
             We Are
           </div>
         </div>
       </div>
-      <div className="mt-[132px] mx-[180px]">
+      <div className="mt-[110px] mx-[40px] md:mt-[128px] md:mx-[90px] lg:mt-[132px] lg:mx-[180px]">
         <article className="font-nunito text-[17px] leading-tight">
           <p>
             Terra is an innovative digital platform meticulously crafted by the talented students of
