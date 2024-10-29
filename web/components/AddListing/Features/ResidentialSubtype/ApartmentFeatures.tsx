@@ -60,7 +60,9 @@ const ApartmentFeatures: React.FC<{
 
         <div className="flex justify-between items-center my-3">
           <div className="flex sm:flex-row flex-col">
-            <label className="text-xs sm:text-sm text-black font-semibold pr-3">Student-Friendly</label>
+            <label className="text-xs sm:text-sm text-black font-semibold pr-3">
+              Student-Friendly
+            </label>
             <input
               type="checkbox"
               name="studentFriendly"
