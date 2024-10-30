@@ -28,7 +28,7 @@ const ApartmentFeatures: React.FC<{
 
   return (
     <div>
-      <div className="p-6">
+      <div className="p-6 space-y-5">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-black font-semibold">
@@ -43,7 +43,7 @@ const ApartmentFeatures: React.FC<{
               className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-gray-400"
             />
           </div>
-          <div>
+          <div className="flex justify-between flex-col">
             <label className="block text-sm text-black font-semibold">
               Floor number of the unit
             </label>
@@ -59,8 +59,10 @@ const ApartmentFeatures: React.FC<{
         </div>
 
         <div className="flex justify-between items-center my-3">
-          <div className="flex">
-            <label className=" text-sm text-black font-semibold pr-3">Student-Friendly</label>
+          <div className="flex sm:flex-row flex-col">
+            <label className="text-xs sm:text-sm text-black font-semibold pr-3">
+              Student-Friendly
+            </label>
             <input
               type="checkbox"
               name="studentFriendly"
@@ -69,8 +71,8 @@ const ApartmentFeatures: React.FC<{
               className="pl-5"
             />
           </div>
-          <div className="flex">
-            <label className=" text-sm text-black font-semibold pr-3">
+          <div className="flex sm:flex-row flex-col">
+            <label className="text-xs sm:text-sm text-black font-semibold pr-3">
               Laundry Facility Available
             </label>
             <input
@@ -81,8 +83,8 @@ const ApartmentFeatures: React.FC<{
               className="pl-5"
             />
           </div>
-          <div className="flex">
-            <label className="block text-sm text-black font-semibold pr-3">
+          <div className="flex sm:flex-row flex-col">
+            <label className=" text-xs sm:text-sm text-black font-semibold pr-3">
               Cleaning Service Available
             </label>
             <input
