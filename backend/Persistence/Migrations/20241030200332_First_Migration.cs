@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class First_Migrations : Migration
+    public partial class First_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,40 +63,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
-                    Gender = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
-                    ProfilePictureUrl = table.Column<string>(type: "text", nullable: true),
-                    VerificationToken = table.Column<string>(type: "text", nullable: true),
-                    PasswordResetToken = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserName = table.Column<string>(type: "text", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "text", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Properties",
                 columns: table => new
                 {
@@ -129,12 +95,6 @@ namespace Persistence.Migrations
                         name: "FK_Properties_PropertyLocations_PropertyLocationId",
                         column: x => x.PropertyLocationId,
                         principalTable: "PropertyLocations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Properties_User_ListerId",
-                        column: x => x.ListerId,
-                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -506,11 +466,6 @@ namespace Persistence.Migrations
                 column: "CommercialPropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Properties_ListerId",
-                table: "Properties",
-                column: "ListerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Properties_PaymentInformationId",
                 table: "Properties",
                 column: "PaymentInformationId");
@@ -618,9 +573,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "PropertyLocations");
-
-            migrationBuilder.DropTable(
-                name: "User");
         }
     }
 }

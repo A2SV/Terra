@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations.AppAuthDb
 {
     /// <inheritdoc />
-    public partial class First_Auth_Migration : Migration
+    public partial class First_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,16 +33,15 @@ namespace Persistence.Migrations.AppAuthDb
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Discriminator = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: true),
-                    LastName = table.Column<string>(type: "text", nullable: true),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
                     Gender = table.Column<string>(type: "text", nullable: true),
-                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: true),
+                    DateOfBirth = table.Column<DateOnly>(type: "date", nullable: false),
                     ProfilePictureUrl = table.Column<string>(type: "text", nullable: true),
                     VerificationToken = table.Column<string>(type: "text", nullable: true),
                     PasswordResetToken = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -200,8 +199,8 @@ namespace Persistence.Migrations.AppAuthDb
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DateOfBirth", "Discriminator", "Email", "EmailConfirmed", "FirstName", "Gender", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PasswordResetToken", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UserName", "VerificationToken" },
-                values: new object[] { "f7dbc673-4cd9-477b-a809-0739846dd5fb", 0, "d7f5e227-1973-4071-af29-e2d2ec414616", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(1, 1, 1), "User", "superadmin@gmail.com", false, "Superadmin", null, "Superadmin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEVZLSlKXcbxuLOR2EAo7LtHBzvwYaSDKXEfiwz/alRU8OeYcJquOxSUtNMwy1Nfuw==", null, null, false, null, "ecae1649-fd11-432a-9bac-83b099bb8e63", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "superadmin@gmail.com", null });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PasswordResetToken", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "SecurityStamp", "TwoFactorEnabled", "UpdatedAt", "UserName", "VerificationToken" },
+                values: new object[] { "f7dbc673-4cd9-477b-a809-0739846dd5fb", 0, "b32b002a-e0f9-4487-8802-7b87c73eeb29", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateOnly(1, 1, 1), "superadmin@gmail.com", false, "Superadmin", null, "Superadmin", false, null, "SUPERADMIN@GMAIL.COM", "SUPERADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEIzUPwrt97kxroICmUmzCDEW3MYNoambuT0Qz0+WdT4DpChl8kVRMdMaxRy+2/DGMg==", null, null, false, null, "1e12ebb0-c412-4a28-a778-9babcef8d1e5", false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "superadmin@gmail.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
