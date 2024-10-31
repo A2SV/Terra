@@ -10,40 +10,8 @@ import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_pa
 import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
+import 'package:mobile/src/features/dashboard/data/data.dart';
+import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 
-final GetIt sl = GetIt.instance;
-
-Future<void> init() async {
-  await Hive.initFlutter();
-  await Hive.openBox('userData');
-
-  //App Logic
-  sl
-    ..registerLazySingleton<Box>(() => Hive.box('userData'))
-    ..registerFactory(
-        () => AuthenticationBloc(registerWithEmailPasswordUseCase: sl()))
-
-    //UseCases
-    ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
-
-    //Repository
-    ..registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(remoteDataSource: sl(), network: sl()))
-
-    // Internet Connection
-    ..registerLazySingleton(() => NetworkImpl(sl()))
-
-    //DataSources
-
-    ..registerLazySingleton<AuthRemoteDataSource>(
-        () => AuthRemoteDataSourceImpl(sl()))
-
-    //External dependencies
-    ..registerLazySingleton(InternetConnectionChecker.new)
-    ..registerLazySingleton(http.Client.new);
-
-  sl.registerLazySingleton(
-      () => OTPBloc(otpUseCase: sl(), resendOtpUseCase: sl()));
-
-  sl.registerLazySingleton(() => OTPUseCase(sl()));
-}
+part "dp_injection.dart";

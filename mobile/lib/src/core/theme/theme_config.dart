@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/dark_theme_colors.dart';
-import 'package:mobile/src/core/theme/light_theme_colors.dart';
+import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 
 class ThemeConfig {

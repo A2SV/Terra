@@ -16,14 +16,14 @@ class OTPResendParams extends Equatable {
   List<Object?> get props => [email];
 }
 
-class OTPResendUseCase extends UseCase<OTPSent, OTPResendParams> {
+class OTPResendUseCase implements UseCase<OTPSent, OTPResendParams> {
   final AuthRepository _authRepository;
   OTPResendUseCase(
     this._authRepository,
   );
 
   @override
-  Future<Either<Failure, OTPSent>> call(OTPResendParams params) {
-    return _authRepository.resendOtp(params.email);
+  Future<Either<Failure, OTPSent>> call(OTPResendParams params) async {
+    return await _authRepository.resendOtp(params.email);
   }
 }

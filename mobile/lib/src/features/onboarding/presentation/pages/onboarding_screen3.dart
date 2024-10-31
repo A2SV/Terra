@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
+import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../../core/theme/text_theme.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
-  const OnboardingScreen3({super.key, required this.onBack});
   final VoidCallback onBack;
+  const OnboardingScreen3({super.key, required this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,11 @@ class OnboardingScreen3 extends StatelessWidget {
                             icon: const Icon(Icons.arrow_back)),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacementNamed(context, "/signup");
+                            switchScreen(
+                              context: context,
+                              routeName: AppRoutes.signup,
+                              popAndPush: true,
+                            );
                           },
                           child: const SkipButton(opacity: 0.69),
                         ),
@@ -75,7 +80,10 @@ class OnboardingScreen3 extends StatelessWidget {
                         child: Text(
                           "Easily find and connect with roommates to share your rental costs.",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              Colors.white)
+                              .bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 19.sp,
                             fontWeight: FontWeight.w600,
@@ -103,7 +111,10 @@ class OnboardingScreen3 extends StatelessWidget {
                           },
                           child: Text(
                             "Get started",
-                            style: TextStyle(
+                            style:
+                            CustomTextStyles.kDefaultTextTheme(
+                                Colors.white)
+                                .bodySmall?.copyWith(
                               color: Colors.white,
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w600,

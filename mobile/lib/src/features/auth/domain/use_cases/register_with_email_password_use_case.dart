@@ -1,29 +1,33 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/use_case/use_case.dart';
 import 'package:mobile/src/features/auth/domain/domain.dart';
 
-
-class RegisterWithEmailPasswordUseCase extends UseCase<void,RegisterWithEmailPasswordUseCaseParams> {
-  
-
-  RegisterWithEmailPasswordUseCase(this._authRepository,);
+class RegisterWithEmailPasswordUseCase
+    implements UseCase<void, RegisterWithEmailPasswordUseCaseParams> {
+  RegisterWithEmailPasswordUseCase(
+    this._authRepository,
+  );
   final AuthRepository _authRepository;
-  @override
-  Future<Either<Failure, void>> call(RegisterWithEmailPasswordUseCaseParams params){
-    return _authRepository.registerWithEmailPassword(
-      firstName: params.firstName,
-      lastName: params.lastName,
-      email: params.email,
-      password: params.password,
-      phoneNumber: params.phoneNumber,
-      role: params.role,
 
-    );
+  @override
+  Future<Either<Failure, void>> call(
+      RegisterWithEmailPasswordUseCaseParams params) async {
+    try {
+      return await _authRepository.registerWithEmailPassword(
+        firstName: params.firstName,
+        lastName: params.lastName,
+        email: params.email,
+        password: params.password,
+        phoneNumber: params.phoneNumber,
+        role: params.role,
+      );
+    } catch (error) {
+      return Left(ServerFailure(error
+          .toString())); 
+    }
   }
 }
-
 
 class RegisterWithEmailPasswordUseCaseParams {
   final String? firstName;

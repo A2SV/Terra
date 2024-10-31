@@ -80,6 +80,10 @@ const authOptions: NextAuthOptions = {
       }
       return token;
     },
+
+    async redirect({ baseUrl }) {
+      return baseUrl;
+    },
   },
   jwt: {
     maxAge: 30 * 24 * 60 * 60,

@@ -28,10 +28,5 @@ namespace Domain.Entities
         public User Lister { get; set; } = null!;
         public PaymentInformation PaymentInformation { get; set; } = null!;
         public PropertyLocation PropertyLocation { get; set; } = null!;
-
-        public ResidentialProperty ResidentialProperty { get; set; } = null!;
-        public CommercialProperty CommercialProperty { get; set; } = null!;
-                    
-        
     }
 }

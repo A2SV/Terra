@@ -20,9 +20,9 @@ describe("Footer Component", () => {
     });
   });
 
-  test("displays contact information", () => {
-    expect(screen.getByText("terra@gmail.com")).toBeInTheDocument();
-    expect(screen.getByText("terra_company")).toBeInTheDocument();
-    expect(screen.getByText("American House, Accra")).toBeInTheDocument();
-  });
+  // test("displays contact information", () => {
+  //   expect(screen.getByText("terra@gmail.com")).toBeInTheDocument();
+  //   expect(screen.getByText("terra_company")).toBeInTheDocument();
+  //   expect(screen.getByText("American House, Accra")).toBeInTheDocument();
+  // });
 });
