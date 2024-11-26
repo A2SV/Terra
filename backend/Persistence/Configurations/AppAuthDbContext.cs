@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Configurations
 {
-    public class AppAuthDbContext : IdentityDbContext
+    public class AppAuthDbContext : IdentityDbContext<User>
     {
         public AppAuthDbContext(DbContextOptions<AppAuthDbContext> options) : base(options)
         {

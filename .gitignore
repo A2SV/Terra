@@ -691,4 +691,4 @@ Temporary Items
 
 **/.next
 **/coverage
-/backend/Persistence/Migrations/
+.env.local
