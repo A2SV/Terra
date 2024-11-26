@@ -156,4 +156,21 @@ class AppRoutes {
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
+
+
+  static const String addListingExtraDetail = "add-listing-extra-detail";
+  static const String addListingExtraDetailResidential = "${AppRoutes.addListingExtraDetail}/residential";
+  static const String addListingExtraDetailHouse = "${AppRoutes.addListingExtraDetailResidential}/house";
+  static const String addListingExtraDetailApartment = "${AppRoutes.addListingExtraDetailResidential}/apartment";
+  static const String addListingExtraDetailStudentHousing = "${AppRoutes.addListingExtraDetailResidential}/student-housing";
+  static const String addListingExtraDetailHotel = "${AppRoutes.addListingExtraDetailResidential}/hotel";
+  static const String addListingExtraDetailGuestHouse = "${AppRoutes.addListingExtraDetailResidential}/guest-house";
+
+
+  static const String addListingExtraDetailCommercial = "${AppRoutes.addListingExtraDetail}/commercial";
+  static const String addListingExtraDetailOfficeSpace = "${AppRoutes.addListingExtraDetailCommercial}/office-space";
+  static const String addListingExtraDetailShop = "${AppRoutes.addListingExtraDetailCommercial}/shop";
+  static const String addListingExtraDetailWarehouse = "${AppRoutes.addListingExtraDetailCommercial}/warehouse";
+  static const String addListingExtraDetailEventSpace = "${AppRoutes.addListingExtraDetailCommercial}/event-space";
+
 }
