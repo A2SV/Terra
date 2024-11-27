@@ -64,7 +64,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
     <>
       <div className="px-[40px] h-screen bg-pageColor">
         <div className="flex md:flex-row flex-col justify-between">
-          <div className="h-screen w-screen flex items-center justify-center">
+          <div className="flex md:h-screen md:w-screen items-center justify-center">
             <div className=" flex flex-col items-center justify-center">
               <Image src="/logo.svg" alt="logo" width={124} height={180} />
               {message && <ErrorMessage message={message} />}
@@ -80,7 +80,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
                   width: "50px",
                   height: "42px",
                   borderRadius: "10px",
-                  margin: "12px",
+                  margin: "5px",
                   color: "black",
                 }}
                 numInputs={6}
@@ -89,8 +89,15 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
                 renderInput={(props) => (
                   <input
                     {...props}
-                    type="password"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     className="bg-inputColor outline-[0.9px] outline-[#0000001A] text-[14px]"
+                    onKeyDown={(e) => {
+                      if (!/[0-9]/.test(e.key) && e.key !== "Backspace") {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                 )}
               />
