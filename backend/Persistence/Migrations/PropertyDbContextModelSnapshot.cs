@@ -106,10 +106,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyId")
-                        .IsUnique();
+                    b.HasIndex("PropertyId");
 
-                    b.ToTable("CommercialProperties");
+                    b.ToTable("CommercialProperties", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.EventSpace", b =>
@@ -144,7 +143,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CommercialPropertyId");
 
-                    b.ToTable("EventSpaces");
+                    b.ToTable("EventSpaces", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.GuestHouse", b =>
@@ -172,7 +171,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ResidentialPropertyId");
 
-                    b.ToTable("GuestHouses");
+                    b.ToTable("GuestHouses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Hotel", b =>
@@ -200,7 +199,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ResidentialPropertyId");
 
-                    b.ToTable("Hotels");
+                    b.ToTable("Hotels", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.House", b =>
@@ -231,7 +230,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ResidentialPropertyId");
 
-                    b.ToTable("Houses");
+                    b.ToTable("Houses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.OfficeSpace", b =>
@@ -262,7 +261,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CommercialPropertyId");
 
-                    b.ToTable("OfficeSpaces");
+                    b.ToTable("OfficeSpaces", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PaymentInformation", b =>
@@ -351,7 +350,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("PropertyLocationId");
 
-                    b.ToTable("Properties");
+                    b.ToTable("Properties", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.PropertyAmenity", b =>
@@ -507,10 +506,9 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyId")
-                        .IsUnique();
+                    b.HasIndex("PropertyId");
 
-                    b.ToTable("ResidentialProperties");
+                    b.ToTable("ResidentialProperties", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Shop", b =>
@@ -538,7 +536,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CommercialPropertyId");
 
-                    b.ToTable("Shops");
+                    b.ToTable("Shops", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.StudentHostel", b =>
@@ -585,7 +583,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ResidentialPropertyId");
 
-                    b.ToTable("StudentHostels");
+                    b.ToTable("StudentHostels", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Warehouse", b =>
@@ -620,7 +618,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("CommercialPropertyId");
 
-                    b.ToTable("Warehouses");
+                    b.ToTable("Warehouses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Apartment", b =>
@@ -637,8 +635,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.CommercialProperty", b =>
                 {
                     b.HasOne("Domain.Entities.Property", "Property")
-                        .WithOne("CommercialProperty")
-                        .HasForeignKey("Domain.Entities.CommercialProperty", "PropertyId")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -763,8 +761,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ResidentialProperty", b =>
                 {
                     b.HasOne("Domain.Entities.Property", "Property")
-                        .WithOne("ResidentialProperty")
-                        .HasForeignKey("Domain.Entities.ResidentialProperty", "PropertyId")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -802,15 +800,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("CommercialProperty");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Property", b =>
-                {
-                    b.Navigation("CommercialProperty")
-                        .IsRequired();
-
-                    b.Navigation("ResidentialProperty")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

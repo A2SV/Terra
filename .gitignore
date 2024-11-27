@@ -692,3 +692,4 @@ Temporary Items
 **/.next
 **/coverage
 .env.local
+/backend/terra-427922-ae51e66636d9.json
