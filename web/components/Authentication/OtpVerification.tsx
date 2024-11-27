@@ -90,13 +90,10 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
                   <input
                     {...props}
                     type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
                     className="bg-inputColor outline-[0.9px] outline-[#0000001A] text-[14px]"
-                    onKeyDown={(e) => {
-                      if (!/[0-9]/.test(e.key) && e.key !== "Backspace") {
-                        e.preventDefault();
-                      }
+                    onInput={(e) => {
+                      const inputElement = e.target as HTMLInputElement;
+                      inputElement.value = inputElement.value.replace(/\D/g, '');
                     }}
                   />
                 )}
