@@ -221,11 +221,14 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader()
                 .AllowAnyMethod();
 
-        policy.WithOrigins("https://terra-web-deployment.onrender.com/")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+        // policy.WithOrigins("https://terra-web-deployment.onrender.com/")
+        //         .AllowAnyHeader()
+        //         .AllowAnyMethod();
     });
 });
+
+builder.Logging.AddConsole()
+    .AddFilter("Microsoft.AspNetCore.Cors", LogLevel.Debug);
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
