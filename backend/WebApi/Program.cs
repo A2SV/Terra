@@ -37,6 +37,7 @@ using WebApi.Filters;
 using Application.Features.Listings.Queries.Filtering;
 using Application.Features.Listings.Queries.GetAllListings;
 using System.Collections;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -195,6 +196,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+});
+
 //builder.Services.AddCors(options =>
 //{
 //    options.AddPolicy("myAppCors", policy =>
@@ -257,6 +263,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 
 
 app.UseRouting();
+app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseCors("myAppCors");
 app.UseAuthentication();
