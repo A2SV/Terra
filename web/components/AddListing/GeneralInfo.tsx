@@ -240,7 +240,7 @@ const GeneralInfo: React.FC = () => {
 
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
-      {error && <ErrorMessage message={error}></ErrorMessage>}
+      {error && <ErrorMessage message={error} onClose={() => setError("")}></ErrorMessage>}
       {!error && successMessage && <SuccessMessage message={successMessage}></SuccessMessage>}
       <div className="w-full lg:w-1/2 px-9 lg:mb-16">
         <p className="text-black font-bold text-lg mb-2">General Info</p>

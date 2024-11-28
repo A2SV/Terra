@@ -8,6 +8,7 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
+    "./node_modules/flowbite-react/**/*.js",
   ],
   prefix: "",
   theme: {
@@ -112,7 +113,11 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwind-scrollbar-hide"),
+    require("flowbite/plugin"),
+  ],
 } satisfies Config;
 
 export default config;
