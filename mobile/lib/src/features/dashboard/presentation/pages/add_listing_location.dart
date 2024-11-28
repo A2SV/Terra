@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/utils.dart';
@@ -262,6 +263,9 @@ class _AddListingLocPageState extends State<AddListingLocPage> {
                 onPressed: _isButtonEnabled
                     ? () {
                         // Handle next button press
+                        switchScreen(
+                            context: context,
+                            routeName: AppRoutes.addListingMedia);
                       }
                     : null,
                 style: ElevatedButton.styleFrom(

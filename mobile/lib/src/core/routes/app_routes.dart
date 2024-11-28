@@ -9,7 +9,10 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_apartment.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
@@ -52,6 +55,25 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.listingDetail}',
     builder: (context, state) => const ListingDetail(),
   ),
+  GoRoute(
+    name: AppRoutes.addListingLocation,
+    path: '/${AppRoutes.addListingLocation}',
+    builder: (context, state) => const AddListingLocPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.addListing,
+    path: '/${AppRoutes.addListing}',
+    builder: (context, state) => const AddListingView(),
+  ),
+  GoRoute(
+    name: AppRoutes.addListingExtraDetailApartment,
+    path: '/${AppRoutes.addListingExtraDetailApartment}',
+    builder: (context, state) => const AddListingApartment(),
+  ),
+
+
+
+  
   GoRoute(
     name: AppRoutes.identifyStudentIdentity,
     path: '/${AppRoutes.identifyStudentIdentity}',
@@ -151,9 +173,13 @@ class AppRoutes {
   static const String passwordReset = 'password-reset';
   static const String forgotPassword = 'forgot-password';
   static const String dashboard = 'dashboard';
+
+
+  static const String addListing = 'add-listing';
   static const String listingDetail = 'listing-detail';
   static const String listingFilters = 'listing-filters';
   static const String identifyStudentIdentity = "identify-student-identity";
+  static const String addListingLocation = "add-listing-location";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
 
