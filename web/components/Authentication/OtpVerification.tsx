@@ -37,8 +37,14 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data?.message || "An unknown error occurred.";
         setMessage(errorMessage);
+        setTimeout(() => {
+          setMessage("");
+        }, 10000);
       } else {
         setMessage("An error occurred. Please try again later.");
+        setTimeout(() => {
+          setMessage("");
+        }, 10000);
       }
     }
 

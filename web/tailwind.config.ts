@@ -110,6 +110,7 @@ const config = {
       },
       animation: {
         "slide-in": "slide-in 0.5s forwards",
+        "slide-out": "slide-out 0.3s ease-in",
       },
     },
   },

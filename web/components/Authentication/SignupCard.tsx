@@ -123,13 +123,13 @@ const SignUpCard: React.FC = () => {
             setMessage(error.response?.data.message);
             setTimeout(() => {
               setMessage("");
-            }, 5000);
+            }, 10000);
           }
         } else {
           setMessage("An error occurred. Please try again later.");
           setTimeout(() => {
             setMessage("");
-          }, 5000);
+          }, 10000);
         }
       }
     }
