@@ -31,7 +31,7 @@ const HomePage = () => {
       setShowError(true);
       const timer = setTimeout(() => {
         setShowError(false);
-      }, 4000);
+      }, 10000);
 
       return () => clearTimeout(timer);
     }

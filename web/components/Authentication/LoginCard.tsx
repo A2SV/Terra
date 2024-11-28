@@ -37,7 +37,7 @@ const LoginCard: React.FC = () => {
         setError("Incorrect Email or Password");
         setTimeout(() => {
           setError("");
-        }, 5000);
+        }, 10000);
       } else {
         setSuccessMessage("Login successful");
         setTimeout(() => {
@@ -47,6 +47,9 @@ const LoginCard: React.FC = () => {
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
+      setTimeout(() => {
+        setError("");
+      }, 10000);
     }
 
     setLoading(false);

@@ -50,7 +50,7 @@ const ResetInputEmail = () => {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 10000);
     } finally {
       setLoading(false);
     }
