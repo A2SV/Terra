@@ -51,7 +51,7 @@ const HomePage = () => {
             <SpinnerComponent />
           </div>
         ) : error && showError ? (
-          <ErrorMessage message="Error fetching listings" />
+          <ErrorMessage message="Error fetching listings" onClose={() => setShowError(false)} />
         ) : (
           <div className="flex flex-wrap justify-center">
             {listings.map((listing: Listing) => (

@@ -114,7 +114,9 @@ const LoginCard: React.FC = () => {
 
   return (
     <div className="">
-      {error && !emailError && <ErrorMessage message={error}></ErrorMessage>}
+      {error && !emailError && (
+        <ErrorMessage message={error} onClose={() => setError("")}></ErrorMessage>
+      )}
       {!error && !emailError && successMessage && (
         <SuccessMessage message={successMessage}></SuccessMessage>
       )}
