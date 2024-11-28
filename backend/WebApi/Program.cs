@@ -196,10 +196,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
-});
+// builder.Services.Configure<ForwardedHeadersOptions>(options =>
+// {
+//     options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
+// });
 
 //builder.Services.AddCors(options =>
 //{
@@ -263,7 +263,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 
 
 app.UseRouting();
-app.UseForwardedHeaders();
+// app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseCors("myAppCors");
 app.UseAuthentication();
