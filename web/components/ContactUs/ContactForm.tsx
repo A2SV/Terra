@@ -31,12 +31,12 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
     console.log(formData);
     setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+    });
   };
 
   return (

@@ -37,8 +37,14 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data?.message || "An unknown error occurred.";
         setMessage(errorMessage);
+        setTimeout(() => {
+          setMessage("");
+        }, 10000);
       } else {
         setMessage("An error occurred. Please try again later.");
+        setTimeout(() => {
+          setMessage("");
+        }, 10000);
       }
     }
 
@@ -67,7 +73,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
           <div className="h-screen w-screen flex items-center justify-center">
             <div className=" flex flex-col items-center justify-center">
               <Image src="/logo.svg" alt="logo" width={124} height={180} />
-              {message && <ErrorMessage message={message} />}
+              {message && <ErrorMessage message={message} onClose={() => setMessage("")} />}
               <h1 className="text-4xl font-bold text-btnColor mt-[20px]">OTP Verification</h1>
 
               <p className="text-normalTextColor text-[16px] pt-[40px] pb-[30px]">

@@ -50,7 +50,7 @@ const ResetInputEmail = () => {
 
       setTimeout(() => {
         setErrorMessage("");
-      }, 5000);
+      }, 10000);
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,9 @@ const ResetInputEmail = () => {
 
   return (
     <div className="w-10/12 md:w-8/12 flex flex-col items-center justify-center mx-auto">
-      {errorMessage && <ErrorMessage message={errorMessage}></ErrorMessage>}
+      {errorMessage && (
+        <ErrorMessage message={errorMessage} onClose={() => setErrorMessage("")}></ErrorMessage>
+      )}
       <div className="flex justify-center items-center p-3 px-2 w-full text-md font-normal font-nunito">
         Enter your email address, you will receive a link in your email to create a new password
       </div>

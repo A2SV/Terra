@@ -123,13 +123,13 @@ const SignUpCard: React.FC = () => {
             setMessage(error.response?.data.message);
             setTimeout(() => {
               setMessage("");
-            }, 5000);
+            }, 10000);
           }
         } else {
           setMessage("An error occurred. Please try again later.");
           setTimeout(() => {
             setMessage("");
-          }, 5000);
+          }, 10000);
         }
       }
     }
@@ -139,7 +139,9 @@ const SignUpCard: React.FC = () => {
 
   return (
     <div className="">
-      {!passwordError && message && <ErrorMessage message={message}></ErrorMessage>}
+      {!passwordError && message && (
+        <ErrorMessage message={message} onClose={() => setMessage("")}></ErrorMessage>
+      )}
       {!passwordError && !message && success && <SuccessMessage message={success}></SuccessMessage>}
 
       <div className="bg-white w-full flex flex-col items-center justify-center">
