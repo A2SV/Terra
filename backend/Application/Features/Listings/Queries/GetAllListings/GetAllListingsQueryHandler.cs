@@ -24,6 +24,8 @@ namespace Application.Features.Listings.Queries.GetAllListings
         {
             return await _listingRepository.GetAllListings(request.pageIndex, request.pageSize);
         }
+        
+        
 
     }
 }

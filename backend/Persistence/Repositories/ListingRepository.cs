@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Application.Contracts;
 using Application.Features.Listings.Dtos;
 using Domain.Entities;
@@ -44,7 +45,9 @@ namespace Persistence.Repositories
 
         public async Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex, int pageSize)
         {
-            IQueryable<Property> query = _context.Properties;
+            IQueryable<Property> query = _context.Properties
+                .Include(p => p.PropertyLocation)
+                .Include(p => p.PaymentInformation);
             
             var count = await query.CountAsync();
 
@@ -115,8 +118,7 @@ namespace Persistence.Repositories
 
             return new PaginatedList<PropertyDto>(propertyDto, pageIndex, totalPages);
         }
-
-
+        
         public async Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,
             string? listingType, string? propertyType,
