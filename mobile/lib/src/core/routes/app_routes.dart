@@ -7,6 +7,7 @@ import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password_send_mail.dart';
 import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
+import 'package:mobile/src/features/auth/presentation/pages/profile_pages/profile_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing.dart';
@@ -14,12 +15,16 @@ import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_apa
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/saved_page.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
-final routes = <GoRoute>[
+
+final routes = <RouteBase>[
   GoRoute(
     name: AppRoutes.signup,
     path: '/${AppRoutes.signup}',
@@ -47,11 +52,6 @@ final routes = <GoRoute>[
       final email = state.pathParameters['email'];
       return ForgotPasswordSendMail(email: email!);
     },
-  ),
-  GoRoute(
-    name: AppRoutes.dashboard,
-    path: '/${AppRoutes.dashboard}',
-    builder: (context, state) => const DashboardPage(),
   ),
   GoRoute(
     name: AppRoutes.listingDetail,
@@ -94,7 +94,7 @@ final routes = <GoRoute>[
   ),
   GoRoute(
     name: AppRoutes.listingFilters,
-    path: '/${AppRoutes.addListingMedia}',
+    path: '/${AppRoutes.listingFilters}',
     builder: (context, state) => const ListingsFilters(),
   ),
   GoRoute(
@@ -136,9 +136,35 @@ final routes = <GoRoute>[
   //     return BlogDetails(id: int.parse(id));
   //   },
   // ),
+  ShellRoute(
+    builder: (context, state, child) {
+      return DashboardPage(child: child);
+    },
+    routes: [
+      GoRoute(
+        name: AppRoutes.home,
+        path: '/${AppRoutes.home}',
+        builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        name: AppRoutes.chatPage,
+        path: '/${AppRoutes.chatPage}',
+        builder: (context, state) => const ChatPage(),
+      ),
+      GoRoute(
+        name: AppRoutes.savedPage,
+        path: '/${AppRoutes.savedPage}',
+        builder: (context, state) => const SavedPage(),
+      ),
+      GoRoute(
+        name: AppRoutes.profilePage,
+        path: '/${AppRoutes.profilePage}',
+        builder: (context, state) => const ProfilePage(),
+      ),
+    ],
+  ),
 ];
 
-//* Custom transition page
 CustomTransitionPage buildPageWithDefaultTransition<T>({
   required BuildContext context,
   required GoRouterState state,
@@ -152,7 +178,6 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
   );
 }
 
-//* Default page builder
 Page<dynamic> Function(BuildContext, GoRouterState) defaultPageBuilder<T>(
         Widget child) =>
     (BuildContext context, GoRouterState state) {
@@ -164,8 +189,8 @@ Page<dynamic> Function(BuildContext, GoRouterState) defaultPageBuilder<T>(
     };
 
 class AppRoutes {
-  // static const String otp = 'otp';
-  static const String home = '';
+  static const String otp = 'otp';
+  static const String home = 'home';
   static const String signup = 'signup';
   static const String onboarding = 'onboarding';
   static const String signin = 'signin';
@@ -202,4 +227,7 @@ class AppRoutes {
   static const String addListingExtraDetailWarehouse = "${AppRoutes.addListingExtraDetailCommercial}/warehouse";
   static const String addListingExtraDetailEventSpace = "${AppRoutes.addListingExtraDetailCommercial}/event-space";
 
+  static const String chatPage = 'chat-page';
+  static const String savedPage = 'saved-page';
+  static const String profilePage = 'profile-page';
 }
