@@ -8,3 +8,8 @@ sealed class DashboardEvent extends Equatable {
 }
 
 class GetAllListingsEvent extends DashboardEvent {}
+
+class GetListingEvent extends DashboardEvent{
+  final String id;
+  GetListingEvent({required this.id});
+}

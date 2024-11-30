@@ -11,6 +11,8 @@ class DashboardInitial extends DashboardState {}
 
 class DashboardLoading extends DashboardState {}
 
+class ListingLoading extends DashboardState {}
+
 @immutable
 sealed class DashboardState extends Equatable {
   @override
@@ -20,4 +22,16 @@ sealed class DashboardState extends Equatable {
 class DashboardSuccess extends DashboardState {
   final List<ListingModel> listings;
   DashboardSuccess({required this.listings}) : super();
+}
+
+class CompareListing extends DashboardState{
+  final ListingModel listing;
+  CompareListing({required this.listing});
+}
+
+final class ListingError extends DashboardState {
+  final String message;
+  ListingError(this.message);
+  @override
+  List<Object?> get props => [message];
 }

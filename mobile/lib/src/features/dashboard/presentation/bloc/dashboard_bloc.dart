@@ -12,10 +12,13 @@ part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetListingsUseCase getListingsUseCase;
+  final GetListingUseCase getListingUseCase;
   DashboardBloc({
     required this.getListingsUseCase,
+    required this.getListingUseCase,
   }) : super(DashboardInitial()) {
     on<GetAllListingsEvent>(getAllListingsEvent);
+    on<GetListingEvent>(getListingEvent);
   }
 
   FutureOr<void> getAllListingsEvent(
@@ -25,6 +28,19 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     result.fold(
       (failure) => emit(DashboardError(failure.message)),
       (listings) => emit(DashboardSuccess(listings: listings)),
+    );
+  }
+
+  FutureOr<void> getListingEvent(
+      GetListingEvent event, Emitter<DashboardState> emit
+      ) async {
+
+    emit(ListingLoading());
+    final result = await getListingUseCase(ListingParams(id:event.id));
+
+    result.fold(
+            (failure)=>emit(ListingError(failure.message)),
+            (listing)=>emit(CompareListing(listing: listing))
     );
   }
 }

@@ -61,6 +61,7 @@ void _initDashboard() {
     ..registerFactory(
       () => DashboardBloc(
         getListingsUseCase: sl<GetListingsUseCase>(),
+        getListingUseCase: sl<GetListingUseCase>()
       ),
     );
 }
