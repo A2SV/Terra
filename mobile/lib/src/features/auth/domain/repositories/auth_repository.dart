@@ -16,6 +16,7 @@ abstract class AuthRepository {
     required String role,
   });
   Future<Either<Failure, void>> registerWithGoogle();
-  Future<Either<Failure, OTPSent>> resendOtp(String email);
   Future<Either<Failure, void>> resetPassword(String password);
+  Future<Either<Failure, void>> forgotPassword(String email);
+  Future<Either<Failure, void>> resendOTP(String email);
 }

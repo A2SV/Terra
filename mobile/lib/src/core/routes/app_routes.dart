@@ -4,8 +4,8 @@ import 'package:mobile/src/core/error/error_pages/404_page.dart';
 import 'package:mobile/src/core/error/error_pages/no_network_page.dart';
 import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
+import 'package:mobile/src/features/auth/presentation/pages/forgot_password_send_mail.dart';
 import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
-import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
@@ -17,11 +17,6 @@ import 'package:mobile/src/features/dashboard/presentation/pages/listings_filter
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 final routes = <GoRoute>[
-  GoRoute(
-    name: AppRoutes.otp,
-    path: '/${AppRoutes.otp}',
-    builder: (context, state) => const OTPage(),
-  ),
   GoRoute(
     name: AppRoutes.signup,
     path: '/${AppRoutes.signup}',
@@ -41,6 +36,14 @@ final routes = <GoRoute>[
     name: AppRoutes.forgotPassword,
     path: '/${AppRoutes.forgotPassword}',
     builder: (context, state) => const ForgotPasswordScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.forgotPasswordEmailSent,
+    path: '/${AppRoutes.forgotPasswordEmailSent}/:email',
+    builder: (context, state) {
+      final email = state.pathParameters['email'];
+      return ForgotPasswordSendMail(email: email!);
+    },
   ),
   GoRoute(
     name: AppRoutes.dashboard,
@@ -92,7 +95,6 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.notFound}',
     builder: (context, state) => const Page404(),
   ),
-  
 
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
@@ -140,7 +142,7 @@ Page<dynamic> Function(BuildContext, GoRouterState) defaultPageBuilder<T>(
     };
 
 class AppRoutes {
-  static const String otp = 'otp';
+  // static const String otp = 'otp';
   static const String home = '';
   static const String signup = 'signup';
   static const String onboarding = 'onboarding';
@@ -150,6 +152,7 @@ class AppRoutes {
   static const String noNetwork = 'noNetwork';
   static const String passwordReset = 'password-reset';
   static const String forgotPassword = 'forgot-password';
+  static const String forgotPasswordEmailSent = 'forgot-password-email-sent';
   static const String dashboard = 'dashboard';
   static const String listingDetail = 'listing-detail';
   static const String listingFilters = 'listing-filters';

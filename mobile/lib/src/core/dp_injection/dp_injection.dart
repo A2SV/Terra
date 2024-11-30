@@ -21,23 +21,28 @@ void _initAuth() {
   sl
     ..registerLazySingleton<Box>(() => Hive.box('userData'))
 
-    //UseCases
-    ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
-    ..registerLazySingleton(() => OTPUseCase(sl()))
+    //DataSources
+    ..registerLazySingleton<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(sl()))
 
     //Repository
     ..registerLazySingleton<AuthRepository>(
         () => AuthRepositoryImpl(remoteDataSource: sl(), network: sl()))
 
-    //DataSources
-    ..registerLazySingleton<AuthRemoteDataSource>(
-        () => AuthRemoteDataSourceImpl(sl()))
-
-    //Blocs
-    ..registerLazySingleton(
-        () => OTPBloc(otpUseCase: sl(), resendOtpUseCase: sl()))
-    ..registerLazySingleton(
-        () => AuthenticationBloc(registerWithEmailPasswordUseCase: sl()));
+    //UseCases
+    ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
+    ..registerLazySingleton(() => OTPUseCase(sl()))
+    ..registerFactory(
+      () => ForgotPasswordUsecase(authRepository: sl()),
+    )
+    ..registerFactory(
+      () => ResendOTPUsecase(authRepository: sl()),
+    )
+    ..registerLazySingleton(() => AuthenticationBloc(
+          registerWithEmailPasswordUseCase: sl(),
+          forgotPasswordUsecase: sl(),
+          resendOTPUsecase: sl(),
+        ));
 }
 
 void _initDashboard() {

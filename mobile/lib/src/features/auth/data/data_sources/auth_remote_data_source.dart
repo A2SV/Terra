@@ -17,7 +17,8 @@ abstract class AuthRemoteDataSource {
     required String phoneNumber,
     required String role,
   });
-  Future<OTPSent> resendOtp(String email);
+  Future<void> forgotPassword(String email);
+  Future<void> resendOTP(String email);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -98,14 +99,56 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<OTPSent> resendOtp(String email) async {
-    final otpResponse = await _client.post(
-        Uri.parse(AppStrings.resendOtpEndPoint),
-        body: jsonEncode({'email': email}),
-        headers: {'Content-Type': ' application/json'});
-    if (otpResponse.statusCode != 200) {
-      throw ResendOTPException(message: otpResponse.body);
+  Future<void> forgotPassword(String email) async {
+    try {
+      final result = await _client.post(
+        Uri.parse(AppStrings.forgotPasswordEndpoint),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+        }),
+      );
+
+      if (result.statusCode != 200) {
+        final response = jsonDecode(result.body);
+        throw ApiException(response['message']);
+      }
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
-    return const OTPSent();
+  }
+
+  @override
+  Future<void> resendOTP(String email) async {
+    try {
+      final result = await _client.post(
+        Uri.parse(AppStrings.resendOTPEndpoint),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+        }),
+      );
+
+      if (result.statusCode == 500) {
+        throw const ServerException("Internal Server Error");
+      }
+
+      if (result.statusCode != 200) {
+        final response = jsonDecode(result.body);
+        throw ResendOTPException(message: response['message']);
+      }
+    } catch (e) {
+      if (e is ServerException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
+    }
   }
 }

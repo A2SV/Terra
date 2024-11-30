@@ -84,23 +84,36 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, OTPSent>> resendOtp(String email) async {
-    if (await network.isConnected) {
-      try {
-        final otp = await remoteDataSource.resendOtp(email);
-        return Right(otp);
-      } catch (e) {
-        return Left(ResendOTPFailure(e.toString()));
+  Future<Either<Failure, void>> resetPassword(String password) {
+    // TODO: implement resetPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> forgotPassword(String email) async {
+    try {
+      if (await network.isConnected) {
+        await remoteDataSource.forgotPassword(email);
+        return const Right(null);
+      } else {
+        return const Left(NetworkFailure('No internet connection'));
       }
-    } else {
-      return const Left(NetworkFailure(
-          'No internet connection. Check Your Internet Connection'));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, void>> resetPassword(String password) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> resendOTP(String email) async {
+    try {
+      if (await network.isConnected) {
+        await remoteDataSource.resendOTP(email);
+        return const Right(null);
+      } else {
+        return const Left(NetworkFailure('No internet connection'));
+      }
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
   }
 }

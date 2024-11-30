@@ -35,7 +35,6 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) async {
-        print(state);
         if (state is LoginSuccess) {
           CustomSnackBar.successSnackBar(
               context: context, message: 'Login success');
@@ -95,11 +94,10 @@ class _SignInPageState extends State<SignInPage> {
                     Text(
                       'Welcome to the Terra family',
                       textAlign: TextAlign.center,
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                          fontSize: 16),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(fontSize: 16),
                     ),
                     SizedBox(height: 4.h),
                     AuthTextFormField(
@@ -129,15 +127,21 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     SizedBox(height: 3.h),
-                    Text(
-                      "Forgot password?",
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                        fontSize: 15.sp,
+                    GestureDetector(
+                      onTap: () => switchScreen(
+                        context: context,
+                        routeName: AppRoutes.forgotPassword,
                       ),
-                      textAlign: TextAlign.end,
+                      child: Text(
+                        "Forgot password?",
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                              fontSize: 15.sp,
+                            ),
+                        textAlign: TextAlign.end,
+                      ),
                     ),
                     SizedBox(height: 5.h),
                     CustomButton(
@@ -178,27 +182,29 @@ class _SignInPageState extends State<SignInPage> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         "Don't have an account? ",
-                        style:
-                        CustomTextStyles.kDefaultTextTheme(
-                            AppLightThemeColors.kBlackTextColor)
-                            .bodySmall?.copyWith(
-                            fontSize: 15.sp,
-                            color: AppCommonColors.fieldBorderColor
-                        ),
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                                fontSize: 15.sp,
+                                color: AppCommonColors.fieldBorderColor),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          switchScreen(
+                            context: context,
+                            routeName: AppRoutes.signup,
+                            popAndPush: true,
+                          );
                         },
                         child: Text(
                           'Sign Up',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  fontSize: 15.sp,
+                                  color: AppCommonColors.defaultLink),
                         ),
                       ),
                     ]),
@@ -213,12 +219,11 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              color: AppCommonColors.fieldBorderColor
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  color: AppCommonColors.fieldBorderColor),
                         ),
                         Expanded(
                           child: Divider(

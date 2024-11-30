@@ -1,9 +1,9 @@
-
-
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile/src/core/error/failure.dart';
+import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
+import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/use_cases.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mocktail/mocktail.dart';
@@ -11,8 +11,14 @@ import 'package:mocktail/mocktail.dart';
 class MockRegisterWithEmailPassword extends Mock
     implements RegisterWithEmailPasswordUseCase {}
 
+class MockForgotPasswordUsecase extends Mock implements ForgotPasswordUsecase {}
+
+class MockResendOTPUsecase extends Mock implements ResendOTPUsecase {}
+
 void main() {
   late RegisterWithEmailPasswordUseCase usecase;
+  late ForgotPasswordUsecase forgotPasswordUsecase;
+  late ResendOTPUsecase resendOTPUsecase;
   late AuthenticationBloc bloc;
   final params = RegisterWithEmailPasswordUseCaseParams(
       firstName: "firstName",
@@ -24,7 +30,13 @@ void main() {
 
   setUp(() {
     usecase = MockRegisterWithEmailPassword();
-    bloc = AuthenticationBloc(registerWithEmailPasswordUseCase: usecase);
+    forgotPasswordUsecase = MockForgotPasswordUsecase();
+    resendOTPUsecase = MockResendOTPUsecase();
+    bloc = AuthenticationBloc(
+      registerWithEmailPasswordUseCase: usecase,
+      forgotPasswordUsecase: forgotPasswordUsecase,
+      resendOTPUsecase: resendOTPUsecase,
+    );
     registerFallbackValue(params);
   });
   tearDown(() => bloc.close());
@@ -37,7 +49,6 @@ void main() {
     blocTest<AuthenticationBloc, AuthenticationState>(
       'should emit [AuthenticationLoading, AuthenticationSuccess]',
       build: () {
-       
         when(() => usecase(any())).thenAnswer((_) async => const Right(null));
         return bloc;
       },
@@ -54,17 +65,16 @@ void main() {
         AuthenticationSuccess(),
       ],
       verify: (_) {
- 
         verify(() => usecase(any())).called(1);
         verifyNoMoreInteractions(usecase);
       },
     );
-  
+
     blocTest<AuthenticationBloc, AuthenticationState>(
       'should emit [AuthenticationLoading, AuthenticationSuccess]',
       build: () {
-      
-        when(() => usecase(any())).thenAnswer((_) async => const Left(APIFailure('Failed')));
+        when(() => usecase(any()))
+            .thenAnswer((_) async => const Left(APIFailure('Failed')));
         return bloc;
       },
       act: (bloc) async => bloc.add(AuthenticationRegisterUserEvent(
@@ -80,11 +90,9 @@ void main() {
         AuthenticationError('Failed'),
       ],
       verify: (_) {
-     
         verify(() => usecase(any())).called(1);
         verifyNoMoreInteractions(usecase);
       },
     );
   });
-  
 }
