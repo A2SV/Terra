@@ -26,8 +26,8 @@ class ListingModel extends ListingEntity {
   factory ListingModel.fromJson(Map<String, dynamic> json) {
     return ListingModel(
       id: json['id'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      createdAt: DateTime.parse(json['createdAt']??'2024-09-01T00:00:00Z'),
+      updatedAt: DateTime.parse(json['updatedAt']??'2024-09-01T00:00:00Z'),
       listerId: json['listerId'],
       paymentInformationId: json['paymentInformationId'],
       propertyLocationId: json['propertyLocationId'],

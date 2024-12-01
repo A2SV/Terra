@@ -7,6 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/theme/text_theme.dart';
+import '../../../../core/utils/custom_snackbar.dart';
 
 /*
 List<Map<String, dynamic>> pages = [
@@ -26,16 +27,21 @@ List<Map<String, dynamic>> pages = [
 class ComparePage{
   final String image;
   final String location;
+  final String type;
+  final int bedrooms;
   final double price;
 
-  ComparePage({required this.image, required this.location, required this.price});
+  ComparePage({required this.image, required this.location, required this.price,required this.type,required this.bedrooms});
 }
 
+/*
 List<ComparePage> pages=[
   ComparePage(image: 'assets/images/Rectangle 86.png', location: 'North Legon', price: 100000),
   ComparePage(image: 'assets/images/Rectangle 86.png', location: 'Adabraka', price: 60000),
 ];
+*/
 
+List<ComparePage> pages=[];
 class CompareListingPage extends StatefulWidget {
   const CompareListingPage({super.key});
 
@@ -53,9 +59,29 @@ class _CompareListingPageState extends State<CompareListingPage> {
       body: BlocConsumer<DashboardBloc, DashboardState>(
         listener: (context, state){
 
+          if(state is ListingError) {
+            CustomSnackBar.errorSnackBar(
+              context: context,
+              message: state.message,
+            );
+          }else if (state is CompareListing){
+            pages.add(ComparePage(image: 'assets/images/Rectangle 86.png', location: state.listing1.propertyLocation.city, price: state.listing1.paymentInformation.cost,type: state.listing1.propertyType.name,bedrooms: 4));
+            pages.add(ComparePage(image: 'assets/images/Rectangle 86.png', location: state.listing2.propertyLocation.city, price: state.listing2.paymentInformation.cost,type: state.listing2.propertyType.name,bedrooms: 4));
+          }
+          else{
+            print('default...');
+          }
+
         },
         builder: (context,state){
-          return Padding(
+          if(state is DashboardInitial){
+            print('...init00');
+            context.read<DashboardBloc>().add(
+              CompareListingsEvent(id1: "221aadf9-b3a1-4ff9-b163-361e916a2ab4", id2: "80d8dddb-019d-4035-a2ef-da43dadca0d5")
+            );
+
+          }
+          return state is CompareListing ? Padding(
             padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 4.5.w),
             child: Column(
               children: [
@@ -287,7 +313,7 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                             ),
                                           ),
                                           Text(
-                                            'Apartments',
+                                            '${pages[index].type}',
                                             style:
                                             CustomTextStyles.kDefaultTextTheme(
                                                 AppLightThemeColors.kBlackTextColor)
@@ -558,6 +584,17 @@ class _CompareListingPageState extends State<CompareListingPage> {
                   ),
                 )
               ],
+            ),
+          ) : const Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              child: SizedBox(
+                height: 50.0,
+                width: 50.0,
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.white,
+                ),
+              ),
             ),
           );
         },

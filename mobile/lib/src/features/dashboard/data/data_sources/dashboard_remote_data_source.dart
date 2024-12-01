@@ -30,11 +30,13 @@ class DashboardRemoteDataSourceImpl implements DashboardRemoteDataSource {
       // for (var item in data) {
       //   listings.add(ListingModel.fromJson(item));
       // }
-      print(json.decode(response.body));
+      print("Status:${response.statusCode}");
       final listingReturn =
           GetAllListingsModel.fromJson(json.decode(response.body));
+      print(listingReturn.items);
       return listingReturn.items;
     }
+
     print(response.body);
     throw ApiException(response.body);
   }

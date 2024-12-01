@@ -13,3 +13,10 @@ class GetListingEvent extends DashboardEvent{
   final String id;
   GetListingEvent({required this.id});
 }
+
+
+class CompareListingsEvent extends DashboardEvent{
+  final String id1;
+  final String id2;
+  CompareListingsEvent({required this.id1,required this.id2});
+}

@@ -15,16 +15,17 @@ class GetListingUseCase implements UseCase<ListingModel, ListingParams> {
     List<ListingModel> listings=[];
     response.fold(
         (failure)=>output=failure,
-        (listings_return)=>output=listings_return
+        (listings_return)=>listings=listings_return
     );
 
     for (ListingModel item in listings){
+      //print("${item.id}==${params.id}");
       if (item.id==params.id){
         return Right(item);
       }
     }
 
-    return Left(output);
+    return Left(NetworkFailure('Could not retrieve data'));
   }
 }
 

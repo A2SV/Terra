@@ -25,8 +25,9 @@ class DashboardSuccess extends DashboardState {
 }
 
 class CompareListing extends DashboardState{
-  final ListingModel listing;
-  CompareListing({required this.listing});
+  final ListingModel listing1;
+  final ListingModel listing2;
+  CompareListing({required this.listing1,required this.listing2});
 }
 
 final class ListingError extends DashboardState {
