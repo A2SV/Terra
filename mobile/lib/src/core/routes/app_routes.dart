@@ -9,8 +9,10 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/compare_listing.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
@@ -92,7 +94,11 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.notFound}',
     builder: (context, state) => const Page404(),
   ),
-  
+  GoRoute(
+    name: AppRoutes.compareListings,
+    path: '/${AppRoutes.compareListings}',
+    builder: (context, state) => const CompareListingPage(),
+  ),
 
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
@@ -156,4 +162,5 @@ class AppRoutes {
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
+  static const String compareListings = "compare-listings";
 }

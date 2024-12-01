@@ -12,6 +12,7 @@ import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/otp/otp_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
@@ -42,6 +43,9 @@ class MainApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => sl<AuthenticationBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => sl<DashboardBloc>(),
           ),
         ], child: AppRouter());
       },
