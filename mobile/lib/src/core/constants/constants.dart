@@ -3,6 +3,8 @@ class AppStrings {
 
   static String registerUrl = '$baseUrl/api/auth/register';
   static String loginUrl = '$baseUrl/api/auth/login';
+  static String forgotPasswordEndpoint = '$baseUrl/api/Auth/forgot-password';
+  static String resendOTPEndpoint = '$baseUrl/api/Auth/ResendOTP';
   static String otpEndPoint = '$baseUrl/api/auth/VerifyOTP';
   static String resendOtpEndPoint = '$baseUrl/api/auth/ResendOTP';
   static String getAllListingsEndPoint = '$baseUrl/api/listing';

@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:meta/meta.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
-import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_password_use_case.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
+import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 
 import '../../../../../core/entities/user_account.dart';
 import '../../../../../core/error/failure.dart';
@@ -21,10 +22,16 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final RegisterWithEmailPasswordUseCase registerWithEmailPasswordUseCase;
+  final ForgotPasswordUsecase forgotPasswordUsecase;
+  final ResendOTPUsecase resendOTPUsecase;
   AuthenticationBloc({
     required this.registerWithEmailPasswordUseCase,
+    required this.forgotPasswordUsecase,
+    required this.resendOTPUsecase,
   }) : super(AuthenticationInitial()) {
     on<AuthenticationRegisterUserEvent>(authenticationRegisterUserEvent);
+    on<ForgotPasswordEvent>(onForgotPasswordEvent);
+    on<ResendOTPEvent>(onResendOTPEvent);
 
     on<LoginUserEvent>((event, emit) async {
       emit(AuthenticationLoading());
@@ -64,6 +71,35 @@ class AuthenticationBloc
     result.fold(
       (failure) => emit(AuthenticationError(failure.message)),
       (_) => emit(RegisterUserSuccess(event.email)),
+    );
+  }
+
+  FutureOr<void> onForgotPasswordEvent(
+    ForgotPasswordEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(AuthenticationLoading());
+    final result = await forgotPasswordUsecase(ForgotPasswordParams(
+      email: event.email,
+    ));
+    result.fold(
+      (l) => emit(AuthenticationError(l.message)),
+      (r) => emit(ForgotPasswordSuccess()),
+    );
+  }
+
+  FutureOr<void> onResendOTPEvent(
+    ResendOTPEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(AuthenticationLoading());
+
+    final result = await resendOTPUsecase(ResendOTPParams(
+      email: event.email,
+    ));
+    result.fold(
+      (l) => emit(AuthenticationError(l.message)),
+      (r) => emit(ResendMailSuccess()),
     );
   }
 }

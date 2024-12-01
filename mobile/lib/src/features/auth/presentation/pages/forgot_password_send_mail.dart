@@ -1,43 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/src/core/routes/routes.dart';
-import 'package:mobile/src/core/routes/routes_config.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
-import 'package:mobile/src/core/utils/custom_textformfield.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../onboarding/presentation/widgets/page_indicator.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class ForgotPasswordSendMail extends StatelessWidget {
+  const ForgotPasswordSendMail({super.key, required this.email});
 
-  @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
-}
-
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
-    with SingleTickerProviderStateMixin {
-  final _emailController = TextEditingController();
-  bool buttonDisabled = true;
-
-  final _formKey = GlobalKey<FormState>();
-
-  void _submitEmail() {
-    if (_formKey.currentState!.validate()) {
-      context.read<AuthenticationBloc>().add(
-            ForgotPasswordEvent(email: _emailController.text.trim()),
-          );
-    }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
-  }
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +33,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                       Icons.arrow_back,
                       size: 5.8.w,
                     ),
-                    onPressed: () {
-                      popScreen(context);
-                    },
+                    onPressed: () => popScreen(context),
                   ),
                 ],
               ),
@@ -74,14 +48,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                       margin: EdgeInsets.fromLTRB(1.5.w, 0, 1.5.w, 0),
                       child: PageIndicator(
                         width: 8.w,
-                        color: AppCommonColors.mainBlueButton,
+                        color: AppCommonColors.mainlightBlue,
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(1.5.w, 0, 1.5.w, 0),
                       child: PageIndicator(
                         width: 8.w,
-                        color: AppCommonColors.mainlightBlue,
+                        color: AppCommonColors.mainBlueButton,
                       ),
                     ),
                     Container(
@@ -125,10 +99,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                 key: const Key('Description'),
                 margin: EdgeInsets.all(1.h),
                 alignment: Alignment.center,
-                width: 85.w,
+                width: 65.w,
                 child: Center(
                   child: Text(
-                    'Forgot your password?  Reset it now!',
+                    'A link has been sent to your email account Follow the instructions and get back here',
                     style: CustomTextStyles.kDefaultTextTheme(
                       AppCommonColors.signInWithGoogleBgnd,
                     ).bodyMedium!.copyWith(
@@ -139,78 +113,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                 ),
               ),
               SizedBox(
-                height: 6.h,
+                height: 4.h,
               ),
-              Container(
-                key: const Key('Email'),
-                child: SizedBox(
-                  width: 85.w,
-                  child: Form(
-                    key: _formKey,
-                    child: CustomTextFormField(
-                      textFormFieldType: TextFormFieldType.regular,
-                      controller: _emailController,
-                      hintText: 'Email',
-                      validate: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Enter an email address";
-                        } else if (!RegExp(
-                                r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
-                            .hasMatch(value)) {
-                          return "Enter a valid email address";
-                        }
-                        return null;
-                      },
-                      onChanged: (val) {
-                        if (val == null || val.length < 3) {
-                          buttonDisabled = true;
-                        } else {
-                          buttonDisabled = false;
-                        }
-                        setState(() {});
-                      },
-                      borderSideColor: AppCommonColors.textFieldTextColor,
-                      prefixIcon: SizedBox(
-                        width: 15.w,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            const Icon(
-                              Icons.email_outlined,
-                              color: AppCommonColors.textFieldTextColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                      errorStyle: CustomTextStyles.kDefaultTextTheme(
-                              AppCommonColors.textFieldTextColor)
-                          .bodySmall!
-                          .copyWith(
-                            color: AppCommonColors.red,
-                          ),
-                      hintStyle: CustomTextStyles.kDefaultTextTheme(
-                              AppCommonColors.textFieldTextColor)
-                          .bodyMedium,
-                      contentPadding: EdgeInsets.symmetric(vertical: 5.w),
-                      style: CustomTextStyles.kDefaultTextTheme(
-                              AppCommonColors.textFieldTextColor)
-                          .bodyMedium,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2.h),
               BlocConsumer<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {
-                  if (state is ForgotPasswordSuccess) {
-                    switchScreen(
-                      context: context,
-                      routeName: AppRoutes.forgotPasswordEmailSent,
-                      pathParameters: {"email": _emailController.text.trim()},
-                    );
-                  }
                   if (state is AuthenticationError) {
                     CustomSnackBar.errorSnackBar(
                       context: context,
@@ -226,16 +132,67 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                     key: const Key('button'),
                     width: 100.w,
                     child: CustomButton(
-                      onPressed: _submitEmail,
+                      onPressed: () {
+                        switchScreen(
+                          context: context,
+                          routeName: AppRoutes.signin,
+                          popAndPush: true,
+                        );
+                      },
                       backgroundColor: AppCommonColors.mainBlueButton,
-                      text: 'Continue',
+                      text: 'Back to Login',
                       borderColor: AppCommonColors.mainBlueButton,
                       width: 85.w,
-                      disabled: buttonDisabled,
                     ),
                   );
                 },
               ),
+              SizedBox(height: 2.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 7.5.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        text: "Didnt get email?  ",
+                        style: CustomTextStyles.kDefaultTextTheme(
+                          AppCommonColors.signInWithGoogleBgnd,
+                        ).bodyMedium!.copyWith(
+                              fontSize: 14.5.sp,
+                              color: AppCommonColors.appBlack,
+                            ),
+                        children: [
+                          TextSpan(
+                            text: "Resend",
+                            style: CustomTextStyles.kDefaultTextTheme(
+                              AppCommonColors.signInWithGoogleBgnd,
+                            ).bodyMedium!.copyWith(
+                                  fontSize: 14.5.sp,
+                                  color: AppCommonColors.pageViewIconActive,
+                                ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.read<AuthenticationBloc>().add(
+                                      ResendOTPEvent(email: email),
+                                    );
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "0:59 seconds",
+                      style: CustomTextStyles.kDefaultTextTheme(
+                        AppCommonColors.signInWithGoogleBgnd,
+                      ).bodyMedium!.copyWith(
+                            fontSize: 14.5.sp,
+                            color: AppCommonColors.red,
+                          ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),

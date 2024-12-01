@@ -86,26 +86,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       'Sign Up',
                       textAlign: TextAlign.center,
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppLightThemeColors.kBlackColor
-                      ),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppLightThemeColors.kBlackColor),
                     ),
                     Text(
                       'Join the Terra family',
                       textAlign: TextAlign.center,
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                          fontSize: 16
-                      ),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(fontSize: 16),
                       //TextStyle(fontSize: 16)
-
                     ),
                     const SizedBox(height: 28),
                     Row(
@@ -196,23 +192,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           'I agree to the ',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              fontSize: 14.sp
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(fontSize: 14.sp),
                           //TextStyle(fontSize: 14.sp),
                         ),
                         Text(
                           'Terms of service and Privacy Policy',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                            fontSize: 14.sp,
-                            color: AppCommonColors.defaultLink,
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                fontSize: 14.sp,
+                                color: AppCommonColors.defaultLink,
+                              ),
 
                           //TextStyle(fontSize: 14.sp, color: AppCommonColors.defaultLink,),
                         )
@@ -269,25 +263,28 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         'Already have an account? ',
                         style: CustomTextStyles.kDefaultTextTheme(
-                            AppLightThemeColors.kBlackTextColor)
-                            .bodySmall?.copyWith(
-                            fontSize: 15.sp,
-                            color: AppCommonColors.fieldBorderColor),
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                                fontSize: 15.sp,
+                                color: AppCommonColors.fieldBorderColor),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/signin");
+                          switchScreen(
+                            context: context,
+                            routeName: AppRoutes.signin,
+                            popAndPush: true,
+                          );
                         },
                         child: Text(
                           'Sign In',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink
-                          ),
-
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  fontSize: 15.sp,
+                                  color: AppCommonColors.defaultLink),
                         ),
                       ),
                     ]),
@@ -302,12 +299,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              color: AppCommonColors.fieldBorderColor),
-
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  color: AppCommonColors.fieldBorderColor),
                         ),
                         Expanded(
                           child: Divider(

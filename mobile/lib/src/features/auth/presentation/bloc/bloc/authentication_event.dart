@@ -21,19 +21,30 @@ class AuthenticationRegisterUserEvent extends AuthenticationEvent {
     required this.phoneNumber,
     required this.role,
   });
-  
 }
 
-
-class LoginUserEvent extends AuthenticationEvent{
+class LoginUserEvent extends AuthenticationEvent {
   final String username;
   final String password;
 
-  LoginUserEvent({
-    required this.username,
-    required this.password
-  });
+  LoginUserEvent({required this.username, required this.password});
 
   @override
-  List<Object> get props=>[username,password];
+  List<Object> get props => [username, password];
+}
+
+class ForgotPasswordEvent extends AuthenticationEvent {
+  final String email;
+
+  ForgotPasswordEvent({
+    required this.email,
+  });
+}
+
+class ResendOTPEvent extends AuthenticationEvent {
+  final String email;
+
+  ResendOTPEvent({
+    required this.email,
+  });
 }
