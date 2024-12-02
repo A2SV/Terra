@@ -99,7 +99,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
                     className="bg-inputColor outline-[0.9px] outline-[#0000001A] text-[14px]"
                     onInput={(e) => {
                       const inputElement = e.target as HTMLInputElement;
-                      inputElement.value = inputElement.value.replace(/\D/g, '');
+                      inputElement.value = inputElement.value.replace(/\D/g, "");
                     }}
                   />
                 )}
