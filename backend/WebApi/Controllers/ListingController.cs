@@ -5,10 +5,12 @@ using Application.Models.ApiResult;
 using Application.Features.Listings.Queries.GetAllListings;
 using Domain.Models;
 using Domain.Entities;
+using Domain.Enums;
 using Application.Features.Listings.Queries.Filtering;
 using Microsoft.AspNetCore.Authorization;
 using Application.Features.Listings.Dtos;
 using Application.Features.Listings.Queries.GetListingById;
+using Application.Features.Listings.Commands.UpdatePropertyMarketStatus;
 
 namespace WebApi.Controllers
 {
@@ -81,5 +83,23 @@ namespace WebApi.Controllers
 
             return Ok(listings);
         }
+        
+        [HttpPost("{id}/status")]
+        public async Task<IActionResult> SetMarketStatus(Guid id, [FromQuery] PropertyMarketStatus newStatus)
+        {
+            var command = new UpdatePropertyMarketStatusCommand
+            {
+                PropertyId = id,
+                NewStatus = newStatus
+            };
+
+            await _mediator.Send(command);
+
+            return Ok(new { Message = $"Property status updated to {newStatus}." });
+        }
     }
 }
+
+
+
+

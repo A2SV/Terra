@@ -13,6 +13,7 @@ namespace Application.Contracts
         Task<PaymentInformation?> AddPaymentInformationAsync(PaymentInformation paymentInformation);
         Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex,int pageSize);
         Task<DetailedPropertyDto?> GetListingByIdAsync(Guid id);
+        Task <Property?> GetPropertyByIdAsync(Guid propertyId);
 
         Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,
