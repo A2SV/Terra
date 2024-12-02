@@ -114,7 +114,7 @@ const ExploreProperty: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex justify-between my-10">
+        <div className="flex justify-between my-10 items-center">
           <div className="flex space-x-2">
             {Array.from({ length: totalPages }, (_, index) => (
               <span
