@@ -70,7 +70,8 @@ class ListingsCard extends StatelessWidget {
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       // image: listing.,//listing.[0],
-                      image: 'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',//listing.[0],
+                      image:
+                          'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D', //listing.[0],
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
@@ -123,7 +124,8 @@ class ListingsCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           listing.title,
-                          style: TextStyle(fontSize: 15.sp, color: Colors.black),
+                          style:
+                              TextStyle(fontSize: 15.sp, color: Colors.black),
                         ),
                       ),
                       SizedBox(
@@ -224,18 +226,18 @@ class ListingsCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                "assets/svg/eye.svg",
-                                height: 3.5.w,
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: SvgPicture.asset(
+                            //     "assets/svg/eye.svg",
+                            //     height: 3.5.w,
+                            //   ),
+                            // ),
                             SizedBox(width: 4.w),
                             InkWell(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                "assets/svg/columns.svg",
+                                "assets/svg/repost.svg",
                                 height: 3.5.w,
                               ),
                             ),
