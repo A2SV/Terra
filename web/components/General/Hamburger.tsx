@@ -36,8 +36,8 @@ const HamburgerMenu = () => {
         </svg>
       </button>
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="fixed top-0 right-0 h-[54%] w-64 bg-gray-100 shadow-md z-50 transform transition-transform duration-300">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 rounded-md">
+          <div className="fixed top-0 right-0 h-[54%] w-64 bg-gray-100 shadow-md z-50 transform transition-transform duration-300 m-2 sm:rounded-md">
             <ul className="mt-2 space-y-2 bg-gray-100">
               <div className="flex flex-row justify-between pt-5">
                 <li className="px-4 py-2 rounded-md">
