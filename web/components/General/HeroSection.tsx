@@ -109,10 +109,9 @@ const HeroSection: React.FC = () => {
                   </div>
                   <div className="flex items-center">
                     <form>
-                      <label></label>
                       <div className="font-nunito text-xs text-slate-400 lg:text-sm">
                         <input
-                          type="text"
+                          type="number"
                           placeholder="Max Price"
                           className="w-[100px] h-8 bg-slate-100 rounded-md p-2 text-slate-400"
                         />

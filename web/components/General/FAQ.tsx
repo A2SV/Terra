@@ -8,7 +8,7 @@ const FAQ = () => {
     <div className="w-screen h-auto flex justify-center">
       <div className="w-10/12 lg:w-9/12 flex flex-col lg:flex-row">
         <div className="order-1 lg:order-2 w-full lg:w-1/2 mb-10 lg:mb-0 flex flex-col items-center">
-            <p className="text-lg text-terrablue font-montserrat mb-3 self-start">Got Questions</p>
+          <p className="text-lg text-terrablue font-montserrat mb-3 self-start">Got Questions</p>
           <h1 className="font-montserrat font-semibold text-gray-700 text-3xl mb-5 self-start">
             Frequently Asked Questions
           </h1>
