@@ -21,6 +21,12 @@ namespace Persistence.Repositories
         {
             await _context.SaveChangesAsync(CancellationToken.None);
         }
+        
+        public async Task<Property?> GetPropertyByIdAsync(Guid propertyId)
+        {
+            return await _context.Properties
+                .FirstOrDefaultAsync(p => p.Id == propertyId);
+        }
 
         public async Task<TEntity?> AddPropertyAsync<TEntity>(TEntity property) where TEntity : class
         {
