@@ -1,29 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/features//dashboard/presentation/pages/widgets/add_listing_check_box.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_bottom_sheet_modal.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
-import 'package:mobile/src/features//dashboard/presentation/pages/widgets/add_listing_check_box.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/add_listing_search_input.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
-import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/widgets/property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/dropdown_component.dart';
-import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
-import 'package:mobile/src/features/da'
-    'shboard/presentation/widgets/filter_button.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+
 import '../../../../../gen/fonts.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/utils/utils.dart';
-import '../widgets/add_listing_search_input.dart';
 
 class AddListingResHotel extends StatefulWidget {
   const AddListingResHotel({super.key});
@@ -64,7 +53,6 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
   String _furnishedStatus = 'None';
   String _starRating = '';
   String _restaurantOnsite = '';
-  SfRangeValues _values = const SfRangeValues(30, 59);
   List<Amenity> amenities = [
     Amenity(name: 'Wifi'),
     Amenity(name: 'Balcony'),
@@ -110,13 +98,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
   late bool _isButtonDisabled;
 
   @override
-  void initState() {
-    _isButtonDisabled = false;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -125,7 +107,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -136,7 +118,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +142,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -181,11 +163,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Property Features',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -193,37 +176,37 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
-                              Container(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 95.w,
-                                      margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
-                                          label: 'Bedroom(s)'),
-                                    ),
-                                    Container(
-                                      width: 95.w,
-                                      margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
-                                          label: 'Bathroom(s)'),
-                                    ),
-                                    Container(
-                                      width: 95.w,
-                                      margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
-                                          label: 'Washroom(s)'),
-                                    ),
-                                    Container(
-                                      width: 95.w,
-                                      margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
-                                          label: 'Kitchen(s)'),
-                                    ),
-                                  ],
-                                ),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 95.w,
+                                    margin: EdgeInsets.all(2.w),
+                                    child: const AddListingPropertyFeatureCounter(
+                                            label: 'Bedroom(s)'),
+                                  ),
+                                  Container(
+                                    width: 95.w,
+                                    margin: EdgeInsets.all(2.w),
+                                    child:
+                                        const AddListingPropertyFeatureCounter(
+                                            label: 'Bathroom(s)'),
+                                  ),
+                                  Container(
+                                    width: 95.w,
+                                    margin: EdgeInsets.all(2.w),
+                                    child:
+                                        const AddListingPropertyFeatureCounter(
+                                            label: 'Washroom(s)'),
+                                  ),
+                                  Container(
+                                    width: 95.w,
+                                    margin: EdgeInsets.all(2.w),
+                                    child:
+                                        const AddListingPropertyFeatureCounter(
+                                            label: 'Kitchen(s)'),
+                                  ),
+                                ],
                               )
                             ],
                           ),
@@ -232,14 +215,15 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -265,7 +249,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
 
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Student Housing Amenities',
                             style:
@@ -274,11 +258,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Wrap(
                             children: studentHousingAmenities.map((feature) {
-                              return Container(
+                              return SizedBox(
                                 width: 30.w,
                                 child: AddListingCheckBox(
                                   isActive: feature.isSelected,
@@ -299,7 +283,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Room Types',
                             style:
@@ -308,11 +292,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Wrap(
                             children: roomType.map((feature) {
-                              return Container(
+                              return SizedBox(
                                 width: 40
                                     .w, // Adjust width to give each item more space to wrap
                                 child: AddListingCheckBox(
@@ -335,6 +319,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 ' Hostel Type', //I'M GETTING AN OVERFLOW ERROR HERE
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -342,13 +327,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child: Wrap(
                                 children: hostelType.map((status) {
-                                  return Container(
+                                  return SizedBox(
                                     width: 25.w,
                                     child: Row(
                                       children: [
@@ -361,7 +345,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                             });
                                           },
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                              WidgetStateColor.resolveWith(
                                                   (states) => AppCommonColors
                                                       .mainBlueButton),
                                         ),
@@ -385,6 +369,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Location',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -392,34 +377,30 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
-                              child: Row(
-                                children: location.map((status) {
-                                  return Row(
-                                    children: [
-                                      Radio<String>(
-                                        value: status.value,
-                                        groupValue: _restaurantOnsite,
-                                        onChanged: (String? value) {
-                                          setState(() {
-                                            _restaurantOnsite = value!;
-                                          });
-                                        },
-                                        fillColor:
-                                            MaterialStateColor.resolveWith(
-                                                (states) => AppCommonColors
-                                                    .mainBlueButton),
-                                      ),
-                                      Text(status.name,
-                                          style: TextStyle(
-                                            fontSize: 14.5.sp,
-                                          ))
-                                    ],
-                                  );
-                                }).toList(),
-                              ),
+                            Row(
+                              children: location.map((status) {
+                                return Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: status.value,
+                                      groupValue: _restaurantOnsite,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          _restaurantOnsite = value!;
+                                        });
+                                      },
+                                      fillColor: WidgetStateColor.resolveWith(
+                                          (states) =>
+                                              AppCommonColors.mainBlueButton),
+                                    ),
+                                    Text(status.name,
+                                        style: TextStyle(
+                                          fontSize: 14.5.sp,
+                                        ))
+                                  ],
+                                );
+                              }).toList(),
                             ), //furnished status
                           ],
                         ),
@@ -431,6 +412,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Furnished Status',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -438,34 +420,30 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
-                              child: Row(
-                                children: furnishedStatus.map((status) {
-                                  return Row(
-                                    children: [
-                                      Radio<String>(
-                                        value: status.value,
-                                        groupValue: _furnishedStatus,
-                                        onChanged: (String? value) {
-                                          setState(() {
-                                            _furnishedStatus = value!;
-                                          });
-                                        },
-                                        fillColor:
-                                            MaterialStateColor.resolveWith(
-                                                (states) => AppCommonColors
-                                                    .mainBlueButton),
-                                      ),
-                                      Text(status.name,
-                                          style: TextStyle(
-                                            fontSize: 14.5.sp,
-                                          ))
-                                    ],
-                                  );
-                                }).toList(),
-                              ),
+                            Row(
+                              children: furnishedStatus.map((status) {
+                                return Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: status.value,
+                                      groupValue: _furnishedStatus,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          _furnishedStatus = value!;
+                                        });
+                                      },
+                                      fillColor: WidgetStateColor.resolveWith(
+                                          (states) =>
+                                              AppCommonColors.mainBlueButton),
+                                    ),
+                                    Text(status.name,
+                                        style: TextStyle(
+                                          fontSize: 14.5.sp,
+                                        ))
+                                  ],
+                                );
+                              }).toList(),
                             ), //furnished status
                           ],
                         ),
@@ -473,11 +451,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -485,12 +464,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -499,7 +477,8 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {
@@ -508,7 +487,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                               !amenity.isSelected;
                                         });
                                       },
-                                      isSelected: amenity.isSelected ?? false,
+                                      isSelected: amenity.isSelected,
                                       hasShadow: false,
                                       size: 15,
                                     ),
@@ -547,4 +526,6 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                   )),
             )));
   }
+
+  
 }
