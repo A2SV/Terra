@@ -84,7 +84,7 @@ namespace WebApi.Controllers
             return Ok(listings);
         }
         
-        [HttpPost("{id}/status")]
+        [HttpPatch("{id}/status")]
         public async Task<IActionResult> SetMarketStatus(Guid id, [FromQuery] PropertyMarketStatus newStatus)
         {
             var command = new UpdatePropertyMarketStatusCommand
