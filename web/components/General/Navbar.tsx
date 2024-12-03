@@ -39,10 +39,10 @@ const Navbar = () => {
   const userIsLoggedIn = !!session;
 
   return (
-    <div className="pt-3 top-0 z-50 w-full bg-white pb-[16px]">
-      <div className="flex flex-row justify-between w-full h-16 py-2 lg:px-8 px-4 pt-4 ">
+    <div className="fixed pt-3 top-0 z-50 w-full bg-white pb-[16px] border-b-2">
+      <div className="flex flex-row justify-between w-full h-12 py-2 lg:px-8 px-4 pt-4 ">
         <div className="flex items-center ">
-          <Image src="/headerLogo.svg" alt="Logo" height={90} width={80} className="object-cover" />
+          <Image src="/headerLogo.svg" alt="Logo" height={70} width={60} className="object-cover" />
         </div>
         <div className="lg:flex flex-row items-center hidden ">
           <nav>
@@ -61,14 +61,14 @@ const Navbar = () => {
         </div>
         <div className="flex flex-row">
           {userIsLoggedIn ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row justify-center items-center">
               <ProfilePic />
               <p className="lg:flex hidden items-center px-4 font-nunito">
                 {session?.user?.firstName} <span className="text-[20px] pl-3"> &#124;</span>
               </p>
             </div>
           ) : (
-            <div className="flex flex-row">
+            <div className="flex flex-row justify-center items-center">
               <Link href="/auth">
                 <Image
                   src="/profilePic.svg"

@@ -22,11 +22,11 @@ const Select = () => {
   };
 
   return (
-    <div className="lg:mx-24 mx-10 md:h-[90px] h-[130px]  lg:mt-10 flex flex-col  md:mt-[160px] mt-[210px] ">
+    <div className="lg:mx-24 mx-10 md:h-[60px] h-[100px]  lg:mt-10 flex flex-col ml-3 md:mt-[130px] mt-[180px] ">
       <div>
-        <h2 className="font-nunito text-[26px] font-bold px-5">Select from a variety of suites</h2>
+        <h2 className="font-nunito text-[26px] font-bold px-5 text-lg md:text-2xl lg:text-3xl">Select from a variety of suites</h2>
       </div>
-      <div className="flex justify-between  mt-8">
+      <div className="flex justify-between  mt-4">
         <div className="flex overflow-x-scroll scrollbar-hide justify-start items-start ">
           <ul className="flex flex-row justify-center items-center">
             {items.map((item, index) => (

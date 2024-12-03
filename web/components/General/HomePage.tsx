@@ -38,14 +38,14 @@ const HomePage = () => {
   }, [error]);
 
   return (
-    <div className="flex flex-col min-w-[100%]">
+    <div className="flex flex-col min-w-[100%] m-0 p-0">
       <Navbar />
       <HeroSection />
       <div className="lg:mt-10  mt-0">
         <Select />
       </div>
 
-      <div className="flex justify-center items-center lg:mx-24 mt-[50px] mb-[50px]">
+      <div className="flex justify-center items-center lg:mx-24 mt-[10px] mb-[50px] md:mt-12">
         {isLoading ? (
           <div>
             <SpinnerComponent />
@@ -61,19 +61,19 @@ const HomePage = () => {
         )}
       </div>
 
-      <div className="mt-[10px] mb-[50px]">
+      <div className="-mt-4">
         <ExploreProperty />
       </div>
-      <div className="mt-[60px] ">
+      <div className="">
         <ProcedureSection />
       </div>
-      <div className=" mb-[50px]">
+      <div className="">
         <CreateListing />
       </div>
-      <div className=" mt-[80px]">
+      <div className=" mt-[30px]">
         <FAQ />
       </div>
-      <div className=" mt-[80px]">
+      <div className=" mt-[40px]">
         <Footer />
       </div>
     </div>

@@ -9,8 +9,8 @@ const Footer = () => {
     <div className="flex items-center justify-center">
       {/* Page */}
 
-      <footer className="bg-[#00010F] w-screen text-white py-12 md:px-6 font-nunito text-sm">
-        <div className="lg:mx-32 text-left justify-start flex-col px-4 sm:px-3 lg:px-8">
+      <footer className="bg-[#00010F] w-screen text-white py-12 pl-5 md:pl-0 md:px-6 font-nunito text-sm">
+        <div className="md:mx-6 text-left justify-start flex-col px-4 sm:px-3 lg:px-8">
           {/* FIrst line */}
           <div className="flex flex-col md:flex-row justify-between my-10">
             <div className="flex-row justify-between">
