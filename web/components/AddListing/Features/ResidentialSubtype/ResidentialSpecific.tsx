@@ -38,7 +38,7 @@ const ResidentialSpecific: React.FC<{
   return (
     <div className="rounded-lg font-nunito flex">
       <div>
-        <div className="p-6 space-y-3">
+        <div className="md:p-6 space-y-3">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-black font-semibold">Bedrooms</label>

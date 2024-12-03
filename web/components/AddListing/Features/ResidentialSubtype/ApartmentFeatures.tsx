@@ -28,7 +28,7 @@ const ApartmentFeatures: React.FC<{
 
   return (
     <div>
-      <div className="p-6 space-y-5">
+      <div className="md:p-6 space-y-5 pt-3">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-black font-semibold">
