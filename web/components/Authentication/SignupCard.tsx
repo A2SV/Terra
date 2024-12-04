@@ -139,7 +139,7 @@ const SignUpCard: React.FC = () => {
       <div className="bg-white w-full flex flex-col items-center justify-center ">
         <form
           onSubmit={handleSubmit}
-          className="w-5/6 md:w-3/6 flex flex-col justify-center items-center  space-y-3  "
+          className="w-5/6 md:w-4/6 lg:w-3/6 flex flex-col justify-center items-center  space-y-3  "
         >
           <div className="w-full">
             <p className="font-nunito text-sm font-normal">
