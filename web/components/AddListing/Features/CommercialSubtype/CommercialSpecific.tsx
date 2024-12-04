@@ -19,7 +19,7 @@ const CommercialSpecific: React.FC<{
   return (
     <div className="rounded-lg font-nunito flex">
       <div>
-        <div className="p-6">
+        <div className="md:p-6">
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm text-black font-semibold">Total Floors</label>
