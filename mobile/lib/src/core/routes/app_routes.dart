@@ -9,10 +9,8 @@ import 'package:mobile/src/features/auth/presentation/pages/identify_student.dar
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_apartment.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
@@ -59,28 +57,14 @@ final routes = <GoRoute>[
     builder: (context, state) => const ListingDetail(),
   ),
   GoRoute(
-    name: AppRoutes.addListingLocation,
-    path: '/${AppRoutes.addListingLocation}',
-    builder: (context, state) => const AddListingLocPage(),
+    name: AppRoutes.identifyStudentIdentity,
+    path: '/${AppRoutes.identifyStudentIdentity}',
+    builder: (context, state) => const IdentifyStudent(),
   ),
   GoRoute(
     name: AppRoutes.addListing,
     path: '/${AppRoutes.addListing}',
-    builder: (context, state) => const AddListingView(),
-  ),
-  GoRoute(
-    name: AppRoutes.addListingExtraDetailApartment,
-    path: '/${AppRoutes.addListingExtraDetailApartment}',
-    builder: (context, state) => const AddListingApartment(),
-  ),
-
-
-
-  
-  GoRoute(
-    name: AppRoutes.identifyStudentIdentity,
-    path: '/${AppRoutes.identifyStudentIdentity}',
-    builder: (context, state) => const IdentifyStudent(),
+    builder: (context, state) => const AddListingPage(),
   ),
   GoRoute(
     name: AppRoutes.addListingMedia,
@@ -176,30 +160,10 @@ class AppRoutes {
   static const String forgotPassword = 'forgot-password';
   static const String forgotPasswordEmailSent = 'forgot-password-email-sent';
   static const String dashboard = 'dashboard';
-
-
-  static const String addListing = 'add-listing';
   static const String listingDetail = 'listing-detail';
   static const String listingFilters = 'listing-filters';
   static const String identifyStudentIdentity = "identify-student-identity";
-  static const String addListingLocation = "add-listing-location";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
-
-
-  static const String addListingExtraDetail = "add-listing-extra-detail";
-  static const String addListingExtraDetailResidential = "${AppRoutes.addListingExtraDetail}/residential";
-  static const String addListingExtraDetailHouse = "${AppRoutes.addListingExtraDetailResidential}/house";
-  static const String addListingExtraDetailApartment = "${AppRoutes.addListingExtraDetailResidential}/apartment";
-  static const String addListingExtraDetailStudentHousing = "${AppRoutes.addListingExtraDetailResidential}/student-housing";
-  static const String addListingExtraDetailHotel = "${AppRoutes.addListingExtraDetailResidential}/hotel";
-  static const String addListingExtraDetailGuestHouse = "${AppRoutes.addListingExtraDetailResidential}/guest-house";
-
-
-  static const String addListingExtraDetailCommercial = "${AppRoutes.addListingExtraDetail}/commercial";
-  static const String addListingExtraDetailOfficeSpace = "${AppRoutes.addListingExtraDetailCommercial}/office-space";
-  static const String addListingExtraDetailShop = "${AppRoutes.addListingExtraDetailCommercial}/shop";
-  static const String addListingExtraDetailWarehouse = "${AppRoutes.addListingExtraDetailCommercial}/warehouse";
-  static const String addListingExtraDetailEventSpace = "${AppRoutes.addListingExtraDetailCommercial}/event-space";
-
+  static const addListing = 'add_listing';
 }
