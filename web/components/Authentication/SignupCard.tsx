@@ -46,24 +46,6 @@ const SignUpCard: React.FC = () => {
     }));
   };
 
-  // const togglePasswordVisibility = (): void => {
-  //   setPasswordVisible(!passwordVisible);
-  //   if (!passwordVisible) {
-  //     setTimeout(() => {
-  //       setPasswordVisible(false);
-  //     }, 700);
-  //   }
-  // };
-
-  // const toggleConfirmPasswordVisibility = (): void => {
-  //   setPasswordVisible(!confirmPasswordVisible);
-  //   if (!confirmPasswordVisible) {
-  //     setTimeout(() => {
-  //       setPasswordVisible(false);
-  //     }, 700);
-  //   }
-  // };
-
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { value } = e.target;
     setEmail(value);
@@ -157,7 +139,7 @@ const SignUpCard: React.FC = () => {
       <div className="bg-white w-full flex flex-col items-center justify-center ">
         <form
           onSubmit={handleSubmit}
-          className="w-5/6 md:w-3/6 flex flex-col justify-center items-center  space-y-3  "
+          className="w-5/6 md:w-4/6 lg:w-3/6 flex flex-col justify-center items-center  space-y-3  "
         >
           <div className="w-full">
             <p className="font-nunito text-sm font-normal">

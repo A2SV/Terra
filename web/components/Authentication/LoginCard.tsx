@@ -64,30 +64,6 @@ const LoginCard: React.FC = () => {
     }
   };
 
-  // const RememberMeCheckbox: React.FC = () => {
-  //   const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  //   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>): void => {
-  //     setIsChecked(event.target.checked);
-  //   };
-
-  //   return (
-  //     <div className="remember flex">
-  //       <input
-  //         type="checkbox"
-  //         name="rememberMe"
-  //         id="rememberMe"
-  //         checked={isChecked}
-  //         onChange={handleCheckboxChange}
-  //         className="mr-2"
-  //       />
-  //       <label className="font-nunito font-normal text-sm" htmlFor="rememberMe">
-  //         Remember me
-  //       </label>
-  //     </div>
-  //   );
-  // };
-
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
     setEmail(value);
@@ -127,7 +103,7 @@ const LoginCard: React.FC = () => {
       <div className="bg-white flex flex-col items-center justify-center ">
         <form
           onSubmit={handleSubmit}
-          className="info-section w-5/6 md:w-3/6  flex flex-col items-center justify-center space-y-5    "
+          className="info-section w-5/6 md:w-4/6 lg:w-3/6  flex flex-col items-center justify-center space-y-5"
         >
           <div className="info w-full mt-7">
             <p className="font-nunito font-normal text-sm">
