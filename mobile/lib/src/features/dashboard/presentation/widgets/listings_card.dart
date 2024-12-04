@@ -238,7 +238,7 @@ class ListingsCard extends StatelessWidget {
                               onTap: () {},
                               child: SvgPicture.asset(
                                 "assets/svg/repost.svg",
-                                height: 3.5.w,
+                                height: 3.7.w,
                               ),
                             ),
                             SizedBox(width: 4.w),
