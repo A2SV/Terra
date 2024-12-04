@@ -14,9 +14,12 @@ import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_apa
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/saved_page.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 final routes = <GoRoute>[
@@ -118,6 +121,24 @@ final routes = <GoRoute>[
     builder: (context, state) => const Page404(),
   ),
 
+  GoRoute(
+    name: AppRoutes.chatPage,
+    path: '/${AppRoutes.chatPage}',
+    builder: (context, state) => const ChatPage(),
+  ),
+
+  GoRoute(
+    name: AppRoutes.savedPage,
+    path: '/${AppRoutes.savedPage}',
+    builder: (context, state) => const SavedPage(),
+  ),
+
+  GoRoute(
+    name: AppRoutes.profilePage,
+    path: '/${AppRoutes.profilePage}',
+    builder: (context, state) => const ProfPage(),
+  ),
+
   // GoRoute(
   //   name: AppRoutes.editblogScreen,
   //   path: '/${EditBlogScreen.routeName}',
@@ -186,6 +207,9 @@ class AppRoutes {
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
 
+  static const String chatPage = 'chat-page';
+  static const String savedPage = 'saved-page';
+  static const String profilePage = 'profile-page';
 
   static const String addListingExtraDetail = "add-listing-extra-detail";
   static const String addListingExtraDetailResidential = "${AppRoutes.addListingExtraDetail}/residential";
