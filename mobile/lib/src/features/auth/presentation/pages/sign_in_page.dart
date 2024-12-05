@@ -35,6 +35,10 @@ class _SignInPageState extends State<SignInPage> {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) async {
         if (state is LoginSuccess) {
+          CustomSnackBar.successSnackBar(
+            context: context,
+            message: "User login successful",
+          );
           switchScreen(
             context: context,
             routeName: AppRoutes.dashboard,
@@ -86,9 +90,10 @@ class _SignInPageState extends State<SignInPage> {
                       'Sign In',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppLightThemeColors.kBlackColor), //black
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppLightThemeColors.kBlackColor,
+                      ),
                     ),
                     Text(
                       'Welcome to the Terra family',

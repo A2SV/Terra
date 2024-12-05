@@ -41,6 +41,16 @@ class ForgotPasswordEvent extends AuthenticationEvent {
   });
 }
 
+class VerifyOTPEvent extends AuthenticationEvent {
+  final String email;
+  final String code;
+
+  VerifyOTPEvent({
+    required this.email,
+    required this.code,
+  });
+}
+
 class ResendOTPEvent extends AuthenticationEvent {
   final String email;
 

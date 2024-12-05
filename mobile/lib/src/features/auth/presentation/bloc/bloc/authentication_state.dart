@@ -12,7 +12,7 @@ final class AuthenticationLoading extends AuthenticationState {}
 
 final class AuthenticationError extends AuthenticationState {
   final String message;
-  AuthenticationError(this.message);
+  AuthenticationError({required this.message});
   @override
   List<Object?> get props => [message];
 }
@@ -22,19 +22,14 @@ final class AuthenticationSuccess extends AuthenticationState {}
 final class RegisterUserSuccess extends AuthenticationSuccess {
   final String email;
   RegisterUserSuccess(this.email);
+
+  @override
+  List<Object?> get props => [email];
 }
 
-final class ForgotPasswordSuccess extends AuthenticationSuccess {}
+final class ForgotPasswordSuccess extends AuthenticationState {}
 
-final class ResendMailSuccess extends AuthenticationSuccess {}
-
-class Empty extends AuthenticationState {}
-
-class Initial extends AuthenticationState {
-  Loading() {
-    print('loading...');
-  }
-}
+final class ResendMailSuccess extends AuthenticationState {}
 
 class LoggingIn extends AuthenticationState {
   final String username;
@@ -43,15 +38,6 @@ class LoggingIn extends AuthenticationState {
   LoggingIn({required this.username, required this.password});
   @override
   List<Object> get props => [username, password];
-}
-
-class LoggedIn extends AuthenticationState {
-  final String message;
-
-  LoggedIn({this.message = 'logged in'});
-
-  @override
-  List<Object> get props => [message];
 }
 
 class LoginSuccess extends AuthenticationState {
@@ -73,11 +59,12 @@ class LoginFailed extends AuthenticationState {
   List<Object> get props => [message];
 }
 
-class Error extends AuthenticationState {
-  final String message;
+final class VerifyOTPSuccess extends AuthenticationState {}
 
-  Error({required this.message});
+final class VerifyOTPFailure extends AuthenticationState {
+  final String message;
+  VerifyOTPFailure({required this.message});
 
   @override
-  List<Object> get props => [message];
+  List<Object?> get props => [message];
 }

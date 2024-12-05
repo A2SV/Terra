@@ -28,11 +28,11 @@ class _SignUpPageState extends State<SignUpPage> {
   bool passwordVisibility = true;
   bool passwordVisibility1 = true;
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -44,11 +44,18 @@ class _SignUpPageState extends State<SignUpPage> {
             context: context,
             message: state.message,
           );
-        } else if (state is AuthenticationSuccess) {
+        }
+        if (state is AuthenticationSuccess) {
+          CustomSnackBar.successSnackBar(
+            context: context,
+            message: "Please verify your email",
+          );
           switchScreen(
             context: context,
-            routeName: AppRoutes.signin,
-            popAndPush: true,
+            routeName: AppRoutes.verifyOtp,
+            pathParameters: {
+              "email": emailController.text.trim(),
+            },
           );
         }
       },
@@ -338,15 +345,5 @@ class _SignUpPageState extends State<SignUpPage> {
     confirmPasswordController.dispose();
 
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-    super.initState();
   }
 }

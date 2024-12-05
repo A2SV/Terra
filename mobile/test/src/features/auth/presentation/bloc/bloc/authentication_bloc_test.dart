@@ -5,6 +5,7 @@ import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/use_cases.dart';
+import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -17,11 +18,14 @@ class MockResendOTPUsecase extends Mock implements ResendOTPUsecase {}
 
 class MockLoginUseCase extends Mock implements LoginUseCase {}
 
+class MockVerifyOTPUseCase extends Mock implements VerifyOTPUseCase {}
+
 void main() {
   late RegisterWithEmailPasswordUseCase usecase;
   late ForgotPasswordUsecase forgotPasswordUsecase;
   late ResendOTPUsecase resendOTPUsecase;
   late LoginUseCase loginUseCase;
+  late VerifyOTPUseCase verifyOTPUseCase;
   late AuthenticationBloc bloc;
   final params = RegisterWithEmailPasswordUseCaseParams(
       firstName: "firstName",
@@ -36,11 +40,13 @@ void main() {
     forgotPasswordUsecase = MockForgotPasswordUsecase();
     resendOTPUsecase = MockResendOTPUsecase();
     loginUseCase = MockLoginUseCase();
+    verifyOTPUseCase = MockVerifyOTPUseCase();
     bloc = AuthenticationBloc(
       registerWithEmailPasswordUseCase: usecase,
       forgotPasswordUsecase: forgotPasswordUsecase,
       resendOTPUsecase: resendOTPUsecase,
       loginUseCase: loginUseCase,
+      verifyOTPUseCase: verifyOTPUseCase,
     );
     registerFallbackValue(params);
   });
@@ -92,7 +98,7 @@ void main() {
       )),
       expect: () => [
         AuthenticationLoading(),
-        AuthenticationError('Failed'),
+        AuthenticationError(message: 'Failed'),
       ],
       verify: (_) {
         verify(() => usecase(any())).called(1);

@@ -6,6 +6,7 @@ import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password_send_mail.dart';
 import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
+import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
@@ -25,6 +26,14 @@ final routes = <GoRoute>[
     name: AppRoutes.signup,
     path: '/${AppRoutes.signup}',
     builder: (context, state) => const SignUpPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.verifyOtp,
+    path: '/${AppRoutes.verifyOtp}/:email',
+    builder: (context, state) {
+      final email = state.pathParameters['email'];
+      return OTPage(email: email!);
+    },
   ),
   GoRoute(
     name: AppRoutes.signin,
@@ -104,7 +113,7 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.notFound}',
     builder: (context, state) => const Page404(),
   ),
-    GoRoute(
+  GoRoute(
     name: AppRoutes.chatPage,
     path: '/${AppRoutes.chatPage}',
     builder: (context, state) => const ChatPage(),
@@ -171,6 +180,7 @@ class AppRoutes {
   // static const String otp = 'otp';
   static const String home = '';
   static const String signup = 'signup';
+  static const String verifyOtp = 'verifyOtp';
   static const String onboarding = 'onboarding';
   static const String signin = 'signin';
   static const String notFound = 'notFound';
