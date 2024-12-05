@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
-import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
 
-  Future<OTPMatched> otp(String code, String email);
+  Future<void> verifyOtp(String code, String email);
   Future<void> registerWithEmailPassword({
     required String? firstName,
     required String? lastName,
@@ -29,7 +28,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel> login(String email, String password) async {
     try {
-      final response = await http.post(
+      final response = await _client.post(
         Uri.parse(AppStrings.loginUrl),
         body: jsonEncode({
           'email': email,
@@ -57,14 +56,29 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<OTPMatched> otp(String otp, String email) async {
-    final otpResponse = await _client.post(Uri.parse(AppStrings.otpEndPoint),
-        body: jsonEncode({'email': email, 'otp': otp}),
-        headers: {'Content-Type': ' application/json'});
-    if (otpResponse.statusCode != 200) {
-      throw OTPException(message: otpResponse.body);
+  Future<void> verifyOtp(String otp, String email) async {
+    try {
+      final response = await _client.post(
+        Uri.parse(AppStrings.verifyOtp),
+        body: jsonEncode({
+          'email': email,
+          'otp': otp,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        final responseData = jsonDecode(response.body);
+        throw ApiException(responseData['message']);
+      }
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
-    return const OTPMatched();
   }
 
   @override

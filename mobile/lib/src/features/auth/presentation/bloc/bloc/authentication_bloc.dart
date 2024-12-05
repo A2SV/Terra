@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
+import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 
 import '../../../../../core/entities/user_account.dart';
 import '../../../domain/domain.dart';
@@ -18,16 +19,19 @@ class AuthenticationBloc
   final ForgotPasswordUsecase forgotPasswordUsecase;
   final ResendOTPUsecase resendOTPUsecase;
   final LoginUseCase loginUseCase;
+  final VerifyOTPUseCase verifyOTPUseCase;
   AuthenticationBloc({
     required this.registerWithEmailPasswordUseCase,
     required this.forgotPasswordUsecase,
     required this.resendOTPUsecase,
     required this.loginUseCase,
+    required this.verifyOTPUseCase,
   }) : super(AuthenticationInitial()) {
     on<LoginUserEvent>(onLoginUserEvent);
     on<AuthenticationRegisterUserEvent>(authenticationRegisterUserEvent);
     on<ForgotPasswordEvent>(onForgotPasswordEvent);
     on<ResendOTPEvent>(onResendOTPEvent);
+    on<VerifyOTPEvent>(onVerifyOTPEvent);
   }
 
   FutureOr<void> onLoginUserEvent(
@@ -58,7 +62,7 @@ class AuthenticationBloc
             phoneNumber: event.phoneNumber,
             role: event.role));
     result.fold(
-      (failure) => emit(AuthenticationError(failure.message)),
+      (failure) => emit(AuthenticationError(message: failure.message)),
       (_) => emit(RegisterUserSuccess(event.email)),
     );
   }
@@ -72,7 +76,7 @@ class AuthenticationBloc
       email: event.email,
     ));
     result.fold(
-      (l) => emit(AuthenticationError(l.message)),
+      (l) => emit(AuthenticationError(message: l.message)),
       (r) => emit(ForgotPasswordSuccess()),
     );
   }
@@ -87,8 +91,24 @@ class AuthenticationBloc
       email: event.email,
     ));
     result.fold(
-      (l) => emit(AuthenticationError(l.message)),
+      (l) => emit(AuthenticationError(message: l.message)),
       (r) => emit(ResendMailSuccess()),
+    );
+  }
+
+  FutureOr<void> onVerifyOTPEvent(
+    VerifyOTPEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(AuthenticationLoading());
+
+    final result = await verifyOTPUseCase(OTPParams(
+      email: event.email,
+      code: event.code,
+    ));
+    result.fold(
+      (l) => emit(VerifyOTPFailure(message: l.message)),
+      (r) => emit(VerifyOTPSuccess()),
     );
   }
 }

@@ -31,7 +31,7 @@ void _initAuth() {
 
     //UseCases
     ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
-    ..registerLazySingleton(() => OTPUseCase(sl()))
+    ..registerLazySingleton(() => VerifyOTPUseCase(sl()))
     ..registerFactory(
       () => ForgotPasswordUsecase(authRepository: sl()),
     )
@@ -47,6 +47,7 @@ void _initAuth() {
         registerWithEmailPasswordUseCase: sl(),
         forgotPasswordUsecase: sl(),
         resendOTPUsecase: sl(),
+        verifyOTPUseCase: sl(),
       ),
     );
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/src/core/routes/routes.dart';
-import 'package:mobile/src/core/routes/routes_config.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
-import 'package:mobile/src/core/utils/custom_textformfield.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
