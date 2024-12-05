@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -6,24 +5,15 @@ import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_lis
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
 import 'package:mobile/src/features//dashboard/presentation/pages/widgets/add_listing_check_box.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/add_listing_search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/widgets/property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/dropdown_component.dart';
-import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:mobile/src/features/da'
     'shboard/presentation/widgets/filter_button.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../../../../gen/fonts.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/utils/utils.dart';
-import '../widgets/add_listing_search_input.dart';
 
 class AddListingHotel extends StatefulWidget {
   const AddListingHotel({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
@@ -36,16 +35,16 @@ class _SignInPageState extends State<SignInPage> {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) async {
         if (state is LoginSuccess) {
-          CustomSnackBar.successSnackBar(
-              context: context, message: 'Login success');
-          Navigator.pushReplacementNamed(context, '/dashboard');
+          switchScreen(
+            context: context,
+            routeName: AppRoutes.dashboard,
+            popAndPush: true,
+          );
         }
 
         if (state is LoginFailed) {
-          final Box userBox = await Hive.openBox('userData');
-          final String message =
-              await userBox.get('errormessage', defaultValue: 'error');
-          CustomSnackBar.errorSnackBar(context: context, message: message);
+          CustomSnackBar.errorSnackBar(
+              context: context, message: state.message);
         }
       },
       builder: (context, state) {
@@ -167,7 +166,7 @@ class _SignInPageState extends State<SignInPage> {
                         if (valid) {
                           context.read<AuthenticationBloc>().add(
                                 LoginUserEvent(
-                                  username: emailController.text,
+                                  email: emailController.text,
                                   password: passwordController.text,
                                 ),
                               );
@@ -211,7 +210,7 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(height: 4.h),
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,
@@ -225,7 +224,7 @@ class _SignInPageState extends State<SignInPage> {
                               ?.copyWith(
                                   color: AppCommonColors.fieldBorderColor),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,

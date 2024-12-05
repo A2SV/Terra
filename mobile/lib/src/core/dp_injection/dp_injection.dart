@@ -38,11 +38,17 @@ void _initAuth() {
     ..registerFactory(
       () => ResendOTPUsecase(authRepository: sl()),
     )
-    ..registerLazySingleton(() => AuthenticationBloc(
-          registerWithEmailPasswordUseCase: sl(),
-          forgotPasswordUsecase: sl(),
-          resendOTPUsecase: sl(),
-        ));
+    ..registerFactory(() => LoginUseCase(authRepository: sl()))
+
+    // Blocs
+    ..registerLazySingleton(
+      () => AuthenticationBloc(
+        loginUseCase: sl(),
+        registerWithEmailPasswordUseCase: sl(),
+        forgotPasswordUsecase: sl(),
+        resendOTPUsecase: sl(),
+      ),
+    );
 }
 
 void _initDashboard() {

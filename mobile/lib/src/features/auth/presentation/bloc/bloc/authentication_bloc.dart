@@ -3,17 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:mobile/src/core/network/network_info.dart';
-import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
-import 'package:http/http.dart' as http;
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 
 import '../../../../../core/entities/user_account.dart';
-import '../../../../../core/error/failure.dart';
-import '../../../data/repositories/auth_repository_impl.dart';
 import '../../../domain/domain.dart';
 
 part 'authentication_event.dart';
@@ -24,36 +17,32 @@ class AuthenticationBloc
   final RegisterWithEmailPasswordUseCase registerWithEmailPasswordUseCase;
   final ForgotPasswordUsecase forgotPasswordUsecase;
   final ResendOTPUsecase resendOTPUsecase;
+  final LoginUseCase loginUseCase;
   AuthenticationBloc({
     required this.registerWithEmailPasswordUseCase,
     required this.forgotPasswordUsecase,
     required this.resendOTPUsecase,
+    required this.loginUseCase,
   }) : super(AuthenticationInitial()) {
+    on<LoginUserEvent>(onLoginUserEvent);
     on<AuthenticationRegisterUserEvent>(authenticationRegisterUserEvent);
     on<ForgotPasswordEvent>(onForgotPasswordEvent);
     on<ResendOTPEvent>(onResendOTPEvent);
+  }
 
-    on<LoginUserEvent>((event, emit) async {
-      emit(AuthenticationLoading());
-      final Box userBox = await Hive.openBox('userData');
-      final LoginUseCase loginUseCase = LoginUseCase(AuthRepositoryImpl(
-          remoteDataSource: AuthRemoteDataSourceImpl(http.Client()),
-          network: NetworkImpl(InternetConnectionChecker())));
-      final login = await loginUseCase(
-          LoginParams(email: event.username, password: event.password));
+  FutureOr<void> onLoginUserEvent(
+    LoginUserEvent event,
+    Emitter<AuthenticationState> emit,
+  ) async {
+    emit(AuthenticationLoading());
+    final res = await loginUseCase(
+      LoginParams(email: event.email, password: event.password),
+    );
 
-      var output;
-      login.fold(
-          (failure) => output = failure, (loginReturn) => output = loginReturn);
-      if (output is LoginReturn) {
-        emit(LoginSuccess(user: output.user));
-      } else if (output is Failure) {
-        emit(LoginFailed());
-        userBox.put('errormessage', output.message);
-      }
-
-      emit(AuthenticationInitial());
-    });
+    res.fold(
+      (l) => emit(LoginFailed()),
+      (r) => emit(LoginSuccess(user: r)),
+    );
   }
 
   FutureOr<void> authenticationRegisterUserEvent(

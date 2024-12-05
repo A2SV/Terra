@@ -45,7 +45,11 @@ class _SignUpPageState extends State<SignUpPage> {
             message: state.message,
           );
         } else if (state is AuthenticationSuccess) {
-          Navigator.pushNamed(context, '/otp');
+          switchScreen(
+            context: context,
+            routeName: AppRoutes.signin,
+            popAndPush: true,
+          );
         }
       },
       builder: (context, state) {
@@ -291,7 +295,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 2),
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,
@@ -305,7 +309,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ?.copyWith(
                                   color: AppCommonColors.fieldBorderColor),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,

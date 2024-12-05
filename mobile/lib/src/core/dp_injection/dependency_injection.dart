@@ -5,6 +5,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mobile/src/core/network/network_info.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:mobile/src/features/auth/domain/domain.dart';
 import 'package:mobile/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_password_use_case.dart';

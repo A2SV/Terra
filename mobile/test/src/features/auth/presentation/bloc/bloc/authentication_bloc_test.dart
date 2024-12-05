@@ -15,10 +15,13 @@ class MockForgotPasswordUsecase extends Mock implements ForgotPasswordUsecase {}
 
 class MockResendOTPUsecase extends Mock implements ResendOTPUsecase {}
 
+class MockLoginUseCase extends Mock implements LoginUseCase {}
+
 void main() {
   late RegisterWithEmailPasswordUseCase usecase;
   late ForgotPasswordUsecase forgotPasswordUsecase;
   late ResendOTPUsecase resendOTPUsecase;
+  late LoginUseCase loginUseCase;
   late AuthenticationBloc bloc;
   final params = RegisterWithEmailPasswordUseCaseParams(
       firstName: "firstName",
@@ -32,10 +35,12 @@ void main() {
     usecase = MockRegisterWithEmailPassword();
     forgotPasswordUsecase = MockForgotPasswordUsecase();
     resendOTPUsecase = MockResendOTPUsecase();
+    loginUseCase = MockLoginUseCase();
     bloc = AuthenticationBloc(
       registerWithEmailPasswordUseCase: usecase,
       forgotPasswordUsecase: forgotPasswordUsecase,
       resendOTPUsecase: resendOTPUsecase,
+      loginUseCase: loginUseCase,
     );
     registerFallbackValue(params);
   });

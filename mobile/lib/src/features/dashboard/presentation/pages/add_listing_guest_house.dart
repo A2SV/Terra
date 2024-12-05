@@ -1,6 +1,3 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -8,85 +5,99 @@ import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_lis
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
 import 'package:mobile/src/features//dashboard/presentation/pages/widgets/add_listing_check_box.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/add_listing_search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
+
 import 'package:mobile/src/core/theme/common_color.dart';
-import 'package:mobile/src/core/widgets/property_feature_counter.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/add_listing_text_form_field.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/widgets/dropdown_component.dart';
-import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:mobile/src/features/da'
     'shboard/presentation/widgets/filter_button.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../../../../gen/fonts.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/utils/utils.dart';
-import '../widgets/add_listing_search_input.dart';
 
-class AddListingGuestHouse extends StatefulWidget{
+class AddListingGuestHouse extends StatefulWidget {
   const AddListingGuestHouse({super.key});
   @override
   State<AddListingGuestHouse> createState() => _AddListingGuestHouseState();
 }
 
-class Amenity{
-
+class Amenity {
   String name;
   late bool isSelected;
   Amenity({
     required this.name,
-    this.isSelected=false,
+    this.isSelected = false,
   });
-
 }
 
-class Feature{
-
+class Feature {
   String name;
   late bool isSelected;
   Feature({
     required this.name,
-    this.isSelected=false,
+    this.isSelected = false,
   });
-
 }
 
-class RadioItem{
-
+class RadioItem {
   String name;
   late String value;
   RadioItem({
     required this.name,
     required this.value,
   });
-
 }
-
 
 class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
   final _formKey = GlobalKey<FormState>();
   final _propertySizeController = TextEditingController();
-  String _furnishedStatus='None';
-  String _starRating='';
-  String _restaurantOnsite='';
-  SfRangeValues _values = const SfRangeValues(30,59);
-  List<Amenity> amenities=[Amenity(name: 'Wifi'),Amenity(name: 'Balcony'),Amenity(name: 'Security'),Amenity(name: 'Balcony'),Amenity(name: 'Free Parking'),Amenity(name: 'Kitchen'),Amenity(name: 'Air Conditioner')];
-  List<RadioItem> starRatings=[RadioItem(name: '1-star', value: '1-star'),RadioItem(name: '2-stars', value: '2-stars'),RadioItem(name: '3-stars', value: '3-stars'),RadioItem(name: '4-stars', value: '4-stars'),RadioItem(name: '5-stars', value: '5-stars')];
-  List<RadioItem> restaurantOnsite=[RadioItem(name: 'Yes', value: 'Yes'),RadioItem(name: 'No', value: 'No')];
-  List<RadioItem> furnishedStatus=[RadioItem(name: 'Full', value: 'Full'),RadioItem(name: 'Partial', value: 'Partial'),RadioItem(name: 'None', value: 'None')];
-  List<Feature> studentHousingAmenities=[Feature(name: 'Study Area'),Feature(name: 'Laundry Service'),Feature(name: 'Cleaning Service'),Feature(name: 'Shared Facilities'),Feature(name: 'Meal Plan')];
-  List<Feature> roomServices=[Feature(name: 'Laundry Service'),Feature(name: 'Cleaning Service')];
+  String _furnishedStatus = 'None';
+  String _starRating = '';
+  String _restaurantOnsite = '';
+  SfRangeValues _values = const SfRangeValues(30, 59);
+  List<Amenity> amenities = [
+    Amenity(name: 'Wifi'),
+    Amenity(name: 'Balcony'),
+    Amenity(name: 'Security'),
+    Amenity(name: 'Balcony'),
+    Amenity(name: 'Free Parking'),
+    Amenity(name: 'Kitchen'),
+    Amenity(name: 'Air Conditioner')
+  ];
+  List<RadioItem> starRatings = [
+    RadioItem(name: '1-star', value: '1-star'),
+    RadioItem(name: '2-stars', value: '2-stars'),
+    RadioItem(name: '3-stars', value: '3-stars'),
+    RadioItem(name: '4-stars', value: '4-stars'),
+    RadioItem(name: '5-stars', value: '5-stars')
+  ];
+  List<RadioItem> restaurantOnsite = [
+    RadioItem(name: 'Yes', value: 'Yes'),
+    RadioItem(name: 'No', value: 'No')
+  ];
+  List<RadioItem> furnishedStatus = [
+    RadioItem(name: 'Full', value: 'Full'),
+    RadioItem(name: 'Partial', value: 'Partial'),
+    RadioItem(name: 'None', value: 'None')
+  ];
+  List<Feature> studentHousingAmenities = [
+    Feature(name: 'Study Area'),
+    Feature(name: 'Laundry Service'),
+    Feature(name: 'Cleaning Service'),
+    Feature(name: 'Shared Facilities'),
+    Feature(name: 'Meal Plan')
+  ];
+  List<Feature> roomServices = [
+    Feature(name: 'Laundry Service'),
+    Feature(name: 'Cleaning Service')
+  ];
 
   late bool _isButtonDisabled;
 
-
   @override
-  void initState(){
-    _isButtonDisabled=false;
+  void initState() {
+    _isButtonDisabled = false;
   }
 
   @override
@@ -121,15 +132,15 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Add Listing',
-                            style:
-                            CustomTextStyles.kDefaultTextTheme(
-                                AppLightThemeColors.kBlackTextColor)
-                                .bodySmall?.copyWith(
-                              color: Colors.black,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: FontFamily.nunito,
-                            ),
+                            style: CustomTextStyles.kDefaultTextTheme(
+                                    AppLightThemeColors.kBlackTextColor)
+                                .bodySmall
+                                ?.copyWith(
+                                  color: Colors.black,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: FontFamily.nunito,
+                                ),
                           ),
                         ), //add listing
                         SizedBox(
@@ -138,21 +149,21 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                         Container(
                             width: 92.w,
                             child: RichText(
-                                text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text:'Almost finished',
-                                        style: CustomTextStyles.kDefaultTextTheme(AppCommonColors.mainBlueButton).titleLarge,
-                                      ),
-                                      TextSpan(
-                                        text:', complete your property listing',
-                                        style: CustomTextStyles.kDefaultTextTheme(Colors.black).titleLarge?.copyWith(fontWeight: FontWeight.w500),
-                                      ),
-
-                                    ]
-                                )
-                            )
-                        ),//almost finished
+                                text: TextSpan(children: [
+                              TextSpan(
+                                text: 'Almost finished',
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        AppCommonColors.mainBlueButton)
+                                    .titleLarge,
+                              ),
+                              TextSpan(
+                                text: ', complete your property listing',
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .titleLarge
+                                    ?.copyWith(fontWeight: FontWeight.w500),
+                              ),
+                            ]))), //almost finished
                         SizedBox(
                           height: 3.h,
                         ),
@@ -163,8 +174,10 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                               Container(
                                 child: Text(
                                   'Property Features',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
-
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                                 alignment: Alignment.centerLeft,
                               ),
@@ -175,36 +188,32 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
                                       child: AddListingPropertyFeatureCounter(
-                                          label: 'Bedroom(s)'
-                                      ),
+                                          label: 'Bedroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
                                       child: AddListingPropertyFeatureCounter(
-                                          label: 'Bathroom(s)'
-                                      ),
+                                          label: 'Bathroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
                                       child: AddListingPropertyFeatureCounter(
-                                          label: 'Washroom(s)'
-                                      ),
+                                          label: 'Washroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
                                       child: AddListingPropertyFeatureCounter(
-                                          label: 'Kitchen(s)'
-                                      ),
+                                          label: 'Kitchen(s)'),
                                     ),
                                   ],
                                 ),
                               )
                             ],
                           ),
-                        ),//property studentHousingAmenities
+                        ), //property studentHousingAmenities
                         SizedBox(
                           height: 2.h,
                         ),
@@ -219,16 +228,19 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                                 margin: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                               ),
                               AddListingTextFormField(
                                   inputController: _propertySizeController,
                                   width: 95.w,
-                                  labelText: 'Enter property size in square meters',
+                                  labelText:
+                                      'Enter property size in square meters',
                                   validator: (size) =>
-                                      CustomValidator.isNotEmpty(size ?? " ")
-                              ),
+                                      CustomValidator.isNotEmpty(size ?? " ")),
                             ],
                           ),
                         ),
@@ -242,17 +254,20 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Room Service',
-                            style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                            style:
+                                CustomTextStyles.kDefaultTextTheme(Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                         Container(
                           width: 92.w,
                           child: Wrap(
-                            children:roomServices.map((feature){
+                            children: roomServices.map((feature) {
                               return Container(
                                 width: 30.w,
                                 child: AddListingCheckBox(
-                                  isActive:feature.isSelected,
+                                  isActive: feature.isSelected,
                                   label: feature.name,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -274,38 +289,41 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                             Container(
                               child: Text(
                                 'Star Rating',
-                                style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               alignment: Alignment.centerLeft,
                             ),
                             Container(
                               width: 100.w,
-                              child:Wrap(
-                                children: starRatings.map(
-                                        (status){
-                                      return Container(
-                                        width: 25.w,
-                                        child: Row(
-                                          children: [
-                                            Radio<String>(
-                                              value: status.value,
-                                              groupValue: _starRating,
-                                              onChanged: (String? value) {
-                                                setState(() {
-                                                  _starRating = value!;
-                                                });
-                                              },
-                                              fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
-                                            ),
-                                            Text(status.name)
-                                          ],
+                              child: Wrap(
+                                children: starRatings.map((status) {
+                                  return Container(
+                                    width: 25.w,
+                                    child: Row(
+                                      children: [
+                                        Radio<String>(
+                                          value: status.value,
+                                          groupValue: _starRating,
+                                          onChanged: (String? value) {
+                                            setState(() {
+                                              _starRating = value!;
+                                            });
+                                          },
+                                          fillColor:
+                                              MaterialStateColor.resolveWith(
+                                                  (states) => AppCommonColors
+                                                      .mainBlueButton),
                                         ),
-                                      );
-                                    }
-
-                                ).toList(),
+                                        Text(status.name)
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                            ),//furnished status
+                            ), //furnished status
                           ],
                         ),
 
@@ -318,34 +336,37 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                             Container(
                               child: Text(
                                 'Restaurant on-site',
-                                style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
-                                children: restaurantOnsite.map(
-                                        (status){
-                                      return Row(
-                                        children: [
-                                          Radio<String>(
-                                            value: status.value,
-                                            groupValue: _restaurantOnsite,
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                _restaurantOnsite = value!;
-                                              });
-                                            },
-                                            fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
-                                          ),
-                                          Text(status.name)
-                                        ],
-                                      );
-                                    }
-
-                                ).toList(),
+                                children: restaurantOnsite.map((status) {
+                                  return Row(
+                                    children: [
+                                      Radio<String>(
+                                        value: status.value,
+                                        groupValue: _restaurantOnsite,
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            _restaurantOnsite = value!;
+                                          });
+                                        },
+                                        fillColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => AppCommonColors
+                                                    .mainBlueButton),
+                                      ),
+                                      Text(status.name)
+                                    ],
+                                  );
+                                }).toList(),
                               ),
-                            ),//furnished status
+                            ), //furnished status
                           ],
                         ),
 
@@ -358,34 +379,37 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                             Container(
                               child: Text(
                                 'Furnished Status',
-                                style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                style: CustomTextStyles.kDefaultTextTheme(
+                                        Colors.black)
+                                    .bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w600),
                               ),
                               alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
-                                children: furnishedStatus.map(
-                                        (status){
-                                      return Row(
-                                        children: [
-                                          Radio<String>(
-                                            value: status.value,
-                                            groupValue: _furnishedStatus,
-                                            onChanged: (String? value) {
-                                              setState(() {
-                                                _furnishedStatus = value!;
-                                              });
-                                            },
-                                            fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
-                                          ),
-                                          Text(status.name)
-                                        ],
-                                      );
-                                    }
-
-                                ).toList(),
+                                children: furnishedStatus.map((status) {
+                                  return Row(
+                                    children: [
+                                      Radio<String>(
+                                        value: status.value,
+                                        groupValue: _furnishedStatus,
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            _furnishedStatus = value!;
+                                          });
+                                        },
+                                        fillColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => AppCommonColors
+                                                    .mainBlueButton),
+                                      ),
+                                      Text(status.name)
+                                    ],
+                                  );
+                                }).toList(),
                               ),
-                            ),//furnished status
+                            ), //furnished status
                           ],
                         ),
                         SizedBox(
@@ -399,7 +423,10 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                               Container(
                                 child: Text(
                                   'Additional Amenities',
-                                  style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                                  style: CustomTextStyles.kDefaultTextTheme(
+                                          Colors.black)
+                                      .bodyMedium
+                                      ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
                                 alignment: Alignment.centerLeft,
                               ),
@@ -409,16 +436,19 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                               AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
-                              SizedBox(height: 1.h,),
+                              SizedBox(
+                                height: 1.h,
+                              ),
                               Wrap(
-                                children: amenities.map((amenity){
+                                children: amenities.map((amenity) {
                                   return Container(
                                     margin: EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {
                                         setState(() {
-                                          amenity.isSelected=!amenity.isSelected;
+                                          amenity.isSelected =
+                                              !amenity.isSelected;
                                         });
                                       },
                                       isSelected: amenity.isSelected ?? false,
@@ -443,7 +473,8 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                           disabled: _isButtonDisabled,
                           onPressed: () {
                             setState(() {
-                              _isButtonDisabled=_propertySizeController.text=='' ;
+                              _isButtonDisabled =
+                                  _propertySizeController.text == '';
                               AddListingBottomSheetModal(
                                 context: context,
                                 error: false,
@@ -454,13 +485,9 @@ class _AddListingGuestHouseState extends State<AddListingGuestHouse> {
                         SizedBox(
                           height: 2.h,
                         ),
-
                       ],
                     ),
-                  )
-              ),
-            )
-        )
-    );
+                  )),
+            )));
   }
 }

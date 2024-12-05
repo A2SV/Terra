@@ -6,7 +6,7 @@ import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> login(String username, String password);
+  Future<UserModel> login(String email, String password);
 
   Future<OTPMatched> otp(String code, String email);
   Future<void> registerWithEmailPassword({
@@ -27,12 +27,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._client);
 
   @override
-  Future<UserModel> login(String username, String password) async {
+  Future<UserModel> login(String email, String password) async {
     try {
       final response = await http.post(
         Uri.parse(AppStrings.loginUrl),
         body: jsonEncode({
-          'username': username,
+          'email': email,
           'password': password,
         }),
         headers: {
@@ -40,17 +40,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         },
       );
 
-      if (response.statusCode == 200) {
-        //final Box userBox=await Hive.openBox('userData');
-        //await userBox.put('isLoggedIn',   true);
-        final Map<String, dynamic> responseData = jsonDecode(response.body);
-        final Map<String, dynamic> user = responseData['user'];
-        return UserModel.fromJson(user);
-      } else {
+      if (response.statusCode != 200) {
         final responseData = jsonDecode(response.body);
         throw ApiException(responseData['message']);
       }
+
+      final responseData = jsonDecode(response.body);
+      final user = responseData['user'];
+      return UserModel.fromJson(user);
     } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
       throw ServerException(e.toString());
     }
   }
@@ -76,24 +77,29 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String role,
   }) async {
     try {
-      final result = await _client.post(Uri.parse(AppStrings.registerUrl),
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: jsonEncode({
-            'firstName': firstName,
-            'lastName': lastName,
-            'email': email,
-            'password': password,
-            'phoneNumber': phoneNumber,
-            'role': role,
-          }));
+      final response = await _client.post(
+        Uri.parse(AppStrings.registerUrl),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'password': password,
+          'phoneNumber': phoneNumber,
+          'role': role,
+        }),
+      );
 
-      if (result.statusCode != 201) {
-        final response = jsonDecode(result.body);
-        throw ApiException(response['message']);
+      if (response.statusCode != 201) {
+        final data = jsonDecode(response.body);
+        throw ApiException(data['message']);
       }
     } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
       throw ServerException(e.toString());
     }
   }
