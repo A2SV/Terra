@@ -36,4 +36,5 @@ class AppCommonColors {
   static const propertyTitleColor = Color(0xFF122D4D);
   static const locationTextColor = Color(0xFF415770);
   static const starRatingColor = Color(0xFFEEA651);
+  static const forgotPasswordMailBackground = Color.fromRGBO(214, 223, 255, 1);
 }

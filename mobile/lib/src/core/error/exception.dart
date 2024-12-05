@@ -21,3 +21,8 @@ class ResendOTPException implements Exception {
   @override
   String toString() => message;
 }
+
+class ServerException implements Exception {
+  final String message;
+  const ServerException(this.message);
+}

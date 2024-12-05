@@ -7,6 +7,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:mobile/src/core/constants/property_amenities.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class ListingsFilters extends StatefulWidget {
   const ListingsFilters({super.key});
 
@@ -38,7 +40,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
         surfaceTintColor: Colors.white,
         title: Text(
           'Filters',
-          style: TextStyle(
+          style:
+          CustomTextStyles.kDefaultTextTheme(
+              AppLightThemeColors.kBlackTextColor)
+              .bodySmall?.copyWith(
             color: Colors.black,
             fontWeight: FontWeight.w600,
             fontSize: 17.sp,
@@ -53,7 +58,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
             SizedBox(height: 2.h),
             Text(
               "Listing Type",
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 17.sp,
@@ -78,7 +86,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "For Rent",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -103,7 +114,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "For Sale",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -116,7 +130,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
             SizedBox(height: 2.h),
             Text(
               "Property Type",
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 17.sp,
@@ -141,7 +158,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "Commercial",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -166,7 +186,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "Residential",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -207,7 +230,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
             SizedBox(height: 2.h),
             Text(
               "Currency",
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 17.sp,
@@ -232,7 +258,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "GHC",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -257,7 +286,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "USD",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -287,7 +319,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
             SizedBox(height: 4.h),
             Text(
               "Price Frequency",
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 17.sp,
@@ -347,7 +382,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
             SizedBox(height: 2.h),
             Text(
               "Student Accommodation",
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 17.sp,
@@ -372,7 +410,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                     ),
                     Text(
                       "Yes",
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14.sp,
@@ -435,7 +476,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                 icon: const Icon(Icons.refresh),
                 label: Text(
                   "Reset all",
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     color: AppLightThemeColors.kLightTextColor,
                     fontFamily: "Nunito",
                     fontSize: 16.sp,
@@ -450,7 +494,10 @@ class _ListingsFiltersState extends State<ListingsFilters> {
                 ),
                 child: Text(
                   "Show Results",
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     fontFamily: "Nunito",
                     fontSize: 16.sp,
                     color: Colors.white,

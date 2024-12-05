@@ -36,17 +36,49 @@ using Infrastructure.StorageService;
 using WebApi.Filters;
 using Application.Features.Listings.Queries.Filtering;
 using Application.Features.Listings.Queries.GetAllListings;
+using System.Collections;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 var builder = WebApplication.CreateBuilder(args);
-DotNetEnv.Env.Load("../.env");
+
+string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+
+
+if (env == "Development")
+{
+    DotNetEnv.Env.Load("../.env.local");
+
+}
+else
+{
+    DotNetEnv.Env.Load("../.env");
+
+}
+
+
+
 var host = System.Environment.GetEnvironmentVariable("DB_HOST");
 var user = System.Environment.GetEnvironmentVariable("DB_USER");
 var password = System.Environment.GetEnvironmentVariable("DB_PASS");
 var database = System.Environment.GetEnvironmentVariable("DB_NAME");
 var port = System.Environment.GetEnvironmentVariable("DB_PORT");
 var pooling = System.Environment.GetEnvironmentVariable("DB_POOLING");
-var connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
+var connectionString = "";
+
+if (env == "Development")
+{
+    connectionString = $"Host={host}; User ID={user};Password={password};Server={host};Port={port};Database={database}; Pooling={pooling}";
+
+}
+else 
+{
+   connectionString = $"Host={host}; Database={database};Username={user};Password={password};";
+
+}
+
+Console.WriteLine(connectionString);
 var client_id = System.Environment.GetEnvironmentVariable("CLIENT_ID");
 var client_secret = System.Environment.GetEnvironmentVariable("CLIENT_SECRET");
 var jwt_key = System.Environment.GetEnvironmentVariable("JWT_KEY");
@@ -164,17 +196,26 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("myAppCors", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://terra-web-deployment.onrender.com/")
+
+        policy.WithOrigins("*")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
+
+        // policy.WithOrigins("https://terra-web-deployment.onrender.com/")
+        //         .AllowAnyHeader()
+        //         .AllowAnyMethod();
     });
 });
+
+builder.Logging.AddConsole()
+    .AddFilter("Microsoft.AspNetCore.Cors", LogLevel.Debug);
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
@@ -204,17 +245,20 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 
+app.UseRouting();
+// app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseCors("myAppCors");
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

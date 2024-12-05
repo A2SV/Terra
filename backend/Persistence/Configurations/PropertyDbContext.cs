@@ -15,7 +15,39 @@ namespace Persistence.Configurations
         public PropertyDbContext(DbContextOptions<PropertyDbContext> options) : base(options) 
         {
         }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Ignore<User>();
+            
+            // Configure Table-Per-Type (TPT) mappings
+            modelBuilder.Entity<Property>().ToTable("Properties");
+            modelBuilder.Entity<ResidentialProperty>().ToTable("ResidentialProperties");
+            modelBuilder.Entity<CommercialProperty>().ToTable("CommercialProperties");
+
+            modelBuilder.Entity<StudentHostel>().ToTable("StudentHostels");
+            modelBuilder.Entity<GuestHouse>().ToTable("GuestHouses");
+            modelBuilder.Entity<Hotel>().ToTable("Hotels");
+            modelBuilder.Entity<House>().ToTable("Houses");
+
+            modelBuilder.Entity<OfficeSpace>().ToTable("OfficeSpaces");
+            modelBuilder.Entity<Warehouse>().ToTable("Warehouses");
+            modelBuilder.Entity<Shop>().ToTable("Shops");
+            modelBuilder.Entity<EventSpace>().ToTable("EventSpaces");
+            
+            // modelBuilder.Entity<PropertyPhoto>()
+            //     .ToTable("PropertyPhotos")
+            //     .HasOne(p => p.Property)
+            //     .WithMany()
+            //     .HasForeignKey(p => p.PropertyId);
+            //
+            // modelBuilder.Entity<PropertyVideo>()
+            //     .ToTable("PropertyVideos")
+            //     .HasOne(p => p.Property)
+            //     .WithMany()
+            //     .HasForeignKey(p => p.PropertyId);
+        }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             foreach (var change in ChangeTracker.Entries<BaseEntity>())

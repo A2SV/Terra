@@ -14,7 +14,7 @@ const ShopFeatures: React.FC<{
   };
 
   return (
-    <div className="p-6 pt-0">
+    <div className="md:p-6 pt-0">
       <div className="flex">
         <div>
           <label className="block text-sm text-black font-semibold pr-5 pt-1">Display window</label>

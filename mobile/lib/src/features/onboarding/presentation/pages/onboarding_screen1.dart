@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/src/core/routes/routes.dart';
-// import 'package:mobile/src/core/theme/light_theme_colors.dart';
+// import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
 import 'dart:io';
+
+import '../../../../core/theme/text_theme.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
   const OnboardingScreen1({super.key, required this.onNext});
@@ -119,7 +121,10 @@ class OnboardingScreen1 extends StatelessWidget {
                 child: Text(
                   "Experience secure rentals with digital agreements and fraud prevention.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style:
+                  CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackTextColor)
+                      .bodySmall?.copyWith(
                     fontSize: 18.5.sp,
                     fontWeight: FontWeight.w500,
                     fontFamily: "Nunito",
@@ -146,7 +151,10 @@ class OnboardingScreen1 extends StatelessWidget {
                   onTap: onNext,
                   child: Text(
                     "Next",
-                    style: TextStyle(
+                    style:
+                    CustomTextStyles.kDefaultTextTheme(
+                        AppLightThemeColors.kBlackTextColor)
+                        .bodySmall?.copyWith(
                       fontSize: 17.sp,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Nunito",

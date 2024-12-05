@@ -37,7 +37,7 @@ const StudentHostelFeatures: React.FC<{
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <div>
         <label className="block text-sm text-black font-semibold">Room type</label>
         <div className="flex flex-wrap gap-2 mt-1">

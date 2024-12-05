@@ -3,6 +3,9 @@ import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/app_light_theme_colors.dart';
+import '../../../../core/theme/text_theme.dart';
+
 List<Map<String, dynamic>> pages = [
   {
     "image": 'assets/images/Rectangle 86.png',
@@ -48,10 +51,14 @@ class _CompareListingPageState extends State<CompareListingPage> {
                   bottom: 0,
                   child: Text(
                     'Compare Listings',
-                    style: TextStyle(
+                    style:
+                    CustomTextStyles.kDefaultTextTheme(
+                        AppLightThemeColors.kBlackTextColor)
+                        .bodySmall?.copyWith(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w700,
-                        color: Colors.black),
+                        color: Colors.black
+                    )
                   ),
                 ),
                 Positioned(
@@ -67,10 +74,13 @@ class _CompareListingPageState extends State<CompareListingPage> {
                       child: Text(
                         '2',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style:
+                        CustomTextStyles.kDefaultTextTheme(
+                            AppLightThemeColors.kBlackTextColor)
+                            .bodySmall?.copyWith(
                           color: Colors.white,
                           fontSize: 14.sp,
-                        ),
+                        )
                       ),
                     ),
                   ),
@@ -79,7 +89,10 @@ class _CompareListingPageState extends State<CompareListingPage> {
             ),
             Text(
               'Compare multiple listings side by side. Get a comprehensive overview of properties, including key details, amenities, and pricing.',
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 fontSize: 14.sp,
                 color: AppCommonColors.fieldBorderColor,
               ),
@@ -176,10 +189,14 @@ class _CompareListingPageState extends State<CompareListingPage> {
                             padding: EdgeInsets.symmetric(vertical: 2.h),
                             child: Text(
                               'Beautiful home located in ${pages[index]["location"]}',
-                              style: TextStyle(
+                              style:
+                              CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                                  .bodySmall?.copyWith(
                                   fontSize: 18.3.sp,
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.black),
+                                  color: Colors.black
+                              ),
                             ),
                           ),
                           Container(
@@ -199,16 +216,24 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Price',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
+
                                       ),
                                       Text(
                                         'GHC ${pages[index]["price"]}',
-                                        style: const TextStyle(
-                                            color: Colors.black),
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: Colors.black
+                                        ),
                                       )
                                     ],
                                   ),
@@ -230,17 +255,23 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Property Type',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
                                       ),
-                                      const Text(
+                                      Text(
                                         'Apartments',
-                                        style: TextStyle(
-                                            color: AppCommonColors
-                                                .fieldBorderColor),
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: AppCommonColors.fieldBorderColor
+                                        ),
                                       )
                                     ],
                                   ),
@@ -262,17 +293,23 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Bedrooms',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
                                       ),
-                                      const Text(
+                                      Text(
                                         '4',
-                                        style: TextStyle(
-                                            color: AppCommonColors
-                                                .fieldBorderColor),
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: AppCommonColors.fieldBorderColor
+                                        ),
                                       )
                                     ],
                                   ),
@@ -294,17 +331,23 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Bathrooms',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
                                       ),
-                                      const Text(
+                                      Text(
                                         '3',
-                                        style: TextStyle(
-                                            color: AppCommonColors
-                                                .fieldBorderColor),
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: AppCommonColors.fieldBorderColor
+                                        ),
                                       )
                                     ],
                                   ),
@@ -326,18 +369,24 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Area',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
                                       ),
-                                      const Text(
+                                      Text(
                                         'Accra, Ghana',
-                                        style: TextStyle(
-                                            color: AppCommonColors
-                                                .fieldBorderColor),
-                                      )
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: AppCommonColors.fieldBorderColor
+                                        ),
+                                        )
                                     ],
                                   ),
                                 ),
@@ -358,17 +407,24 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Property Size',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
+
                                       ),
-                                      const Text(
+                                      Text(
                                         '1400 ft2',
-                                        style: TextStyle(
-                                            color: AppCommonColors
-                                                .fieldBorderColor),
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
+                                            color: AppCommonColors.fieldBorderColor
+                                        ),
                                       )
                                     ],
                                   ),
@@ -390,11 +446,15 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     children: [
                                       Text(
                                         'Property Features',
-                                        style: TextStyle(
+                                        style:
+                                        CustomTextStyles.kDefaultTextTheme(
+                                            AppLightThemeColors.kBlackTextColor)
+                                            .bodySmall?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black,
                                           fontSize: 16.sp,
                                         ),
+
                                       ),
                                       Column(
                                         crossAxisAlignment:
@@ -402,24 +462,35 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                         children: [
                                           Text(
                                             'Administrative support,',
-                                            style: TextStyle(
+                                            style:
+                                            CustomTextStyles.kDefaultTextTheme(
+                                                AppLightThemeColors.kBlackTextColor)
+                                                .bodySmall?.copyWith(
                                                 fontSize: 15.sp,
                                                 color: AppCommonColors
-                                                    .fieldBorderColor),
+                                                    .fieldBorderColor
+                                            ),
                                           ),
                                           Text(
                                             'Allows Stove and Oven,',
-                                            style: TextStyle(
+                                            style:
+                                            CustomTextStyles.kDefaultTextTheme(
+                                                AppLightThemeColors.kBlackTextColor)
+                                                .bodySmall?.copyWith(
                                                 fontSize: 15.sp,
                                                 color: AppCommonColors
-                                                    .fieldBorderColor),
+                                                    .fieldBorderColor
+                                            ),
                                           ),
                                           Text(
                                             'Balcony, Lift',
-                                            style: TextStyle(
+                                            style:
+                                            CustomTextStyles.kDefaultTextTheme(
+                                                AppLightThemeColors.kBlackTextColor)
+                                                .bodySmall?.copyWith(
                                                 fontSize: 15.sp,
-                                                color: AppCommonColors
-                                                    .fieldBorderColor),
+                                                color: AppCommonColors.fieldBorderColor
+                                            ),
                                           ),
                                         ],
                                       )

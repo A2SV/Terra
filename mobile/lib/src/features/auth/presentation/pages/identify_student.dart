@@ -5,6 +5,8 @@ import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/student_identity_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/theme/text_theme.dart';
+
 class IdentifyStudent extends StatefulWidget {
   const IdentifyStudent({super.key});
 
@@ -45,7 +47,9 @@ class _IdentifyStudentState extends State<IdentifyStudent> {
                 child: Text(
                   "Are you a univeristy student?",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
+                  style:CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kBlackColor)
+                      .bodySmall?.copyWith(
                     fontWeight: FontWeight.w700,
                     fontFamily: "Nunito",
                     fontSize: 19.sp,
@@ -58,11 +62,13 @@ class _IdentifyStudentState extends State<IdentifyStudent> {
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 child: Text(
                   "Kindly let us know if you are studying in any of the univeristies in Ghana",
-                  style: TextStyle(
+                  style:CustomTextStyles.kDefaultTextTheme(
+                      AppLightThemeColors.kLightTextColor)
+                      .bodySmall?.copyWith(
                     fontFamily: "Nunito",
                     fontSize: 15.sp,
-                    color: AppLightThemeColors.kLightTextColor,
                   ),
+
                 ),
               ),
               SizedBox(height: 2.h),

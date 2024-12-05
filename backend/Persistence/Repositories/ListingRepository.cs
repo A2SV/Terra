@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Application.Contracts;
 using Application.Features.Listings.Dtos;
 using Domain.Entities;
@@ -19,6 +20,12 @@ namespace Persistence.Repositories
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync(CancellationToken.None);
+        }
+        
+        public async Task<Property?> GetPropertyByIdAsync(Guid propertyId)
+        {
+            return await _context.Properties
+                .FirstOrDefaultAsync(p => p.Id == propertyId);
         }
 
         public async Task<TEntity?> AddPropertyAsync<TEntity>(TEntity property) where TEntity : class
@@ -44,13 +51,13 @@ namespace Persistence.Repositories
 
         public async Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex, int pageSize)
         {
-            IQueryable<Property> query = _context.Properties;
+            IQueryable<Property> query = _context.Properties
+                .Include(p => p.PropertyLocation)
+                .Include(p => p.PaymentInformation);
             
             var count = await query.CountAsync();
 
             var properties = await query
-                .Include(p => p.PaymentInformation)
-                .Include(p => p.PropertyLocation)
                 .OrderBy(p => p.CreatedAt)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
@@ -117,8 +124,7 @@ namespace Persistence.Repositories
 
             return new PaginatedList<PropertyDto>(propertyDto, pageIndex, totalPages);
         }
-
-
+        
         public async Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,
             string? listingType, string? propertyType,

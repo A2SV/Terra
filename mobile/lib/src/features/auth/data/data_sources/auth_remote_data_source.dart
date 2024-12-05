@@ -1,18 +1,13 @@
 import 'dart:convert';
-
-import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
-import 'package:mobile/src/core/success/success.dart';
-
-import '../../../../core/error/failure.dart';
-import '../models/UserModel.dart';
+import 'package:mobile/src/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Either<Failure, UserModel>> login(String username, String password);
+  Future<UserModel> login(String email, String password);
 
-  Future<OTPMatched> otp(String code, String email);
+  Future<void> verifyOtp(String code, String email);
   Future<void> registerWithEmailPassword({
     required String? firstName,
     required String? lastName,
@@ -21,7 +16,8 @@ abstract class AuthRemoteDataSource {
     required String phoneNumber,
     required String role,
   });
-  Future<OTPSent> resendOtp(String email);
+  Future<void> forgotPassword(String email);
+  Future<void> resendOTP(String email);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -30,40 +26,59 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this._client);
 
   @override
-  Future<Either<Failure, UserModel>> login(
-      String username, String password) async {
-    // String url = 'http://terra.runasp.net/api/Auth/login';
+  Future<UserModel> login(String email, String password) async {
+    try {
+      final response = await _client.post(
+        Uri.parse(AppStrings.loginUrl),
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
 
-    final response = await http.post(Uri.parse(AppStrings.loginUrl),
-        body: jsonEncode({'username': username, 'password': password}),
-        headers: {'Content-Type': 'application/json'});
-    if (response.statusCode == 200) {
-      //final Box userBox=await Hive.openBox('userData');
-      //await userBox.put('isLoggedIn',   true);
-      print(response.body);
-      return Right(UserModel(username: username, password: password));
-    } else if (response.statusCode == 400) {
-      print(response.body);
-      return const Left(LoginFailure('User Login Failed'));
-    } else if (response.statusCode == 500) {
-      print(response.body);
-      return const Left(ServerFailure('Server Failure'));
-    } else {
-      print(response.body);
-      return const Left(NetworkFailure(
-          'Network Failure, try configuring your network settings'));
+      if (response.statusCode != 200) {
+        final responseData = jsonDecode(response.body);
+        throw ApiException(responseData['message']);
+      }
+
+      final responseData = jsonDecode(response.body);
+      final user = responseData['user'];
+      return UserModel.fromJson(user);
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<OTPMatched> otp(String otp, String email) async {
-    final otpResponse = await _client.post(Uri.parse(AppStrings.otpEndPoint),
-        body: jsonEncode({'email': email, 'otp': otp}),
-        headers: {'Content-Type': ' application/json'});
-    if (otpResponse.statusCode != 200) {
-      throw OTPException(message: otpResponse.body);
+  Future<void> verifyOtp(String otp, String email) async {
+    try {
+      final response = await _client.post(
+        Uri.parse(AppStrings.verifyOtp),
+        body: jsonEncode({
+          'email': email,
+          'otp': otp,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        final responseData = jsonDecode(response.body);
+        throw ApiException(responseData['message']);
+      }
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
-    return const OTPMatched();
   }
 
   @override
@@ -75,7 +90,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String phoneNumber,
     required String role,
   }) async {
-    final result = await _client.post(Uri.parse(AppStrings.registerUrl),
+    try {
+      final response = await _client.post(
+        Uri.parse(AppStrings.registerUrl),
         headers: {
           'Content-type': 'application/json',
         },
@@ -86,23 +103,72 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'password': password,
           'phoneNumber': phoneNumber,
           'role': role,
-        }));
+        }),
+      );
 
-    if (result.statusCode != 201) {
-      final response = jsonDecode(result.body);
-      throw ApiException(response['message']);
+      if (response.statusCode != 201) {
+        final data = jsonDecode(response.body);
+        throw ApiException(data['message']);
+      }
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<OTPSent> resendOtp(String email) async {
-    final otpResponse = await _client.post(
-        Uri.parse(AppStrings.resendOtpEndPoint),
-        body: jsonEncode({'email': email}),
-        headers: {'Content-Type': ' application/json'});
-    if (otpResponse.statusCode != 200) {
-      throw ResendOTPException(message: otpResponse.body);
+  Future<void> forgotPassword(String email) async {
+    try {
+      final result = await _client.post(
+        Uri.parse(AppStrings.forgotPasswordEndpoint),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+        }),
+      );
+
+      if (result.statusCode != 200) {
+        final response = jsonDecode(result.body);
+        throw ApiException(response['message']);
+      }
+    } catch (e) {
+      if (e is ApiException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
     }
-    return const OTPSent();
+  }
+
+  @override
+  Future<void> resendOTP(String email) async {
+    try {
+      final result = await _client.post(
+        Uri.parse(AppStrings.resendOTPEndpoint),
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+        }),
+      );
+
+      if (result.statusCode == 500) {
+        throw const ServerException("Internal Server Error");
+      }
+
+      if (result.statusCode != 200) {
+        final response = jsonDecode(result.body);
+        throw ResendOTPException(message: response['message']);
+      }
+    } catch (e) {
+      if (e is ServerException) {
+        throw ServerException(e.message);
+      }
+      throw ServerException(e.toString());
+    }
   }
 }

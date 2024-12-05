@@ -240,11 +240,11 @@ const GeneralInfo: React.FC = () => {
 
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
-      {error && <ErrorMessage message={error}></ErrorMessage>}
+      {error && <ErrorMessage message={error} onClose={() => setError("")}></ErrorMessage>}
       {!error && successMessage && <SuccessMessage message={successMessage}></SuccessMessage>}
-      <div className="w-full lg:w-1/2 px-9 lg:mb-16">
-        <p className="text-black font-bold text-lg mb-2">General Info</p>
-        <div className="border border-gray-300 p-6">
+      <div className="w-full lg:w-1/2 lg:px-9 px-2 lg:mb-16">
+        <p className="text-black font-bold text-lg mb-2 px-2 lg:px-0">General Info</p>
+        <div className="md:border md:border-gray-300 md:p-6 p-4">
           <form className="space-y-4">
             <div>
               <label className="block text-sm text-black font-semibold">Listing Title</label>
@@ -306,7 +306,7 @@ const GeneralInfo: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 mt-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
               <div>
                 <label className="block text-sm text-black font-semibold">Price</label>
                 <input
@@ -397,9 +397,9 @@ const GeneralInfo: React.FC = () => {
               ></textarea>
             </div>
 
-            <div className="mt-10">
+            <div className="mt-10 ">
               <h2 className="text-black font-bold text-lg mb-2">Features</h2>
-              <div className="border border-gray-300">
+              <div className="md:border md:border-gray-300">
                 {type === "Residential" ? (
                   <ResidentialSpecific handleInputChange={handleInputChange} />
                 ) : (
@@ -411,7 +411,7 @@ const GeneralInfo: React.FC = () => {
                 {type === "Commercial" && CommercialFeatureComponent && (
                   <CommercialFeatureComponent handleInputChange={handleInputChange} />
                 )}
-                <div className="p-6 pt-0">
+                <div className="md:p-6 md:pt-0 mt-5">
                   <label className="block text-sm text-black font-semibold">Amenities</label>
                   <input
                     type="text"
@@ -446,7 +446,7 @@ const GeneralInfo: React.FC = () => {
         </div>
       </div>
       <div className="w-full lg:w-1/2">
-        <div className="mb-10">
+        <div className="mb-10 px-2 lg:px-0">
           <ImageSelector handleInputChange={handleInputChange} />
         </div>
         <div className="mt-20 lg:mt-0">

@@ -3,6 +3,7 @@ import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/widgets/skip_button.dart';
 import 'package:mobile/src/features/onboarding/presentation/widgets/page_indicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../../core/theme/text_theme.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   final VoidCallback onBack;
@@ -79,7 +80,10 @@ class OnboardingScreen3 extends StatelessWidget {
                         child: Text(
                           "Easily find and connect with roommates to share your rental costs.",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style:
+                          CustomTextStyles.kDefaultTextTheme(
+                              Colors.white)
+                              .bodySmall?.copyWith(
                             color: Colors.white,
                             fontSize: 19.sp,
                             fontWeight: FontWeight.w600,
@@ -107,7 +111,10 @@ class OnboardingScreen3 extends StatelessWidget {
                           },
                           child: Text(
                             "Get started",
-                            style: TextStyle(
+                            style:
+                            CustomTextStyles.kDefaultTextTheme(
+                                Colors.white)
+                                .bodySmall?.copyWith(
                               color: Colors.white,
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w600,

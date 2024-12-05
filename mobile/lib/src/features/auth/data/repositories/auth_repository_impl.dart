@@ -2,13 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/network/network_info.dart';
-import 'package:mobile/src/core/success/success.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
-import 'package:mobile/src/features/auth/domain/entities/login_return_entity.dart';
-
-import '../../../../core/entities/user_account.dart';
+import 'package:mobile/src/features/auth/data/models/user_model.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../models/UserModel.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
@@ -19,23 +15,20 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.network,
   });
   @override
-  Future<Either<Failure, LoginReturn>> login(
-      String email, String password) async {
-    Either<Failure, UserModel> response =
-        await remoteDataSource.login(email, password);
-
-    var output;
-    response.fold(
-        (failure) => output = failure,
-        (usermodel) => output = LoginReturn(
-            user: UserAccount(
-                username: usermodel.username, password: usermodel.password),
-            token: ''));
-
-    if (output is LoginReturn) {
-      return Right(output);
+  Future<Either<Failure, UserModel>> login(
+    String email,
+    String password,
+  ) async {
+    if (await network.isConnected) {
+      try {
+        final response = await remoteDataSource.login(email, password);
+        return right(response);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
+      }
     } else {
-      return Left(output);
+      return const Left(NetworkFailure(
+          'No internet connection. Check Your Internet Connection'));
     }
   }
 
@@ -46,12 +39,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, OTPMatched>> otp(String code, String email) async {
+  Future<Either<Failure, void>> verifyOtp(String code, String email) async {
     try {
-      final otp = await remoteDataSource.otp(code, email);
+      final otp = await remoteDataSource.verifyOtp(code, email);
       return Right(otp);
-    } catch (e) {
-      return Left(OTPFailure(e.toString()));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
     }
   }
 
@@ -74,12 +67,14 @@ class AuthRepositoryImpl implements AuthRepository {
             phoneNumber: phoneNumber,
             role: role);
         return Right(result);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
-      return const Left(NetworkFailure(
-          'No internet connection. Check Your Internet Connection'));
+      return const Left(
+        NetworkFailure(
+            'No internet connection. Check Your Internet Connection'),
+      );
     }
   }
 
@@ -90,18 +85,36 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, OTPSent>> resendOtp(String email) async {
+  Future<Either<Failure, void>> resetPassword(String password) {
+    // TODO: implement resetPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> forgotPassword(String email) async {
     try {
-      final otp = await remoteDataSource.resendOtp(email);
-      return Right(otp);
-    } catch (e) {
-      return Left(ResendOTPFailure(e.toString()));
+      if (await network.isConnected) {
+        await remoteDataSource.forgotPassword(email);
+        return const Right(null);
+      } else {
+        return const Left(NetworkFailure('No internet connection'));
+      }
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, void>> resetPassword(String password) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
+  Future<Either<Failure, void>> resendOTP(String email) async {
+    try {
+      if (await network.isConnected) {
+        await remoteDataSource.resendOTP(email);
+        return const Right(null);
+      } else {
+        return const Left(NetworkFailure('No internet connection'));
+      }
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
   }
 }

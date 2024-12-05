@@ -8,7 +8,7 @@ import { HiOutlineLocationMarker, HiOutlineBookmark } from "react-icons/hi";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { RiExpandDiagonalLine } from "react-icons/ri";
 import Link from "next/link";
-import Carousel from "@/components/Carousel/Carousel";
+import Carousel from "@/components/Sliders/Carousel/Carousel";
 import { Listing } from "@/types/listingTypes";
 
 interface ListingCardProps {

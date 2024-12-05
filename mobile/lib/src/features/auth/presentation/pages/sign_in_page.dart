@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
@@ -12,6 +11,8 @@ import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_b
 import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_field.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/sign_in_with_google.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../core/theme/text_theme.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -33,18 +34,21 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (BuildContext context, AuthenticationState state) async {
-        print(state);
         if (state is LoginSuccess) {
           CustomSnackBar.successSnackBar(
-              context: context, message: 'Login success');
-          Navigator.pushReplacementNamed(context, '/dashboard');
+            context: context,
+            message: "User login successful",
+          );
+          switchScreen(
+            context: context,
+            routeName: AppRoutes.dashboard,
+            popAndPush: true,
+          );
         }
 
         if (state is LoginFailed) {
-          final Box userBox = await Hive.openBox('userData');
-          final String message =
-              await userBox.get('errormessage', defaultValue: 'error');
-          CustomSnackBar.errorSnackBar(context: context, message: message);
+          CustomSnackBar.errorSnackBar(
+              context: context, message: state.message);
         }
       },
       builder: (context, state) {
@@ -86,14 +90,18 @@ class _SignInPageState extends State<SignInPage> {
                       'Sign In',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppLightThemeColors.kBlackColor), //black
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppLightThemeColors.kBlackColor,
+                      ),
                     ),
-                    const Text(
+                    Text(
                       'Welcome to the Terra family',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(fontSize: 16),
                     ),
                     SizedBox(height: 4.h),
                     AuthTextFormField(
@@ -123,12 +131,21 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     SizedBox(height: 3.h),
-                    Text(
-                      "Forgot password?",
-                      style: TextStyle(
-                        fontSize: 15.sp,
+                    GestureDetector(
+                      onTap: () => switchScreen(
+                        context: context,
+                        routeName: AppRoutes.forgotPassword,
                       ),
-                      textAlign: TextAlign.end,
+                      child: Text(
+                        "Forgot password?",
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                              fontSize: 15.sp,
+                            ),
+                        textAlign: TextAlign.end,
+                      ),
                     ),
                     SizedBox(height: 5.h),
                     CustomButton(
@@ -154,12 +171,11 @@ class _SignInPageState extends State<SignInPage> {
                         if (valid) {
                           context.read<AuthenticationBloc>().add(
                                 LoginUserEvent(
-                                  username: emailController.text,
+                                  email: emailController.text,
                                   password: passwordController.text,
                                 ),
                               );
                         }
-                        ;
                       },
                       horizontalPadding: 0,
                       borderColor: Theme.of(context).colorScheme.onPrimary,
@@ -170,26 +186,36 @@ class _SignInPageState extends State<SignInPage> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
-                            fontSize: 15.sp,
-                            color: AppCommonColors.fieldBorderColor),
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                                fontSize: 15.sp,
+                                color: AppCommonColors.fieldBorderColor),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          switchScreen(
+                            context: context,
+                            routeName: AppRoutes.signup,
+                            popAndPush: true,
+                          );
                         },
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  fontSize: 15.sp,
+                                  color: AppCommonColors.defaultLink),
                         ),
                       ),
                     ]),
                     SizedBox(height: 4.h),
-                    const Row(
+                    Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,
@@ -197,10 +223,13 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style: TextStyle(
-                              color: AppCommonColors.fieldBorderColor),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  color: AppCommonColors.fieldBorderColor),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,

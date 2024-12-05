@@ -7,7 +7,7 @@ namespace Domain.Entities
 {
     public class Property : BaseEntity
     {
-        [ForeignKey(nameof(Lister))]
+        [ForeignKey("ListerId")]
         public string ListerId { get; set; } = null!;
         [ForeignKey(nameof(PaymentInformation))]
         public Guid PaymentInformationId { get; set; }

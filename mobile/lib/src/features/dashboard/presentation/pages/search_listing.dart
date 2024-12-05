@@ -6,6 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../gen/fonts.gen.dart';
+import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/theme/text_theme.dart';
 
 List<String> _cachedTexts = [];
@@ -90,7 +91,10 @@ class _SearchListingPageState extends State<SearchListingPage> {
                     margin: EdgeInsets.all(5.w),
                     child: Text(
                       'Recently Viewed',
-                      style: TextStyle(
+                      style:
+                      CustomTextStyles.kDefaultTextTheme(
+                          AppLightThemeColors.kBlackTextColor)
+                          .bodySmall?.copyWith(
                         color: Colors.black,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
@@ -195,7 +199,10 @@ class _SearchListingPageState extends State<SearchListingPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Recent Searches',
-                style: TextStyle(
+                style:
+                CustomTextStyles.kDefaultTextTheme(
+                    AppLightThemeColors.kBlackTextColor)
+                    .bodySmall?.copyWith(
                   color: Colors.black,
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
@@ -215,7 +222,10 @@ class _SearchListingPageState extends State<SearchListingPage> {
             alignment: Alignment.centerLeft,
             child: Text(
               'Recent Searches',
-              style: TextStyle(
+              style:
+              CustomTextStyles.kDefaultTextTheme(
+                  AppLightThemeColors.kBlackTextColor)
+                  .bodySmall?.copyWith(
                 color: Colors.black,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
