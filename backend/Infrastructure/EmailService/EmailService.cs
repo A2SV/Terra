@@ -1,41 +1,37 @@
 using Application.Contracts;
-using System.Net.Mail;
-using System.Net;
+using RestSharp;
 
 namespace Infrastructure.EmailService
 {
     public class EmailService : IEmailService
-    
     {
         public async Task SendEmailAsync(string to, string subject, string body)
         {
-            var smtpClient = new SmtpClient
-            {
-                Host = System.Environment.GetEnvironmentVariable("SMTP_SERVER"),
-                Port = int.Parse(System.Environment.GetEnvironmentVariable("SMTP_PORT")),
-                EnableSsl = true,
-                Credentials = new NetworkCredential(System.Environment.GetEnvironmentVariable("SMTP_USERNAME"), System.Environment.GetEnvironmentVariable("SMTP_PASSWORD")),
-            };
+            var apiKey = Environment.GetEnvironmentVariable("MAILGUN_API_KEY");
+            var domain = Environment.GetEnvironmentVariable("MAILGUN_DOMAIN");
 
-            var mailMessage = new MailMessage
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(domain))
             {
-                From = new MailAddress(System.Environment.GetEnvironmentVariable("SENDER_EMAIL")),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            };
-
-            mailMessage.To.Add(to);
-
-            try
-            {
-                await smtpClient.SendMailAsync(mailMessage);
+                throw new InvalidOperationException("Mailgun API key or domain is not configured.");
             }
-            catch (Exception ex)
+
+            var client = new RestClient($"https://api.mailgun.net/v3/{domain}");
+            var request = new RestRequest("messages", Method.Post);
+
+            request.AddHeader("Authorization", $"Basic {Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"api:{apiKey}"))}");
+            request.AddParameter("from", Environment.GetEnvironmentVariable("SENDER_EMAIL"));
+            request.AddParameter("to", to);
+            request.AddParameter("subject", subject);
+            request.AddParameter("html", body);
+
+            var response = await client.ExecuteAsync(request);
+
+            if (!response.IsSuccessful)
             {
-                throw new InvalidOperationException($"Error sending email: {ex.Message}");
+                throw new InvalidOperationException($"Error sending email: {response.ErrorMessage ?? response.Content}");
             }
         }
     }
 }
+
 
