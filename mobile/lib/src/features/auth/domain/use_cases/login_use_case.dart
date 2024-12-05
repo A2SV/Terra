@@ -5,13 +5,13 @@ import 'package:mobile/src/core/use_case/use_case.dart';
 import 'package:mobile/src/features/auth/domain/domain.dart';
 
 class LoginUseCase implements UseCase<UserAccount, LoginParams> {
-  LoginUseCase(
-    this._authRepository,
-  );
-  final AuthRepository _authRepository;
+  LoginUseCase({
+    required this.authRepository,
+  });
+  final AuthRepository authRepository;
   @override
   Future<Either<Failure, UserAccount>> call(LoginParams params) async {
-    return await _authRepository.login(params.email, params.password);
+    return await authRepository.login(params.email, params.password);
   }
 }
 

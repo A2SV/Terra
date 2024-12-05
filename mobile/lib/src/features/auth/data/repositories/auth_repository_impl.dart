@@ -24,8 +24,8 @@ class AuthRepositoryImpl implements AuthRepository {
       try {
         final response = await remoteDataSource.login(email, password);
         return right(response);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
       return const Left(NetworkFailure(
@@ -68,12 +68,14 @@ class AuthRepositoryImpl implements AuthRepository {
             phoneNumber: phoneNumber,
             role: role);
         return Right(result);
-      } on ApiException catch (e) {
-        return Left(APIFailure(e.message));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.message));
       }
     } else {
-      return const Left(NetworkFailure(
-          'No internet connection. Check Your Internet Connection'));
+      return const Left(
+        NetworkFailure(
+            'No internet connection. Check Your Internet Connection'),
+      );
     }
   }
 
