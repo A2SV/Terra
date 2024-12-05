@@ -1,6 +1,7 @@
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 class ListerModel extends Lister {
+  final bool isVerified;
   const ListerModel({
     required super.id,
     required super.userName,
@@ -26,6 +27,7 @@ class ListerModel extends Lister {
     required super.passwordResetToken,
     required super.createdAt,
     required super.updatedAt,
+    required this.isVerified,
   });
   factory ListerModel.fromJson(Map<String, dynamic> json) {
     return ListerModel(
@@ -55,6 +57,7 @@ class ListerModel extends Lister {
       passwordResetToken: json['passwordResetToken'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
+      isVerified: json['isVerified'] ?? false,
     );
   }
 
@@ -84,6 +87,7 @@ class ListerModel extends Lister {
       'passwordResetToken': passwordResetToken,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
+      'isVerified': isVerified,
     };
   }
 }
