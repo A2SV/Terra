@@ -1,13 +1,12 @@
-import React from "react";
-import Accordion from "@/components/General/Accordion";
+import Accordion from "./Accordion";
 import FAQImage from "@/public/woman.svg";
 import Image from "next/image";
 
 const FAQ = () => {
   return (
     <div className="w-screen h-auto flex justify-center">
-      <div className="w-10/12 md:w-8/12 flex flex-col ">
-        <div className="order-1 lg:order-2 w-full mb-10 lg:mb-0 flex flex-col items-center">
+      <div className="w-10/12 md:w-8/12 flex flex-col lg:flex-row lg:w-10/12">
+        <div className="order-1 lg:order-2 w-full mb-10 lg:mb-0 flex flex-col items-center lg:mr-10">
           <p className="text-lg text-terrablue font-montserrat mb-3 self-start">Got Questions</p>
           <h1 className="font-montserrat font-semibold text-gray-700 text-3xl mb-5 self-start">
             Frequently Asked Questions
@@ -20,7 +19,8 @@ const FAQ = () => {
             />
           </div>
         </div>
-        <div className="order-2 lg:order-2 divide-y space-y-2 flex flex-col border w-full md:mt-14">
+
+        <div className="order-2 lg:order-2 divide-y space-y-2 flex flex-col border w-full md:mt-14 overflow-hidden">
           <Accordion
             title="What types of properties can I list on Terra?"
             answer="You can list a variety of properties on Terra, including apartments, houses, students' hostels, hotels, guest houses, office spaces, shops, warehouses, and event spaces."

@@ -4,17 +4,17 @@ import Image from "next/image";
 const CreateListing = () => {
   return (
     <div className="bg-backgroundColor relative">
-      <div className="w-full flex flex-col md:flex-col justify-between items-center md:pl-12 md:pr-12 space-y-10 lg:pt-[30px] pb-[30px] md:pb-20">
-        <div className="flex flex-row relative items-center w-full">
+      <div className="w-full flex flex-col md:flex-col max-md:justify-between items-center md:pl-12 md:pr-12 space-y-10 lg:space-y-0 lg:justify-self-end pb-[30px] md:pb-20 lg:flex-row">
+        <div className="flex flex-row relative items-center w-full lg:w-1/2">
           <div className="z-20 relative">
-            <div className=" md:w-[650px] md:h-[500px] w-[300px] h-[400px] md:ml-10">
+            <div className=" md:w-[450px] lg:w-[600px] md:h-[500px] w-[300px] h-[400px] md:ml-10 lg:ml-0">
               <Image src="/createListing.svg" fill={true} alt="house" />
             </div>
           </div>
         </div>
-        <div className=" w-full flex flex-row items-center md:w-[650px] pl-10 md:pl-0 px-auto">
+        <div className=" w-full flex flex-row items-center md:w-[650px] lg:w-[100px] pl-10 md:pl-0 lg:ml-16 px-auto lg:top-0 lg:align-top">
           <div className="flex flex-col space-y-6 relative z-20">
-            <div className="md:w-[500px] w-[300px]">
+            <div className="md:w-[500px] w-[300px] lg:w-[300px]">
               <h1 className="text-[28px] font-bold text-normalTextColor font-nunito">
                 Got any property you want to sell or lease?
               </h1>
