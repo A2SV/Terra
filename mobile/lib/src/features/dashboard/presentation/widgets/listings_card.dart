@@ -12,28 +12,8 @@ class ListingsCard extends StatelessWidget {
   const ListingsCard({
     super.key,
     required this.listing,
-    // required this.startingPrice,
-    // required this.propertyType,
-    // required this.title,
-    // required this.location,
-    // required this.bedroomNumber,
-    // required this.washroomNumber,
-    // required this.landSize,
-    // required this.isPremium,
-    // required this.imageUrl,
-    // required this.profileImageUrl,
   });
   final ListingModel listing;
-  // final String imageUrl;
-  // final String profileImageUrl;
-  // final int startingPrice;
-  // final String propertyType;
-  // final String title;
-  // final String location;
-  // final int bedroomNumber;
-  // final int washroomNumber;
-  // final String landSize;
-  // final bool isPremium;
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +49,12 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      // image: listing.,//listing.[0],
-                      image: 'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',//listing.[0],
+                      image:
+                          'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
                   ),
-                  // if (isPremium)
-                  //   Positioned(
-                  //     right: 0,
-                  //     top: 0,
-                  //     width: 30.w,
-                  //     child: SvgPicture.asset('assets/svg/premium_banner.svg'),
-                  //   ),
                   Positioned(
                     left: 0,
                     bottom: 0,
@@ -109,7 +82,7 @@ class ListingsCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -121,20 +94,43 @@ class ListingsCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text(
-                          listing.title,
-                          style: TextStyle(fontSize: 15.sp, color: Colors.black),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                listing.title,
+                                style: TextStyle(
+                                    fontSize: 15.sp, color: Colors.black),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            if (listing.lister.isVerified) ...[
+                              SizedBox(
+                                  width: 1
+                                      .w), // Add some space between title and badge
+                              Image.asset(
+                                'assets/images/verify.png', // Replace with the path to your asset
+                                width: 2.2.h, // Adjust the size
+                                height: 2.2.h, // Adjust the size
+                              ),
+                            ],
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        width: 4.h,
-                        height: 4.h,
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: listing.lister.profilePictureUrl,
-                          fit: BoxFit.cover,
-                        ).circularClip(50),
-                      )
+                      Stack(
+                        children: [
+                          SizedBox(
+                            width: 4.h,
+                            height: 4.h,
+                            child: FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image: listing.lister.profilePictureUrl,
+                              fit: BoxFit.cover,
+                            ).circularClip(50),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -152,6 +148,13 @@ class ListingsCard extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
+                      ),
+                      Spacer(),
+                      // Added gray icon
+                      Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                        size: 18.sp,
                       ),
                     ],
                   ),
@@ -224,19 +227,12 @@ class ListingsCard extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                "assets/svg/eye.svg",
-                                height: 3.5.w,
-                              ),
-                            ),
                             SizedBox(width: 4.w),
                             InkWell(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                "assets/svg/columns.svg",
-                                height: 3.5.w,
+                                "assets/svg/repost.svg",
+                                height: 3.7.w,
                               ),
                             ),
                             SizedBox(width: 4.w),
