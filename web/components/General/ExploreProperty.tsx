@@ -43,13 +43,11 @@ const ExploreProperty: React.FC = () => {
     if (scrollContainerRef.current) {
       // const scrollAmount = scrollContainerRef.current.clientWidth;
       // Calculate the width of a single item
-      const itemWidth = scrollContainerRef.current.querySelector<HTMLDivElement>(
-        ".min-w-72"
-      )?.offsetWidth ?? 0;
+      const itemWidth =
+        scrollContainerRef.current.querySelector<HTMLDivElement>(".min-w-72")?.offsetWidth ?? 0;
 
       // Use the itemWidth or a fixed value for scrolling
       const scrollAmount = itemWidth + 64; // Adding gap-x value (16px) for consistency
-
 
       scrollContainerRef.current.scrollBy({
         left: direction === "right" ? scrollAmount : -scrollAmount,
@@ -86,7 +84,7 @@ const ExploreProperty: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative w-full max-sm:mt-8 pl-11 z-10">
+      <div className="relative w-full max-sm:mt-8 pl-11 lg:pl-20 z-10">
         <div className="relative flex flex-row h-full w-full md:w-1/2">
           <div className="absolute w-1 md:w-1.5 h-full bg-terrablue"></div>
           <div className="w-full flex flex-col z-10 justify-center items-start font-nunito ml-4">
@@ -98,7 +96,7 @@ const ExploreProperty: React.FC = () => {
         </div>
 
         <div
-          className="flex flex-row gap-x-16 relative mr-14 mt-10 md:mt-20 md:space-x-4 overflow-x-scroll scrollbar-hide"
+          className="flex flex-row gap-x-16 relative mr-14 mt-10 md:mt-20 lg:mt-14 md:space-x-4 overflow-x-scroll scrollbar-hide"
           ref={scrollContainerRef}
           onScroll={handleScroll}
         >

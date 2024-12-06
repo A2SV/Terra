@@ -42,7 +42,7 @@ const getTextFromMapping = (value: number, mapping: { [key: number]: string }): 
 
 const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
   return (
-    <div className="md:w-[400px] w-[345.75px]  h-[455px] md:h-[480px] my-4 me-auto ms-auto  flex justify-center ">
+    <div className="md:w-[400px] w-[345.75px]  h-[455px] md:h-[480px] my-4 me-auto ms-auto  flex justify-center lg:w-[400px]">
       <div className="md:w-[400px] w-[382.75px] h-[480px]   bg-white rounded-3xl  mx-2">
         <div className="picture relative overflow-x-hidden rounded-3xl">
           <Carousel images={item.propertyPhotos.map((photo) => photo.url)} />
