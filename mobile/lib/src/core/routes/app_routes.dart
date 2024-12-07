@@ -11,6 +11,7 @@ import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart'
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
@@ -87,6 +88,11 @@ final routes = <GoRoute>[
     name: AppRoutes.addListingContact,
     path: '/${AppRoutes.addListingContact}',
     builder: (context, state) => const AddListingContactPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.addListingLoc,
+    path: '/${AppRoutes.addListingLoc}',
+    builder: (context, state) => const AddListingLocPage(),
   ),
   GoRoute(
     name: AppRoutes.listingFilters,
@@ -195,7 +201,8 @@ class AppRoutes {
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
-  static const addListing = 'add_listing';
+  static const String addListingLoc = "add-listing-location";
+  static const String addListing = 'add_listing';
 
   static const String chatPage = 'chat-page';
   static const String savedPage = 'saved-page';

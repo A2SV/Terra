@@ -74,6 +74,10 @@ class _DashBoardViewState extends State<DashBoardView> {
                   height: 0.3.h,
                 ),
               ],
+            ).onPressed(
+              onTap: () {
+                switchScreen(context: context, routeName: AppRoutes.addListing);
+              },
             ),
             _buildNavItem(
               'assets/svg/tag.svg',
