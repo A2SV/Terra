@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import HamburgerMenu from "./Hamburger";
@@ -38,8 +38,28 @@ const Navbar = () => {
   const { data: session } = useSession();
   const userIsLoggedIn = !!session;
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="fixed pt-3 top-0 z-50 w-full bg-white pb-[16px] border-b-2">
+    <div
+      className={`fixed pt-3 top-0 z-50 w-full bg-white pb-[16px] ${isScrolled ? "border-b-2" : "border-none"}`}
+    >
       <div className="flex flex-row justify-between w-full h-12 py-2 lg:px-8 px-4 pt-4 ">
         <div className="flex items-center ">
           <Image src="/headerLogo.svg" alt="Logo" height={70} width={60} className="object-cover" />

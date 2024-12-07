@@ -41,19 +41,19 @@ const HomePage = () => {
     <div className="flex flex-col min-w-[100%] m-0 p-0">
       <Navbar />
       <HeroSection />
-      <div className="lg:mt-10  mt-0">
+      <div className="lg:mt-10  max-sm:-mt-36">
         <Select />
       </div>
 
-      <div className="flex justify-center items-center lg:mx-24 mt-[10px] mb-[50px] md:mt-12">
+      <div className="flex mx-auto lg:mx-4 mt-[10px] mb-[50px] md:mt-12 md:ml-6 lg:ml-24">
         {isLoading ? (
-          <div>
+          <div className="flex w-full justify-center items-center">
             <SpinnerComponent />
           </div>
         ) : error && showError ? (
           <ErrorMessage message="Error fetching listings" onClose={() => setShowError(false)} />
         ) : (
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap w-full md:gap-12">
             {listings.map((listing: Listing) => (
               <ListingCard key={listing.listerId} item={listing} />
             ))}
