@@ -4,30 +4,36 @@ import 'package:mobile/src/core/error/error_pages/404_page.dart';
 import 'package:mobile/src/core/error/error_pages/no_network_page.dart';
 import 'package:mobile/src/core/error/error_pages/server_error_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/forgot_password.dart';
+import 'package:mobile/src/features/auth/presentation/pages/forgot_password_send_mail.dart';
 import 'package:mobile/src/features/auth/presentation/pages/identify_student.dart';
 import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
-import 'package:mobile/src/features/dashboard/presentation/pages/compare_listing.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/saved_pages.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
 
 final routes = <GoRoute>[
   GoRoute(
-    name: AppRoutes.otp,
-    path: '/${AppRoutes.otp}',
-    builder: (context, state) => const OTPage(),
-  ),
-  GoRoute(
     name: AppRoutes.signup,
     path: '/${AppRoutes.signup}',
     builder: (context, state) => const SignUpPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.verifyOtp,
+    path: '/${AppRoutes.verifyOtp}/:email',
+    builder: (context, state) {
+      final email = state.pathParameters['email'];
+      return OTPage(email: email!);
+    },
   ),
   GoRoute(
     name: AppRoutes.signin,
@@ -45,6 +51,14 @@ final routes = <GoRoute>[
     builder: (context, state) => const ForgotPasswordScreen(),
   ),
   GoRoute(
+    name: AppRoutes.forgotPasswordEmailSent,
+    path: '/${AppRoutes.forgotPasswordEmailSent}/:email',
+    builder: (context, state) {
+      final email = state.pathParameters['email'];
+      return ForgotPasswordSendMail(email: email!);
+    },
+  ),
+  GoRoute(
     name: AppRoutes.dashboard,
     path: '/${AppRoutes.dashboard}',
     builder: (context, state) => const DashboardPage(),
@@ -58,6 +72,11 @@ final routes = <GoRoute>[
     name: AppRoutes.identifyStudentIdentity,
     path: '/${AppRoutes.identifyStudentIdentity}',
     builder: (context, state) => const IdentifyStudent(),
+  ),
+  GoRoute(
+    name: AppRoutes.addListing,
+    path: '/${AppRoutes.addListing}',
+    builder: (context, state) => const AddListingPage(),
   ),
   GoRoute(
     name: AppRoutes.addListingMedia,
@@ -95,9 +114,21 @@ final routes = <GoRoute>[
     builder: (context, state) => const Page404(),
   ),
   GoRoute(
-    name: AppRoutes.compareListings,
-    path: '/${AppRoutes.compareListings}',
-    builder: (context, state) => const CompareListingPage(),
+    name: AppRoutes.chatPage,
+    path: '/${AppRoutes.chatPage}',
+    builder: (context, state) => const ChatPage(),
+  ),
+
+  GoRoute(
+    name: AppRoutes.savedPage,
+    path: '/${AppRoutes.savedPage}',
+    builder: (context, state) => const SavedPage(),
+  ),
+
+  GoRoute(
+    name: AppRoutes.profilePage,
+    path: '/${AppRoutes.profilePage}',
+    builder: (context, state) => const ProfPage(),
   ),
 
   // GoRoute(
@@ -146,9 +177,10 @@ Page<dynamic> Function(BuildContext, GoRouterState) defaultPageBuilder<T>(
     };
 
 class AppRoutes {
-  static const String otp = 'otp';
+  // static const String otp = 'otp';
   static const String home = '';
   static const String signup = 'signup';
+  static const String verifyOtp = 'verifyOtp';
   static const String onboarding = 'onboarding';
   static const String signin = 'signin';
   static const String notFound = 'notFound';
@@ -156,11 +188,16 @@ class AppRoutes {
   static const String noNetwork = 'noNetwork';
   static const String passwordReset = 'password-reset';
   static const String forgotPassword = 'forgot-password';
+  static const String forgotPasswordEmailSent = 'forgot-password-email-sent';
   static const String dashboard = 'dashboard';
   static const String listingDetail = 'listing-detail';
   static const String listingFilters = 'listing-filters';
   static const String identifyStudentIdentity = "identify-student-identity";
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
-  static const String compareListings = "compare-listings";
+  static const addListing = 'add_listing';
+
+  static const String chatPage = 'chat-page';
+  static const String savedPage = 'saved-page';
+  static const String profilePage = 'profile-page';
 }

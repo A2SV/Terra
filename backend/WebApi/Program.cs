@@ -37,6 +37,7 @@ using WebApi.Filters;
 using Application.Features.Listings.Queries.Filtering;
 using Application.Features.Listings.Queries.GetAllListings;
 using System.Collections;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -195,15 +196,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("myAppCors", policy =>
-//    {
-//        policy.WithOrigins("http://localhost:3000")
-//                .AllowAnyHeader()
-//                .AllowAnyMethod();
-//    });
-//});
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
@@ -211,15 +203,19 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("myAppCors", policy =>
     {
+
         policy.WithOrigins("*")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
 
-        policy.WithOrigins("https://terra-web-deployment.onrender.com/")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+        // policy.WithOrigins("https://terra-web-deployment.onrender.com/")
+        //         .AllowAnyHeader()
+        //         .AllowAnyMethod();
     });
 });
+
+builder.Logging.AddConsole()
+    .AddFilter("Microsoft.AspNetCore.Cors", LogLevel.Debug);
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
@@ -257,6 +253,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 
 
 app.UseRouting();
+// app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseCors("myAppCors");
 app.UseAuthentication();

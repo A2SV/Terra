@@ -16,7 +16,7 @@ const OfficeSpaceFeatures: React.FC<{
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <div className="grid grid-cols-2 gap-4 mb-5">
         <div className="flex">
           <label className="block text-sm text-black font-semibold pr-5 pt-1" htmlFor="openPlan">

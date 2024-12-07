@@ -28,11 +28,11 @@ class _SignUpPageState extends State<SignUpPage> {
   bool passwordVisibility = true;
   bool passwordVisibility1 = true;
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -44,8 +44,19 @@ class _SignUpPageState extends State<SignUpPage> {
             context: context,
             message: state.message,
           );
-        } else if (state is AuthenticationSuccess) {
-          Navigator.pushNamed(context, '/otp');
+        }
+        if (state is AuthenticationSuccess) {
+          CustomSnackBar.successSnackBar(
+            context: context,
+            message: "Please verify your email",
+          );
+          switchScreen(
+            context: context,
+            routeName: AppRoutes.verifyOtp,
+            pathParameters: {
+              "email": emailController.text.trim(),
+            },
+          );
         }
       },
       builder: (context, state) {
@@ -86,26 +97,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       'Sign Up',
                       textAlign: TextAlign.center,
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w600,
-                          color: AppLightThemeColors.kBlackColor
-                      ),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w600,
+                              color: AppLightThemeColors.kBlackColor),
                     ),
                     Text(
                       'Join the Terra family',
                       textAlign: TextAlign.center,
-                      style:
-                      CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                          fontSize: 16
-                      ),
+                      style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(fontSize: 16),
                       //TextStyle(fontSize: 16)
-
                     ),
                     const SizedBox(height: 28),
                     Row(
@@ -196,23 +203,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           'I agree to the ',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              fontSize: 14.sp
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(fontSize: 14.sp),
                           //TextStyle(fontSize: 14.sp),
                         ),
                         Text(
                           'Terms of service and Privacy Policy',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                            fontSize: 14.sp,
-                            color: AppCommonColors.defaultLink,
-                          ),
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                fontSize: 14.sp,
+                                color: AppCommonColors.defaultLink,
+                              ),
 
                           //TextStyle(fontSize: 14.sp, color: AppCommonColors.defaultLink,),
                         )
@@ -269,32 +274,35 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         'Already have an account? ',
                         style: CustomTextStyles.kDefaultTextTheme(
-                            AppLightThemeColors.kBlackTextColor)
-                            .bodySmall?.copyWith(
-                            fontSize: 15.sp,
-                            color: AppCommonColors.fieldBorderColor),
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                                fontSize: 15.sp,
+                                color: AppCommonColors.fieldBorderColor),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/signin");
+                          switchScreen(
+                            context: context,
+                            routeName: AppRoutes.signin,
+                            popAndPush: true,
+                          );
                         },
                         child: Text(
                           'Sign In',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              fontSize: 15.sp,
-                              color: AppCommonColors.defaultLink
-                          ),
-
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  fontSize: 15.sp,
+                                  color: AppCommonColors.defaultLink),
                         ),
                       ),
                     ]),
                     const SizedBox(height: 2),
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,
@@ -302,14 +310,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Text(
                           '  Or  ',
-                          style:
-                          CustomTextStyles.kDefaultTextTheme(
-                              AppLightThemeColors.kBlackTextColor)
-                              .bodySmall?.copyWith(
-                              color: AppCommonColors.fieldBorderColor),
-
+                          style: CustomTextStyles.kDefaultTextTheme(
+                                  AppLightThemeColors.kBlackTextColor)
+                              .bodySmall
+                              ?.copyWith(
+                                  color: AppCommonColors.fieldBorderColor),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 0.5,
                             color: AppCommonColors.fieldBorderColor,
@@ -338,15 +345,5 @@ class _SignUpPageState extends State<SignUpPage> {
     confirmPasswordController.dispose();
 
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    confirmPasswordController = TextEditingController();
-    super.initState();
   }
 }

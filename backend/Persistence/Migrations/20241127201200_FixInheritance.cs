@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class First_Migration : Migration
+    public partial class FixInheritance : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -437,8 +437,7 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CommercialProperties_PropertyId",
                 table: "CommercialProperties",
-                column: "PropertyId",
-                unique: true);
+                column: "PropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventSpaces_CommercialPropertyId",
@@ -498,8 +497,7 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ResidentialProperties_PropertyId",
                 table: "ResidentialProperties",
-                column: "PropertyId",
-                unique: true);
+                column: "PropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shops_CommercialPropertyId",

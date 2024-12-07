@@ -62,11 +62,13 @@ class ListingModel extends ListingEntity {
         lastName: 'Doe',
         gender: 'Male',
         dateOfBirth: DateTime(1990, 1, 1),
-        profilePictureUrl: 'https://images.unsplash.com/photo-1502323777036-f29e3972d82f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D',
+        profilePictureUrl:
+            'https://images.unsplash.com/photo-1502323777036-f29e3972d82f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D',
         verificationToken: 'verificationtoken',
         passwordResetToken: 'passwordresettoken',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        isVerified: true,
       ),
       paymentInformation:
           // PaymentInformationModel.fromJson(json['paymentInformation']),
@@ -77,7 +79,7 @@ class ListingModel extends ListingEntity {
         currency: 0, // Assuming 0 represents a specific currency, e.g., USD
         paymentFrequency:
             0, // Assuming 0 represents a specific frequency, e.g., Monthly
-        cost: Random().nextInt(10000)*1.0,
+        cost: Random().nextInt(10000) * 1.0,
         negotiable: true,
       ),
       propertyLocation:

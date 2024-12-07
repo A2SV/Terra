@@ -14,7 +14,7 @@ const HotelFeatures: React.FC<{
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm text-black font-semibold">Star rating</label>

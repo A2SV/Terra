@@ -31,7 +31,7 @@ const HomePage = () => {
       setShowError(true);
       const timer = setTimeout(() => {
         setShowError(false);
-      }, 4000);
+      }, 10000);
 
       return () => clearTimeout(timer);
     }
@@ -51,7 +51,7 @@ const HomePage = () => {
             <SpinnerComponent />
           </div>
         ) : error && showError ? (
-          <ErrorMessage message="Error fetching listings" />
+          <ErrorMessage message="Error fetching listings" onClose={() => setShowError(false)} />
         ) : (
           <div className="flex flex-wrap justify-center">
             {listings.map((listing: Listing) => (

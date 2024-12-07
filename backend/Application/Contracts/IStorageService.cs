@@ -6,5 +6,5 @@ public interface IStorageService
 {
     Task<string> UploadFileAsync(IFormFile file, string fileType);
     Task<Stream> GetFileAsync (string fileUrl);
-    // Task DeleteFileAsync(string fileName, string fileType);
+    Task DeleteFileAsync(string fileUrl);
 }

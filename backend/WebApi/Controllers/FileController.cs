@@ -40,11 +40,15 @@ public class FileController : ControllerBase
         return File(fileStream, "application/octet-stream", fileName);
     }
 
-    // [HttpDelete("delete/{fileName}")]
-    // public async Task<IActionResult> DeleteFile(string fileName)
-    // {
-    //     await _storageService.DeleteFileAsync(fileName, [FromQuery] string fileType);
-    //     return NoContent();
-    // }
+    [HttpDelete("delete")]
+    public async Task<IActionResult> DeleteFile([FromQuery] string fileUrl)
+    {
+        if (string.IsNullOrEmpty(fileUrl))
+            return BadRequest("File URL is required");
+
+        await _storageService.DeleteFileAsync(fileUrl);
+        return NoContent();
+    }
+
     
 }

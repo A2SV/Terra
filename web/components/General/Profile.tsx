@@ -38,39 +38,38 @@ export function ProfilePic() {
 
   return (
     <div
-      className="relative flex justify-start cursor-pointer"
+      className="relative flex justify-start cursor-pointer "
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Avatar alt="User settings" img="/header_image.jpg" rounded />
       {isDropdownVisible && (
-        <div className="absolute top-full mt-2 z-10 w-48 bg-white border rounded-lg shadow-lg ">
-          <div className="dropdown-menu rounded-lg">
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-t-lg">
-              <FiPlusCircle className="mr-3" /> <p className="text-[14px]"> Add Listings </p>
-            </div>
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <FiFileText className="mr-3" />
-              <p className="text-[14px]"> My Listings </p>
-            </div>
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <FiMessageSquare className="mr-3" /> <p className="text-[14px]"> Messages </p>
-            </div>
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <MdOutlineFavoriteBorder className="mr-3" />{" "}
-              <p className="text-[14px]"> Favourites </p>
-            </div>
-            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              <GiSettingsKnobs className="mr-3" />
-              <p className="text-[14px]"> Settings </p>
-            </div>
-            <div className="border-t my-2"></div>
-            <Link href="/auth">
-              <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-b-lg">
-                <GrPowerShutdown className="mr-3" /> <p className="text-[14px]"> Sign out </p>
-              </div>
-            </Link>
+        <div className="absolute top-full mt-2 z-10 w-48 bg-white border rounded-lg shadow-lg -right-20  md:left-3">
+          <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-t-lg">
+            <FiPlusCircle className="mr-3" /> <p className="text-[14px]"> Add Listings </p>
           </div>
+          <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            <FiFileText className="mr-3" />
+            <p className="text-[14px]"> My Listings </p>
+          </div>
+          <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            <FiMessageSquare className="mr-3" /> <p className="text-[14px]"> Messages </p>
+          </div>
+          <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            <MdOutlineFavoriteBorder className="mr-3" /> <p className="text-[14px]"> Favourites </p>
+          </div>
+          <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            <GiSettingsKnobs className="mr-3" />
+            <p className="text-[14px]"> Settings </p>
+          </div>
+          <div className="border-t my-2"></div>
+          <Link href="/auth">
+            <div className="dropdown-item flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-b-lg">
+              <GrPowerShutdown className="mr-3" /> <p className="text-[14px]"> Sign out </p>
+            </div>
+          </Link>
+          {/* <div className="dropdown-menu rounded-lg">
+          </div> */}
         </div>
       )}
     </div>
