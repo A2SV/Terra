@@ -21,7 +21,12 @@ class HomepageCard extends StatelessWidget {
             offset: Offset(0, 3),
           ),
         ],
-        borderRadius: BorderRadius.circular(25.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(0),
+          topRight: Radius.circular(0),
+          bottomLeft: Radius.circular(25.0),
+          bottomRight: Radius.circular(25.0)
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

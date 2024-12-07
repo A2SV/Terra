@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: BlocConsumer<DashboardBloc, DashboardState>(
         listener: (context, state) {
           if (state is DashboardError) {
@@ -54,10 +55,10 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (Platform.isAndroid) SizedBox(height: 2.h),
+                  //if (Platform.isAndroid) SizedBox(height: 2.h),
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 2.w, right: 2.w, bottom: 1.3.h),
+                        EdgeInsets.only(bottom: 1.3.h,),
                     child: const HomepageCard(),
                   ),
                   Padding(
