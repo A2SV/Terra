@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
@@ -10,7 +9,7 @@ class HomepageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 29.h,
+      padding: EdgeInsets.fromLTRB(5.w, 2.h, 5.w, 3.5.h),
       decoration: BoxDecoration(
         color: AppCommonColors.cardColor,
         boxShadow: const [
@@ -23,15 +22,14 @@ class HomepageCard extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(25.0),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
                   height: 5.h,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -67,63 +65,59 @@ class HomepageCard extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 24.w,
-              ),
-              Stack(
-                children: [
-                  Container(
-                    width: 4.h,
-                    height: 4.h,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        'assets/images/notification_icon.png',
-                        height: 1.h,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 9.5,
-                    top: 9,
-                    child: Container(
-                      width: 1.h,
-                      height: 0.7.h,
-                      decoration: const BoxDecoration(
-                        color: AppCommonColors.mainBlueButton,
+                const Spacer(),
+                Stack(
+                  children: [
+                    Container(
+                      width: 4.5.h,
+                      height: 4.5.h,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.onPrimary,
                         shape: BoxShape.circle,
                       ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/images/notification_icon.png',
+                          height: 1.h,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 9.5,
+                      top: 9,
+                      child: Container(
+                        width: 1.h,
+                        height: 0.7.h,
+                        decoration: const BoxDecoration(
+                          color: AppCommonColors.mainBlueButton,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 2.5.w,
+                ),
+                Container(
+                  width: 4.5.h,
+                  height: 4.5.h,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/images/profile_pic.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                width: 2.5.w,
-              ),
-              Container(
-                width: 4.h,
-                height: 4.h,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  shape: BoxShape.circle,
                 ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/profile_pic.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-            child: Column(
+              ],
+            ),
+            SizedBox(height: 2.5.h),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -134,28 +128,27 @@ class HomepageCard extends StatelessWidget {
                       ),
                 ),
                 SizedBox(
-                  height: 1.h,
+                  height: 0.5.h,
                 ),
                 Text(
                   "Let's start exploring",
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.normal,
                         color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 18.sp,
                       ),
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: TopBarSearchInput(searchBackgroundColor: Colors.white,),
-          ),
-        ],
+            SizedBox(
+              height: 2.5.h,
+            ),
+            const TopBarSearchInput(
+              searchBackgroundColor: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-
