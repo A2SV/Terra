@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
+import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
@@ -57,14 +58,14 @@ class _HomePageState extends State<HomePage> {
                 const HomepageCard(),
                 Padding(
                   padding:
-                      EdgeInsets.only(left: 4.5.w, top: 1.3.h, bottom: 1.3.h),
+                      EdgeInsets.only(left: 4.5.w, top: 1.3.h, bottom: 2.h),
                   child: Text(
                     "Browse by Category",
                     style: CustomTextStyles.kDefaultTextTheme(
                             AppLightThemeColors.kBlackTextColor)
                         .bodySmall
                         ?.copyWith(
-                          color: Colors.black,
+                          color: AppCommonColors.homePageBlackColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 17.sp,
                         ),
@@ -163,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                               AppLightThemeColors.kBlackTextColor)
                           .bodySmall
                           ?.copyWith(
-                            color: Colors.black,
+                            color: AppCommonColors.homePageBlackColor,
                             fontWeight: FontWeight.w700,
                             fontSize: 17.sp,
                           ),
