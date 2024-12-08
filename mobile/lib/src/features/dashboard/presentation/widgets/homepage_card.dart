@@ -10,7 +10,7 @@ class HomepageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 29.h,
+      height: 36.h,
       decoration: BoxDecoration(
         color: AppCommonColors.cardColor,
         boxShadow: const [
@@ -31,6 +31,7 @@ class HomepageCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
