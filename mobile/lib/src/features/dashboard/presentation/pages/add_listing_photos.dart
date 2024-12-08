@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/utils.dart';
@@ -92,7 +93,10 @@ class _AddListingMediaPageState extends State<AddListingMediaPage> {
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.w),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle next button press
+                  switchScreen(
+                    context: context,
+                    routeName: AppRoutes.addListingContact,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 5.h),
@@ -113,6 +117,5 @@ class _AddListingMediaPageState extends State<AddListingMediaPage> {
     );
   }
 
-  void _onUploadTap() {
-  }
+  void _onUploadTap() {}
 }
