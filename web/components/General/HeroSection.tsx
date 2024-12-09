@@ -17,10 +17,10 @@ const HeroSection: React.FC = () => {
 
   return (
     <div className="relative mt-[100px]">
-      <div className="flex justify-center lg:h-screen ">
+      <div className="flex justify-center ">
         <div className="relative rounded-3xl flex w-full h-[690px]  mx-8 ">
-          <div className="flex flex-col absolute inset-0 z-40 lg:mx-[12%] mx-[3%] sm:w-[40%] h-1/3 mt-[508px] md:mt-[480px] md:w-[60%] md:mx-40 lg:w-[64%] lg:ml-[80px] lg:mt-[380px]">
-            <div className="flex w-[300px] h-[70px] bg-slate-200 rounded-t-3xl bg-opacity-80 md:w-[300px] lg:w-[270px]">
+          <div className="flex flex-col absolute inset-0 z-40 lg:mx-[12%]  w-full h-1/3 mt-[508px] md:mt-[480px]  lg:w-[64%] lg:ml-[80px] lg:mt-[380px] max-lg:items-center max-sm:mt-[350px]">
+            <div className="flex w-[300px] h-[70px] bg-slate-200 rounded-t-3xl bg-opacity-80 md:w-[300px] lg:w-[270px] md:-ml-[170px] lg:ml-0">
               <Link href="">
                 <div
                   onClick={() => handleItemClick("All")}
@@ -47,8 +47,8 @@ const HeroSection: React.FC = () => {
               </Link>
             </div>
 
-            <div className="absolute flex lg:items-center mt-[55px] w-[300px] h-[250px] bg-white rounded-b-3xl rounded-tr-none drop-shadow-xl flex-wrap md:w-[470px] md:rounded-3xl md:rounded-tl-none lg:w-[870px] lg:h-[120px] lg:rounded-3xl lg:rounded-tl-none lg:justify-center">
-              <div className="flex flex-wrap lg:justify-center items-center mx-4">
+            <div className="absolute flex lg:items-center mt-[55px] w-[300px] h-[250px] bg-white rounded-b-3xl rounded-tr-none drop-shadow-xl flex-wrap md:w-[470px] md:rounded-3xl md:rounded-tl-none lg:w-[870px] lg:h-[120px] lg:rounded-3xl lg:rounded-tl-none justify-center items-center mx-auto">
+              <div className="flex flex-wrap justify-center items-center mx-4 gap-y-5">
                 <div className="flex flex-col ml-3 md:ml-5 lg:mt-0 lg:ml-1 ">
                   <div className="text-sm font-nunito font-semibold md:text-lg lg:text-lg">
                     Property Type
@@ -103,7 +103,7 @@ const HeroSection: React.FC = () => {
 
                 <div className="h-12 bg-slate-400 border mx-9 mr-7 md:ml-12 lg:mr-0 lg:mx-10"></div>
 
-                <div className="flex flex-col md:ml-7 lg:mt-0 lg:ml-10">
+                <div className="flex flex-col md:ml-7 lg:mt-0 lg:ml-10 gap-y-2">
                   <div className="text-sm font-nunito font-semibold md:text-base lg:text-lg">
                     Your Budget
                   </div>
@@ -120,7 +120,7 @@ const HeroSection: React.FC = () => {
                   </div>
                 </div>
 
-                <button className="flex justify-center items-center w-[120px] h-[40px] hover:transform transition-transform duration-200 hover:scale-105 hover:bg-blue bg-terrablue border ml-20 rounded-xl text-xl text-white md:ml-8 md:w-[42px] md:h-[42px] lg:ml-14 lg:w-[42px] lg:h-[42px]">
+                <button className="flex justify-center items-center w-[120px] h-[40px] mb-0 hover:transform transition-transform duration-200 hover:scale-105 hover:bg-blue bg-terrablue border ml-20 max-sm:ml-0 rounded-xl text-xl text-white md:ml-8 md:w-[42px] md:h-[42px] lg:ml-14 lg:w-[42px] lg:h-[42px]">
                   <FiSearch />
                   <div className="mx-2 md:hidden">
                     <p className="font-nunito text-lg">Search</p>
@@ -150,7 +150,7 @@ const HeroSection: React.FC = () => {
             />
           </div>
 
-          <div className="w-full h-full absolute inset-0 z-10">
+          <div className="w-full h-full absolute inset-0 z-10 max-sm:h-[500px]">
             <Image
               src={HeroBack}
               alt="hero"
