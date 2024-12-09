@@ -94,7 +94,7 @@ class _AddListingPageState extends State<AddListingPage> {
                   children: [
                     SizedBox(height: 1.8.h),
                     Text(
-                      'Add Listin',
+                      'Add Listing',
                       style: CustomTextStyles.kDefaultTextTheme(
                               AppCommonColors.appBlack)
                           .displaySmall
@@ -110,7 +110,7 @@ class _AddListingPageState extends State<AddListingPage> {
                     ),
                     SizedBox(height: 0.3.h),
                     Text(
-                      'Property Listing?',
+                      'Property Listing',
                       style: CustomTextStyles.kDefaultTextTheme(
                               AppCommonColors.mainBlueButton)
                           .displaySmall
