@@ -149,13 +149,6 @@ class ListingsCard extends StatelessWidget {
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
                       ),
-                      Spacer(),
-                      // Added gray icon
-                      Icon(
-                        Icons.more_vert,
-                        color: Colors.grey,
-                        size: 18.sp,
-                      ),
                     ],
                   ),
                 ),
