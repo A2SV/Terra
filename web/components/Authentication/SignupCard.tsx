@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { env } from "next-runtime-env";
@@ -12,6 +11,8 @@ import AuthButton from "../Common/Auth/AuthButton";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState<boolean>(false);
+
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -43,15 +44,6 @@ const SignUpCard: React.FC = () => {
       ...prevUser,
       lastName: e.target.value,
     }));
-  };
-
-  const togglePasswordVisibility = (): void => {
-    setPasswordVisible(!passwordVisible);
-    if (!passwordVisible) {
-      setTimeout(() => {
-        setPasswordVisible(false);
-      }, 700);
-    }
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -138,16 +130,16 @@ const SignUpCard: React.FC = () => {
   };
 
   return (
-    <div className="">
+    <div className="flex justify-center items-center ">
       {!passwordError && message && (
         <ErrorMessage message={message} onClose={() => setMessage("")}></ErrorMessage>
       )}
       {!passwordError && !message && success && <SuccessMessage message={success}></SuccessMessage>}
 
-      <div className="bg-white w-full flex flex-col items-center justify-center">
+      <div className="bg-white w-full flex flex-col items-center justify-center ">
         <form
           onSubmit={handleSubmit}
-          className="w-5/6 md:w-4/6 flex flex-col items-center space-y-3"
+          className="w-5/6 md:w-4/6 lg:w-3/6 flex flex-col justify-center items-center  space-y-3  "
         >
           <div className="w-full">
             <p className="font-nunito text-sm font-normal">
@@ -160,10 +152,10 @@ const SignUpCard: React.FC = () => {
               First name
             </p>
             <input
-              className={`h-5 w-full py-4 font-light font-nunito text-sm rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
+              className={`h-5     w-full md:w-12/12 py-4 font-light font-nunito text-sm rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
-              placeholder="Enter Your First Name"
+              placeholder="John  "
               onChange={handleFirstNameChange}
             />
           </div>
@@ -173,10 +165,10 @@ const SignUpCard: React.FC = () => {
               Last name
             </p>
             <input
-              className={`h-5 w-full py-4 font-nunito font-light text-sm  rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
+              className={`h-5 w-full md:w-12/12 py-4 font-nunito font-light text-sm  rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3`}
               type="text"
               required
-              placeholder="Enter Your Last Name"
+              placeholder="Doe"
               onChange={handleLastNameChange}
             />
           </div>
@@ -186,12 +178,12 @@ const SignUpCard: React.FC = () => {
               Email Address
             </p>
             <input
-              className={`h-5 w-full text-sm   py-4 font-nunito font-light rounded-full border ${
+              className={`h-5 w-full md:w-12/12 text-sm   py-4 font-nunito font-light rounded-full border ${
                 emailError ? "border-red-500" : "border-terragray"
               } focus:outline-none focus:border-terrablue px-3`}
               type="email"
               required
-              placeholder="Enter Your Email Address"
+              placeholder="john@gmail.com"
               value={email}
               onChange={handleEmailChange}
             />
@@ -203,51 +195,46 @@ const SignUpCard: React.FC = () => {
             </p>
             <div className="w-full relative">
               <input
-                className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
+                className="h-5 w-full md:w-12/12 text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-6"
                 type={passwordVisible ? "text" : "password"}
                 required
-                placeholder="Enter Your Password"
                 value={password}
                 onChange={handlePasswordChange}
               />
-              <span
-                className="absolute font-nunito top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-sm text-eye"
-                role="button"
-                aria-label={passwordVisible ? "Hide password" : "Show password"}
-                onClick={togglePasswordVisibility}
-              >
-                {passwordVisible ? <IoEyeOff /> : <IoEye />}
-              </span>
+              <img
+                src={passwordVisible ? "/eye-on.svg" : "/eye-off.svg"}
+                alt="Toggle Password Visibility"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer h-5 w-5"
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              />
             </div>
           </div>
+
           <div className="details w-full">
             <p className="font-nunito text-sm font-normal mb-2 after:content-['*'] after:ml-0.5 after:text-red-500">
               Confirm Password
             </p>
             <div className="relative w-full">
               <input
-                className="h-5 w-full text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-12"
-                type={passwordVisible ? "text" : "password"}
+                className="h-5 w-full md:w-12/12 text-sm py-4 font-nunito font-light rounded-full border border-terragray focus:outline-none focus:border-terrablue px-3 pr-6"
+                type={confirmPasswordVisible ? "text" : "password"}
                 required
-                placeholder="Renter Your Password"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
-              <span
-                className="absolute font-nunito top-1/2 right-4 text-sm  transform -translate-y-1/2 cursor-pointer text-eye"
-                role="button"
-                aria-label={passwordVisible ? "Hide password" : "Show password"}
-                onClick={togglePasswordVisibility}
-              >
-                {passwordVisible ? <IoEyeOff /> : <IoEye />}
-              </span>
+              <img
+                src={confirmPasswordVisible ? "/eye-on.svg" : "/eye-off.svg"}
+                alt="Toggle Password Visibility"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer h-5 w-5"
+                onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+              />
             </div>
             {passwordError && (
-              <p className="text-red-500 font-nunito text-sm  mt-1">{passwordError}</p>
+              <p className="text-red-500 font-nunito text-sm mt-1">{passwordError}</p>
             )}
           </div>
 
-          <div className="lower-section font-nunito w-full flex flex-col items-center text-sm space-y-3">
+          <div className="lower-section font-nunito w-full flex flex-col items-center text-sm space-y-1 ">
             <AuthButton
               loading={loading}
               isButtonDisabled={isButtonDisabled}
@@ -258,13 +245,13 @@ const SignUpCard: React.FC = () => {
 
             <button
               type="button"
-              className="google w-3/4 md:w-5/12 h-10 rounded-full flex items-center justify-center border border-terragray"
+              className="google w-3/4 md:w-6/12 h-10 rounded-full flex items-center justify-center border border-terragray"
               onClick={() => {
                 signIn("google");
               }}
             >
               <FcGoogle className="text-2xl mr-2" />
-              <p className="font-nunito font-normal text-xs ">Continue with Google</p>
+              <p className="font-nunito font-normal text-[12px] ">Continue with Google</p>
             </button>
           </div>
         </form>
