@@ -45,8 +45,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       final responseData = jsonDecode(response.body);
+      final token = responseData["token"];
       final user = responseData['user'];
-      return UserModel.fromJson(user);
+      return UserModel.fromJson(user).copyWith(token: token);
     } catch (e) {
       if (e is ApiException) {
         throw ServerException(e.message);
