@@ -17,11 +17,11 @@ namespace Application.Features.Accounts.RegisterUser
         private readonly IOTPService _otpService;
         private readonly IOTPRepository _otpRepository;
         public RegisterUserCommandHandler(IAccountRepository userRepository, UserManager<User> userManager,
-            /*IOTPService otpService*/ IOTPRepository otpRepository)
+            IOTPService otpService, IOTPRepository otpRepository)
         {
             _userRepository = userRepository;
             _userManager = userManager;
-            //_otpService = otpService;
+            _otpService = otpService;
             _otpRepository = otpRepository;
         }
 
@@ -52,8 +52,8 @@ namespace Application.Features.Accounts.RegisterUser
                 return new Result<User>(false, ResultStatusCode.BadRequest, null, $"User creation failed: {errors}");
             }
 
-            //var totp = _otpService.GenerateOTP();
-            var otp = "123456";
+            var totp = _otpService.GenerateOTP();
+            var otp = totp.ComputeTotp();
             var otpEntry = new OtpEntry
             {
                 UserId = newUser.Id,
@@ -62,7 +62,7 @@ namespace Application.Features.Accounts.RegisterUser
             };
             await _otpRepository.AddOtpEntryAsync(otpEntry);
 
-            // await _otpService.SendOtpEmailAsync(newUser.Email, otp);
+            await _otpService.SendOtpEmailAsync(newUser.Email, otp);
 
             return new Result<User>(true, ResultStatusCode.Created, newUser, "Registration successful");
 
