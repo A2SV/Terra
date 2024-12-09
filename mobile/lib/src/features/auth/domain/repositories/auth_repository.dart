@@ -18,4 +18,5 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> resetPassword(String password);
   Future<Either<Failure, void>> forgotPassword(String email);
   Future<Either<Failure, void>> resendOTP(String email);
+  Future<Either<Failure, UserAccount>> getCacheUser();
 }

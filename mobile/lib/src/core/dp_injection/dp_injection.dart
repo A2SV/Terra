@@ -4,43 +4,52 @@ final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
   await Hive.initFlutter();
-  await Hive.openBox('userData');
+  await Hive.openBox('userData'); 
 
-  // dependencies that can be seen accross multiple features
+  // Register shared dependencies
+  _registerCoreDependencies();
+
+  // Initialize feature-specific dependencies
+  _initAuth();
+  _initDashboard();
+}
+
+void _registerCoreDependencies() {
   sl
-    // Internet Connection
     ..registerLazySingleton(() => NetworkImpl(sl()))
     ..registerLazySingleton(InternetConnectionChecker.new)
-    ..registerLazySingleton(http.Client.new);
-
-  _initAuth(); //Initialize the dependencies for the auth feature
-  _initDashboard(); //Initialize the dependencies for the dashboard feature
+    ..registerLazySingleton(http.Client.new)
+    ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
 }
 
 void _initAuth() {
   sl
-    ..registerLazySingleton<Box>(() => Hive.box('userData'))
-
-    //DataSources
+    // Data Sources
     ..registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImpl(sl()))
+    ..registerLazySingleton<AuthLocalDataSource>(
+        () => AuthLocalDataSourceImpl(sl<Box>())) 
 
-    //Repository
+    // Repository
     ..registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(remoteDataSource: sl(), network: sl()))
+        () => AuthRepositoryImpl(
+              remoteDataSource: sl(),
+              localDataSource: sl(), 
+              network: sl(),
+            ))
 
-    //UseCases
+    // Use Cases
     ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
     ..registerLazySingleton(() => VerifyOTPUseCase(sl()))
-    ..registerFactory(
-      () => ForgotPasswordUsecase(authRepository: sl()),
-    )
-    ..registerFactory(
-      () => ResendOTPUsecase(authRepository: sl()),
-    )
-    ..registerFactory(() => LoginUseCase(authRepository: sl()))
+    ..registerLazySingleton(() => LoginUseCase(authRepository: sl()))
+    ..registerLazySingleton(() => ForgotPasswordUsecase(authRepository: sl()))
+    ..registerLazySingleton(() => ResendOTPUsecase(authRepository: sl()))
+    ..registerLazySingleton(() => GetCachedUserUsecase(authRepository: sl()))
 
-    // Blocs
+    // Cubit
+    ..registerLazySingleton(() => AppUserCubit(localDataSource: sl())) 
+
+    // Bloc
     ..registerLazySingleton(
       () => AuthenticationBloc(
         loginUseCase: sl(),
@@ -48,29 +57,24 @@ void _initAuth() {
         forgotPasswordUsecase: sl(),
         resendOTPUsecase: sl(),
         verifyOTPUseCase: sl(),
+        getCachedUserUsecase: sl(),
       ),
     );
 }
 
 void _initDashboard() {
   sl
+    ..registerLazySingleton<DashboardRemoteDataSource>(
+        () => DashboardRemoteDataSourceImpl(sl<http.Client>()))
+    ..registerLazySingleton<DashboardRepository>(
+        () => DashboardRepositoryImpl(
+              remoteDataSource: sl<DashboardRemoteDataSource>(),
+              network: sl<NetworkImpl>(),
+            ))
+    ..registerLazySingleton(() => GetListingsUseCase(
+          dashboardRepository: sl<DashboardRepository>(),
+        ))
     ..registerLazySingleton(
-      () => DashboardRemoteDataSourceImpl(
-        sl<http.Client>(),
-      ),
-    )
-    ..registerLazySingleton(
-      () => DashboardRepositoryImpl(
-        remoteDataSource: sl<DashboardRemoteDataSourceImpl>(),
-        network: sl<NetworkImpl>(),
-      ),
-    )
-    ..registerLazySingleton(
-      () => GetListingsUseCase(
-        dashboardRepository: sl<DashboardRepositoryImpl>(),
-      ),
-    )
-    ..registerFactory(
       () => DashboardBloc(
         getListingsUseCase: sl<GetListingsUseCase>(),
       ),
