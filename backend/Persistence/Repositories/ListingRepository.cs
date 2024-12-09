@@ -407,6 +407,16 @@ namespace Persistence.Repositories
 
         }
 
+        public async Task<bool> RemovePropertyAmenityAsync(Guid propertyId, Guid amenityId)
+    {
+        var propertyAmenity = await _context.PropertyAmenities.FirstOrDefaultAsync(pa => pa.PropertyId == propertyId && pa.AmenityId == amenityId);
+
+        if (propertyAmenity == null) return false;
+
+        _context.PropertyAmenities.Remove(propertyAmenity);
+        return true;
+    }
+
     }
 }
 

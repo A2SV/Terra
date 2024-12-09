@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Application.Features.Listings.Dtos;
 using Application.Features.Listings.Queries.GetListingById;
 using Application.Features.Listings.Commands.UpdatePropertyMarketStatus;
+using Application.Features.Listings.Commands.UpdateListing;
 
 namespace WebApi.Controllers
 {
@@ -97,6 +98,18 @@ namespace WebApi.Controllers
 
             return Ok(new { Message = $"Property status updated to {newStatus}." });
         }
+
+        [HttpPut("{id}")]
+public async Task<IActionResult> UpdateListing(Guid id, [FromBody] UpdateListingCommand command)
+{
+    if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+        
+    command.PropertyId = id;
+    var result = await _mediator.Send(command);
+    
+    return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
+}
     }
 }
 
