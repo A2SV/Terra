@@ -68,3 +68,19 @@ final class VerifyOTPFailure extends AuthenticationState {
   @override
   List<Object?> get props => [message];
 }
+
+final class GetCachedUserSuccess extends AuthenticationState {
+  final UserAccount user;
+  GetCachedUserSuccess({required this.user});
+
+  @override
+  List<Object?> get props => [user];
+}
+
+final class GetCacheUserFailure extends AuthenticationState {
+  final String message;
+  GetCacheUserFailure({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}

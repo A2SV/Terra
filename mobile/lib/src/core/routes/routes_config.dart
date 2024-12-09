@@ -37,10 +37,11 @@ switchScreen({
 }
 
 class AppRouter extends StatelessWidget {
-  static final GoRouter router = createRoute();
+  final String location;
 
   AppRouter({
     super.key,
+    required this.location,
   }) {
     (context, state) => const MaterialPage(
           key: ValueKey('errorPage'),
@@ -60,13 +61,13 @@ class AppRouter extends StatelessWidget {
       theme: ThemeConfig().lightTheme,
       themeMode: ThemeMode.light,
       title: 'Terra',
-      routerConfig: router,
+      routerConfig: createRoute(),
     );
   }
 
-  static GoRouter createRoute() {
+  GoRouter createRoute() {
     return GoRouter(
-      initialLocation: '/${AppRoutes.onboarding}',
+      initialLocation: '/$location',
       routes: routes,
     );
   }

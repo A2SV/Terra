@@ -58,3 +58,5 @@ class ResendOTPEvent extends AuthenticationEvent {
     required this.email,
   });
 }
+
+class GetCachedUserEvent extends AuthenticationEvent {}
