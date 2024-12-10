@@ -16,9 +16,9 @@ import ListDescription from "@/components/Listing/ListDesc";
 import Review from "@/components/Listing/Review";
 // import ListingCard from "@/components/Listing/Cards/ListingCard";
 import ContactCard from "@/components/Listing/Cards/ContactCard";
-import background from "@/public/background.png";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-import ListingCard from "./Cards/ListingCard";
+
+
 const HeroListing = () => {
   const images = [
     "https://images.unsplash.com/photo-1522050212171-61b01dd24579?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Ds",
@@ -77,7 +77,7 @@ const HeroListing = () => {
           <DetailCarousel images={images} />
         </div>
         <ContactCard
-          agentImage={background}
+          agentImage="https://upload.wikimedia.org/wikipedia/commons/2/2d/African-Woman-Business-Woman-Young-Woman-Black-Woman-3439224.jpg"
           agentName="Brittany Watkins"
           agentListingsUrl="/listings"
         />
