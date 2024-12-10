@@ -56,7 +56,7 @@ namespace WebApi.Controllers
         public async Task<ActionResult<DetailedPropertyDto>> GetListingById([FromQuery] GetListingByIdQuery query)
         {
             var listing = await _mediator.Send(query);
-            
+
             return Ok(listing);
         }
 
@@ -74,17 +74,17 @@ namespace WebApi.Controllers
             string? priceFrequency = null,
             int? minPropertySize = null,
             int? maxPropertySize = null,
-            [FromQuery] List<string>? amenities = null                                     
+            [FromQuery] List<string>? amenities = null
             )
         {
-            var command = new FilterQuery(pageIndex, pageSize,listingType,propertyType,
-                subType,minPrice,maxPrice,priceFrequency,minPropertySize,maxPropertySize, amenities);
+            var command = new FilterQuery(pageIndex, pageSize, listingType, propertyType,
+                subType, minPrice, maxPrice, priceFrequency, minPropertySize, maxPropertySize, amenities);
 
             var listings = await _mediator.Send(command);
 
             return Ok(listings);
         }
-        
+
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> SetMarketStatus(Guid id, [FromQuery] PropertyMarketStatus newStatus)
         {
@@ -99,17 +99,22 @@ namespace WebApi.Controllers
             return Ok(new { Message = $"Property status updated to {newStatus}." });
         }
 
-        [HttpPut("{id}")]
-public async Task<IActionResult> UpdateListing(Guid id, [FromBody] UpdateListingCommand command)
-{
-    if (!ModelState.IsValid)
-        return BadRequest(ModelState);
-        
-    command.PropertyId = id;
-    var result = await _mediator.Send(command);
-    
-    return result.IsSuccess ? Ok(result) : StatusCode((int)result.StatusCode, result);
-}
+       [HttpPatch("{propertyId}")]
+        public async Task<IActionResult> UpdateListing(Guid propertyId, [FromBody] UpdateListingCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Set the PropertyId on the command. It won't show up in Swagger body due to [JsonIgnore]
+            command.PropertyId = propertyId;
+
+            var result = await _mediator.Send(command);
+
+            return result.IsSuccess 
+                ? Ok(result)
+                : StatusCode((int)result.StatusCode, result);
+        }
+
     }
 }
 

@@ -1,3 +1,7 @@
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 using Application.Contracts;
 using Application.Models.ApiResult;
@@ -6,12 +10,12 @@ using MediatR;
 
 namespace Application.Features.Listings.Commands.UpdateListing
 {
-    public class UpdateListingCommandHandler : IRequestHandler<UpdateListingCommand, Result<Property>>
+    public class UpdateListingHandler : IRequestHandler<UpdateListingCommand, Result<Property>>
     {
         private readonly IListingRepository _listingRepository;
         private readonly IAmenityRepository _amenityRepository;
 
-        public UpdateListingCommandHandler(
+        public UpdateListingHandler(
             IListingRepository listingRepository,
             IAmenityRepository amenityRepository)
         {
@@ -36,8 +40,8 @@ namespace Application.Features.Listings.Commands.UpdateListing
                     if (!string.IsNullOrEmpty(request.Description)) property.Description = request.Description;
                     if (request.ListingType.HasValue) property.ListingType = request.ListingType.Value;
                     if (request.PropertySize.HasValue) property.PropertySize = request.PropertySize.Value;
-                    if (request.AvailableStartDate.HasValue) property.AvailableStartDate = request.AvailableStartDate;
-                    if (request.AvailableEndDate.HasValue) property.AvailableEndDate = request.AvailableEndDate;
+                    if (request.AvailableStartDate.HasValue) property.AvailableStartDate = request.AvailableStartDate.Value;
+                    if (request.AvailableEndDate.HasValue) property.AvailableEndDate = request.AvailableEndDate.Value;
 
                     // Update payment information
                     if (property.PaymentInformation != null)
@@ -71,31 +75,37 @@ namespace Application.Features.Listings.Commands.UpdateListing
                             property.PropertyLocation.Latitude = request.Latitude.Value;
                     }
 
-                    // Handle amenities
+                    // Handle amenities addition
                     if (request.AddAmenities?.Any() == true)
                     {
-                        foreach (var amenityId in request.AddAmenities)
+                        foreach (var amenityIdString in request.AddAmenities)
                         {
-                            var amenity = await _amenityRepository.GetAmenityByIdAsync(amenityId);
-                            if (amenity != null)
+                            if (Guid.TryParse(amenityIdString, out var amenityId))
                             {
-                                await _listingRepository.AddPropertyAsync(new PropertyAmenity
+                                var amenity = await _amenityRepository.GetAmenityByIdAsync(amenityIdString);
+                                if (amenity != null)
                                 {
-                                    PropertyId = property.Id,
-                                    AmenityId = Guid.Parse(amenityId),
-                                    Property = property,
-                                    Amenity = amenity
-                                });
+                                    await _listingRepository.AddPropertyAsync(new PropertyAmenity
+                                    {
+                                        PropertyId = property.Id,
+                                        AmenityId = amenityId,
+                                        Property = property,
+                                        Amenity = amenity
+                                    });
+                                }
                             }
                         }
                     }
 
+                    // Handle amenities removal
                     if (request.RemoveAmenities?.Any() == true)
                     {
-                        // Add RemovePropertyAmenity method to IListingRepository and implement it
-                        foreach (var amenityId in request.RemoveAmenities)
+                        foreach (var amenityIdString in request.RemoveAmenities)
                         {
-                            await _listingRepository.RemovePropertyAmenityAsync(property.Id, Guid.Parse(amenityId));
+                            if (Guid.TryParse(amenityIdString, out var amenityId))
+                            {
+                                await _listingRepository.RemovePropertyAmenityAsync(property.Id, amenityId);
+                            }
                         }
                     }
 
