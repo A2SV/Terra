@@ -6,7 +6,7 @@ import { MdUnfoldMore } from "react-icons/md";
 
 const Review = () => {
   return (
-    <div className="">
+    <div className="flex flex-col w-full lg:w-8/12 bg-gray-50">
       <ReviewForm />
       <div className="flex flex-col lg:flex-row w-full items-center justify-between lg:p-12">
         <div className="flex mb-5 lg:mb-0 items-center">
@@ -17,7 +17,7 @@ const Review = () => {
         <div className="flex items-center">
           <p className="font-roboto text-sm font-light mr-2">Sort by:</p>
           <div className="flex cursor-pointer items-center">
-            <p className="text-xs lg:text-sm font-roboto font-light text-slate-400 md:mr-4 ">
+            <p className="text-xs lg:text-sm font-roboto font-light text-slate-400 lg:mr-4 ">
               Default Order{" "}
             </p>
             <MdUnfoldMore className=" text-gray-400 text-sm" />
