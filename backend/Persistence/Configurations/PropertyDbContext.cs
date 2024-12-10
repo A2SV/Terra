@@ -22,7 +22,12 @@ namespace Persistence.Configurations
             modelBuilder.Ignore<User>();
             
             // Configure Table-Per-Type (TPT) mappings
+            modelBuilder.Entity<User>().ToTable("AspNetUsers");
             modelBuilder.Entity<Property>().ToTable("Properties");
+            modelBuilder.Entity<Property>()
+                .HasOne(p => p.Lister)
+                .WithMany()
+                .HasForeignKey(p => p.ListerId);
             modelBuilder.Entity<ResidentialProperty>().ToTable("ResidentialProperties");
             modelBuilder.Entity<CommercialProperty>().ToTable("CommercialProperties");
 
