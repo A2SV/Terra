@@ -105,7 +105,7 @@ const EmblaCarousel: FC<EmblaCarouselProps> = ({ options, images }: EmblaCarouse
           </div>
         </div>
 
-        <div className="embla__dots w-24 mx-96">
+        <div className="embla__dots w-full">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}
