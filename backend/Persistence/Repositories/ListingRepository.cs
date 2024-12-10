@@ -52,6 +52,7 @@ namespace Persistence.Repositories
         public async Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex, int pageSize)
         {
             IQueryable<Property> query = _context.Properties
+                .Include(p => p.Lister)
                 .Include(p => p.PropertyLocation)
                 .Include(p => p.PaymentInformation);
             
