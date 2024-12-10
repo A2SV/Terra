@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import ErrorMessage from "../Common/Reusable/ErrorMessage";
 import SuccessMessage from "../Common/Reusable/SuccessMessage";
 import AuthButton from "../Common/Auth/AuthButton";
+import { useRouter } from "next/navigation";
 
 const SignUpCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -22,6 +23,7 @@ const SignUpCard: React.FC = () => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const router = useRouter();
 
   const [user, setUser] = useState({
     firstName: "",
@@ -97,10 +99,8 @@ const SignUpCard: React.FC = () => {
         const res = await axios.post(baseUrl, user);
         setSuccess(res.data.message);
 
-        setTimeout(() => {
-          setSuccess("");
-          window.location.reload();
-        }, 1000);
+        // Navigate to the OTP verification page with the user's email
+        router.push(`/otp/${user.email}`);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response?.data.errors) {

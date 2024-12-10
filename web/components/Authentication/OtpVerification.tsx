@@ -51,9 +51,9 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
     setLoading(false);
   };
 
-  const handleReset = () => {
+  const handleReset = async () => {
     try {
-      axios.post(baseUrl + "Auth/ResendOTP", {
+      await axios.post(baseUrl + "Auth/ResendOTP", {
         email,
       });
     } catch (error) {
