@@ -77,7 +77,7 @@ const HeroListing = () => {
           <DetailCarousel images={images} />
         </div>
         <ContactCard
-          agentImage="https://upload.wikimedia.org/wikipedia/commons/2/2d/African-Woman-Business-Woman-Young-Woman-Black-Woman-3439224.jpg"
+          agentImage="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           agentName="Brittany Watkins"
           agentListingsUrl="/listings"
         />

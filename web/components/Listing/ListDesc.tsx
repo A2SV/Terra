@@ -1,7 +1,6 @@
 import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { IoCaretDownCircleOutline } from "react-icons/io5";
-import { IoCalendarOutline } from "react-icons/io5";
+import { IoCaretDownCircleOutline, IoCalendarOutline } from "react-icons/io5";
 import { SlMap } from "react-icons/sl";
 
 const ListDesc: React.FC = () => {
