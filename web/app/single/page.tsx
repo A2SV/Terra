@@ -5,7 +5,7 @@ import Footer from "@/components/General/Footer";
 
 const page = () => {
   return (
-    <div className="bg-listingBg">
+    <div className="bg-gray-50">
       <NavBar />
       <HeroListing />
       <Footer />
