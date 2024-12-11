@@ -55,7 +55,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
   String _furnishedStatus = 'None';
   String _starRating = '';
   String _restaurantOnsite = '';
-  SfRangeValues _values = const SfRangeValues(30, 59);
+  final SfRangeValues _values = const SfRangeValues(30, 59);
   List<Amenity> amenities = [
     Amenity(name: 'Wifi'),
     Amenity(name: 'Balcony'),
@@ -116,7 +116,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -127,7 +127,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +151,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -172,11 +172,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Property Features',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -184,7 +185,6 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               Container(
                                 child: Column(
@@ -192,25 +192,25 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bedroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bathroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Washroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Kitchen(s)'),
                                     ),
                                   ],
@@ -223,14 +223,14 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -256,7 +256,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
 
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Student Housing Amenities',
                             style:
@@ -265,11 +265,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Wrap(
                             children: studentHousingAmenities.map((feature) {
-                              return Container(
+                              return SizedBox(
                                 width: 30.w,
                                 child: AddListingCheckBox(
                                   isActive: feature.isSelected,
@@ -290,7 +290,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Room Types',
                             style:
@@ -299,11 +299,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Wrap(
                             children: roomType.map((feature) {
-                              return Container(
+                              return SizedBox(
                                 width: 40
                                     .w, // Adjust width to give each item more space to wrap
                                 child: AddListingCheckBox(
@@ -326,6 +326,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 ' Hostel Type', //I'M GETTING AN OVERFLOW ERROR HERE
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -333,13 +334,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child: Wrap(
                                 children: hostelType.map((status) {
-                                  return Container(
+                                  return SizedBox(
                                     width: 25.w,
                                     child: Row(
                                       children: [
@@ -352,7 +352,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                             });
                                           },
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                              WidgetStateColor.resolveWith(
                                                   (states) => AppCommonColors
                                                       .mainBlueButton),
                                         ),
@@ -376,6 +376,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Location',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -383,7 +384,6 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -399,7 +399,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -422,6 +422,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Furnished Status',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -429,7 +430,6 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -445,7 +445,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -464,11 +464,12 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -476,12 +477,11 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -490,7 +490,7 @@ class _AddListingResHotelState extends State<AddListingResHotel> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

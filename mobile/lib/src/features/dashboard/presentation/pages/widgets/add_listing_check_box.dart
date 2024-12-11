@@ -34,8 +34,8 @@ class AddListingCheckBox extends StatelessWidget {
               checkColor: AppCommonColors.cardColor,
               value: isActive,
               onChanged: onChanged,
-              side: MaterialStateBorderSide.resolveWith(
-                    (states) => BorderSide(width: 1.0, color: AppCommonColors.mainBlueButton),
+              side: WidgetStateBorderSide.resolveWith(
+                    (states) => const BorderSide(width: 1.0, color: AppCommonColors.mainBlueButton),
               ),
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 class ListerModel extends Lister {
-  final bool isVerified;
   const ListerModel({
     required super.id,
     required super.userName,
@@ -27,7 +26,7 @@ class ListerModel extends Lister {
     required super.passwordResetToken,
     required super.createdAt,
     required super.updatedAt,
-    required this.isVerified,
+    required super.isVerified,
   });
   factory ListerModel.fromJson(Map<String, dynamic> json) {
     return ListerModel(

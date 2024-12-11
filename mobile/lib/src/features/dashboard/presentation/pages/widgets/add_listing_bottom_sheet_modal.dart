@@ -22,7 +22,7 @@ class AddListingBottomSheetModal {
       builder: (BuildContext context) {
         return Container(
           height: 75.h,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.0),
@@ -46,11 +46,11 @@ class AddListingBottomSheetModal {
                 ),
                 Text(
                   error==true?'Click on Retry to continue to the add listing':'Click finish to continue to your ',
-                  style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium,
+                  style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium,
                 ),
                 Text(
                   error==true?'page':'homepage',
-                  style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium,
+                  style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium,
                 ),
                 SizedBox(
                   height: 2.h,
@@ -80,17 +80,17 @@ Widget _displayMessage(bool error){
           children: [
             Text(
               'Aw snap, an ',
-              style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
+              style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
             ),
             Text(
               'error',
-              style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp,fontWeight: FontWeight.w800),
+              style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp,fontWeight: FontWeight.w800),
             ),
           ],
         ),
         Text(
           'occured',
-          style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
+          style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
         ),
       ],
     );
@@ -99,11 +99,11 @@ Widget _displayMessage(bool error){
       children: [
         Text(
           'Your Listing is now',
-          style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
+          style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp),
         ),
         Text(
           'Published',
-          style: CustomTextStyles.kDefaultTextTheme(Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp,fontWeight: FontWeight.w800),
+          style: CustomTextStyles.kDefaultTextTheme(const Color(0xFF252B5C)).bodyMedium?.copyWith(fontSize: 20.sp,fontWeight: FontWeight.w800),
 
         ),
       ],

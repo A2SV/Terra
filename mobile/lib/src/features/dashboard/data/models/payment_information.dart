@@ -15,9 +15,9 @@ class PaymentInformationModel extends PaymentInformation {
       id: json['id'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
-      currency: json['currency'],
-      paymentFrequency: json['paymentFrequency'],
-      cost: json['cost'],
+      currency: PaymentCurrency.values[json['currency']],
+      paymentFrequency: PaymentFrequency.values[json['paymentFrequency']],
+      cost: json['cost'].toString(),
       negotiable: json['negotiable'],
     );
   }
