@@ -14,6 +14,7 @@ namespace Application.Contracts
         Task<PaginatedList<PropertyDto>> GetAllListings(int pageIndex,int pageSize);
         Task<DetailedPropertyDto?> GetListingByIdAsync(Guid id);
         Task <Property?> GetPropertyByIdAsync(Guid propertyId);
+        Task<bool> RemovePropertyAmenityAsync(Guid propertyId, Guid amenityId);
 
         Task<PaginatedList<Property>> Filter(
             int pageIndex, int pageSize,
