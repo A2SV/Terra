@@ -37,4 +37,15 @@ public class AmenityRepository : IAmenityRepository
         
         return await amenities.ToListAsync();
     }
+
+    public async Task<Amenity?> GetAmenityByIdAsync(string id)
+    {
+        if (!Guid.TryParse(id, out Guid amenityId))
+        {
+            return null;
+        }
+        return await _context.Amenities.FirstOrDefaultAsync(x => x.Id == amenityId);
+    }
+
+    
 }
