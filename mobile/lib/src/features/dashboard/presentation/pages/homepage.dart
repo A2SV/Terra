@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
@@ -24,6 +23,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<DashboardBloc>().add(GetAllListingsEvent());
+    super.initState();
+  }
   final List<String> _filters = [
     "Any",
     "Apartment",
@@ -75,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                   child: Container(
-                    height: 6.h,
+                    height: 5.5.h,
                     width: 85.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.w),
@@ -90,14 +94,14 @@ class _HomePageState extends State<HomePage> {
                       splashFactory: NoSplash.splashFactory,
                       dividerHeight: 0,
                       padding: EdgeInsets.symmetric(
-                        vertical: 0.7.h,
+                        vertical: 0.5.h,
                         horizontal: 1.w,
                       ),
                       labelStyle: CustomTextStyles.kDefaultTextTheme(
                               AppLightThemeColors.kBlackTextColor)
                           .bodySmall
                           ?.copyWith(
-                            fontSize: 16.sp,
+                            fontSize: 15.sp,
                             fontFamily: "Nunito",
                           ),
                       indicatorSize: TabBarIndicatorSize.tab,
@@ -128,9 +132,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 1.7.h),
+                SizedBox(height: 1.5.h),
                 SizedBox(
-                  height: 6.h,
+                  height: 5.h,
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     clipBehavior: Clip.none,
@@ -148,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                             onSelect: () {
                               onFilterButtonPress(index);
                             },
+                            size: 14.5.sp,
                             isSelected: index == _selectedIndex,
                           ),
                         ],
@@ -159,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                 if (state is DashboardSuccess) ...[
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 4.5.w, top: 3.h, bottom: 0.3.h),
+                        EdgeInsets.only(left: 4.5.w, top: 2.5.h, bottom: 0.3.h),
                     child: Text(
                       "Near your location",
                       style: CustomTextStyles.kDefaultTextTheme(
@@ -212,10 +217,20 @@ class _HomePageState extends State<HomePage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.listings.length,
                         primary: false,
+                        padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
-                          return ListingsCard(
-                            listing: state.listings[index],
-                          );
+                          return GestureDetector(
+                              onTap: () {
+                                switchScreen(
+                                  context: context,
+                                  routeName: AppRoutes.listingDetail,
+                                  extra: state.listings[index],
+                                );
+                              },
+                              child: ListingsCard(
+                                listing: state.listings[index],
+                              ),
+                            );
                         },
                       ),
                     )
