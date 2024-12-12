@@ -48,7 +48,7 @@ const OtpVerification: React.FC<OtpVerificationProps> = ({ email }) => {
       }
     }
 
-    setLoading(false);
+    // setLoading(false);
   };
 
   const handleReset = async () => {
