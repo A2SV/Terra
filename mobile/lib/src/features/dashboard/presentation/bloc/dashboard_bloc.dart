@@ -12,10 +12,17 @@ part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetListingsUseCase getListingsUseCase;
+  final CheckLocationPermissionUseCase checkLocationPermissionUseCase;
+  final RequestLocationPermissionUseCase requestLocationPermissionUseCase;
+
   DashboardBloc({
     required this.getListingsUseCase,
+    required this.checkLocationPermissionUseCase,
+    required this.requestLocationPermissionUseCase,
   }) : super(DashboardInitial()) {
     on<GetAllListingsEvent>(getAllListingsEvent);
+    on<CheckLocationPermissionEvent>(checkLocationPermissionEvent); 
+    on<RequestLocationPermissionEvent>(requestLocationPermissionEvent);
   }
 
   FutureOr<void> getAllListingsEvent(
@@ -27,4 +34,35 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       (listings) => emit(DashboardSuccess(listings: listings)),
     );
   }
+
+
+  FutureOr<void> checkLocationPermissionEvent(
+      CheckLocationPermissionEvent event, Emitter<DashboardState> emit) async {
+    try {
+      final isGranted = await checkLocationPermissionUseCase();
+      if (isGranted) {
+        emit(LocationPermissionState(isGranted: true));
+      } else {
+        emit(LocationPermissionState(isGranted: false));
+      }
+    } catch (error) {
+      emit(DashboardError(error.toString()));
+    }
+  }
+
+
+FutureOr<void> requestLocationPermissionEvent(
+      RequestLocationPermissionEvent event, Emitter<DashboardState> emit) async {
+    try {
+      final isGranted = await requestLocationPermissionUseCase();
+      if (isGranted) {
+        emit(LocationPermissionState(isGranted: true));
+      } else {
+        emit(LocationPermissionState(isGranted: false));
+      }
+    } catch (error) {
+      emit(DashboardError(error.toString()));
+    }
+  }
 }
+

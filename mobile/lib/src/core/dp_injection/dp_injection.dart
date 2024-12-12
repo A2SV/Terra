@@ -58,9 +58,17 @@ void _initDashboard() {
         dashboardRepository: sl<DashboardRepositoryImpl>(),
       ),
     )
+    ..registerLazySingleton(
+      () => CheckLocationPermissionUseCase(),
+    )
+    ..registerLazySingleton(
+      () => RequestLocationPermissionUseCase(),
+    )
     ..registerFactory(
       () => DashboardBloc(
-        getListingsUseCase: sl<GetListingsUseCase>(),
-      ),
+          getListingsUseCase: sl<GetListingsUseCase>(),
+          checkLocationPermissionUseCase: sl<CheckLocationPermissionUseCase>(),
+          requestLocationPermissionUseCase:
+              sl<RequestLocationPermissionUseCase>()),
     );
 }

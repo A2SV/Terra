@@ -1,4 +1,3 @@
-
 part of 'dashboard_bloc.dart';
 
 @immutable
@@ -8,3 +7,7 @@ sealed class DashboardEvent extends Equatable {
 }
 
 class GetAllListingsEvent extends DashboardEvent {}
+
+class CheckLocationPermissionEvent extends DashboardEvent {}
+
+class RequestLocationPermissionEvent extends DashboardEvent {}
