@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/utils.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
@@ -17,10 +14,7 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<DashboardBloc>()..add(GetAllListingsEvent()),
-      child: const DashBoardView(),
-    );
+    return const DashBoardView();
   }
 }
 
