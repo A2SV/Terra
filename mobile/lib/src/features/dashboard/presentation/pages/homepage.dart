@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
@@ -66,12 +68,13 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       "Welcome to Terra",
                       style: CustomTextStyles.kDefaultTextTheme(
-                          AppLightThemeColors.kBlackTextColor)
-                          .bodySmall?.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16.5.sp,
-                      ),
+                              AppLightThemeColors.kBlackTextColor)
+                          .bodySmall
+                          ?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.5.sp,
+                          ),
                     ),
                   ),
                   Center(
@@ -94,13 +97,13 @@ class _HomePageState extends State<HomePage> {
                           vertical: 0.7.h,
                           horizontal: 1.w,
                         ),
-                        labelStyle:
-                        CustomTextStyles.kDefaultTextTheme(
-                            AppLightThemeColors.kBlackTextColor)
-                            .bodySmall?.copyWith(
-                          fontSize: 17.sp,
-                          fontFamily: "Nunito",
-                        ),
+                        labelStyle: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                              fontSize: 17.sp,
+                              fontFamily: "Nunito",
+                            ),
                         indicatorSize: TabBarIndicatorSize.tab,
                         indicator: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.sp),
@@ -161,15 +164,14 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(left: 4.5.w, top: 2.5.h),
                       child: Text(
                         "Near your location",
-                        style:
-                        CustomTextStyles.kDefaultTextTheme(
-                            AppLightThemeColors.kBlackTextColor)
-                            .bodySmall?.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16.5.sp,
-                        ),
-
+                        style: CustomTextStyles.kDefaultTextTheme(
+                                AppLightThemeColors.kBlackTextColor)
+                            .bodySmall
+                            ?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16.5.sp,
+                            ),
                       ),
                     ),
                     Padding(
@@ -179,24 +181,24 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text(
                             "${state.listings.length} properties in Accra",
-                            style:
-                            CustomTextStyles.kDefaultTextTheme(
-                                AppLightThemeColors.kBlackTextColor)
-                                .bodySmall?.copyWith(
-                              fontSize: 15.sp,
-                              color: AppLightThemeColors.kLightTextColor,
-                            ),
+                            style: CustomTextStyles.kDefaultTextTheme(
+                                    AppLightThemeColors.kBlackTextColor)
+                                .bodySmall
+                                ?.copyWith(
+                                  fontSize: 15.sp,
+                                  color: AppLightThemeColors.kLightTextColor,
+                                ),
                           ),
                           GestureDetector(
                             onTap: () {},
                             child: Text(
                               "See all",
-                              style:
-                              CustomTextStyles.kDefaultTextTheme(
-                                  AppLightThemeColors.kBlackTextColor)
-                                  .bodySmall?.copyWith(
-                                color: AppLightThemeColors.kMainBlueButton,
-                              ),
+                              style: CustomTextStyles.kDefaultTextTheme(
+                                      AppLightThemeColors.kBlackTextColor)
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color: AppLightThemeColors.kMainBlueButton,
+                                  ),
                             ),
                           ),
                         ],
@@ -212,8 +214,17 @@ class _HomePageState extends State<HomePage> {
                           itemCount: state.listings.length,
                           primary: false,
                           itemBuilder: (context, index) {
-                            return ListingsCard(
-                              listing: state.listings[index],
+                            return GestureDetector(
+                              onTap: () {
+                                switchScreen(
+                                  context: context,
+                                  routeName: AppRoutes.listingDetail,
+                                  extra: state.listings[index],
+                                );
+                              },
+                              child: ListingsCard(
+                                listing: state.listings[index],
+                              ),
                             );
                           },
                         ),
@@ -251,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     )
-                    
+
                   // Padding(
                   //   padding: EdgeInsets.only(left: 4.5.w, right: 12.w),
                   //   child: Row(
@@ -300,7 +311,6 @@ class _HomePageState extends State<HomePage> {
                   //     },
                   //   ),
                   // ),
-                  
                 ],
               ),
             ),
