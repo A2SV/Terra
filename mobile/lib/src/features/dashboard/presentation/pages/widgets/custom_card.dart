@@ -11,8 +11,8 @@ class CustomDropdownCard extends StatefulWidget {
     required this.initialText,
     required this.options,
     required this.controller,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _CustomDropdownCardState createState() => _CustomDropdownCardState();

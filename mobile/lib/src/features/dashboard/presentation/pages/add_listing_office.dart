@@ -55,7 +55,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
   String _receptionArea = 'None';
   String _officeType = '';
   String _meetingRoom = '';
-  SfRangeValues _values = const SfRangeValues(30, 59);
+  final SfRangeValues _values = const SfRangeValues(30, 59);
   List<Amenity> amenities = [
     Amenity(name: 'Wifi'),
     Amenity(name: 'Balcony'),
@@ -103,7 +103,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -114,7 +114,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +138,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -163,6 +163,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Office Type',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -170,13 +171,12 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child: Wrap(
                                 children: officeTypes.map((status) {
-                                  return Container(
+                                  return SizedBox(
                                     width: 45.w,
                                     child: Row(
                                       children: [
@@ -189,7 +189,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                             });
                                           },
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                              WidgetStateColor.resolveWith(
                                                   (states) => AppCommonColors
                                                       .mainBlueButton),
                                         ),
@@ -210,6 +210,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Meeting Rooms',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -217,7 +218,6 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -233,7 +233,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -253,6 +253,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Reception Area',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -260,7 +261,6 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -276,7 +276,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -291,14 +291,14 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -322,11 +322,12 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -334,12 +335,11 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -348,7 +348,7 @@ class _AddListingOfficeState extends State<AddListingOffice> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

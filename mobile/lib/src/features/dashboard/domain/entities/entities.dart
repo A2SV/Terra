@@ -1,4 +1,4 @@
-export '../../data/models/enums.dart';
+export 'enums.dart';
 export 'listing.dart';
 export 'lister.dart';
 export 'payment_information.dart';

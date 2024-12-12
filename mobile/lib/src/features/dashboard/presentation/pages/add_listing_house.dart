@@ -55,7 +55,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
   final _storyNumberController = TextEditingController();
   String _furnishedStatus = 'None';
   late String _garageSpaces = '';
-  SfRangeValues _values = const SfRangeValues(30, 59);
+  final SfRangeValues _values = const SfRangeValues(30, 59);
   List<Amenity> amenities = [
     Amenity(name: 'Wifi'),
     Amenity(name: 'Balcony'),
@@ -90,7 +90,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -101,7 +101,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +125,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -146,11 +146,12 @@ class _AddListingHouseState extends State<AddListingHouse> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Property Features',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -158,7 +159,6 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               Container(
                                 child: Column(
@@ -166,25 +166,25 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bedroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bathroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Washroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Kitchen(s)'),
                                     ),
                                   ],
@@ -197,14 +197,14 @@ class _AddListingHouseState extends State<AddListingHouse> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -228,12 +228,13 @@ class _AddListingHouseState extends State<AddListingHouse> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Story Number',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -241,7 +242,6 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               AddListingTextFormField(
                                   inputController: _storyNumberController,
@@ -255,7 +255,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                               Row(
                                   children: features.map((feature) {
                                 return Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 3),
+                                  margin: const EdgeInsets.symmetric(horizontal: 3),
                                   child: AddListingCheckBox(
                                     isActive: feature.isSelected,
                                     label: feature.name,
@@ -276,6 +276,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Furnished Status',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -283,7 +284,6 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -299,7 +299,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -315,6 +315,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Garage Spaces',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -322,7 +323,6 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(children: [
@@ -336,11 +336,11 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                           _garageSpaces = value!;
                                         });
                                       },
-                                      fillColor: MaterialStateColor.resolveWith(
+                                      fillColor: WidgetStateColor.resolveWith(
                                           (states) =>
                                               AppCommonColors.mainBlueButton),
                                     ),
-                                    Text('Yes')
+                                    const Text('Yes')
                                   ],
                                 ),
                                 Row(
@@ -353,11 +353,11 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                           _garageSpaces = value!;
                                         });
                                       },
-                                      fillColor: MaterialStateColor.resolveWith(
+                                      fillColor: WidgetStateColor.resolveWith(
                                           (states) =>
                                               AppCommonColors.mainBlueButton),
                                     ),
-                                    Text('No')
+                                    const Text('No')
                                   ],
                                 ),
                               ]),
@@ -369,11 +369,12 @@ class _AddListingHouseState extends State<AddListingHouse> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -381,12 +382,11 @@ class _AddListingHouseState extends State<AddListingHouse> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -395,7 +395,7 @@ class _AddListingHouseState extends State<AddListingHouse> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

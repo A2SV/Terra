@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile/src/core/constants/constants.dart';
 import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mocktail/mocktail.dart';

@@ -92,7 +92,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -103,7 +103,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +127,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -148,11 +148,12 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Property Features',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -160,7 +161,6 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               Container(
                                 child: Column(
@@ -168,25 +168,25 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bedroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Bathroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Washroom(s)'),
                                     ),
                                     Container(
                                       width: 95.w,
                                       margin: EdgeInsets.all(2.w),
-                                      child: AddListingPropertyFeatureCounter(
+                                      child: const AddListingPropertyFeatureCounter(
                                           label: 'Kitchen(s)'),
                                     ),
                                   ],
@@ -198,14 +198,14 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -229,12 +229,13 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: [
                               Container(
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Apartment Floors',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -242,7 +243,6 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -274,7 +274,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                               Row(
                                   children: features.map((feature) {
                                 return Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 3),
+                                  margin: const EdgeInsets.symmetric(horizontal: 3),
                                   child: AddListingCheckBox(
                                     isActive: feature.isSelected,
                                     label: feature.name,
@@ -295,6 +295,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Furnished Status',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -302,7 +303,6 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -318,7 +318,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -333,11 +333,12 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                         SizedBox(
                           height: 2.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -345,12 +346,11 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -359,7 +359,7 @@ class _AddListingApartmentState extends State<AddListingApartment> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

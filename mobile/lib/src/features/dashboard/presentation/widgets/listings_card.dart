@@ -49,8 +49,7 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image:
-                          'https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG91c2V8ZW58MHx8MHx8fDA%3D',
+                      image:listing.propertyPhotos.first.url,
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
@@ -106,9 +105,7 @@ class ListingsCard extends StatelessWidget {
                               ),
                             ),
                             if (listing.lister.isVerified) ...[
-                              SizedBox(
-                                  width: 1
-                                      .w), // Add some space between title and badge
+                              SizedBox(width: 1.w), // Add some space between title and badge
                               Image.asset(
                                 'assets/images/verify.png', // Replace with the path to your asset
                                 width: 2.2.h, // Adjust the size
@@ -123,9 +120,10 @@ class ListingsCard extends StatelessWidget {
                           SizedBox(
                             width: 4.h,
                             height: 4.h,
-                            child: FadeInImage.memoryNetwork(
+                            child: 
+                            FadeInImage.memoryNetwork(
                               placeholder: kTransparentImage,
-                              image: listing.lister.profilePictureUrl,
+                              image: listing.lister.profilePictureUrl??"https://via.placeholder.com/150",
                               fit: BoxFit.cover,
                             ).circularClip(50),
                           ),
@@ -148,6 +146,13 @@ class ListingsCard extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
+                      ),
+                      const Spacer(),
+                      // Added gray icon
+                      Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                        size: 18.sp,
                       ),
                     ],
                   ),

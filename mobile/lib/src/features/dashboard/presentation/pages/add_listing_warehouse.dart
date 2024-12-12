@@ -51,10 +51,10 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
   final _formKey = GlobalKey<FormState>();
   final _propertySizeController = TextEditingController();
   final _ceilingHeightController = TextEditingController();
-  String _receptionArea = 'None';
+  final String _receptionArea = 'None';
   String _loadingStocks = '';
   String _officeSpaceIncluded = '';
-  SfRangeValues _values = const SfRangeValues(30, 59);
+  final SfRangeValues _values = const SfRangeValues(30, 59);
   List<Amenity> amenities = [
     Amenity(name: 'Wifi'),
     Amenity(name: 'Balcony'),
@@ -91,7 +91,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -102,7 +102,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +126,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -148,14 +148,14 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                           height: 3.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Ceiling Height',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -181,6 +181,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Loading Stocks',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -188,13 +189,12 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child: Wrap(
                                 children: loadingStocks.map((status) {
-                                  return Container(
+                                  return SizedBox(
                                     width: 19.w,
                                     child: Row(
                                       children: [
@@ -207,7 +207,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                                             });
                                           },
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                              WidgetStateColor.resolveWith(
                                                   (states) => AppCommonColors
                                                       .mainBlueButton),
                                         ),
@@ -228,6 +228,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Office Space Included',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -235,7 +236,6 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -251,7 +251,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -268,14 +268,14 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -299,11 +299,12 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -311,12 +312,11 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -325,7 +325,7 @@ class _AddListingWareHouseState extends State<AddListingWareHouse> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {
