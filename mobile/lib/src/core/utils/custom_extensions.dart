@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+extension CustomExtensions on BuildContext {
+  ColorScheme get colorScheme => theme.colorScheme;
+  DefaultTextStyle get defaultTextStyle => DefaultTextStyle.of(this);
+  FocusScopeNode get focusScope => FocusScope.of(this);
+  double get height => size.height;
+  Size get size => MediaQuery.sizeOf(this);
+  TextTheme get textTheme => theme.textTheme;
+  ThemeData get theme => Theme.of(this);
+  double get width => size.width;
+}
+
 extension CustomStringExtension on String? {
   Widget asAssetImage({
     double? size,
@@ -34,6 +45,27 @@ extension CustomStringExtension on String? {
         fit: fit,
         placeholderBuilder: (_) => const SizedBox.shrink(),
       ).leftPadding(leftPadding ?? 0).rightPadding(rightPadding ?? 0);
+
+  String capitalize() {
+    assert(this != null);
+    if (this!.isEmpty) {
+      return '';
+    }
+
+    // Split the string into words
+    List<String> words = this!.split(' ');
+
+    // Capitalize each word
+    List<String> capitalizedWords = words.map((word) {
+      if (word.isEmpty) {
+        return '';
+      }
+      return word[0].toUpperCase() + word.substring(1).toLowerCase();
+    }).toList();
+
+    // Join the capitalized words back into a sentence
+    return capitalizedWords.join(' ');
+  }
 }
 
 extension CustomWidgetExtensions on Widget {
@@ -137,26 +169,15 @@ extension CustomWidgetExtensions on Widget {
       );
 }
 
-extension CustomExtensions on BuildContext {
-  ColorScheme get colorScheme => theme.colorScheme;
-  DefaultTextStyle get defaultTextStyle => DefaultTextStyle.of(this);
-  FocusScopeNode get focusScope => FocusScope.of(this);
-  double get height => size.height;
-  Size get size => MediaQuery.sizeOf(this);
-  TextTheme get textTheme => theme.textTheme;
-  ThemeData get theme => Theme.of(this);
-  double get width => size.width;
-}
-
 extension ExtendedIterable<E> on Iterable<E> {
+  void forEachIndexed(void Function(E e, int i) f) {
+    var i = 0;
+    forEach((e) => f(e, i++));
+  }
+
   /// Like Iterable<T>.map but the callback has index as second argument
   Iterable<T> mapIndexed<T>(T Function(E e, int i) f) {
     var i = 0;
     return map((e) => f(e, i++));
-  }
-
-  void forEachIndexed(void Function(E e, int i) f) {
-    var i = 0;
-    forEach((e) => f(e, i++));
   }
 }

@@ -28,7 +28,7 @@ class AddListingTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width?? 75.w,
         child: TextFormField(
           obscureText: obscureText,

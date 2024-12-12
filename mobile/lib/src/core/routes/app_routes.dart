@@ -10,6 +10,7 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
@@ -67,7 +68,10 @@ final routes = <GoRoute>[
   GoRoute(
     name: AppRoutes.listingDetail,
     path: '/${AppRoutes.listingDetail}',
-    builder: (context, state) => const ListingDetail(),
+    builder: (context, state) {
+      final listing = state.extra as ListingModel;
+      return  ListingDetail(listing: listing);
+    },
   ),
   GoRoute(
     name: AppRoutes.identifyStudentIdentity,

@@ -7,10 +7,8 @@ import 'package:mobile/src/features/auth/data/data_sources/auth_local_data_sourc
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:mobile/src/features/auth/domain/domain.dart';
-import 'package:mobile/src/features/auth/domain/repositories/auth_repository.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/get_cached_user_usecase.dart';
-import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_password_use_case.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';

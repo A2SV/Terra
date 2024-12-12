@@ -61,10 +61,10 @@ class _AddListingShopState extends State<AddListingShop> {
   final _propertySizeController = TextEditingController();
   final _numberOfFloorsController = TextEditingController();
   final _floorNumberController = TextEditingController();
-  String _receptionArea='None';
+  final String _receptionArea='None';
   String _displayWindow='';
   String _storageRoom='';
-  SfRangeValues _values = const SfRangeValues(30,59);
+  final SfRangeValues _values = const SfRangeValues(30,59);
   List<Amenity> amenities=[Amenity(name: 'Wifi'),Amenity(name: 'Balcony'),Amenity(name: 'Security'),Amenity(name: 'Balcony'),Amenity(name: 'Free Parking'),Amenity(name: 'Kitchen'),Amenity(name: 'Air Conditioner')];
   List<RadioItem> displayWindows=[RadioItem(name: 'Yes', value: 'Yes'),RadioItem(name: 'No', value: 'No')];
   List<RadioItem> storageRoom=[RadioItem(name: 'Yes', value: 'Yes'),RadioItem(name: 'No', value: 'No')];
@@ -88,7 +88,7 @@ class _AddListingShopState extends State<AddListingShop> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -99,7 +99,7 @@ class _AddListingShopState extends State<AddListingShop> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +124,7 @@ class _AddListingShopState extends State<AddListingShop> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(
@@ -150,18 +150,18 @@ class _AddListingShopState extends State<AddListingShop> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Display Window',
                                 style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child:Wrap(
                                 children: displayWindows.map(
                                         (status){
-                                      return Container(
+                                      return SizedBox(
                                         width: 19.w,
                                         child: Row(
                                           children: [
@@ -173,7 +173,7 @@ class _AddListingShopState extends State<AddListingShop> {
                                                   _displayWindow = value!;
                                                 });
                                               },
-                                              fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
+                                              fillColor: WidgetStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
                                             ),
                                             Text(status.name)
                                           ],
@@ -194,11 +194,11 @@ class _AddListingShopState extends State<AddListingShop> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Storage Rooms',
                                 style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
                             Container(
                               child: Row(
@@ -214,7 +214,7 @@ class _AddListingShopState extends State<AddListingShop> {
                                                 _storageRoom = value!;
                                               });
                                             },
-                                            fillColor: MaterialStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
+                                            fillColor: WidgetStateColor.resolveWith((states) => AppCommonColors.mainBlueButton),
                                           ),
                                           Text(status.name)
                                         ],
@@ -231,14 +231,14 @@ class _AddListingShopState extends State<AddListingShop> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -260,28 +260,28 @@ class _AddListingShopState extends State<AddListingShop> {
                         ),
 
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(Colors.black).bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(height: 1.h,),
                               Wrap(
                                 children: amenities.map((amenity){
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

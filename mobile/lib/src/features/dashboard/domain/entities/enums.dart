@@ -31,7 +31,7 @@ enum PropertyMarketStatus { unavailable, available, rented, sold }
 
 enum PropertyPublishStatus { unpublished, published, inReview }
 
-enum PropertyType {
+enum PropertySubType {
   house,
   apartment,
   studentHostel,
@@ -41,6 +41,11 @@ enum PropertyType {
   shop,
   warehouse,
   eventSpace
+}
+
+enum PropertyType {
+  residential,
+  commercial,
 }
 
 enum StudentHostelLocation { onCampus, offCampus }

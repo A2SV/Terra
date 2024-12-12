@@ -10,7 +10,7 @@ class Lister extends Equatable {
   final String passwordHash;
   final String securityStamp;
   final String concurrencyStamp;
-  final String phoneNumber;
+  final String? phoneNumber;
   final bool phoneNumberConfirmed;
   final bool twoFactorEnabled;
   final DateTime? lockoutEnd;
@@ -18,13 +18,14 @@ class Lister extends Equatable {
   final int accessFailedCount;
   final String firstName;
   final String lastName;
-  final String gender;
+  final String? gender;
   final DateTime dateOfBirth;
-  final String profilePictureUrl;
-  final String verificationToken;
-  final String passwordResetToken;
+  final String? profilePictureUrl;
+  final String? verificationToken;
+  final String? passwordResetToken;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool isVerified;
 
   const Lister({
     required this.id,
@@ -51,9 +52,8 @@ class Lister extends Equatable {
     required this.passwordResetToken,
     required this.createdAt,
     required this.updatedAt,
+    required this.isVerified,
   });
-
-  
 
   @override
   List<Object?> get props => [
@@ -81,5 +81,6 @@ class Lister extends Equatable {
         passwordResetToken,
         createdAt,
         updatedAt,
+        isVerified,
       ];
 }

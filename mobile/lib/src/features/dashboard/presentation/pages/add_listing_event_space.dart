@@ -98,7 +98,7 @@ class _AddListingEventState extends State<AddListingEvent> {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 0.5,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios), // Custom back button icon
+            icon: const Icon(Icons.arrow_back_ios), // Custom back button icon
             onPressed: () {
               Navigator.pop(context);
             },
@@ -109,7 +109,7 @@ class _AddListingEventState extends State<AddListingEvent> {
             child: SingleChildScrollView(
               child: Form(
                   key: _formKey,
-                  child: Container(
+                  child: SizedBox(
                     width: 92.w,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +133,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Container(
+                        SizedBox(
                             width: 92.w,
                             child: RichText(
                                 text: TextSpan(children: [
@@ -155,14 +155,14 @@ class _AddListingEventState extends State<AddListingEvent> {
                           height: 3.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Maximum Capacity',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -183,7 +183,7 @@ class _AddListingEventState extends State<AddListingEvent> {
 
                         Container(
                           alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             'Types of Events',
                             style:
@@ -192,11 +192,11 @@ class _AddListingEventState extends State<AddListingEvent> {
                                     ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Wrap(
                             children: eventTypes.map((feature) {
-                              return Container(
+                              return SizedBox(
                                 width: 23.w,
                                 child: AddListingCheckBox(
                                   isActive: feature.isSelected,
@@ -215,6 +215,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Catering Facilities',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -222,7 +223,6 @@ class _AddListingEventState extends State<AddListingEvent> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
 
                             Container(
@@ -239,7 +239,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                                           });
                                         },
                                         fillColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => AppCommonColors
                                                     .mainBlueButton),
                                       ),
@@ -259,6 +259,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                         Column(
                           children: [
                             Container(
+                              alignment: Alignment.centerLeft,
                               child: Text(
                                 'Audio-Visual equipment',
                                 style: CustomTextStyles.kDefaultTextTheme(
@@ -266,13 +267,12 @@ class _AddListingEventState extends State<AddListingEvent> {
                                     .bodyMedium
                                     ?.copyWith(fontWeight: FontWeight.w600),
                               ),
-                              alignment: Alignment.centerLeft,
                             ),
-                            Container(
+                            SizedBox(
                               width: 100.w,
                               child: Wrap(
                                 children: audioVisualEquipments.map((status) {
-                                  return Container(
+                                  return SizedBox(
                                     width: 19.w,
                                     child: Row(
                                       children: [
@@ -285,7 +285,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                                             });
                                           },
                                           fillColor:
-                                              MaterialStateColor.resolveWith(
+                                              WidgetStateColor.resolveWith(
                                                   (states) => AppCommonColors
                                                       .mainBlueButton),
                                         ),
@@ -303,14 +303,14 @@ class _AddListingEventState extends State<AddListingEvent> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.symmetric(vertical: 10),
+                                margin: const EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   'Property Size',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -334,11 +334,12 @@ class _AddListingEventState extends State<AddListingEvent> {
                           height: 2.h,
                         ),
 
-                        Container(
+                        SizedBox(
                           width: 92.w,
                           child: Column(
                             children: <Widget>[
                               Container(
+                                alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Additional Amenities',
                                   style: CustomTextStyles.kDefaultTextTheme(
@@ -346,12 +347,11 @@ class _AddListingEventState extends State<AddListingEvent> {
                                       .bodyMedium
                                       ?.copyWith(fontWeight: FontWeight.w600),
                                 ),
-                                alignment: Alignment.centerLeft,
                               ),
                               SizedBox(
                                 height: 1.h,
                               ),
-                              AddListingSearchInput(
+                              const AddListingSearchInput(
                                 fillColor: AppCommonColors.searchFieldFillColor,
                               ),
                               SizedBox(
@@ -360,7 +360,7 @@ class _AddListingEventState extends State<AddListingEvent> {
                               Wrap(
                                 children: amenities.map((amenity) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 3),
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
                                     child: FilterButton(
                                       text: amenity.name,
                                       onSelect: () {

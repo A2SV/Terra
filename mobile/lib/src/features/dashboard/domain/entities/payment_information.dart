@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 class PaymentInformation extends Equatable{
   final String id;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final int currency;
-  final int paymentFrequency;
-  final double cost;
+  final PaymentCurrency currency;
+  final PaymentFrequency paymentFrequency;
+  final String cost;
   final bool negotiable;
 
   const PaymentInformation({
