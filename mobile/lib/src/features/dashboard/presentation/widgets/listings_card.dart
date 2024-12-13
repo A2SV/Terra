@@ -242,7 +242,7 @@ class _ListingsCardState extends State<ListingsCard> {
                                 });
                                 var box = await Hive.box('userData');
                                 List compare = box.get('compareListing', defaultValue: []);
-                                print(compare);git 
+
 
                                 if (isTapped==true){
                                   if(compare.length<2){

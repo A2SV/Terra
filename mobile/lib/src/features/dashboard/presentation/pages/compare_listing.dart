@@ -8,6 +8,8 @@ import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.d
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../../../../core/routes/app_routes.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/theme/text_theme.dart';
 import '../../../../core/utils/custom_snackbar.dart';
@@ -579,30 +581,37 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                     ],
                                   ),
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 3.h),
+                                  child: CustomButton(
+                                    text: 'View Listing',
+                                    height: 5.5.h,
+                                    width: 50.w,
+                                    borderColor: Colors.white,
+                                    onPressed: () {
+                                      switchScreen(
+                                        context: context,
+                                        routeName: AppRoutes.listingDetail,
+                                        extra: index==1?state.listing2:state.listing1,
+                                      );
+                                    },
+                                    showPrefixWidget: true,
+                                    prefixWidget: Padding(
+                                      padding: EdgeInsets.only(left: 5.w),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                        size: 19.sp,
+                                      ),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           );
                         }),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3.h),
-                    child: CustomButton(
-                      text: 'View Listing',
-                      height: 5.5.h,
-                      width: 50.w,
-                      borderColor: Colors.white,
-                      onPressed: () {},
-                      showPrefixWidget: true,
-                      prefixWidget: Padding(
-                        padding: EdgeInsets.only(left: 5.w),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: 19.sp,
-                        ),
-                      ),
-                    ),
-                  )
+
                 ],
               ),
             ) : const Center(
