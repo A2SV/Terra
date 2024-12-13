@@ -16,6 +16,9 @@ Future<void> main() async {
         create: (context) => sl<AuthenticationBloc>(),
       ),
       BlocProvider(
+        create: (context) => sl<DashboardBloc>(),
+      ),
+      BlocProvider(
         create: (context) => sl<AppUserCubit>()..loadCachedUser(),
       ),
       BlocProvider(
