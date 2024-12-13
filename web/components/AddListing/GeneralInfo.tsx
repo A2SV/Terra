@@ -89,8 +89,6 @@ const GeneralInfo: React.FC = () => {
     washrooms: 0,
   });
 
-  console.log("formDatarrr", formData);
-
   const [type, setType] = useState<string>("Residential");
   const [category, setCategory] = useState<string>("Rent");
   const [residentialSubtype, setResidentialSubtype] = useState<string>("Apartment");
