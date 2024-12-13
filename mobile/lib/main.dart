@@ -21,6 +21,9 @@ Future<void> main() async {
       BlocProvider(
         create: (context) => sl<AppUserCubit>()..loadCachedUser(),
       ),
+      BlocProvider(
+        create: (context) => sl<DashboardBloc>(),
+      ),
     ],
     child: const MainApp(),
   ));
