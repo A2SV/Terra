@@ -18,7 +18,6 @@ import Review from "@/components/Listing/Review";
 import ContactCard from "@/components/Listing/Cards/ContactCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
-
 const HeroListing = () => {
   const images = [
     "https://images.unsplash.com/photo-1522050212171-61b01dd24579?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Ds",

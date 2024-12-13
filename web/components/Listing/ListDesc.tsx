@@ -24,8 +24,8 @@ const ListDesc: React.FC = () => {
   return (
     <div className="flex flex-col w-full lg:w-8/12 bg-gray-50">
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
-      <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
-        <p className="text-lg font-roboto">Description</p>
+        <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
+          <p className="text-lg font-roboto">Description</p>
         </div>
         <p className="py-10">
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
