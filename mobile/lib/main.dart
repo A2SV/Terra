@@ -4,6 +4,7 @@ import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/cubit/app_user_cubit.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
@@ -13,6 +14,9 @@ Future<void> main() async {
     providers: [
       BlocProvider(
         create: (context) => sl<AuthenticationBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => sl<DashboardBloc>(),
       ),
       BlocProvider(
         create: (context) => sl<AppUserCubit>()..loadCachedUser(),
