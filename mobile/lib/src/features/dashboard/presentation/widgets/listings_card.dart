@@ -2,19 +2,26 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class ListingsCard extends StatelessWidget {
-  final ListingModel listing;
+class ListingsCard extends StatefulWidget {
   const ListingsCard({
     super.key,
     required this.listing,
   });
+  final ListingModel listing;
 
+  @override
+  State<ListingsCard> createState() => _ListingsCardState();
+}
+
+class _ListingsCardState extends State<ListingsCard> {
+  bool isTapped=false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -49,7 +56,7 @@ class ListingsCard extends StatelessWidget {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image: listing.propertyPhotos.first.url,
+                      image:widget.listing.propertyPhotos.first.url,
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
@@ -65,14 +72,14 @@ class ListingsCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "Starting GHC ${listing.paymentInformation.cost}",
+                            "Starting GHC ${widget.listing.paymentInformation.cost}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
                             ),
                           ),
                           Text(
-                            listing.propertyType.name.toUpperCase(),
+                            widget.listing.propertyType.name.toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
@@ -98,16 +105,14 @@ class ListingsCard extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                listing.title,
+                                widget.listing.title,
                                 style: TextStyle(
                                     fontSize: 15.sp, color: Colors.black),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            if (listing.lister.isVerified) ...[
-                              SizedBox(
-                                  width: 1
-                                      .w), // Add some space between title and badge
+                            if (widget.listing.lister.isVerified) ...[
+                              SizedBox(width: 1.w), // Add some space between title and badge
                               Image.asset(
                                 'assets/images/verify.png', // Replace with the path to your asset
                                 width: 2.2.h, // Adjust the size
@@ -122,10 +127,10 @@ class ListingsCard extends StatelessWidget {
                           SizedBox(
                             width: 4.h,
                             height: 4.h,
-                            child: FadeInImage.memoryNetwork(
+                            child:
+                            FadeInImage.memoryNetwork(
                               placeholder: kTransparentImage,
-                              image: listing.lister.profilePictureUrl ??
-                                  "https://via.placeholder.com/150",
+                              image: widget.listing.lister.profilePictureUrl??"https://via.placeholder.com/150",
                               fit: BoxFit.cover,
                             ).circularClip(50),
                           ),
@@ -144,11 +149,17 @@ class ListingsCard extends StatelessWidget {
                       ),
                       SizedBox(width: 2.w),
                       Text(
-                        '${listing.propertyLocation.city}, ${listing.propertyLocation.country}',
+                        '${widget.listing.propertyLocation.city}, ${widget.listing.propertyLocation.country}',
                         style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AppLightThemeColors.kLightTextColor,
-                        ),
+                            fontSize: 14.sp,
+                            color: AppLightThemeColors.kLightTextColor),
+                      ),
+                      const Spacer(),
+                      // Added gray icon
+                      Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                        size: 18.sp,
                       ),
                     ],
                   ),
@@ -206,7 +217,7 @@ class ListingsCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  "${listing.propertySize} sqft",
+                                  "${widget.listing.propertySize} sqft",
                                   style: TextStyle(
                                     color: AppLightThemeColors.kLightTextColor,
                                     fontSize: 13.5.sp,
@@ -223,10 +234,33 @@ class ListingsCard extends StatelessWidget {
                           children: [
                             SizedBox(width: 4.w),
                             InkWell(
-                              onTap: () {},
+                              onTap: () async {
+                                //await box.put(_hiveKey, _isTapped ? 'compareListing' : null);
+                                setState((){
+                                  isTapped = !isTapped; // Toggle tapped state
+                                  print(isTapped);
+                                });
+                                var box = await Hive.box('userData');
+                                List compare = box.get('compareListing', defaultValue: []);
+
+
+                                if (isTapped==true){
+                                  if(compare.length<2){
+                                    compare.add(widget.listing.id);
+                                  }else{
+                                    compare.removeAt(0);
+                                    compare.add(widget.listing.id);
+                                  }
+                                  await box.put('compareListing',compare);
+                                }
+                              },
                               child: SvgPicture.asset(
                                 "assets/svg/repost.svg",
                                 height: 3.7.w,
+                                colorFilter: ColorFilter.mode(
+                                  isTapped==true ? Colors.blue : Colors.black,
+                                  BlendMode.srcIn, // Ensures the color applies to the SVG
+                                ),
                               ),
                             ),
                             SizedBox(width: 4.w),

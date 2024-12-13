@@ -3,23 +3,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile/src/core/error/exception.dart';
 import 'package:mobile/src/core/error/failure.dart';
 import 'package:mobile/src/core/network/network_info.dart';
+import 'package:mobile/src/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:mobile/src/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:mobile/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/register_with_email_password_use_case.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
+class MockAuthLocalDataSource extends Mock implements AuthLocalDataSource {}
 class MockNetwork extends Mock implements NetworkImpl {}
 
 void main() {
   late MockAuthRemoteDataSource remoteDataSource; //dependency
+  late MockAuthLocalDataSource localDataSource;
   late AuthRepositoryImpl authRepositoryImpl;
   late NetworkImpl network;
 
   setUp(() {
     remoteDataSource = MockAuthRemoteDataSource();
     network = MockNetwork();
-    authRepositoryImpl = AuthRepositoryImpl(remoteDataSource:remoteDataSource,network:network,);
+    localDataSource=MockAuthLocalDataSource();
+    authRepositoryImpl = AuthRepositoryImpl(remoteDataSource:remoteDataSource,network:network, localDataSource: localDataSource,);
   });
   final params = RegisterWithEmailPasswordUseCaseParams(
     firstName: 'firstName',

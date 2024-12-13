@@ -11,6 +11,7 @@ import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart'
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
@@ -22,6 +23,8 @@ import 'package:mobile/src/features/dashboard/presentation/pages/listings_filter
 import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/saved_pages.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
+
+import '../../features/dashboard/presentation/pages/compare_listing.dart';
 
 final routes = <GoRoute>[
   GoRoute(
@@ -136,6 +139,12 @@ final routes = <GoRoute>[
   ),
 
   GoRoute(
+    name: AppRoutes.compareListing,
+    path: '/${AppRoutes.compareListing}',
+    builder: (context, state) => const CompareListingPage(),
+  ),
+
+  GoRoute(
     name: AppRoutes.profilePage,
     path: '/${AppRoutes.profilePage}',
     builder: (context, state) => const ProfPage(),
@@ -206,6 +215,7 @@ class AppRoutes {
   static const String addListingMedia = "add-listing-media";
   static const String addListingContact = "add-listing-contact";
   static const String addListingLoc = "add-listing-location";
+  static const String compareListing = 'compare-listing';
   static const String addListing = 'add_listing';
 
   static const String chatPage = 'chat-page';

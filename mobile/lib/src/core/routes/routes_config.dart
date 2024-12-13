@@ -67,7 +67,7 @@ class AppRouter extends StatelessWidget {
 
   GoRouter createRoute() {
     return GoRouter(
-      initialLocation: '/$location',
+      initialLocation: '/${AppRoutes.dashboard}',
       routes: routes,
     );
   }

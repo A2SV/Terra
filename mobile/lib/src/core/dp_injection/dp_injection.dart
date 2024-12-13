@@ -74,9 +74,13 @@ void _initDashboard() {
     ..registerLazySingleton(() => GetListingsUseCase(
           dashboardRepository: sl<DashboardRepository>(),
         ))
+    ..registerLazySingleton(() => GetListingUseCase(
+      dashboardRepository: sl<DashboardRepository>(),
+    ))
     ..registerLazySingleton(
       () => DashboardBloc(
         getListingsUseCase: sl<GetListingsUseCase>(),
+        getListingUseCase: sl<GetListingUseCase>()
       ),
     );
 }
