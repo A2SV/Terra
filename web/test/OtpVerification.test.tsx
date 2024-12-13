@@ -36,13 +36,13 @@ describe("OtpVerification", () => {
     expect(push).toHaveBeenCalledWith(`/auth`);
   });
 
-  // test("handles OTP resend", () => {
-  //   render(<OtpVerification email="test@example.com" />);
-  //   const resendLink = screen.getByText("Resend");
-  //   fireEvent.click(resendLink);
+  test("handles OTP resend", () => {
+    render(<OtpVerification email="test@example.com" />);
+    const resendLink = screen.getByText("Resend");
+    fireEvent.click(resendLink);
 
-  //   expect(axios.post).toHaveBeenCalledWith(expect.any(String), {
-  //     email: "test@example.com",
-  //   });
-  // });
+    expect(axios.post).toHaveBeenCalledWith(expect.any(String), {
+      email: "test@example.com",
+    });
+  });
 });

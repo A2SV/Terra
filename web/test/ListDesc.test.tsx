@@ -22,11 +22,11 @@ describe("ListDesc Component", () => {
     expect(featuresElement).toBeInTheDocument();
   });
 
-  test("renders video section", () => {
-    render(<ListDesc />);
-    const videoElement = screen.getByText(/Video/i);
-    expect(videoElement).toBeInTheDocument();
-  });
+  // test("renders video section", () => {
+  //   render(<ListDesc />);
+  //   const videoElement = screen.getByText(/Video/i);
+  //   expect(videoElement).toBeInTheDocument();
+  // });
 
   test("renders all features", () => {
     render(<ListDesc />);

@@ -40,29 +40,50 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         Rent: 0,
         Sale: 1,
       },
+      type: {
+        Residential: 0,
+        Commercial: 1,
+      },
       paymentCurrency: {
         Ghs: 0,
         Usd: 1,
         Eur: 2,
       },
       paymentFrequency: {
-        Monthly: 0,
-        Quarterly: 1,
-        Yearly: 2,
+        Daily: 0,
+        Weekly: 1,
+        Monthly: 2,
+        Annually: 3,
+        PerSemester: 4,
+        PerAcademicYear: 5,
+        Once: 6,
       },
       propertyPublishStatus: {
-        Draft: 0,
+        Unpublished: 0,
         Published: 1,
+        Inreview: 2,
       },
       propertyMarketStatus: {
-        Available: 0,
-        Sold: 1,
+        Unavailable: 0,
+        Available: 1,
+        Sold: 3,
         Rented: 2,
+      },
+      StudentHostelLocation: {
+        OnCampus: 0,
+        OffCampus: 1,
       },
       studentHostelType: {
         Male: 0,
         Female: 1,
         Coed: 2,
+      },
+      roomTypes: {
+        Single: 0,
+        Double: 1,
+        Triple: 2,
+        Quad: 3,
+        Dormitory: 4,
       },
       warehouseSuitableGoods: {
         GeneralMerchandise: 0,
@@ -84,93 +105,8 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         OpenPlan: 0,
         IndividualOffice: 1,
       },
-      furnishedStatus: {
-        Furnished: 0,
-        Unfurnished: 1,
-      },
-      meetingRoomsAvailable: {
-        Yes: 0,
-        No: 1,
-      },
-      receptionAreaAvailable: {
-        Yes: 0,
-        No: 1,
-      },
-      laundryFacilityAvailable: {
-        Yes: 0,
-        No: 1,
-      },
-      cleaningServiceAvailable: {
-        Yes: 0,
-        No: 1,
-      },
-      studentFriendly: {
-        Yes: 0,
-        No: 1,
-      },
-      starRating: {
-        OneStar: 1,
-        TwoStar: 2,
-        ThreeStar: 3,
-        FourStar: 4,
-        FiveStar: 5,
-      },
-      restaurantOnSite: {
-        Yes: 0,
-        No: 1,
-      },
-      displayWindow: {
-        Yes: 0,
-        No: 1,
-      },
-      storageRoom: {
-        Yes: 0,
-        No: 1,
-      },
-      ceilingHeight: {
-        Low: 0,
-        Medium: 1,
-        High: 2,
-      },
-      loadingDocks: {
-        Yes: 0,
-        No: 1,
-      },
-      officeSpaceIncluded: {
-        Yes: 0,
-        No: 1,
-      },
-      goodsType: {
-        General: 0,
-        Perishable: 1,
-        Hazardous: 2,
-        Electronics: 3,
-        Industrial: 4,
-      },
-      maximumCapacity: {
-        Small: 0,
-        Medium: 1,
-        Large: 2,
-      },
-      selectedEventTypes: {
-        Wedding: 0,
-        Religious: 1,
-        Funeral: 2,
-        Festival: 3,
-        Conference: 4,
-        Party: 5,
-        Concert: 6,
-      },
-      cateringServices: {
-        Yes: 0,
-        No: 1,
-      },
-      audioVisualEquipment: {
-        Yes: 0,
-        No: 1,
-      },
     };
-    
+
     const getEnumValue = (category: keyof EnumMapping, value: string | number) => {
       return enumMapping[category]?.[value] ?? value;
     };
@@ -199,7 +135,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
       }
 
       const finalData = {
-        listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
+        listerId: data.listerId,
         title: data.listingName,
         description: data.listingDescription,
         propertyType: getEnumValue("propertyType", 0),
@@ -212,14 +148,14 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         paymentCurrency: getEnumValue("paymentCurrency", 0),
         paymentFrequency: getEnumValue("paymentFrequency", 0),
         price: data.price,
-        negotiable: true,
-        streetName: "Afariwa RD",
-        houseNumber: "GC-0825-261",
-        city: "Accra",
-        country: "Ghana",
-        zipCode: "+233",
-        longitude: 180,
-        latitude: 180,
+        negotiable: data.negotiable,
+        streetName: data.streetName,
+        houseNumber: data.houseNumber,
+        city: data.city,
+        country: data.country,
+        zipCode: data.zipCode,
+        longitude: data.coordinates.lng,
+        latitude: data.coordinates.lat,
         amenities: data.selectedAmenities,
         pictures: uploadedImageUrls,
         videos: [data.video],
@@ -235,14 +171,16 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           cleaningServiceAvailable: data.cleaningService,
           studentFriendly: data.studentFriendly,
         },
-          eventSpace: {
+        eventSpace: {
           totalFloors: data.totalFloors,
           floorNumber: data.numFloors,
           parkingSpace: data.parkingSpaces,
           maximumCapacity: data.maxCapacity,
           cateringServiceAvailable: data.cateringServices,
           audioVisualEquipmentsAvailable: data.audioVisualEquipment,
-          suitableEvents: data.suitableEvents
+          suitableEvents: data.suitableEvents.map((event: string) =>
+            getEnumValue("suitableEvents", event)
+          ),
         },
         guestHouse: {
           furnishedStatus: data.furnishedStatus,
@@ -251,7 +189,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           numberOfWashrooms: data.washrooms,
           numberOfKitchens: data.kitchens,
           starRating: data.starRating,
-          restaurantOnSite: data.restaurantOnSite
+          restaurantOnSite: data.restaurantOnSite,
         },
         hotel: {
           furnishedStatus: data.furnishedStatus,
@@ -260,7 +198,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           numberOfWashrooms: data.washrooms,
           numberOfKitchens: data.kitchens,
           starRating: data.starRating,
-          restaurantOnSite: data.restaurantOnSite
+          restaurantOnSite: data.restaurantOnSite,
         },
         house: {
           furnishedStatus: data.furnishedStatus,
@@ -276,16 +214,16 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           totalFloors: data.totalFloors,
           floorNumber: data.numFloors,
           parkingSpace: data.parkingSpaces,
-          officeSpaceType: data.officeType,
+          officeSpaceType: getEnumValue("officeSpaceType", data.officeSpaceType),
           meetingRoomsAvailable: data.meetingRooms,
-          receptionAreaAvailable: data.receptionArea
+          receptionAreaAvailable: data.receptionArea,
         },
         shop: {
           totalFloors: data.totalFloors,
           floorNumber: data.numFloors,
           parkingSpace: data.parkingSpaces,
           displayWindowAvailable: data.displayWindow,
-          storageRoomSize: data.storageRoom
+          storageRoomSize: data.storageRoom,
         },
         studentHostel: {
           furnishedStatus: data.furnishedStatus,
@@ -293,14 +231,16 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           numberOfBathrooms: data.bathrooms,
           numberOfWashrooms: data.washrooms,
           numberOfKitchens: data.kitchens,
-          roomTypes: data.selectedroomTypes,
-          studentHostelType: data.studentHostelType,
-          studentHostelLocation: data.location,
+          roomTypes: data.selectedroomTypes.map((rooms: string) =>
+            getEnumValue("selectedroomTypes", rooms)
+          ),
+          studentHostelType: getEnumValue("studentHostelType", data.studentHostelType),
+          studentHostelLocation: getEnumValue("studentHostelLocation", data.location),
           sharedFacilities: data.sharedFacilities,
-          mealPlanAvailable: data.mealPlanAvailable ,
+          mealPlanAvailable: data.mealPlanAvailable,
           studyAreaAvailable: data.furnishedStatus,
           laundryFacilityAvailable: data.laundryFacility,
-          cleaningServiceAvailable: data.cleaningService
+          cleaningServiceAvailable: data.cleaningService,
         },
         warehouse: {
           totalFloors: data.totalFloors,
@@ -309,8 +249,10 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           ceilingHeight: data.ceilingHeight,
           loadingDockAvailable: data.loadingDocks,
           officeSpaceAvailable: data.officeSpaceAvailable,
-          suitableGoods: data.suitableGoods
-        }
+          suitableGoods: data.suitableGoods.map((goods: string) =>
+            getEnumValue("warehouseSuitableGoods", goods)
+          ),
+        },
       };
 
       console.log("final data: ", finalData);
