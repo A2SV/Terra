@@ -44,38 +44,20 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         Ghs: 0,
         Usd: 1,
         Eur: 2,
-        Gbp: 3,
       },
       paymentFrequency: {
-        Daily: 0,
-        Weekly: 1,
-        Monthly: 2,
-        Annually: 3,
-        PerSemester: 4,
-        PerAcademicYear: 5,
-        Once: 6,
-      },
-      propertyMarketStatus: {
-        Unavailable: 0,
-        Available: 1,
-        Rented: 2,
-        Sold: 3,
+        Monthly: 0,
+        Quarterly: 1,
+        Yearly: 2,
       },
       propertyPublishStatus: {
-        Unpublished: 0,
+        Draft: 0,
         Published: 1,
-        InReview: 2,
       },
-      studentHostelLocation: {
-        OnCampus: 0,
-        OffCampus: 1,
-      },
-      studentHostelRoomTypes: {
-        Single: 0,
-        Double: 1,
-        Triple: 2,
-        Quad: 3,
-        Dormitory: 4,
+      propertyMarketStatus: {
+        Available: 0,
+        Sold: 1,
+        Rented: 2,
       },
       studentHostelType: {
         Male: 0,
@@ -102,8 +84,93 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         OpenPlan: 0,
         IndividualOffice: 1,
       },
+      furnishedStatus: {
+        Furnished: 0,
+        Unfurnished: 1,
+      },
+      meetingRoomsAvailable: {
+        Yes: 0,
+        No: 1,
+      },
+      receptionAreaAvailable: {
+        Yes: 0,
+        No: 1,
+      },
+      laundryFacilityAvailable: {
+        Yes: 0,
+        No: 1,
+      },
+      cleaningServiceAvailable: {
+        Yes: 0,
+        No: 1,
+      },
+      studentFriendly: {
+        Yes: 0,
+        No: 1,
+      },
+      starRating: {
+        OneStar: 1,
+        TwoStar: 2,
+        ThreeStar: 3,
+        FourStar: 4,
+        FiveStar: 5,
+      },
+      restaurantOnSite: {
+        Yes: 0,
+        No: 1,
+      },
+      displayWindow: {
+        Yes: 0,
+        No: 1,
+      },
+      storageRoom: {
+        Yes: 0,
+        No: 1,
+      },
+      ceilingHeight: {
+        Low: 0,
+        Medium: 1,
+        High: 2,
+      },
+      loadingDocks: {
+        Yes: 0,
+        No: 1,
+      },
+      officeSpaceIncluded: {
+        Yes: 0,
+        No: 1,
+      },
+      goodsType: {
+        General: 0,
+        Perishable: 1,
+        Hazardous: 2,
+        Electronics: 3,
+        Industrial: 4,
+      },
+      maximumCapacity: {
+        Small: 0,
+        Medium: 1,
+        Large: 2,
+      },
+      selectedEventTypes: {
+        Wedding: 0,
+        Religious: 1,
+        Funeral: 2,
+        Festival: 3,
+        Conference: 4,
+        Party: 5,
+        Concert: 6,
+      },
+      cateringServices: {
+        Yes: 0,
+        No: 1,
+      },
+      audioVisualEquipment: {
+        Yes: 0,
+        No: 1,
+      },
     };
-
+    
     const getEnumValue = (category: keyof EnumMapping, value: string | number) => {
       return enumMapping[category]?.[value] ?? value;
     };
@@ -157,7 +224,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         pictures: uploadedImageUrls,
         videos: [data.video],
         apartment: {
-          furnishedStatus: true,
+          furnishedStatus: data.furnishedStatus,
           numberOfBedrooms: data.bedrooms,
           numberOfBathrooms: data.bathrooms,
           numberOfWashrooms: data.washrooms,
@@ -168,7 +235,85 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           cleaningServiceAvailable: data.cleaningService,
           studentFriendly: data.studentFriendly,
         },
+          eventSpace: {
+          totalFloors: data.totalFloors,
+          floorNumber: data.numFloors,
+          parkingSpace: data.parkingSpaces,
+          maximumCapacity: data.maxCapacity,
+          cateringServiceAvailable: data.cateringServices,
+          audioVisualEquipmentsAvailable: data.audioVisualEquipment,
+          suitableEvents: data.suitableEvents
+        },
+        guestHouse: {
+          furnishedStatus: data.furnishedStatus,
+          numberOfBedrooms: data.bedrooms,
+          numberOfBathrooms: data.bathrooms,
+          numberOfWashrooms: data.washrooms,
+          numberOfKitchens: data.kitchens,
+          starRating: data.starRating,
+          restaurantOnSite: data.restaurantOnSite
+        },
+        hotel: {
+          furnishedStatus: data.furnishedStatus,
+          numberOfBedrooms: data.bedrooms,
+          numberOfBathrooms: data.bathrooms,
+          numberOfWashrooms: data.washrooms,
+          numberOfKitchens: data.kitchens,
+          starRating: data.starRating,
+          restaurantOnSite: data.restaurantOnSite
+        },
+        house: {
+          furnishedStatus: data.furnishedStatus,
+          numberOfBedrooms: data.bedrooms,
+          numberOfBathrooms: data.bathrooms,
+          numberOfWashrooms: data.washrooms,
+          numberOfKitchens: data.kitchens,
+          numberOfStories: data.numStories,
+          garageSpace: data.garageSpace,
+          studentFriendly: data.studentFriendly,
+        },
+        officeSpace: {
+          totalFloors: data.totalFloors,
+          floorNumber: data.numFloors,
+          parkingSpace: data.parkingSpaces,
+          officeSpaceType: data.officeType,
+          meetingRoomsAvailable: data.meetingRooms,
+          receptionAreaAvailable: data.receptionArea
+        },
+        shop: {
+          totalFloors: data.totalFloors,
+          floorNumber: data.numFloors,
+          parkingSpace: data.parkingSpaces,
+          displayWindowAvailable: data.displayWindow,
+          storageRoomSize: data.storageRoom
+        },
+        studentHostel: {
+          furnishedStatus: data.furnishedStatus,
+          numberOfBedrooms: data.bedrooms,
+          numberOfBathrooms: data.bathrooms,
+          numberOfWashrooms: data.washrooms,
+          numberOfKitchens: data.kitchens,
+          roomTypes: data.selectedroomTypes,
+          studentHostelType: data.studentHostelType,
+          studentHostelLocation: data.location,
+          sharedFacilities: data.sharedFacilities,
+          mealPlanAvailable: data.mealPlanAvailable ,
+          studyAreaAvailable: data.furnishedStatus,
+          laundryFacilityAvailable: data.laundryFacility,
+          cleaningServiceAvailable: data.cleaningService
+        },
+        warehouse: {
+          totalFloors: data.totalFloors,
+          floorNumber: data.numFloors,
+          parkingSpace: data.parkingSpaces,
+          ceilingHeight: data.ceilingHeight,
+          loadingDockAvailable: data.loadingDocks,
+          officeSpaceAvailable: data.officeSpaceAvailable,
+          suitableGoods: data.suitableGoods
+        }
       };
+
+      console.log("final data: ", finalData);
 
       const response = await fetch(`${baseUrl}listing`, {
         method: "POST",
