@@ -8,9 +8,15 @@ interface SubmitButtonProps {
   data: any;
   setSuccessMessage: (message: string) => void;
   setError: (message: string) => void;
+  targetType: any;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, setError }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({
+  data,
+  setSuccessMessage,
+  setError,
+  targetType,
+}) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -107,6 +113,134 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
       },
     };
 
+    const constructPropertySpecificData = (data: any, propertyType: string) => {
+      switch (propertyType) {
+        case "Apartment":
+          return {
+            apartment: {
+              furnishedStatus: data.furnishedStatus,
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              numberOfFloorsInBuilding: data.numFloors,
+              floorNumberOfUnit: data.floorNumber,
+              laundryFacilityAvailable: data.laundryFacility,
+              cleaningServiceAvailable: data.cleaningService,
+              studentFriendly: data.studentFriendly,
+            },
+          };
+        case "House":
+          return {
+            house: {
+              furnishedStatus: data.furnishedStatus,
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              numberOfStories: data.numStories,
+              garageSpace: data.garageSpace,
+              studentFriendly: data.studentFriendly,
+            },
+          };
+        case "Student's Hostels":
+          return {
+            studentHostel: {
+              furnishedStatus: data.furnishedStatus,
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              roomTypes: data.selectedroomTypes.map((rooms: string) =>
+                getEnumValue("selectedroomTypes", rooms)
+              ),
+              studentHostelType: getEnumValue("studentHostelType", data.studentHostelType),
+              studentHostelLocation: getEnumValue("studentHostelLocation", data.location),
+              sharedFacilities: data.sharedFacilities,
+              mealPlanAvailable: data.mealPlanAvailable,
+              studyAreaAvailable: data.furnishedStatus,
+              laundryFacilityAvailable: data.laundryFacility,
+              cleaningServiceAvailable: data.cleaningService,
+            },
+          };
+        case "Hotel":
+          return {
+            hotel: {
+              furnishedStatus: data.furnishedStatus,
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              starRating: data.starRating,
+              restaurantOnSite: data.restaurantOnSite,
+            },
+          };
+        case "Guest House":
+          return {
+            guestHouse: {
+              furnishedStatus: data.furnishedStatus,
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              starRating: data.starRating,
+              restaurantOnSite: data.restaurantOnSite,
+            },
+          };
+        case "Office Space":
+          return {
+            officeSpace: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: data.parkingSpaces,
+              officeSpaceType: getEnumValue("officeSpaceType", data.officeSpaceType),
+              meetingRoomsAvailable: data.meetingRooms,
+              receptionAreaAvailable: data.receptionArea,
+            },
+          };
+        case "Shop":
+          return {
+            shop: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: data.parkingSpaces,
+              displayWindowAvailable: data.displayWindow,
+              storageRoomSize: data.storageRoom,
+            },
+          };
+        case "Warehouse":
+          return {
+            warehouse: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: data.parkingSpaces,
+              ceilingHeight: data.ceilingHeight,
+              loadingDockAvailable: data.loadingDocks,
+              officeSpaceAvailable: data.officeSpaceAvailable,
+              suitableGoods: data.suitableGoods.map((goods: string) =>
+                getEnumValue("warehouseSuitableGoods", goods)
+              ),
+            },
+          };
+        case "Event Space":
+          return {
+            eventSpace: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.floorNumber,
+              parkingSpace: data.parkingSpaces,
+              maximumCapacity: data.maxCapacity,
+              cateringServiceAvailable: data.cateringServices,
+              audioVisualEquipmentsAvailable: data.audioVisualEquipment,
+              suitableEvents: data.suitableEvents.map((event: string) =>
+                getEnumValue("suitableEvents", event)
+              ),
+            },
+          };
+        default:
+          return {};
+      }
+    };
+
     const getEnumValue = (category: keyof EnumMapping, value: string | number) => {
       return enumMapping[category]?.[value] ?? value;
     };
@@ -159,100 +293,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         amenities: data.selectedAmenities,
         pictures: uploadedImageUrls,
         videos: [data.video],
-        apartment: {
-          furnishedStatus: data.furnishedStatus,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          numberOfFloorsInBuilding: data.numFloors,
-          floorNumberOfUnit: data.floorNumber,
-          laundryFacilityAvailable: data.laundryFacility,
-          cleaningServiceAvailable: data.cleaningService,
-          studentFriendly: data.studentFriendly,
-        },
-        eventSpace: {
-          totalFloors: data.totalFloors,
-          floorNumber: data.numFloors,
-          parkingSpace: data.parkingSpaces,
-          maximumCapacity: data.maxCapacity,
-          cateringServiceAvailable: data.cateringServices,
-          audioVisualEquipmentsAvailable: data.audioVisualEquipment,
-          suitableEvents: data.suitableEvents.map((event: string) =>
-            getEnumValue("suitableEvents", event)
-          ),
-        },
-        guestHouse: {
-          furnishedStatus: data.furnishedStatus,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          starRating: data.starRating,
-          restaurantOnSite: data.restaurantOnSite,
-        },
-        hotel: {
-          furnishedStatus: data.furnishedStatus,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          starRating: data.starRating,
-          restaurantOnSite: data.restaurantOnSite,
-        },
-        house: {
-          furnishedStatus: data.furnishedStatus,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          numberOfStories: data.numStories,
-          garageSpace: data.garageSpace,
-          studentFriendly: data.studentFriendly,
-        },
-        officeSpace: {
-          totalFloors: data.totalFloors,
-          floorNumber: data.numFloors,
-          parkingSpace: data.parkingSpaces,
-          officeSpaceType: getEnumValue("officeSpaceType", data.officeSpaceType),
-          meetingRoomsAvailable: data.meetingRooms,
-          receptionAreaAvailable: data.receptionArea,
-        },
-        shop: {
-          totalFloors: data.totalFloors,
-          floorNumber: data.numFloors,
-          parkingSpace: data.parkingSpaces,
-          displayWindowAvailable: data.displayWindow,
-          storageRoomSize: data.storageRoom,
-        },
-        studentHostel: {
-          furnishedStatus: data.furnishedStatus,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          roomTypes: data.selectedroomTypes.map((rooms: string) =>
-            getEnumValue("selectedroomTypes", rooms)
-          ),
-          studentHostelType: getEnumValue("studentHostelType", data.studentHostelType),
-          studentHostelLocation: getEnumValue("studentHostelLocation", data.location),
-          sharedFacilities: data.sharedFacilities,
-          mealPlanAvailable: data.mealPlanAvailable,
-          studyAreaAvailable: data.furnishedStatus,
-          laundryFacilityAvailable: data.laundryFacility,
-          cleaningServiceAvailable: data.cleaningService,
-        },
-        warehouse: {
-          totalFloors: data.totalFloors,
-          floorNumber: data.numFloors,
-          parkingSpace: data.parkingSpaces,
-          ceilingHeight: data.ceilingHeight,
-          loadingDockAvailable: data.loadingDocks,
-          officeSpaceAvailable: data.officeSpaceAvailable,
-          suitableGoods: data.suitableGoods.map((goods: string) =>
-            getEnumValue("warehouseSuitableGoods", goods)
-          ),
-        },
+        ...constructPropertySpecificData(data, targetType),
       };
 
       console.log("final data: ", finalData);

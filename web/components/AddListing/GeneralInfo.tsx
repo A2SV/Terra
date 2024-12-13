@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ResidentialSpecific from "./Features/ResidentialSubtype/ResidentialSpecific";
 import CommercialSpecific from "./Features/CommercialSubtype/CommercialSpecific";
 import ImageSelector from "./ImageSelector";
@@ -35,6 +35,8 @@ const GeneralInfo: React.FC = () => {
     category: "Rent",
     cateringServices: "Yes",
     ceilingHeight: 0,
+    city: "Greater Accra",
+    country: "Ghana",
     cleaningService: false,
     commercialSubtype: "Office Space",
     coordinates: {
@@ -49,11 +51,13 @@ const GeneralInfo: React.FC = () => {
     garageSpace: 0,
     goodsType: "General Merchandise",
     hostelType: "Female only",
+    houseNumber: "GC-0825261",
     images: [],
     kitchens: 0,
     landSize: "",
     laundryFacility: false,
     listingName: "",
+    listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
     listingDescription: "",
     loadingDocks: "Yes",
     location: "On Campus",
@@ -81,13 +85,17 @@ const GeneralInfo: React.FC = () => {
     studentFriendly: false,
     studentHostelLocation: 0,
     studentHostelType: 0,
+    streetName: "AFARIWA RD",
     suitableEvents: [],
     suitableGoods: [],
     totalFloors: 0,
     type: "Residential",
     video: "",
     washrooms: 0,
+    zipCode: "00233",
   });
+
+  console.log("form data", formData);
 
   const [type, setType] = useState<string>("Residential");
   const [category, setCategory] = useState<string>("Rent");
@@ -97,6 +105,7 @@ const GeneralInfo: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [specificData, setSpecificData] = useState<string>("");
 
   const amenities = [
     "Air Conditioning",
@@ -230,6 +239,14 @@ const GeneralInfo: React.FC = () => {
 
   const ResidentialFeatureComponent = residentialFeatureComponents[residentialSubtype];
   const CommercialFeatureComponent = commercialFeatureComponents[commercialSubtype];
+
+  useEffect(() => {
+    if (type === "Commercial") {
+      setSpecificData(commercialSubtype);
+    } else {
+      setSpecificData(residentialSubtype);
+    }
+  }, [type, residentialSubtype, commercialSubtype]);
 
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
@@ -447,7 +464,12 @@ const GeneralInfo: React.FC = () => {
           <LocationForm handleInputChange={handleInputChange} />
         </div>
         <div>
-          <SubmitButton setSuccessMessage={setSuccessMessage} setError={setError} data={formData} />
+          <SubmitButton
+            setSuccessMessage={setSuccessMessage}
+            setError={setError}
+            data={formData}
+            targetType={specificData}
+          />
         </div>
       </div>
     </div>
