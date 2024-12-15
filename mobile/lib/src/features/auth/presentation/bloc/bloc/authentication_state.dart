@@ -31,15 +31,6 @@ final class ForgotPasswordSuccess extends AuthenticationState {}
 
 final class ResendMailSuccess extends AuthenticationState {}
 
-class LoggingIn extends AuthenticationState {
-  final String username;
-  final String password;
-
-  LoggingIn({required this.username, required this.password});
-  @override
-  List<Object> get props => [username, password];
-}
-
 class LoginSuccess extends AuthenticationState {
   final String message;
   final UserAccount user;

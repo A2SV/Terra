@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
-import 'package:mobile/src/features/auth/presentation/cubit/app_user_cubit.dart';
+import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -19,7 +19,7 @@ Future<void> main() async {
         create: (context) => sl<DashboardBloc>(),
       ),
       BlocProvider(
-        create: (context) => sl<AppUserCubit>()..loadCachedUser(),
+        create: (context) => sl<AppUserCubit>(),
       ),
       BlocProvider(
         create: (context) => sl<DashboardBloc>(),
@@ -45,14 +45,14 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+    return BlocBuilder<AppUserCubit, AppUserCubitState>(
       builder: (context, state) {
         return ResponsiveSizer(
           builder: (context, orientation, screenType) {
-            if(state is GetCachedUserSuccess) {
-              return AppRouter(location: AppRoutes.dashboard); 
+            if (state is AppUserLoggedIn) {
+              return AppRouter(location: AppRoutes.dashboard);
             }
-            return AppRouter(location: AppRoutes.onboarding); 
+            return AppRouter(location: AppRoutes.onboarding);
           },
         );
       },

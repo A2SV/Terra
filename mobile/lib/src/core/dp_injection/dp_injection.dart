@@ -4,7 +4,7 @@ final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
   await Hive.initFlutter();
-  await Hive.openBox('userData'); 
+  await Hive.openBox('userData');
 
   // Register shared dependencies
   _registerCoreDependencies();
@@ -28,15 +28,14 @@ void _initAuth() {
     ..registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImpl(sl()))
     ..registerLazySingleton<AuthLocalDataSource>(
-        () => AuthLocalDataSourceImpl(sl<Box>())) 
+        () => AuthLocalDataSourceImpl(sl<Box>()))
 
     // Repository
-    ..registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(
-              remoteDataSource: sl(),
-              localDataSource: sl(), 
-              network: sl(),
-            ))
+    ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
+          remoteDataSource: sl(),
+          localDataSource: sl(),
+          network: sl(),
+        ))
 
     // Use Cases
     ..registerLazySingleton(() => RegisterWithEmailPasswordUseCase(sl()))
@@ -47,7 +46,7 @@ void _initAuth() {
     ..registerLazySingleton(() => GetCachedUserUsecase(authRepository: sl()))
 
     // Cubit
-    ..registerLazySingleton(() => AppUserCubit(localDataSource: sl())) 
+    ..registerLazySingleton(() => AppUserCubit())
 
     // Bloc
     ..registerLazySingleton(
@@ -58,6 +57,7 @@ void _initAuth() {
         resendOTPUsecase: sl(),
         verifyOTPUseCase: sl(),
         getCachedUserUsecase: sl(),
+        appUserCubit: sl(),
       ),
     );
 }
@@ -66,21 +66,19 @@ void _initDashboard() {
   sl
     ..registerLazySingleton<DashboardRemoteDataSource>(
         () => DashboardRemoteDataSourceImpl(sl<http.Client>()))
-    ..registerLazySingleton<DashboardRepository>(
-        () => DashboardRepositoryImpl(
-              remoteDataSource: sl<DashboardRemoteDataSource>(),
-              network: sl<NetworkImpl>(),
-            ))
+    ..registerLazySingleton<DashboardRepository>(() => DashboardRepositoryImpl(
+          remoteDataSource: sl<DashboardRemoteDataSource>(),
+          network: sl<NetworkImpl>(),
+        ))
     ..registerLazySingleton(() => GetListingsUseCase(
           dashboardRepository: sl<DashboardRepository>(),
         ))
     ..registerLazySingleton(() => GetListingUseCase(
-      dashboardRepository: sl<DashboardRepository>(),
-    ))
+          dashboardRepository: sl<DashboardRepository>(),
+        ))
     ..registerLazySingleton(
       () => DashboardBloc(
-        getListingsUseCase: sl<GetListingsUseCase>(),
-        getListingUseCase: sl<GetListingUseCase>()
-      ),
+          getListingsUseCase: sl<GetListingsUseCase>(),
+          getListingUseCase: sl<GetListingUseCase>()),
     );
 }

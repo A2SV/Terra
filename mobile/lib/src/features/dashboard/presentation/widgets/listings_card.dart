@@ -21,7 +21,7 @@ class ListingsCard extends StatefulWidget {
 }
 
 class _ListingsCardState extends State<ListingsCard> {
-  bool isTapped=false;
+  bool isTapped = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -56,7 +56,7 @@ class _ListingsCardState extends State<ListingsCard> {
                     right: 0,
                     child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
-                      image:widget.listing.propertyPhotos.first.url,
+                      image: widget.listing.propertyPhotos.first.url,
                       fit: BoxFit.fill,
                       height: 20.h,
                     ),
@@ -112,7 +112,9 @@ class _ListingsCardState extends State<ListingsCard> {
                               ),
                             ),
                             if (widget.listing.lister.isVerified) ...[
-                              SizedBox(width: 1.w), // Add some space between title and badge
+                              SizedBox(
+                                  width: 1
+                                      .w), // Add some space between title and badge
                               Image.asset(
                                 'assets/images/verify.png', // Replace with the path to your asset
                                 width: 2.2.h, // Adjust the size
@@ -127,10 +129,10 @@ class _ListingsCardState extends State<ListingsCard> {
                           SizedBox(
                             width: 4.h,
                             height: 4.h,
-                            child:
-                            FadeInImage.memoryNetwork(
+                            child: FadeInImage.memoryNetwork(
                               placeholder: kTransparentImage,
-                              image: widget.listing.lister.profilePictureUrl??"https://via.placeholder.com/150",
+                              image: widget.listing.lister.profilePictureUrl ??
+                                  "https://via.placeholder.com/150",
                               fit: BoxFit.cover,
                             ).circularClip(50),
                           ),
@@ -153,13 +155,6 @@ class _ListingsCardState extends State<ListingsCard> {
                         style: TextStyle(
                             fontSize: 14.sp,
                             color: AppLightThemeColors.kLightTextColor),
-                      ),
-                      const Spacer(),
-                      // Added gray icon
-                      Icon(
-                        Icons.more_vert,
-                        color: Colors.grey,
-                        size: 18.sp,
                       ),
                     ],
                   ),
@@ -236,30 +231,31 @@ class _ListingsCardState extends State<ListingsCard> {
                             InkWell(
                               onTap: () async {
                                 //await box.put(_hiveKey, _isTapped ? 'compareListing' : null);
-                                setState((){
+                                setState(() {
                                   isTapped = !isTapped; // Toggle tapped state
                                   print(isTapped);
                                 });
                                 var box = await Hive.box('userData');
-                                List compare = box.get('compareListing', defaultValue: []);
+                                List compare =
+                                    box.get('compareListing', defaultValue: []);
 
-
-                                if (isTapped==true){
-                                  if(compare.length<2){
+                                if (isTapped == true) {
+                                  if (compare.length < 2) {
                                     compare.add(widget.listing.id);
-                                  }else{
+                                  } else {
                                     compare.removeAt(0);
                                     compare.add(widget.listing.id);
                                   }
-                                  await box.put('compareListing',compare);
+                                  await box.put('compareListing', compare);
                                 }
                               },
                               child: SvgPicture.asset(
                                 "assets/svg/repost.svg",
                                 height: 3.7.w,
                                 colorFilter: ColorFilter.mode(
-                                  isTapped==true ? Colors.blue : Colors.black,
-                                  BlendMode.srcIn, // Ensures the color applies to the SVG
+                                  isTapped == true ? Colors.blue : Colors.black,
+                                  BlendMode
+                                      .srcIn, // Ensures the color applies to the SVG
                                 ),
                               ),
                             ),
