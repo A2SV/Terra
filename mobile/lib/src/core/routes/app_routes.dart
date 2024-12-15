@@ -11,7 +11,6 @@ import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart'
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
@@ -73,7 +72,7 @@ final routes = <GoRoute>[
     path: '/${AppRoutes.listingDetail}',
     builder: (context, state) {
       final listing = state.extra as ListingModel;
-      return  ListingDetail(listing: listing);
+      return ListingDetail(listing: listing);
     },
   ),
   GoRoute(

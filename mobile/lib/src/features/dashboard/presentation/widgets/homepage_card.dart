@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/search_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
@@ -8,6 +10,8 @@ class HomepageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppUserCubit>().state as AppUserLoggedIn).user;
+
     return Container(
       padding: EdgeInsets.fromLTRB(5.w, 2.h, 5.w, 3.5.h),
       decoration: BoxDecoration(
@@ -121,7 +125,7 @@ class HomepageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hey Evans!',
+                  'Hey ${user.firstName}!',
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onPrimary,
