@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/core/use_case/use_case.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/forgot_password_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/get_cached_user_usecase.dart';
@@ -23,6 +24,7 @@ class AuthenticationBloc
   final LoginUseCase loginUseCase;
   final VerifyOTPUseCase verifyOTPUseCase;
   final GetCachedUserUsecase getCachedUserUsecase;
+  final AppUserCubit appUserCubit;
   AuthenticationBloc({
     required this.registerWithEmailPasswordUseCase,
     required this.forgotPasswordUsecase,
@@ -30,6 +32,7 @@ class AuthenticationBloc
     required this.loginUseCase,
     required this.verifyOTPUseCase,
     required this.getCachedUserUsecase,
+    required this.appUserCubit,
   }) : super(AuthenticationInitial()) {
     on<LoginUserEvent>(onLoginUserEvent);
     on<AuthenticationRegisterUserEvent>(authenticationRegisterUserEvent);
@@ -50,7 +53,10 @@ class AuthenticationBloc
 
     res.fold(
       (l) => emit(LoginFailed()),
-      (r) => emit(LoginSuccess(user: r)),
+      (r) {
+        appUserCubit.userLoggedIn(r);
+        emit(LoginSuccess(user: r));
+      },
     );
   }
 
@@ -126,7 +132,10 @@ class AuthenticationBloc
     final result = await getCachedUserUsecase(NoParams());
     result.fold(
       (l) => emit(GetCacheUserFailure(message: l.message)),
-      (r) => emit(GetCachedUserSuccess(user: r)),
+      (r) {
+        appUserCubit.userLoggedIn(r);
+        emit(GetCachedUserSuccess(user: r));
+      },
     );
   }
 }

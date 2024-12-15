@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     context.read<DashboardBloc>().add(GetAllListingsEvent());
     super.initState();
   }
+
   final List<String> _filters = [
     "Any",
     "Apartment",
@@ -160,7 +161,6 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-
                 if (state is DashboardSuccess) ...[
                   Padding(
                     padding:
@@ -220,17 +220,17 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.zero,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                              onTap: () {
-                                switchScreen(
-                                  context: context,
-                                  routeName: AppRoutes.listingDetail,
-                                  extra: state.listings[index],
-                                );
-                              },
-                              child: ListingsCard(
-                                listing: state.listings[index],
-                              ),
-                            );
+                            onTap: () {
+                              switchScreen(
+                                context: context,
+                                routeName: AppRoutes.listingDetail,
+                                extra: state.listings[index],
+                              );
+                            },
+                            child: ListingsCard(
+                              listing: state.listings[index],
+                            ),
+                          );
                         },
                       ),
                     )
@@ -246,7 +246,8 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.all(6.h),
                     child: const Center(
-                        child: CircularProgressIndicator.adaptive()),
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
                   )
                 else if (state is DashboardError)
                   Column(
@@ -266,56 +267,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ],
-                  )
-
-                // Padding(
-                //   padding: EdgeInsets.only(left: 4.5.w, right: 12.w),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         "Top rated",
-                //         style: TextStyle(
-                //           color: Colors.black,
-                //           fontWeight: FontWeight.w700,
-                //           fontSize: 16.5.sp,
-                //         ),
-                //       ),
-                //       GestureDetector(
-                //         onTap: () {},
-                //         child: const Text(
-                //           "See all",
-                //           style: TextStyle(
-                //             color: AppLightThemeColors.kMainBlueButton,
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 3.5.w, vertical: 2.h),
-                //   child: ListView.builder(
-                //     shrinkWrap: true,
-                //     physics: const NeverScrollableScrollPhysics(),
-                //     itemCount: 2,
-                //     itemBuilder: (context, index) {
-                //       return const ListingsCard(
-                //           startingPrice: 1600000,
-                //           propertyType: "Residential",
-                //           title: "Airport residential, Accra",
-                //           location: "Lane Avenue 12, Zebra street",
-                //           bedroomNumber: 4,
-                //           washroomNumber: 3,
-                //           landSize: "7,179 to 20,462 acres",
-                //           isPremium: true,
-                //           imageUrl:
-                //               "https://s3-alpha-sig.figma.com/img/a8d8/f9f2/f36a2800fda83ededb3075f62df728f8?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=k12xKy-MoEtQnYGlVSpJUq3s2JYmzUSu1h3wjKom1ci31k4nJu-8t24S9FqkLAGvt0aYmmTs4x9Vt4AsKc8SDwADdAsDJNJfqUqycSZ~viVRlCnGHW9-vNv7YrXrC2MUpcKxTHElAvSpxX9G1NgDtbbnvzv2lrSMNighcR-NA~eOBU0ea-e1frqu5EkjRO3LL3JrOCF5Xr5OhEZ1iWEGDVwtGf~oqA7QKo6T4cxxg~Y2f1NOiSzikuqeiMMa00tXcvjT3bmR7c15cngL0tgpk-0K~4bG-~5rn3xfb7V1JVsPQ1ux9UUTPYM-UTYOcLPKjioiDjRjV5vGBnb8lUfKow__",
-                //           profileImageUrl:
-                //               "https://s3-alpha-sig.figma.com/img/73bb/c414/2ae566f2ad16ff007a811f356417a725?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YrrqXp8acdsMllZnYPtvAyPLDbjdeKlqUcAcNHmFiMwqrY1c8ooaX1bGqex3p-HdSWPrMIltRwUJ9eIjETjKVjhem3WyM-PFH9rh8YlPh4RROa-q7JCXjByrW~ozS4jS~xp4IkPo9SRVHe-Bf6XvI-AP~ORx0RIx~XPBBRoXwHdpAx26JQIZAw3f-X5MjvTWeap5ktoh3DMGUxE38jIh1hLXadeuCo2s8XqTna3jgozoQrjiWQxvlJKq8OIrKwxFzjIErW~rlHtusy7PpZS2y7jHxIp~kJfQPOGjIJsWP9G0J2N92QD6l3j-bXbIWYU0oEYnDr05cuTwOpBUU1JzXg__");
-                //     },
-                //   ),
-                // ),
+                  ),
               ],
             ),
           ),

@@ -12,7 +12,7 @@ import 'package:mobile/src/features/auth/domain/use_cases/get_cached_user_usecas
 import 'package:mobile/src/features/auth/domain/use_cases/resend_otp_usecase.dart';
 import 'package:mobile/src/features/auth/domain/use_cases/verify_otp.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
-import 'package:mobile/src/features/auth/presentation/cubit/app_user_cubit.dart';
+import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';

@@ -39,11 +39,6 @@ class _SignInPageState extends State<SignInPage> {
             context: context,
             message: "User login successful",
           );
-          switchScreen(
-            context: context,
-            routeName: AppRoutes.dashboard,
-            popAndPush: true,
-          );
         }
 
         if (state is LoginFailed) {
