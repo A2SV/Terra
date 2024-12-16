@@ -24,7 +24,6 @@ namespace Domain.Entities
         public double? PropertySize { get; set; }
         public DateTime? AvailableStartDate { get; set; }
         public DateTime? AvailableEndDate { get; set; }
-
         public User Lister { get; set; } = null!;
         public PaymentInformation PaymentInformation { get; set; } = null!;
         public PropertyLocation PropertyLocation { get; set; } = null!;

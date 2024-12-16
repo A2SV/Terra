@@ -42,6 +42,7 @@ namespace WebApi.Controllers
 
 
         //[Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<PaginatedList<PropertyDto>>> GetAllListing([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 5)
         {
@@ -51,7 +52,8 @@ namespace WebApi.Controllers
 
             return Ok(listings);
         }
-
+        
+        [AllowAnonymous]
         [HttpGet("id")]
         public async Task<ActionResult<DetailedPropertyDto>> GetListingById([FromQuery] GetListingByIdQuery query)
         {
