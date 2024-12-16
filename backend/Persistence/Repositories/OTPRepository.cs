@@ -30,7 +30,7 @@ namespace Persistence.Repositories
         public async Task<OtpEntry> GetOtpEntryAsync(string userId)
         {
             return await _context.Otps
-                                 .FirstOrDefaultAsync(o => o.UserId == userId && o.Expiry > DateTime.UtcNow);
+                .FirstOrDefaultAsync(o => o.UserId == userId && o.Expiry > DateTime.UtcNow);
         }
 
         public async Task DeleteOtpEntryAsync(Guid otpId)
