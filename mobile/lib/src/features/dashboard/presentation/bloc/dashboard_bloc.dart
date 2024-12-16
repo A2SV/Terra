@@ -13,14 +13,20 @@ part 'dashboard_state.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetListingsUseCase getListingsUseCase;
   final GetListingUseCase getListingUseCase;
+    final CheckLocationPermissionUseCase checkLocationPermissionUseCase;
+  final RequestLocationPermissionUseCase requestLocationPermissionUseCase;
   DashboardBloc({
     required this.getListingsUseCase,
     required this.getListingUseCase,
+      required this.checkLocationPermissionUseCase,
+    required this.requestLocationPermissionUseCase,
   }) : super(DashboardInitial()) {
     on<GetAllListingsEvent>(getAllListingsEvent);
     on<GetListingEvent>(getListingEvent);
     on<CompareListingsEvent>(compareListingsEvent);
     on<LoadDashBoardEvent>(loadDashBoardEvent);
+    on<CheckLocationPermissionEvent>(checkLocationPermissionEvent); 
+    on<RequestLocationPermissionEvent>(requestLocationPermissionEvent);
   }
 
   FutureOr<void> loadDashBoardEvent(
@@ -77,5 +83,33 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       emit(CompareListing(listing1: listing1, listing2: listing2));
     }
 
+  }
+
+  FutureOr<void> checkLocationPermissionEvent(
+      CheckLocationPermissionEvent event, Emitter<DashboardState> emit) async {
+    try {
+      final isGranted = await checkLocationPermissionUseCase();
+      if (isGranted) {
+        emit(LocationPermissionState(isGranted: true));
+      } else {
+        emit(LocationPermissionState(isGranted: false));
+      }
+    } catch (error) {
+      emit(DashboardError(error.toString()));
+    }
+  }
+
+  FutureOr<void> requestLocationPermissionEvent(
+      RequestLocationPermissionEvent event, Emitter<DashboardState> emit) async {
+    try {
+      final isGranted = await requestLocationPermissionUseCase();
+      if (isGranted) {
+        emit(LocationPermissionState(isGranted: true));
+      } else {
+        emit(LocationPermissionState(isGranted: false));
+      }
+    } catch (error) {
+      emit(DashboardError(error.toString()));
+    }
   }
 }

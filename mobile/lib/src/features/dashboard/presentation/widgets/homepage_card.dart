@@ -10,7 +10,7 @@ class HomepageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = (context.read<AppUserCubit>().state as AppUserLoggedIn).user;
+    // final user = (context.read<AppUserCubit>().state as AppUserLoggedIn).user;
 
     return Container(
       padding: EdgeInsets.fromLTRB(5.w, 2.h, 5.w, 3.5.h),
@@ -125,7 +125,7 @@ class HomepageCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hey ${user.firstName}!',
+                  'Hey Evans!',
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onPrimary,
