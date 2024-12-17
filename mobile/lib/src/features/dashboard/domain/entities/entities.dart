@@ -16,3 +16,4 @@ export 'warehouse.dart';
 export 'event_space.dart';
 export 'office_space.dart';
 export 'shop.dart';
+export 'listing_detail.dart';
