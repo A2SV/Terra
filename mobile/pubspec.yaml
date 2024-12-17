@@ -38,6 +38,7 @@ dependencies:
   syncfusion_flutter_sliders: ^26.1.42
   dotted_border: ^2.1.0
   http: ^1.2.2
+  geolocator: ^13.0.2
 
 dev_dependencies:
   bloc_test: ^9.1.7

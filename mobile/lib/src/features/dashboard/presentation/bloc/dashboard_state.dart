@@ -36,3 +36,37 @@ final class ListingError extends DashboardState {
   @override
   List<Object?> get props => [message];
 }
+
+class LocationPermissionState extends DashboardState {
+  final bool isGranted;
+
+  LocationPermissionState({required this.isGranted});
+
+  @override
+  List<Object?> get props => [isGranted];
+}
+
+// class UserLocationState extends DashboardState { //name this current location
+//   final double latitude;
+//   final double longitude;
+
+//   UserLocationState({required this.latitude, required this.longitude});
+
+//   @override
+//   List<Object?> get props => [latitude, longitude];
+// }
+
+class LocationErrorState extends DashboardState {
+  final String errorMessage;
+
+  LocationErrorState({required this.errorMessage});
+
+  @override
+  List<Object?> get props => [errorMessage];
+}
+
+
+class LocationPromptState extends DashboardState { // for showing the modal
+  @override
+  List<Object?> get props => [];
+}

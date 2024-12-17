@@ -22,3 +22,7 @@ class CompareListingsEvent extends DashboardEvent{
   final String id2;
   CompareListingsEvent({required this.id1,required this.id2});
 }
+
+class CheckLocationPermissionEvent extends DashboardEvent {}
+
+class RequestLocationPermissionEvent extends DashboardEvent {}
