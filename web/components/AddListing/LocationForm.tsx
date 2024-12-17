@@ -18,11 +18,8 @@ const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => 
     if (input) {
       try {
         const response = await axios.get(`/api/places/autocomplete?input=${input}`);
-        console.log("Suggestions:", response.data.predictions);
         setSuggestions(response.data.predictions);
-      } catch (error) {
-        console.error("Error fetching suggestions:", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -30,7 +27,6 @@ const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => 
     try {
       const response = await axios.get(`/api/places/details?placeId=${placeId}`);
       const location = response.data.result.geometry.location;
-      console.log("Selected Location:", location);
       setCoordinates({ lat: location.lat, lng: location.lng });
       setLocation(response.data.result.name);
       setSuggestions([]);
@@ -72,6 +68,12 @@ const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocation(e.target.value);
     fetchSuggestions(e.target.value);
+  };
+
+  const handleLocationSelect = (lat: number, lng: number) => {
+    console.log("Selected Location:", { lat, lng });
+    setCoordinates({ lat, lng });
+    handleInputChange("coordinates", { lat, lng });
   };
 
   return (
@@ -118,7 +120,7 @@ const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => 
       </div>
 
       <div className="relative mb-4">
-        <GoogleMapComponent coordinates={coordinates} />
+        <GoogleMapComponent coordinates={coordinates} onLocationSelect={handleLocationSelect} />
       </div>
     </div>
   );
