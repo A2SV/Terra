@@ -1,11 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import aboutpic1 from "@/public/aboutpic1.jpeg";
+import Navbar from "../General/Navbar";
 
 const AboutHero = () => {
   return (
     <div className="pb-10">
-      <div className="relative w-full h-[277px] mt-[88px] bg-slate-400 ">
+      <Navbar />
+      <div className="relative w-full h-[277px] bg-slate-400 ">
         <div className="w-full h-full absolute inset-0">
           <Image
             src={aboutpic1}
