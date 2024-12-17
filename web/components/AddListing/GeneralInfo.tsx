@@ -60,7 +60,7 @@ const GeneralInfo: React.FC = () => {
     listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
     listingDescription: "",
     loadingDocks: "Yes",
-    location: "On Campus",
+    location: "On campus",
     maxCapacity: 0,
     mealPlanAvailable: false,
     meetingRooms: "Yes",
@@ -95,7 +95,7 @@ const GeneralInfo: React.FC = () => {
     zipCode: "00233",
   });
 
-  console.log("form data", formData);
+  console.log("form data j", formData);
 
   const [type, setType] = useState<string>("Residential");
   const [category, setCategory] = useState<string>("Rent");
