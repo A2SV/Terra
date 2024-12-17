@@ -12,38 +12,8 @@ class OfficeSpace extends Equatable {
     required this.receptionAreaAvailable,
   });
 
-  factory OfficeSpace.fromJson(Map<String, dynamic> json) {
-    return OfficeSpace(
-      officeSpaceType: OfficeSpaceType.values
-          .firstWhere((type) => type.name == json['officeSpaceType']),
-      meetingRoomsAvailable: json['meetingRoomsAvailable'],
-      receptionAreaAvailable: json['receptionAreaAvailable'],
-    );
-  }
-
   @override
   List<Object?> get props =>
       [officeSpaceType, meetingRoomsAvailable, receptionAreaAvailable];
 
-  OfficeSpace copyWith({
-    OfficeSpaceType? officeSpaceType,
-    bool? meetingRoomsAvailable,
-    bool? receptionAreaAvailable,
-  }) {
-    return OfficeSpace(
-      officeSpaceType: officeSpaceType ?? this.officeSpaceType,
-      meetingRoomsAvailable:
-          meetingRoomsAvailable ?? this.meetingRoomsAvailable,
-      receptionAreaAvailable:
-          receptionAreaAvailable ?? this.receptionAreaAvailable,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'officeSpaceType': officeSpaceType.name,
-      'meetingRoomsAvailable': meetingRoomsAvailable,
-      'receptionAreaAvailable': receptionAreaAvailable,
-    };
-  }
 }

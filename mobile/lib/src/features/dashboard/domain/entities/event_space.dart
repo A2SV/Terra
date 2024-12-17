@@ -14,20 +14,6 @@ class EventSpace extends Equatable {
     this.suitableEvents,
   });
 
-  factory EventSpace.fromJson(Map<String, dynamic> json) {
-    return EventSpace(
-      maximumCapacity: json['maximumCapacity'],
-      cateringServiceAvailable: json['cateringServiceAvailable'],
-      audioVisualEquipmentsAvailable: json['audioVisualEquipmentsAvailable'],
-      suitableEvents: json['suitableEvents'] != null
-          ? (json['suitableEvents'] as List)
-              .map((e) => EventSpaceSuitableEvents.values
-                  .firstWhere((type) => type.name == e))
-              .toList()
-          : null,
-    );
-  }
-
   @override
   List<Object?> get props => [
         maximumCapacity,
@@ -35,29 +21,4 @@ class EventSpace extends Equatable {
         audioVisualEquipmentsAvailable,
         suitableEvents,
       ];
-
-  EventSpace copyWith({
-    int? maximumCapacity,
-    bool? cateringServiceAvailable,
-    bool? audioVisualEquipmentsAvailable,
-    List<EventSpaceSuitableEvents>? suitableEvents,
-  }) {
-    return EventSpace(
-      maximumCapacity: maximumCapacity ?? this.maximumCapacity,
-      cateringServiceAvailable:
-          cateringServiceAvailable ?? this.cateringServiceAvailable,
-      audioVisualEquipmentsAvailable:
-          audioVisualEquipmentsAvailable ?? this.audioVisualEquipmentsAvailable,
-      suitableEvents: suitableEvents ?? this.suitableEvents,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'maximumCapacity': maximumCapacity,
-      'cateringServiceAvailable': cateringServiceAvailable,
-      'audioVisualEquipmentsAvailable': audioVisualEquipmentsAvailable,
-      'suitableEvents': suitableEvents?.map((e) => e.name).toList(),
-    };
-  }
 }

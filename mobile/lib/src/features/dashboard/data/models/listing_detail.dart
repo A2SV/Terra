@@ -1,8 +1,19 @@
 import 'package:mobile/src/features/dashboard/data/data.dart';
-import 'package:mobile/src/features/dashboard/data/models/media.dart';
+import 'package:mobile/src/features/dashboard/data/models/amenity.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 class ListingDetailModel extends ListingDetailEntity {
+  final ListerModel lister_;
+
+  final PaymentInformationModel paymentInformation_;
+  final PropertyLocationModel propertyLocation_;
+  @override
+  final List<AmenityModel>? propertyAmenities;
+  @override
+  final CommercialPropertyModel? commercialProperty;
+  @override
+  final ResidentialPropertyModel? residentialProperty;
+
   const ListingDetailModel({
     required super.id,
     required super.listerId,
@@ -21,8 +32,13 @@ class ListingDetailModel extends ListingDetailEntity {
     required this.paymentInformation_,
     required this.propertyLocation_,
     required this.lister_,
-  }):super(lister: lister_, paymentInformation: paymentInformation_, propertyLocation: propertyLocation_);
-
+    required this.propertyAmenities,
+    required this.commercialProperty,
+    required this.residentialProperty,
+  }) : super(
+            lister: lister_,
+            paymentInformation: paymentInformation_,
+            propertyLocation: propertyLocation_);
   factory ListingDetailModel.fromJson(Map<String, dynamic> json) {
     return ListingDetailModel(
       id: json['id'],
@@ -59,6 +75,17 @@ class ListingDetailModel extends ListingDetailEntity {
               .map((e) => MediaModel.fromJson(e))
               .toList()
           : null,
+      propertyAmenities: json['propertyAmenities'] != null
+          ? (json['propertyAmenities'] as List)
+              .map((e) => AmenityModel.fromJson(e))
+              .toList()
+          : null,
+      commercialProperty: json['commercialProperty'] != null
+          ? CommercialPropertyModel.fromJson(json['commercialProperty'])
+          : null,
+      residentialProperty: json['residentialProperty'] != null
+          ? ResidentialPropertyModel.fromJson(json['residentialProperty'])
+          : null,
     );
   }
   ListingDetailModel copyWith({
@@ -81,9 +108,9 @@ class ListingDetailModel extends ListingDetailEntity {
     PropertyLocationModel? propertyLocation_,
     List<MediaModel>? propertyPhotos,
     List<MediaModel>? propertyVideos,
-    List<Amenity>? propertyAmenities,
-    CommercialProperty? commercialProperty,
-    ResidentialProperty? residentialProperty,
+    List<AmenityModel>? propertyAmenities,
+    CommercialPropertyModel? commercialProperty,
+    ResidentialPropertyModel? residentialProperty,
   }) {
     return ListingDetailModel(
       id: id ?? this.id,
@@ -103,12 +130,11 @@ class ListingDetailModel extends ListingDetailEntity {
       propertyLocation_: propertyLocation_ ?? this.propertyLocation_,
       propertyPhotos: propertyPhotos ?? this.propertyPhotos,
       propertyVideos: propertyVideos ?? this.propertyVideos,
+      propertyAmenities: propertyAmenities ?? this.propertyAmenities,
+      commercialProperty: commercialProperty ?? this.commercialProperty,
+      residentialProperty: residentialProperty ?? this.residentialProperty,
     );
   }
-
-  final ListerModel lister_;
-  final PaymentInformationModel paymentInformation_;
-  final PropertyLocationModel propertyLocation_;
 
   Map<String, dynamic> toJson() {
     return {

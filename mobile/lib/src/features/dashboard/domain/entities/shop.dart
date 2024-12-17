@@ -9,31 +9,6 @@ class Shop extends Equatable {
     required this.storageRoomSize,
   });
 
-  factory Shop.fromJson(Map<String, dynamic> json) {
-    return Shop(
-      displayWindowAvailable: json['displayWindowAvailable'],
-      storageRoomSize: json['storageRoomSize'].toDouble(),
-    );
-  }
-
   @override
   List<Object?> get props => [displayWindowAvailable, storageRoomSize];
-
-  Shop copyWith({
-    bool? displayWindowAvailable,
-    double? storageRoomSize,
-  }) {
-    return Shop(
-      displayWindowAvailable:
-          displayWindowAvailable ?? this.displayWindowAvailable,
-      storageRoomSize: storageRoomSize ?? this.storageRoomSize,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'displayWindowAvailable': displayWindowAvailable,
-      'storageRoomSize': storageRoomSize,
-    };
-  }
 }
