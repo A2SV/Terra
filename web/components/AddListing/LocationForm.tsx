@@ -63,7 +63,7 @@ const LocationForm: React.FC<{ handleInputChange: (name: string, value: any) => 
       window.addEventListener("load", handleLoad);
       return () => window.removeEventListener("load", handleLoad);
     }
-  }, []);
+  }, [handleInputChange]);
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocation(e.target.value);
