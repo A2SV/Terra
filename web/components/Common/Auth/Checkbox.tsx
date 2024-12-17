@@ -16,8 +16,17 @@ const RememberMeCheckbox: React.FC<RememberMeCheckboxProps> = ({
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem("rememberedEmail");
-    const savedPassword = localStorage.getItem("rememberedPassword");
+    const getCookie = (name: string): string | null => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop()?.split(";").shift() || null;
+      }
+      return null;
+    };
+
+    const savedEmail = getCookie("rememberedEmail");
+    const savedPassword = getCookie("rememberedPassword");
 
     if (savedEmail && savedPassword) {
       setEmail(savedEmail);
@@ -31,11 +40,11 @@ const RememberMeCheckbox: React.FC<RememberMeCheckboxProps> = ({
     setIsChecked(checked);
 
     if (checked) {
-      localStorage.setItem("rememberedEmail", email);
-      localStorage.setItem("rememberedPassword", password);
+      document.cookie = `rememberedEmail=${email}; path=/; max-age=31536000;`; // 1 year
+      document.cookie = `rememberedPassword=${password}; path=/; max-age=31536000;`;
     } else {
-      localStorage.removeItem("rememberedEmail");
-      localStorage.removeItem("rememberedPassword");
+      document.cookie = `rememberedEmail=; path=/; max-age=0;`;
+      document.cookie = `rememberedPassword=; path=/; max-age=0;`;
     }
   };
 
