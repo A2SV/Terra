@@ -95,8 +95,6 @@ const GeneralInfo: React.FC = () => {
     zipCode: "00233",
   });
 
-  console.log("form data j", formData);
-
   const [type, setType] = useState<string>("Residential");
   const [category, setCategory] = useState<string>("Rent");
   const [residentialSubtype, setResidentialSubtype] = useState<string>("Apartment");

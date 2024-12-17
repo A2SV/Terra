@@ -348,8 +348,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
         videos: [data.video],
         ...constructPropertySpecificData(data, targetType),
       };
-      console.log("final data: ");
-      console.log("final data: ", JSON.stringify(finalData));
 
       const response = await fetch(`${baseUrl}listing`, {
         method: "POST",
@@ -359,8 +357,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
         body: JSON.stringify(finalData),
       });
 
-      console.log(response);
-
       if (response.ok) {
         setSuccessMessage("Listing Has Been Added Sucessfully");
         setTimeout(() => {
@@ -368,7 +364,11 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
           router.push("/");
         }, 5000);
       } else {
-        setError("Failed To Add listing. Please try again.");
+        const errorResponse = await response.json();
+        const validationErrors = errorResponse.errors
+          ? Object.values(errorResponse.errors).flat().join(", ")
+          : "";
+        setError(validationErrors || "Failed To Add listing. Please try again.");
         setTimeout(() => {
           setError("");
         }, 5000);
