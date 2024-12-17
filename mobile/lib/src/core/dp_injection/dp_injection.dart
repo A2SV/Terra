@@ -14,14 +14,6 @@ Future<void> init() async {
   _initDashboard();
 }
 
-void _registerCoreDependencies() {
-  sl
-    ..registerLazySingleton(() => NetworkImpl(sl()))
-    ..registerLazySingleton(InternetConnectionChecker.new)
-    ..registerLazySingleton(http.Client.new)
-    ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
-}
-
 void _initAuth() {
   sl
     // Data Sources
@@ -81,6 +73,9 @@ void _initDashboard() {
     ..registerLazySingleton(() => GetListingUseCase(
           dashboardRepository: sl<DashboardRepository>(),
         ))
+    ..registerLazySingleton(() => GetListingByIdUseCase(
+          dashboardRepository: sl<DashboardRepository>(),
+        ))
     ..registerLazySingleton(() => CheckLocationPermissionUseCase())
     ..registerLazySingleton(() => RequestLocationPermissionUseCase())
 
@@ -89,8 +84,17 @@ void _initDashboard() {
       () => DashboardBloc(
           getListingsUseCase: sl<GetListingsUseCase>(),
           getListingUseCase: sl<GetListingUseCase>(),
+          getListingByIdUseCase: sl<GetListingByIdUseCase>(),
           checkLocationPermissionUseCase: sl<CheckLocationPermissionUseCase>(),
           requestLocationPermissionUseCase:
               sl<RequestLocationPermissionUseCase>()),
     );
+}
+
+void _registerCoreDependencies() {
+  sl
+    ..registerLazySingleton(() => NetworkImpl(sl()))
+    ..registerLazySingleton(InternetConnectionChecker.new)
+    ..registerLazySingleton(http.Client.new)
+    ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
 }
