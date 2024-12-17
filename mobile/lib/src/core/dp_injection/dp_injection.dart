@@ -64,21 +64,33 @@ void _initAuth() {
 
 void _initDashboard() {
   sl
+    // Data Sources
     ..registerLazySingleton<DashboardRemoteDataSource>(
         () => DashboardRemoteDataSourceImpl(sl<http.Client>()))
+
+    // Repository
     ..registerLazySingleton<DashboardRepository>(() => DashboardRepositoryImpl(
           remoteDataSource: sl<DashboardRemoteDataSource>(),
           network: sl<NetworkImpl>(),
         ))
+
+    // Use Cases
     ..registerLazySingleton(() => GetListingsUseCase(
           dashboardRepository: sl<DashboardRepository>(),
         ))
     ..registerLazySingleton(() => GetListingUseCase(
           dashboardRepository: sl<DashboardRepository>(),
         ))
+    ..registerLazySingleton(() => CheckLocationPermissionUseCase())
+    ..registerLazySingleton(() => RequestLocationPermissionUseCase())
+
+    // Bloc
     ..registerLazySingleton(
       () => DashboardBloc(
           getListingsUseCase: sl<GetListingsUseCase>(),
-          getListingUseCase: sl<GetListingUseCase>()),
+          getListingUseCase: sl<GetListingUseCase>(),
+          checkLocationPermissionUseCase: sl<CheckLocationPermissionUseCase>(),
+          requestLocationPermissionUseCase:
+              sl<RequestLocationPermissionUseCase>()),
     );
 }
