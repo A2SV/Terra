@@ -69,7 +69,7 @@ namespace WebApi.Controllers
 
 
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        public async Task<IActionResult> ResetPassword([FromQuery] string token,[FromBody] ResetPasswordDto resetPasswordDto)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace WebApi.Controllers
                 }
 
                 var command = new ResetPasswordCommand(
-                    resetPasswordDto.Email,
+                    token,
                     resetPasswordDto.NewPassword,
                     resetPasswordDto.ConfirmPassword
                 );

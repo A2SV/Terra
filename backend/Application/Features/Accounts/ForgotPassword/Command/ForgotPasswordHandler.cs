@@ -11,11 +11,13 @@ namespace Application.Features.Accounts.ForgotPassword.Command
     {
         private readonly UserManager<User> _userManager;
         private readonly IEmailService _emailService;
+        private readonly ITokenRepository _tokenRepository;
         
-        public ForgotPasswordHandler(UserManager<User> userManager, IEmailService emailService)
+        public ForgotPasswordHandler(UserManager<User> userManager, IEmailService emailService, ITokenRepository tokenRepository)
         {
             _userManager = userManager;
             _emailService = emailService;
+            _tokenRepository = tokenRepository;
         }
 
         public async Task<Result<string>> Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
@@ -25,14 +27,18 @@ namespace Application.Features.Accounts.ForgotPassword.Command
             {
                 return new Result<string>(false, ResultStatusCode.NotFound, string.Empty, "User not found or email not confirmed.");
             }
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var token = _tokenRepository.GenerateJwtToken(user, userRoles.ToArray());
+            
             var mainResetUrl = System.Environment.GetEnvironmentVariable("RESET_PASSWORD_URL");
-            var resetUrl = $"{mainResetUrl}{token}/{user.Email}";
+            var encodedToken = Uri.EscapeDataString(token);
+            var resetUrl = $"{mainResetUrl}?token={encodedToken}";
 
             var message = $"<p>Please reset your password by clicking <a href='{resetUrl}'>here</a>.</p>";
             await _emailService.SendEmailAsync(user.Email, "Reset Password", message);
             
-            return new Result<string>(true, ResultStatusCode.Success, token, "Password reset email sent");
+            return new Result<string>(true, ResultStatusCode.Success, "Password reset email sent");
         }
     }
 }
