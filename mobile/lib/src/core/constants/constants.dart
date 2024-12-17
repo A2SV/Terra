@@ -8,4 +8,5 @@ class AppStrings {
   static String verifyOtp = '$baseUrl/api/Auth/VerifyOTP';
   static String resendOtpEndPoint = '$baseUrl/api/Auth/ResendOTP';
   static String getAllListingsEndPoint = '$baseUrl/api/listing';
+  static String getListingByIdEndPoint = '$baseUrl/api/listing/id?id=';
 }
