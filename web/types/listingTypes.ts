@@ -1,3 +1,30 @@
+export interface Lister {
+  firstName: string;
+  lastName: string;
+  gender: string | null;
+  dateOfBirth: string;
+  profilePictureUrl: string | null;
+  verificationToken: string | null;
+  passwordResetToken: string | null;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+  userName: string;
+  normalizedUserName: string;
+  email: string;
+  normalizedEmail: string;
+  emailConfirmed: boolean;
+  passwordHash: string;
+  securityStamp: string;
+  concurrencyStamp: string;
+  phoneNumber: string | null;
+  phoneNumberConfirmed: boolean;
+  twoFactorEnabled: boolean;
+  lockoutEnd: string | null;
+  lockoutEnabled: boolean;
+  accessFailedCount: number;
+}
+
 export interface PaymentInformation {
   currency: number;
   paymentFrequency: number;
@@ -25,13 +52,28 @@ export interface PropertyPhoto {
   id: string;
   url: string;
 }
-
-export interface PropertyVideo {
-  id: string;
-  url: string;
+export interface ApartmentDto {
+  numberOfFloorsInBuilding: number;
+  floorNumberOfUnit: number;
+  laundryFacilityAvailable: boolean;
+  cleaningServiceAvailable: boolean;
+  studentFriendly: boolean;
+}
+export interface ResidentialProperty {
+  furnishedStatus: boolean;
+  numberOfBedrooms: number;
+  numberOfBathrooms: number;
+  numberOfWashrooms: number;
+  numberOfKitchens: number;
+  apartmentDto: ApartmentDto | null;
+  guestHouseDto: any | null;
+  houseDto: any | null;
+  hotelDto: any | null;
+  studentHostelDto: any | null;
 }
 
 export interface Listing {
+  id: string;
   listerId: string;
   paymentInformationId: string;
   propertyLocationId: string;
@@ -45,11 +87,14 @@ export interface Listing {
   propertySize: number;
   availableStartDate: string;
   availableEndDate: string;
-  lister: null | string; // Adjust this if the lister object structure is known
+  lister: Lister;
   paymentInformation: PaymentInformation;
   propertyLocation: PropertyLocation;
   propertyPhotos: PropertyPhoto[];
-  propertyVideos: PropertyVideo[];
+  propertyVideos: any[];
+  propertyAmenities: any[];
+  commercialProperty: any | null;
+  residentialProperty: ResidentialProperty | null;
 }
 
 export interface ListingsResponse {

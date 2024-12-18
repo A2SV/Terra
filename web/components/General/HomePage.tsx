@@ -10,7 +10,7 @@ import CreateListing from "./CreateListing";
 import FAQ from "./FAQ";
 import Footer from "./Footer";
 import { Listing } from "@/types/listingTypes";
-import { useGetAllListingsQuery } from "../../redux/getAllListingApi";
+import { useGetAllListingsQuery } from "../../redux/listingApi";
 import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
 import SpinnerComponent from "@/components/Common/Reusable/Spinner";
 
@@ -53,7 +53,7 @@ const HomePage = () => {
         ) : error && showError ? (
           <ErrorMessage message="Error fetching listings" onClose={() => setShowError(false)} />
         ) : (
-          <div className="flex flex-wrap w-full md:gap-12">
+          <div className="flex flex-wrap w-full md:gap-12 ">
             {listings.map((listing: Listing) => (
               <ListingCard key={listing.listerId} item={listing} />
             ))}
