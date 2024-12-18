@@ -98,3 +98,11 @@ void _registerCoreDependencies() {
     ..registerLazySingleton(http.Client.new)
     ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
 }
+
+void _registerCoreDependencies() {
+  sl
+    ..registerLazySingleton(() => NetworkImpl(sl()))
+    ..registerLazySingleton(InternetConnectionChecker.new)
+    ..registerLazySingleton(http.Client.new)
+    ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
+}

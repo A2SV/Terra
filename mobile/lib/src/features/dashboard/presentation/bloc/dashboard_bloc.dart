@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile/src/core/use_case/use_case.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/data/data.dart';
+import 'package:mobile/src/features/dashboard/domain/domain.dart';
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
@@ -49,14 +51,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   FutureOr<void> getListingEvent(
       GetListingEvent event, Emitter<DashboardState> emit) async {
+      GetListingEvent event, Emitter<DashboardState> emit) async {
     emit(ListingLoading());
+    final result = await getListingUseCase(ListingParams(id: event.id));
     final result = await getListingUseCase(ListingParams(id: event.id));
     print(result);
     result.fold(
         (failure) => emit(ListingError(failure.message)), (listing) => listing);
+        (failure) => emit(ListingError(failure.message)), (listing) => listing);
   }
 
   FutureOr<void> compareListingsEvent(
+      CompareListingsEvent event, Emitter<DashboardState> emit) async {
       CompareListingsEvent event, Emitter<DashboardState> emit) async {
     late ListingModel listing1;
     late ListingModel listing2;
@@ -66,7 +72,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     print(event.id2);
 
     final result2 = await getListingUseCase(ListingParams(id: event.id2));
+    final result2 = await getListingUseCase(ListingParams(id: event.id2));
     print(result2);
+    result2.fold((failure) => emit(ListingError(failure.message)),
+        (listing_2) => listing2 = listing_2);
+    final result1 = await getListingUseCase(ListingParams(id: event.id1));
+    result1.fold((failure) => emit(ListingError(failure.message)),
+        (listing_1) => listing1 = listing_1);
+    if (listing1 != Null && listing2 != Null) {
     result2.fold((failure) => emit(ListingError(failure.message)),
         (listing_2) => listing2 = listing_2);
     final result1 = await getListingUseCase(ListingParams(id: event.id1));
