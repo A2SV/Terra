@@ -29,16 +29,10 @@ class ListingDetailSuccess extends DashboardSuccess {
   ListingDetailSuccess({required this.listingDetail}):super(listings: []);
 }
 
-class CompareListing extends DashboardState {
-class ListingDetailSuccess extends DashboardSuccess {
-  final ListingDetailModel listingDetail;
-  ListingDetailSuccess({required this.listingDetail}):super(listings: []);
-}
 
 class CompareListing extends DashboardState {
   final ListingModel listing1;
   final ListingModel listing2;
-  CompareListing({required this.listing1, required this.listing2});
   CompareListing({required this.listing1, required this.listing2});
 }
 
