@@ -11,7 +11,6 @@ const ResidentialSpecific: React.FC<{
   const [furnishedStatus, setFurnishedStatus] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     handleInputChange(name, value);
     switch (name) {
@@ -96,8 +95,8 @@ const ResidentialSpecific: React.FC<{
                 className="mt-1 block w-full p-2  rounded-md bg-gray-100 text-sm text-gray-400"
               >
                 <option value="">Select</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
               </select>
             </div>
           </div>

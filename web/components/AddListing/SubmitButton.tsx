@@ -8,9 +8,15 @@ interface SubmitButtonProps {
   data: any;
   setSuccessMessage: (message: string) => void;
   setError: (message: string) => void;
+  targetType: any;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, setError }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({
+  data,
+  setSuccessMessage,
+  setError,
+  targetType,
+}) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -21,7 +27,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
     const uploadedImageUrls = [];
 
     type EnumMapping = {
-      [key: string]: { [key: string]: number };
+      [key: string]: { [key: string]: number | boolean | number[] };
     };
 
     const enumMapping: EnumMapping = {
@@ -40,11 +46,14 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         Rent: 0,
         Sale: 1,
       },
+      type: {
+        Residential: 0,
+        Commercial: 1,
+      },
       paymentCurrency: {
         Ghs: 0,
         Usd: 1,
         Eur: 2,
-        Gbp: 3,
       },
       paymentFrequency: {
         Daily: 0,
@@ -55,53 +64,234 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         PerAcademicYear: 5,
         Once: 6,
       },
-      propertyMarketStatus: {
-        Unavailable: 0,
-        Available: 1,
-        Rented: 2,
-        Sold: 3,
-      },
       propertyPublishStatus: {
         Unpublished: 0,
         Published: 1,
-        InReview: 2,
+        Inreview: 2,
       },
-      studentHostelLocation: {
-        OnCampus: 0,
-        OffCampus: 1,
+      propertyMarketStatus: {
+        Unavailable: 0,
+        Available: 1,
+        Sold: 3,
+        Rented: 2,
       },
-      studentHostelRoomTypes: {
-        Single: 0,
-        Double: 1,
-        Triple: 2,
-        Quad: 3,
-        Dormitory: 4,
+      StudentHostelLocation: {
+        "On campus": 0,
+        "Off campus": 1,
       },
       studentHostelType: {
         Male: 0,
         Female: 1,
         Coed: 2,
       },
+      roomTypes: {
+        Single: 0,
+        Double: 1,
+        Triple: 2,
+        Quad: 3,
+        Dormitory: 4,
+      },
       warehouseSuitableGoods: {
-        GeneralMerchandise: 0,
-        PerishableGoods: 1,
-        HazardousMaterials: 2,
-        Electronics: 3,
-        IndustrialOrConstructionMaterials: 4,
+        "General Merchandise": [0],
+        "Perishable Goods": [1],
+        "Hazardous Materials": [2],
+        "Electronics/Sensitive Equipment": [3],
+        Electronics: [4],
+        "Industrial/Construction Materials": [5],
       },
       eventSpaceSuitableEvents: {
-        Wedding: 0,
-        Religious: 1,
-        Funeral: 2,
-        Festival: 3,
-        Conference: 4,
-        Party: 5,
-        Concert: 6,
+        wedding: 0,
+        religious: 1,
+        funeral: 2,
+        failestival: 3,
+        conference: 4,
+        party: 5,
+        concert: 6,
       },
       officeSpaceType: {
         OpenPlan: 0,
         IndividualOffice: 1,
       },
+      negotiable: {
+        Yes: true,
+        No: false,
+      },
+      furnishedStatus: {
+        Yes: true,
+        No: false,
+      },
+      restaurantOnSite: {
+        Yes: true,
+        No: false,
+      },
+      meetingRooms: {
+        Yes: true,
+        No: false,
+      },
+      receptionArea: {
+        Yes: true,
+        No: false,
+      },
+      displayWindow: {
+        Yes: true,
+        No: false,
+      },
+      sharedFacilities: {
+        Yes: true,
+        No: false,
+      },
+      mealPlanAvailable: {
+        Yes: true,
+        No: false,
+      },
+      laundryFacility: {
+        Yes: true,
+        No: false,
+      },
+      audioVisualEquipmentsAvailable: {
+        Yes: true,
+        No: false,
+      },
+      loadingDocks: {
+        Yes: true,
+        No: false,
+      },
+      storageRoom: {
+        Yes: true,
+        No: false,
+      },
+      cateringServiceAvailable: {
+        Yes: true,
+        No: false,
+      },
+    };
+
+    const constructPropertySpecificData = (data: any, propertyType: string) => {
+      switch (propertyType) {
+        case "Apartment":
+          return {
+            apartment: {
+              furnishedStatus: getEnumValue("furnishedStatus", data.furnishedStatus),
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              numberOfFloorsInBuilding: data.numFloors,
+              floorNumberOfUnit: data.floorNumber,
+              laundryFacilityAvailable: getEnumValue("laundryFacility", data.laundryFacility),
+              cleaningServiceAvailable: data.cleaningService,
+              studentFriendly: data.studentFriendly,
+            },
+          };
+        case "House":
+          return {
+            house: {
+              furnishedStatus: getEnumValue("furnishedStatus", data.furnishedStatus),
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              numberOfStories: data.numStories,
+              garageSpace: data.garageSpace,
+              studentFriendly: data.studentFriendly,
+            },
+          };
+        case "Student's Hostels":
+          return {
+            studentHostel: {
+              furnishedStatus: getEnumValue("furnishedStatus", data.furnishedStatus),
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              roomTypes: data.selectedroomTypes.map((rooms: string) =>
+                getEnumValue("roomTypes", rooms)
+              ),
+              studentHostelType: getEnumValue("studentHostelType", data.studentHostelType),
+              studentHostelLocation: getEnumValue("StudentHostelLocation", data.location),
+              sharedFacilities: getEnumValue("sharedFacilities", data.sharedFacilities),
+              mealPlanAvailable: getEnumValue("mealPlanAvailable", data.mealPlanAvailable),
+              studyAreaAvailable: getEnumValue("furnishedStatus", data.furnishedStatus),
+              laundryFacilityAvailable: data.laundryFacility,
+              cleaningServiceAvailable: data.cleaningService,
+            },
+          };
+        case "Hotel":
+          return {
+            hotel: {
+              furnishedStatus: getEnumValue("furnishedStatus", data.furnishedStatus),
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              starRating: data.starRating,
+              restaurantOnSite: getEnumValue("restaurantOnSite", data.restaurantOnSite),
+            },
+          };
+        case "Guest House":
+          return {
+            guestHouse: {
+              furnishedStatus: getEnumValue("furnishedStatus", data.furnishedStatus),
+              numberOfBedrooms: data.bedrooms,
+              numberOfBathrooms: data.bathrooms,
+              numberOfWashrooms: data.washrooms,
+              numberOfKitchens: data.kitchens,
+              starRating: data.starRating,
+              restaurantOnSite: getEnumValue("restaurantOnSite", data.restaurantOnSite),
+            },
+          };
+        case "Office Space":
+          return {
+            officeSpace: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: parseInt(data.parkingSpaces, 10) > 0,
+              officeSpaceType: getEnumValue("officeSpaceType", data.officeSpaceType),
+              meetingRoomsAvailable: getEnumValue("meetingRooms", data.meetingRooms),
+              receptionAreaAvailable: getEnumValue("receptionArea", data.receptionArea),
+            },
+          };
+        case "Shop":
+          return {
+            shop: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: parseInt(data.parkingSpaces, 10) > 0,
+              displayWindowAvailable: getEnumValue("displayWindow", data.displayWindow),
+            },
+          };
+        case "Warehouse":
+          return {
+            warehouse: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.numFloors,
+              parkingSpace: parseInt(data.parkingSpaces, 10) > 0,
+              ceilingHeight: data.ceilingHeight,
+              loadingDockAvailable: getEnumValue("loadingDocks", data.loadingDocks),
+              officeSpaceAvailable: data.officeSpaceAvailable,
+              suitableGoods: getEnumValue("warehouseSuitableGoods", data.goodsType),
+            },
+          };
+        case "Event Space":
+          return {
+            eventSpace: {
+              totalFloors: data.totalFloors,
+              floorNumber: data.floorNumber,
+              parkingSpace: parseInt(data.parkingSpaces, 10) > 0,
+              maximumCapacity: data.maxCapacity,
+              cateringServiceAvailable: data.cateringServiceAvailable,
+              audioVisualEquipmentsAvailable: getEnumValue(
+                "audioVisualEquipmentsAvailable",
+                data.audioVisualEquipment
+              ),
+              suitableEvents: data.selectedeventTypes.map((event: string) =>
+                getEnumValue("eventSpaceSuitableEvents", event)
+              ),
+            },
+          };
+        default:
+          return {};
+      }
     };
 
     const getEnumValue = (category: keyof EnumMapping, value: string | number) => {
@@ -132,42 +322,31 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
       }
 
       const finalData = {
-        listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
+        listerId: data.listerId,
         title: data.listingName,
         description: data.listingDescription,
         propertyType: getEnumValue("propertyType", 0),
         listingType: getEnumValue("listingType", 0),
         propertyPublishStatus: getEnumValue("propertyPublishStatus", 1),
         propertyMarketStatus: getEnumValue("propertyMarketStatus", 1),
-        propertySize: data.landSize,
+        propertySize: parseInt(data.landSize, 10),
         availableStartDate: "2024-07-25T12:35:32.051Z",
         availableEndDate: "2024-07-25T12:35:32.051Z",
         paymentCurrency: getEnumValue("paymentCurrency", 0),
         paymentFrequency: getEnumValue("paymentFrequency", 0),
-        price: data.price,
-        negotiable: true,
-        streetName: "Afariwa RD",
-        houseNumber: "GC-0825-261",
-        city: "Accra",
-        country: "Ghana",
-        zipCode: "+233",
-        longitude: 180,
-        latitude: 180,
+        price: parseInt(data.price, 10),
+        negotiable: getEnumValue("negotiable", data.negotiable),
+        streetName: data.streetName,
+        houseNumber: data.houseNumber,
+        city: data.city,
+        country: data.country,
+        zipCode: data.zipCode,
+        longitude: data.coordinates.lng,
+        latitude: data.coordinates.lat,
         amenities: data.selectedAmenities,
         pictures: uploadedImageUrls,
         videos: [data.video],
-        apartment: {
-          furnishedStatus: true,
-          numberOfBedrooms: data.bedrooms,
-          numberOfBathrooms: data.bathrooms,
-          numberOfWashrooms: data.washrooms,
-          numberOfKitchens: data.kitchens,
-          numberOfFloorsInBuilding: data.numFloors,
-          floorNumberOfUnit: data.floorNumber,
-          laundryFacilityAvailable: data.laundryFacility,
-          cleaningServiceAvailable: data.cleaningService,
-          studentFriendly: data.studentFriendly,
-        },
+        ...constructPropertySpecificData(data, targetType),
       };
 
       const response = await fetch(`${baseUrl}listing`, {
@@ -178,8 +357,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
         body: JSON.stringify(finalData),
       });
 
-      console.log(response);
-
       if (response.ok) {
         setSuccessMessage("Listing Has Been Added Sucessfully");
         setTimeout(() => {
@@ -187,7 +364,11 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ data, setSuccessMessage, se
           router.push("/");
         }, 5000);
       } else {
-        setError("Failed To Add listing. Please try again.");
+        const errorResponse = await response.json();
+        const validationErrors = errorResponse.errors
+          ? Object.values(errorResponse.errors).flat().join(", ")
+          : "";
+        setError(validationErrors || "Failed To Add listing. Please try again.");
         setTimeout(() => {
           setError("");
         }, 5000);

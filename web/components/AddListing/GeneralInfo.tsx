@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ResidentialSpecific from "./Features/ResidentialSubtype/ResidentialSpecific";
 import CommercialSpecific from "./Features/CommercialSubtype/CommercialSpecific";
 import ImageSelector from "./ImageSelector";
@@ -28,72 +28,71 @@ const priceFrequencyOptions: { [key: string]: string[] } = {
 
 const GeneralInfo: React.FC = () => {
   const [formData, setFormData] = useState({
-    listingName: "",
-    category: "",
-    type: "",
-    residentialSubtype: "",
-    commercialSubtype: "",
-    landSize: "",
-    price: 0,
-    frequency: "",
-    negotiable: "",
-    listingDescription: "",
-    selectedAmenities: [],
-    features: {
-      numFloors: 0,
-      floorNumber: 0,
-      studentFriendly: false,
-      laundryFacility: false,
-      cleaningService: false,
-      openPlan: false,
-      individualOffices: false,
-      meetingRooms: false,
-      receptionArea: false,
-      numStories: 0,
-      garageSpaces: false,
-      starRating: 0,
-      restaurantOnSite: "",
-      loadingDocks: "",
-      officeSpaceIncluded: "",
-      goodsSuitableForStorage: "",
-      displayWindow: "",
-      storageRoom: "",
-      maximumCapacity: 0,
-      eventTypes: [],
-      cateringFacilities: "",
-      audioVisualEquipment: "",
-      selectedRoomTypes: [],
-      hostelType: "Male only",
-      hostelLocation: "On campus",
-      furnishedStatus: false,
-      numberOfBedrooms: 0,
-      numberOfBathrooms: 0,
-      numberOfWashrooms: 0,
-      numberOfKitchens: 0,
-      ceilingHeight: 0,
-      parkingSpaces: 0,
-      suitableGoods: [],
-      officeType: "Open Plan",
-      meetingRoomsAvailable: "Yes",
-      receptionAreaAvailable: "Yes",
-      totalFloors: 0,
-      studentHostelType: "",
-      studentHostelLocation: "",
-      sharedFacilities: false,
-      mealPlanAvailable: false,
-      studyAreaAvailable: false,
-      laundryFacilityAvailable: false,
-      cleaningServiceAvailable: false,
+    address: "",
+    audioVisualEquipment: "Yes",
+    bedrooms: 0,
+    bathrooms: 0,
+    category: "Rent",
+    cateringServices: "Yes",
+    ceilingHeight: 0,
+    city: "Greater Accra",
+    country: "Ghana",
+    cleaningService: false,
+    commercialSubtype: "Office Space",
+    coordinates: {
+      lat: 0,
+      lng: 0,
     },
+    displayWindow: "Yes",
+    floorNumber: 0,
+    floorNumberOfUnit: 0,
+    furnishedStatus: "Yes",
+    frequency: "Per Night",
+    garageSpace: 0,
+    goodsType: "General Merchandise",
+    hostelType: "Female only",
+    houseNumber: "GC-0825261",
     images: [],
-    location: {
-      address: "",
-      coordinates: {
-        lat: 0,
-        lng: 0,
-      },
-      video: "",
-    },
+    kitchens: 0,
+    landSize: "",
+    laundryFacility: false,
+    listingName: "",
+    listerId: "f7dbc673-4cd9-477b-a809-0739846dd5fb",
+    listingDescription: "",
+    loadingDocks: "Yes",
+    location: "On campus",
+    maxCapacity: 0,
+    mealPlanAvailable: false,
+    meetingRooms: "Yes",
+    negotiable: "Yes",
+    numFloors: 0,
+    numStories: 0,
+    numberOfFloorsInBuilding: 0,
+    officeType: "Open Plan",
+    fficeSpaceIncluded: "Yes",
+    officeSpaceAvailable: false,
+    parkingSpaces: 0,
+    price: 0,
+    receptionArea: "Yes",
+    residentialSubtype: "Apartment",
+    restaurantOnSite: "Yes",
+    selectedroomTypes: [],
+    selectedAmenities: [],
+    selectedeventTypes: [],
+    sharedFacilities: false,
+    starRating: 0,
+    storageRoom: "Yes",
+    studentFriendly: false,
+    studentHostelLocation: 0,
+    studentHostelType: 0,
+    streetName: "AFARIWA RD",
+    suitableEvents: [],
+    suitableGoods: [],
+    totalFloors: 0,
+    type: "Residential",
+    video: "",
+    washrooms: 0,
+    zipCode: "00233",
   });
 
   const [type, setType] = useState<string>("Residential");
@@ -104,6 +103,7 @@ const GeneralInfo: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [specificData, setSpecificData] = useState<string>("");
 
   const amenities = [
     "Air Conditioning",
@@ -205,8 +205,8 @@ const GeneralInfo: React.FC = () => {
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value);
     handleInputChange("category", event.target.value);
+    setCategory(event.target.value);
   };
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -238,6 +238,14 @@ const GeneralInfo: React.FC = () => {
   const ResidentialFeatureComponent = residentialFeatureComponents[residentialSubtype];
   const CommercialFeatureComponent = commercialFeatureComponents[commercialSubtype];
 
+  useEffect(() => {
+    if (type === "Commercial") {
+      setSpecificData(commercialSubtype);
+    } else {
+      setSpecificData(residentialSubtype);
+    }
+  }, [type, residentialSubtype, commercialSubtype]);
+
   return (
     <div className="mt-16 rounded-lg font-nunito flex flex-col lg:flex-row">
       {error && <ErrorMessage message={error} onClose={() => setError("")}></ErrorMessage>}
@@ -260,11 +268,12 @@ const GeneralInfo: React.FC = () => {
               <div>
                 <label className="block text-sm text-black font-semibold">Category</label>
                 <select
+                  value={category}
                   className="mt-1 block w-full p-2 rounded-md bg-gray-100 text-sm text-black"
                   onChange={handleCategoryChange}
                 >
-                  <option>Rent</option>
-                  <option>Sale</option>
+                  <option value="Rent">Rent</option>
+                  <option value="Sale">Sale</option>
                 </select>
               </div>
               <div>
@@ -453,7 +462,12 @@ const GeneralInfo: React.FC = () => {
           <LocationForm handleInputChange={handleInputChange} />
         </div>
         <div>
-          <SubmitButton setSuccessMessage={setSuccessMessage} setError={setError} data={formData} />
+          <SubmitButton
+            setSuccessMessage={setSuccessMessage}
+            setError={setError}
+            data={formData}
+            targetType={specificData}
+          />
         </div>
       </div>
     </div>
