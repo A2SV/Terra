@@ -62,7 +62,15 @@ const Navbar = () => {
     >
       <div className="flex flex-row justify-between w-full h-12 py-2 lg:px-8 px-4 pt-4 ">
         <div className="flex items-center ">
-          <Image src="/headerLogo.svg" alt="Logo" height={70} width={60} className="object-cover" />
+          <Link href={"/"}>
+            <Image
+              src="/headerLogo.svg"
+              alt="Logo"
+              height={70}
+              width={60}
+              className="object-cover"
+            />
+          </Link>
         </div>
         <div className="lg:flex flex-row items-center hidden ">
           <nav>

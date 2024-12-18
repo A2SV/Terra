@@ -1,51 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { IoCaretDownCircleOutline, IoCalendarOutline } from "react-icons/io5";
 import { SlMap } from "react-icons/sl";
+import { useGetListingByIdQuery } from "@/redux/listingApi";
+import { useParams } from "next/navigation";
+import UpdatedDate from "../Common/Reusable/UpdatedDate";
+import Spinner from "@/components/Common/Reusable/Spinner";
+import { enumMapping } from "./HeroListing";
+import formatMoney from "@/components/Common/Reusable/MoneyFormatter";
 
 const ListDesc: React.FC = () => {
-  const features = [
-    "Air Conditioning",
-    "Barbeque",
-    "Dryer",
-    "Gym",
-    "Laundry",
-    "Lawn",
-    "Microwave",
-    "Outdoor Shower",
-    "Refrigerator",
-    "Sauna",
-    "Swimming Pool",
-    "TV Cable",
-    "Washer",
-    "WiFi",
-    "Window Coverings",
-  ];
+  const params = useParams<{ id: string }>();
+
+  const { data, error, isLoading } = useGetListingByIdQuery({ listingId: params?.id });
+  const [listingData, setListingData] = useState<any>({});
+  useEffect(() => {
+    if (data) {
+      setListingData(data);
+    }
+  }, [data]);
+
+  const features = [...(listingData.propertyAmenities?.map((amenity: string) => amenity) || [])];
+
+  if (isLoading) {
+    return (
+      <div>
+        <Spinner />{" "}
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error loading blog data.</div>;
+  }
+
+  if (!data) {
+    return <div>No blog data found.</div>;
+  }
+
   return (
     <div className="flex flex-col w-full lg:w-8/12 bg-gray-50">
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
           <p className="text-lg font-roboto">Description</p>
         </div>
-        <p className="py-10">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-          tincidunt ut laoreet <br /> dolore magna aliquam erat volutpat. Ut wisi enim ad minim
-          veniam, quis nostrud exerci tation ullamcorper <br /> suscipit lobortis nisl ut aliquip ex
-          ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in <br /> vulputate
-          velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
-          accumsan et <br /> iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
-          duis dolore te feugait nulla facilisi.
-        </p>
-        <p className="pb-10">
-          Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod
-          mazim placerat facer <br /> possim assum. Typi non habent claritatem insitam; est usus
-          legentis in iis qui facit eorum claritatem. <br /> Investigationes demonstraverunt
-          lectores legere me lius quod ii legunt saepius. Claritas est etiam processus <br />{" "}
-          dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera
-          gothica, quam nunc <br /> putamus parum claram, anteposuerit litterarum formas humanitatis
-          per seacula quarta decima et quinta <br />
-          decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-        </p>
+        <p className="py-10">{listingData.description}</p>
       </div>
 
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
@@ -61,29 +60,29 @@ const ListDesc: React.FC = () => {
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Address</p>
-              <p>2436 SW 8th St</p>
+              <p>{listingData.propertyLocation?.streetName}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">City</p>
-              <p>Miami</p>
+              <p>{listingData.propertyLocation?.city}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">State/county</p>
-              <p>Florida</p>
+              <p>{listingData.propertyLocation?.houseNumber}</p>
             </div>
           </div>
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Zip/Postal Code</p>
-              <p>33140</p>
+              <p>{listingData.propertyLocation?.zipCode}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Area</p>
-              <p>West Flagger</p>
+              <p>{listingData.propertyLocation?.city}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Country</p>
-              <p>United States</p>
+              <p>{listingData.propertyLocation?.country}</p>
             </div>
           </div>
         </div>
@@ -93,7 +92,7 @@ const ListDesc: React.FC = () => {
           <p className="text-lg font-roboto">Details</p>
           <p className="font-light text-sm text-gray-400 flex items-center">
             <IoCalendarOutline className="mr-1" />
-            Updated on April 4, 2020 at 5:18 pm
+            <UpdatedDate updatedAt={listingData.propertyLocation?.updatedAt} />
           </p>
         </div>
 
@@ -101,45 +100,51 @@ const ListDesc: React.FC = () => {
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Property ID:</p>
-              <p>HZ40</p>
+              <p>N/A</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Price:</p>
-              <p>$4,500/mo</p>
+              <p>
+                {formatMoney(listingData.paymentInformation?.cost ?? 0, {
+                  currency: enumMapping.paymentCurrency[listingData.paymentInformation?.currency],
+                  locale: "en-GH",
+                })}
+                / {enumMapping.paymentFrequency[listingData.paymentInformation?.paymentFrequency]}
+              </p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Property Size:</p>
-              <p>1200 Sq m</p>
+              <p>{listingData?.propertySize} Sq m</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Bedrooms:</p>
-              <p>4</p>
+              <p>{listingData.residentialProperty?.numberOfBedrooms}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Bathrooms:</p>
-              <p>2</p>
+              <p>{listingData.residentialProperty?.numberOfBathrooms}</p>
             </div>
           </div>
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Garage:</p>
-              <p>1</p>
+              <p>Unavailable</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Garage Size:</p>
-              <p>200 Sq m</p>
+              <p>N/A</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Year Built:</p>
-              <p>2016</p>
+              <p>N/A</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Property Type:</p>
-              <p>Apartment</p>
+              <p>{enumMapping.propertyType[listingData.propertyType]}</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Property Status:</p>
-              <p>For Rent</p>
+              <p>{enumMapping.propertyMarketStatus[listingData.propertyMarketStatus]}</p>
             </div>
           </div>
         </div>
@@ -154,25 +159,25 @@ const ListDesc: React.FC = () => {
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Pool Size:</p>
-              <p>300 Sqft</p>
+              <p>N/A Sqft</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Last remodel year:</p>
-              <p>1987</p>
+              <p>N/A</p>
             </div>
           </div>
           <div className="w-[45%]">
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Amenities:</p>
-              <p>Clubhouse</p>
+              <p>N/A</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
-              <p className="font-bold">Additional Rooms::</p>
-              <p>Guest Bath</p>
+              <p className="font-bold">Additional Rooms:</p>
+              <p>N/A</p>
             </div>
             <div className="flex flex-row justify-between border-b-2 py-4">
               <p className="font-bold">Equipment:</p>
-              <p>Grill - Gas</p>
+              <p>N/A</p>
             </div>
           </div>
         </div>
@@ -202,14 +207,14 @@ const ListDesc: React.FC = () => {
             <IoCaretDownCircleOutline className="text-blue" />
             City
           </p>
-          <p>Miami</p>
+          <p> {listingData.propertyLocation?.city}</p>
         </div>
         <div className="flex flex-row justify-between border-b-2 py-4">
           <p className="font-bold flex items-center">
             <IoCaretDownCircleOutline className="text-blue" />
             State/county
           </p>
-          <p>Florida</p>
+          <p> {listingData.propertyLocation?.country}</p>
         </div>
       </div>
     </div>

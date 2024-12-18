@@ -43,9 +43,12 @@ const getTextFromMapping = (value: number, mapping: { [key: number]: string }): 
 const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
   return (
     <div className="h-[455px] my-4 flex justify-start items-start w-[400px] max-lg:mx-auto">
-      <div className="w-full bg-white rounded-3xl  mx-2">
+      <div className="w-full bg-white rounded-3xl  mx-2 md:transition-transform md:duration-300 md:hover:scale-105 md:hover:shadow-xl">
         <div className="picture relative overflow-x-hidden rounded-3xl">
-          <Carousel images={item.propertyPhotos.map((photo) => photo.url)} />
+          <Link key={item.id} href={`/single/${item.id}`}>
+            <Carousel images={item.propertyPhotos.map((photo) => photo.url)} />
+          </Link>
+
           <div className="flex justify-center items-center absolute top-4 font-nunito left-5 bg-yellow-600 opacity-80 text-white rounded text-[13px] w-[72px] pt-[2px]">
             {getTextFromMapping(item.propertyType, propertyTypeMapping)}
           </div>
@@ -73,30 +76,30 @@ const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
             </div>
           </div>
         </div>
-        <Link href="">
-          <div className="p-2 pl-1 pr-1 flex justify-between">
-            <div className="pl-4 ">
-              <h2 className="font-nunito font-bold text-[24px] text-btnColor">
-                ${item.paymentInformation.cost}
-              </h2>
-            </div>
-            <p className="my-auto text-slate-400 font-nunito font-bold pr-4 text-sm">
-              {getTextFromMapping(item.propertyType, propertySubTypeMapping)}
-            </p>
-          </div>
 
-          <div className="pl-4 pt-0">
-            <h2 className="font-nunito font-bold text-lg text-gray-700">{item.title}</h2>
+        <div className="p-2 pl-1 pr-1 flex justify-between">
+          <div className="pl-4 ">
+            <h2 className="font-nunito font-bold text-[24px] text-btnColor">
+              GHC {item.paymentInformation.cost}
+            </h2>
           </div>
-          <div className="flex pl-4 pr-3 my-2">
-            <HiOutlineLocationMarker className="mr-2 w-5 h-5 text-slate-400" />
-            <p className="text-[15px] text-slate-400 font-nunito font-bold">
-              {item.propertyLocation.city} | {item.propertyLocation.streetName}
-            </p>
-          </div>
+          <p className="my-auto text-slate-400 font-nunito font-bold pr-4 text-sm">
+            {getTextFromMapping(item.propertyType, propertySubTypeMapping)}
+          </p>
+        </div>
 
-          <div className="flex pl-4 space-x-5">
-            {/* <div className="flex space-x-2 justify-center items-center">
+        <div className="pl-4 pt-0">
+          <h2 className="font-nunito font-bold text-lg text-gray-700">{item.title}</h2>
+        </div>
+        <div className="flex pl-4 pr-3 my-2">
+          <HiOutlineLocationMarker className="mr-2 w-5 h-5 text-slate-400" />
+          <p className="text-[15px] text-slate-400 font-nunito font-bold">
+            {item.propertyLocation.city} | {item.propertyLocation.streetName}
+          </p>
+        </div>
+
+        <div className="flex pl-4 space-x-5">
+          {/* <div className="flex space-x-2 justify-center items-center">
               <Image src={bedIcon} alt="bed" className="size-5" />
               <p className="font-nunito font-bold text-base text-gray-700 pt-1">3</p>
             </div>
@@ -104,14 +107,13 @@ const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
               <Image src={showerIcon} alt="shower" className="size-5" />
               <p className="font-nunito font-bold text-base text-gray-700 pt-1">2</p>
             </div> */}
-            <div className="flex space-x-2 justify-center items-center">
-              <Image src={constructionIcon} alt="construction" className="size-5" />
-              <p className="font-nunito font-bold text-base text-gray-700 pt-2">
-                {item.propertySize} sq.ft
-              </p>
-            </div>
+          <div className="flex space-x-2 justify-center items-center">
+            <Image src={constructionIcon} alt="construction" className="size-5" />
+            <p className="font-nunito font-bold text-base text-gray-700 pt-2">
+              {item.propertySize} sq.ft
+            </p>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );
