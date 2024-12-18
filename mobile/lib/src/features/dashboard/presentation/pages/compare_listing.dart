@@ -592,7 +592,7 @@ class _CompareListingPageState extends State<CompareListingPage> {
                                       switchScreen(
                                         context: context,
                                         routeName: AppRoutes.listingDetail,
-                                        extra: index==1?state.listing2:state.listing1,
+                                        extra: index==1?state.listing2.id:state.listing1.id,
                                       );
                                     },
                                     showPrefixWidget: true,

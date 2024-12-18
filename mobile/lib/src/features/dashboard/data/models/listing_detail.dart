@@ -47,13 +47,10 @@ class ListingDetailModel extends ListingDetailEntity {
       propertyLocationId: json['propertyLocationId'],
       title: json['title'],
       description: json['description'],
-      propertyType: PropertyType.values
-          .firstWhere((type) => type.name == json['propertyType']),
-      propertySubType: PropertySubType.values
-          .firstWhere((type) => type.name == json['propertySubType']),
-      listingType: PropertyListingType.values
-          .firstWhere((type) => type.name == json['listingType']),
-      propertySize: json['propertySize']?.toDouble(),
+      propertyType: PropertyType.values[json['propertyType']],
+      propertySubType: PropertySubType.values[json['propertySubType']],
+      listingType: PropertyListingType.values[json['listingType']],
+      propertySize: (json['propertySize']as num).toDouble(),
       availableStartDate: json['availableStartDate'] != null
           ? DateTime.parse(json['availableStartDate'])
           : null,
