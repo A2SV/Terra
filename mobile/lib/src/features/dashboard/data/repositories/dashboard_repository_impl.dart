@@ -27,4 +27,18 @@ class DashboardRepositoryImpl implements DashboardRepository {
       return const Left(NetworkFailure('No internet connection. Check Your Internet Connection'));
     }
   }
+  
+  @override
+  Future<Either<Failure, ListingDetailModel>> getAllListingById(String id) async{
+    if (await network.isConnected) {
+      try {
+        final result = await remoteDataSource.getListingById(id);
+        return Right(result);
+      } on ApiException catch (e) {
+        return Left(APIFailure(e.message));
+      }
+    } else {
+      return const Left(NetworkFailure('No internet connection. Check Your Internet Connection'));
+    }
+  }
 }

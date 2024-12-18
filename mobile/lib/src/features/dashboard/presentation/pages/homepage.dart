@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                               switchScreen(
                                 context: context,
                                 routeName: AppRoutes.listingDetail,
-                                extra: state.listings[index],
+                                extra: state.listings[index].id,
                               );
                             },
                             child: ListingsCard(

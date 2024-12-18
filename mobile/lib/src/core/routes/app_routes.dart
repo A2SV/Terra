@@ -71,8 +71,8 @@ final routes = <GoRoute>[
     name: AppRoutes.listingDetail,
     path: '/${AppRoutes.listingDetail}',
     builder: (context, state) {
-      final listing = state.extra as ListingModel;
-      return ListingDetail(listing: listing);
+      final id = state.extra as String;
+      return ListingDetail(id: id);
     },
   ),
   GoRoute(

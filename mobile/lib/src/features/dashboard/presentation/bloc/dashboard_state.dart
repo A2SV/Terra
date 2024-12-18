@@ -24,10 +24,16 @@ class DashboardSuccess extends DashboardState {
   DashboardSuccess({required this.listings}) : super();
 }
 
-class CompareListing extends DashboardState{
+class ListingDetailSuccess extends DashboardSuccess {
+  final ListingDetailModel listingDetail;
+  ListingDetailSuccess({required this.listingDetail}):super(listings: []);
+}
+
+
+class CompareListing extends DashboardState {
   final ListingModel listing1;
   final ListingModel listing2;
-  CompareListing({required this.listing1,required this.listing2});
+  CompareListing({required this.listing1, required this.listing2});
 }
 
 final class ListingError extends DashboardState {
@@ -36,6 +42,7 @@ final class ListingError extends DashboardState {
   @override
   List<Object?> get props => [message];
 }
+
 
 class LocationPermissionState extends DashboardState {
   final bool isGranted;
