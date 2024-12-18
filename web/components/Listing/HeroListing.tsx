@@ -23,6 +23,7 @@ import { PropertyPhoto } from "@/types/listingTypes";
 import Spinner from "@/components/Common/Reusable/Spinner";
 import formatMoney from "@/components/Common/Reusable/MoneyFormatter";
 
+
 type EnumMapping = {
   [key: string]: { [key: number]: string };
 };
@@ -106,6 +107,7 @@ export const enumMapping: EnumMapping = {
     1: "IndividualOffice",
   },
 };
+
 
 const HeroListing = () => {
   const params = useParams<{ id: string }>();
