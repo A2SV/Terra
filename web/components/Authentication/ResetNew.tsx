@@ -6,11 +6,10 @@ import axios from "axios";
 import AuthButton from "../Common/Auth/AuthButton";
 
 interface ResetNewProps {
-  email: string;
   token: string;
 }
 
-const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
+const ResetNew: React.FC<ResetNewProps> = ({ token }) => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [showPassword1, setShowPassword1] = useState(false);
@@ -22,80 +21,59 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
   const router = useRouter();
 
   const togglePasswordVisibility1 = () => {
-    setShowPassword1(true);
+    setShowPassword1(!showPassword1);
   };
 
   const togglePasswordVisibility2 = () => {
-    setShowPassword2(true);
+    setShowPassword2(!showPassword2);
   };
 
   useEffect(() => {
-    const isPasswordValid =
-      password1.length >= 10 && password1 === password2 && password1.length > 0;
-
+    const isPasswordValid = password1.length >= 10 && password1 === password2;
     setIsButtonDisabled(!isPasswordValid);
   }, [password1, password2]);
 
-  const handlePasswordReset = () => {
+  const handlePasswordReset = async () => {
     setLoading(true);
     setError("");
     setSuccessMessage("");
 
-    setTimeout(async () => {
+    try {
       if (password1.length === 0 || password2.length === 0) {
         setError("Passwords cannot be empty.");
         setLoading(false);
       } else if (password1 === password2 && password1.length > 0) {
-        setSuccessMessage("Password successfully reset.");
-        setLoading(false);
-
-        setTimeout(() => {
-          setSuccessMessage("");
-          router.push("/auth");
-        }, 1000);
-      } else {
-        try {
-          await resetPasswordApi();
-          setSuccessMessage("Password successfully reset.");
-          setLoading(false);
-
-          setTimeout(() => {
-            setSuccessMessage("");
-            router.push("/auth");
-          }, 1000);
-        } catch (error: any) {
-          setError(error.message);
-          setLoading(false);
-        }
+        await resetPasswordApi();
       }
-    }, 1000);
-  };
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  const resetPasswordApi = async () => {
-    try {
-      await axios({
-        method: "POST",
-        url: `${baseUrl}/auth/reset-password`,
-        data: {
-          email,
-          token,
-          newPassword: password1,
-          confirmPassword: password2,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      setTimeout(() => {
-        setSuccessMessage("");
-        router.push("/auth");
-      }, 1000);
     } catch (error: any) {
-      setError(error.response.data.message || "Failed to reset password");
+      setError(error.response?.data?.message || "Failed to reset password");
       setLoading(false);
     }
   };
+
+  const resetPasswordApi = async () => {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    await axios({
+      method: "POST",
+      url: `${baseUrl}Auth/reset-password?token=${token}`,
+      data: {
+        newPassword: password1,
+        confirmPassword: password2,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    setSuccessMessage("Password successfully reset.");
+    setLoading(false);
+
+    setTimeout(() => {
+      setSuccessMessage("");
+      router.push("/auth");
+    }, 1000);
+  };
+
   return (
     <div>
       <div className="w-10/12 md:w-8/12 flex items-center justify-center mx-auto">
@@ -108,56 +86,47 @@ const ResetNew: React.FC<ResetNewProps> = ({ email, token }) => {
           </p>
           <div>
             <p className="mb-2 text-sm">Password</p>
-
             <div className="relative mb-8 text-sm">
               <input
-                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue  rounded-full py-3 px-6 w-full`}
+                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
                 type={showPassword1 ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
               />
-              {error ? <p className="text-red-500 text-sm mt-1">{error}</p> : <p></p>}
-              <button className="absolute top-[25%] right-[5%]" onClick={togglePasswordVisibility1}>
-                {showPassword1 ? (
-                  <IoMdEyeOff className="size-5 text-terragray" />
-                ) : (
-                  <IoMdEye className="size-5 text-terragray" />
-                )}
+              <button
+                type="button"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility1}
+              >
+                {showPassword1 ? <IoMdEyeOff /> : <IoMdEye />}
               </button>
             </div>
-          </div>
-
-          <div>
-            <p className="mb-2 text-sm">Confirm password</p>
-
-            <div className="relative text-sm">
+            <p className="mb-2 text-sm">Confirm Password</p>
+            <div className="relative mb-8 text-sm">
               <input
                 className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
                 type={showPassword2 ? "text" : "password"}
-                placeholder="Re-enter your password"
+                placeholder="Confirm your password"
                 value={password2}
                 onChange={(e) => setPassword2(e.target.value)}
               />
-              {error ? <p className="text-red-500 text-sm mt-1">{error}</p> : <p></p>}
-              <button className="absolute top-[25%] right-[5%]" onClick={togglePasswordVisibility2}>
-                {showPassword2 ? (
-                  <IoMdEyeOff className="size-5 text-terragray" />
-                ) : (
-                  <IoMdEye className="size-5 text-terragray" />
-                )}
+              <button
+                type="button"
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility2}
+              >
+                {showPassword2 ? <IoMdEyeOff /> : <IoMdEye />}
               </button>
             </div>
           </div>
-
-          <div>
-            <AuthButton
-              loading={loading}
-              isButtonDisabled={isButtonDisabled}
-              text="Set new password"
-              action={handlePasswordReset}
-            />
-          </div>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          <AuthButton
+            loading={loading}
+            isButtonDisabled={isButtonDisabled}
+            text="Reset Password"
+            action={handlePasswordReset}
+          />
         </div>
       </div>
     </div>
