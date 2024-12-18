@@ -114,30 +114,27 @@ class _ListingDetailState extends State<ListingDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => sl<DashboardBloc>(),
-        child: BlocBuilder<DashboardBloc, DashboardState>(
-          // body: BlocConsumer<DashboardBloc, DashboardState>(
-          //   listener: (context, state) {
-          //     // TODO: implement listener
-          //   },
-          builder: (context, state) {
-            return (state is DashboardError)
-                ? Center(
-                    child: Text(
-                      state.message,
-                      style: context.textTheme.bodyMedium!.copyWith(
-                        fontSize: 15.sp,
-                      ),
+      body: BlocBuilder<DashboardBloc, DashboardState>(
+        // body: BlocConsumer<DashboardBloc, DashboardState>(
+        //   listener: (context, state) {
+        //     // TODO: implement listener
+        //   },
+        builder: (context, state) {
+          return (state is DashboardError)
+              ? Center(
+                  child: Text(
+                    state.message,
+                    style: context.textTheme.bodyMedium!.copyWith(
+                      fontSize: 15.sp,
                     ),
-                  )
-                : (state is DashboardLoading)
-                    ? const Center(child: CircularProgressIndicator())
-                    : (state is ListingDetailSuccess)
-                        ? _buildListingDetail(context, state.listingDetail)
-                        : const SizedBox();
-          },
-        ),
+                  ),
+                )
+              : (state is DashboardLoading)
+                  ? const Center(child: CircularProgressIndicator())
+                  : (state is ListingDetailSuccess)
+                      ? _buildListingDetail(context, state.listingDetail)
+                      : const SizedBox();
+        },
       ),
     );
   }

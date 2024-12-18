@@ -67,10 +67,10 @@ class AppRouter extends StatelessWidget {
 
   GoRouter createRoute() {
     return GoRouter(
-      // initialLocation: '/$location',
-      initialLocation: '/${AppRoutes.listingDetail}',
+      initialLocation: '/$location',
+      // initialLocation: '/${AppRoutes.listingDetail}',
       routes: routes,
-      initialExtra: "221aadf9-b3a1-4ff9-b163-361e916a2ab4"
+      // initialExtra: "221aadf9-b3a1-4ff9-b163-361e916a2ab4"
     );
   }
 }
