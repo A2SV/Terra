@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
-import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
-import 'package:mobile/src/core/widgets/custom_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/location/location_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
@@ -21,10 +20,7 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<DashboardBloc>()..add(GetAllListingsEvent()),
-      child: const DashBoardView(),
-    );
+    return const DashBoardView();
   }
 }
 
@@ -43,7 +39,7 @@ class _DashBoardViewState extends State<DashBoardView> {
   @override
   void initState() {
     super.initState();
-    context.read<DashboardBloc>().add(CheckLocationPermissionEvent());
+    context.read<LocationBloc>().add(CheckLocationPermissionEvent());
   }
 
   @override
@@ -128,10 +124,12 @@ class _DashBoardViewState extends State<DashBoardView> {
           ),
         ),
       ),
-      body: BlocListener<DashboardBloc, DashboardState>(
+      body: BlocListener<LocationBloc, LocationState>(
         listener: (context, state) {
           if (state is LocationPermissionState) {
-            _showLocationModal(context);
+            if (!state.isGranted) {
+              _showLocationModal(context);
+            }
           }
         },
         child: InkWell(
@@ -187,7 +185,7 @@ class _DashBoardViewState extends State<DashBoardView> {
       iconPath: 'assets/images/location.png',
       getButtonAction: () {
         Navigator.of(context).pop();
-        context.read<DashboardBloc>().add(RequestLocationPermissionEvent());
+        context.read<LocationBloc>().add(RequestLocationPermissionEvent());
       },
       skipText: 'Cancel',
       onSkip: () {

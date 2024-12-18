@@ -4,7 +4,9 @@ import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/location/location_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
@@ -16,13 +18,16 @@ Future<void> main() async {
         create: (context) => sl<AuthenticationBloc>(),
       ),
       BlocProvider(
-        create: (context) => sl<DashboardBloc>(),
-      ),
-      BlocProvider(
         create: (context) => sl<AppUserCubit>(),
       ),
       BlocProvider(
         create: (context) => sl<DashboardBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => sl<ListingDetailBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => sl<LocationBloc>(),
       ),
     ],
     child: const MainApp(),

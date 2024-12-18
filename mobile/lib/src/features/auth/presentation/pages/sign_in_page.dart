@@ -67,17 +67,6 @@ class _SignInPageState extends State<SignInPage> {
                           "assets/svg/terra_logo.svg",
                           height: 20.w,
                         ),
-                        SizedBox(width: 19.w),
-                        GestureDetector(
-                          onTap: () {
-                            switchScreen(
-                              context: context,
-                              routeName: AppRoutes.dashboard,
-                              popAndPush: true,
-                            );
-                          },
-                          child: const SkipButton(),
-                        ),
                       ],
                     ),
                     SizedBox(height: 2.h),

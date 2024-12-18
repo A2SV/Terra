@@ -80,14 +80,21 @@ void _initDashboard() {
     ..registerLazySingleton(() => RequestLocationPermissionUseCase())
 
     // Bloc
-    ..registerLazySingleton(
-      () => DashboardBloc(
+    ..registerLazySingleton(() => DashboardBloc(
           getListingsUseCase: sl<GetListingsUseCase>(),
           getListingUseCase: sl<GetListingUseCase>(),
-          getListingByIdUseCase: sl<GetListingByIdUseCase>(),
-          checkLocationPermissionUseCase: sl<CheckLocationPermissionUseCase>(),
-          requestLocationPermissionUseCase:
-              sl<RequestLocationPermissionUseCase>()),
+        ))
+    ..registerLazySingleton(
+      () => LocationBloc(
+        checkLocationPermissionUseCase: sl<CheckLocationPermissionUseCase>(),
+        requestLocationPermissionUseCase:
+            sl<RequestLocationPermissionUseCase>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => ListingDetailBloc(
+        getListingByIdUseCase: sl<GetListingByIdUseCase>(),
+      ),
     );
 }
 
@@ -98,4 +105,3 @@ void _registerCoreDependencies() {
     ..registerLazySingleton(http.Client.new)
     ..registerLazySingleton<Box>(() => Hive.box('userData')); // Shared Hive box
 }
-
