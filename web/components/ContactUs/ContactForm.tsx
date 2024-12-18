@@ -52,7 +52,7 @@ const ContactForm: React.FC = () => {
           value={formData.name}
           onChange={handleChange}
           className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Enter"
+          placeholder="Jon Doe"
           required
         />
       </div>
@@ -68,7 +68,7 @@ const ContactForm: React.FC = () => {
           value={formData.email}
           onChange={handleChange}
           className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Enter"
+          placeholder="johndoe@example.com"
           required
         />
       </div>
@@ -84,7 +84,7 @@ const ContactForm: React.FC = () => {
           value={formData.phone}
           onChange={handleChange}
           className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Enter"
+          placeholder="+10000000000"
         />
       </div>
 
@@ -99,7 +99,7 @@ const ContactForm: React.FC = () => {
           value={formData.subject}
           onChange={handleChange}
           className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Enter"
+          placeholder="Your Subject"
         />
       </div>
 
@@ -112,10 +112,10 @@ const ContactForm: React.FC = () => {
           name="message"
           value={formData.message}
           onChange={handleChange}
-          className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="Type Description"
-          rows={5}
-          required
+          className="mt-1 block w-full px-3 py-2 border bg-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none"
+          placeholder="Message"
+          rows={9}
+          maxLength={250}
         />
       </div>
 
