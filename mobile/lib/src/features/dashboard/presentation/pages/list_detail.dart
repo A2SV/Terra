@@ -3,13 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/gen/assets.gen.dart';
-import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_google_widget.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
@@ -114,13 +114,13 @@ class _ListingDetailState extends State<ListingDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<DashboardBloc, DashboardState>(
+      body: BlocBuilder<ListingDetailBloc, ListingDetailsState>(
         // body: BlocConsumer<DashboardBloc, DashboardState>(
         //   listener: (context, state) {
         //     // TODO: implement listener
         //   },
         builder: (context, state) {
-          return (state is DashboardError)
+          return (state is ListingDetailsError)
               ? Center(
                   child: Text(
                     state.message,
@@ -129,7 +129,7 @@ class _ListingDetailState extends State<ListingDetail> {
                     ),
                   ),
                 )
-              : (state is DashboardLoading)
+              : (state is ListingDetailsLoading)
                   ? const Center(child: CircularProgressIndicator())
                   : (state is ListingDetailSuccess)
                       ? _buildListingDetail(context, state.listingDetail)
@@ -141,7 +141,9 @@ class _ListingDetailState extends State<ListingDetail> {
 
   @override
   void initState() {
-    context.read<DashboardBloc>().add(GetListingByIdEvent(id: widget.id));
+    context
+        .read<ListingDetailBloc>()
+        .add(LoadListingDetailsEvent(id: widget.id));
     super.initState();
   }
 
@@ -815,11 +817,11 @@ class _ListingDetailState extends State<ListingDetail> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: nearbyLocations.length,
-                padding: EdgeInsets.only(right: 4.5.w),
+                padding: EdgeInsets.only(top: 0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.71,
-                  crossAxisSpacing: 10.w,
+                  crossAxisSpacing: 7.w,
                   mainAxisSpacing: 1.h,
                 ),
                 itemBuilder: (context, index) {

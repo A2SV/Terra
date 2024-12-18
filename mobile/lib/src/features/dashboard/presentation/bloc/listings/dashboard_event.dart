@@ -15,9 +15,6 @@ class GetListingEvent extends DashboardEvent{
   final String id;
   GetListingEvent({required this.id});
 }
-class GetListingByIdEvent extends GetListingEvent{
-  GetListingByIdEvent({required super.id});
-}
 
 
 class CompareListingsEvent extends DashboardEvent{
@@ -25,7 +22,3 @@ class CompareListingsEvent extends DashboardEvent{
   final String id2;
   CompareListingsEvent({required this.id1,required this.id2});
 }
-
-class CheckLocationPermissionEvent extends DashboardEvent {}
-
-class RequestLocationPermissionEvent extends DashboardEvent {}

@@ -7,7 +7,7 @@ import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/homepage_card.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';

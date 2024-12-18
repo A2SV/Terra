@@ -6,7 +6,6 @@ import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
-import 'package:mobile/src/core/widgets/skip_button.dart';
 
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:mobile/src/features/auth/presentation/widgets/auth_text_form_field.dart';
@@ -79,17 +78,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         SvgPicture.asset(
                           "assets/svg/terra_logo.svg",
                           height: 20.w,
-                        ),
-                        SizedBox(width: 19.w),
-                        GestureDetector(
-                          onTap: () {
-                            switchScreen(
-                              context: context,
-                              routeName: AppRoutes.dashboard,
-                              popAndPush: true,
-                            );
-                          },
-                          child: const SkipButton(),
                         ),
                       ],
                     ),

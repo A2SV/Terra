@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 

@@ -13,37 +13,14 @@ part 'dashboard_state.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final GetListingsUseCase getListingsUseCase;
   final GetListingUseCase getListingUseCase;
-  final GetListingByIdUseCase getListingByIdUseCase;
-  final CheckLocationPermissionUseCase checkLocationPermissionUseCase;
-  final RequestLocationPermissionUseCase requestLocationPermissionUseCase;
   DashboardBloc({
     required this.getListingsUseCase,
     required this.getListingUseCase,
-    required this.getListingByIdUseCase,
-    required this.checkLocationPermissionUseCase,
-    required this.requestLocationPermissionUseCase,
   }) : super(DashboardInitial()) {
     on<GetAllListingsEvent>(getAllListingsEvent);
     on<GetListingEvent>(getListingEvent);
     on<CompareListingsEvent>(compareListingsEvent);
     on<LoadDashBoardEvent>(loadDashBoardEvent);
-    on<GetListingByIdEvent>(_getListingById);
-    on<CheckLocationPermissionEvent>(checkLocationPermissionEvent);
-    on<RequestLocationPermissionEvent>(requestLocationPermissionEvent);
-  }
-
-  FutureOr<void> checkLocationPermissionEvent(
-      CheckLocationPermissionEvent event, Emitter<DashboardState> emit) async {
-    try {
-      final isGranted = await checkLocationPermissionUseCase();
-      if (isGranted) {
-        emit(LocationPermissionState(isGranted: true));
-      } else {
-        emit(LocationPermissionState(isGranted: false));
-      }
-    } catch (error) {
-      emit(DashboardError(error.toString()));
-    }
   }
 
   FutureOr<void> compareListingsEvent(
@@ -96,30 +73,5 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   FutureOr<void> loadDashBoardEvent(
       DashboardEvent event, Emitter<DashboardState> emit) async {
     emit(DashboardInitial());
-  }
-
-  FutureOr<void> requestLocationPermissionEvent(
-      RequestLocationPermissionEvent event,
-      Emitter<DashboardState> emit) async {
-    try {
-      final isGranted = await requestLocationPermissionUseCase();
-      if (isGranted) {
-        emit(LocationPermissionState(isGranted: true));
-      } else {
-        emit(LocationPermissionState(isGranted: false));
-      }
-    } catch (error) {
-      emit(DashboardError(error.toString()));
-    }
-  }
-
-  FutureOr<void> _getListingById(
-      GetListingByIdEvent event, Emitter<DashboardState> emit) async {
-    emit(DashboardLoading());
-    final result = await getListingByIdUseCase(ListingParams(id: event.id));
-    result.fold(
-      (failure) => emit(DashboardError(failure.message)),
-      (listing) => emit(ListingDetailSuccess(listingDetail: listing)),
-    );
   }
 }
