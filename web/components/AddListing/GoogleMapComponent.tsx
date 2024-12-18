@@ -13,7 +13,7 @@ const GoogleMapComponent: React.FC<MapProps> = ({ coordinates, onLocationSelect 
     if (event.latLng) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
-      onLocationSelect(lat, lng); // Pass the coordinates back to the parent component
+      onLocationSelect(lat, lng);
     }
   };
 

@@ -33,7 +33,8 @@ const ResetNew: React.FC<ResetNewProps> = ({ token }) => {
     setIsButtonDisabled(!isPasswordValid);
   }, [password1, password2]);
 
-  const handlePasswordReset = async () => {
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoading(true);
     setError("");
     setSuccessMessage("");
@@ -84,49 +85,51 @@ const ResetNew: React.FC<ResetNewProps> = ({ token }) => {
             Use a memorable detail, like a favorite book, pet&apos;s name, or special date. Include
             symbols and capital letters for security.
           </p>
-          <div>
-            <p className="mb-2 text-sm">Password</p>
-            <div className="relative mb-8 text-sm">
-              <input
-                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
-                type={showPassword1 ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password1}
-                onChange={(e) => setPassword1(e.target.value)}
-              />
-              <button
-                type="button"
-                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
-                onClick={togglePasswordVisibility1}
-              >
-                {showPassword1 ? <IoMdEyeOff /> : <IoMdEye />}
-              </button>
+          <form onSubmit={handlePasswordReset}>
+            <div>
+              <p className="mb-2 text-sm">Password</p>
+              <div className="relative mb-8 text-sm">
+                <input
+                  className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
+                  type={showPassword1 ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password1}
+                  onChange={(e) => setPassword1(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                  onClick={togglePasswordVisibility1}
+                >
+                  {showPassword1 ? <IoMdEyeOff /> : <IoMdEye />}
+                </button>
+              </div>
+              <p className="mb-2 text-sm">Confirm Password</p>
+              <div className="relative mb-8 text-sm">
+                <input
+                  className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
+                  type={showPassword2 ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  value={password2}
+                  onChange={(e) => setPassword2(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                  onClick={togglePasswordVisibility2}
+                >
+                  {showPassword2 ? <IoMdEyeOff /> : <IoMdEye />}
+                </button>
+              </div>
             </div>
-            <p className="mb-2 text-sm">Confirm Password</p>
-            <div className="relative mb-8 text-sm">
-              <input
-                className={`border ${error ? "border-red-500" : "border-terragray"} focus:outline-none focus:border-terrablue rounded-full py-3 px-6 w-full`}
-                type={showPassword2 ? "text" : "password"}
-                placeholder="Confirm your password"
-                value={password2}
-                onChange={(e) => setPassword2(e.target.value)}
-              />
-              <button
-                type="button"
-                className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
-                onClick={togglePasswordVisibility2}
-              >
-                {showPassword2 ? <IoMdEyeOff /> : <IoMdEye />}
-              </button>
-            </div>
-          </div>
-          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-          <AuthButton
-            loading={loading}
-            isButtonDisabled={isButtonDisabled}
-            text="Reset Password"
-            action={handlePasswordReset}
-          />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            <AuthButton
+              loading={loading}
+              isButtonDisabled={isButtonDisabled}
+              text="Reset Password"
+              action={handlePasswordReset}
+            />
+          </form>
         </div>
       </div>
     </div>
