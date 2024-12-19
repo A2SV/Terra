@@ -38,6 +38,11 @@ const ListDesc: React.FC = () => {
     return <div>No blog data found.</div>;
   }
 
+  const handleOpenInGoogleMaps = () => {
+    const googleMapsUrl = `https://www.google.com/maps?q=${listingData.propertyLocation?.latitude},${listingData.propertyLocation?.longitude}`;
+    window.open(googleMapsUrl, "_blank");
+  };
+
   return (
     <div className="flex flex-col w-full lg:w-8/12 bg-gray-50">
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
@@ -50,7 +55,10 @@ const ListDesc: React.FC = () => {
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
           <p className="text-lg font-roboto">Address</p>
-          <button className="bg-sky-400 py-1 w-[28%] px-3 rounded flex items-center text-xs justify-between text-white">
+          <button
+            className="bg-sky-400 py-1 w-[28%] px-3 rounded flex items-center text-xs justify-between text-white"
+            onClick={handleOpenInGoogleMaps}
+          >
             <SlMap />
             Open on Google Maps
           </button>
