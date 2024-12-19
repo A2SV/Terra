@@ -20,7 +20,13 @@ const ListDesc: React.FC = () => {
     }
   }, [data]);
 
-  const features = [...(listingData.propertyAmenities?.map((amenity: string) => amenity) || [])];
+  const features = [
+    ...(listingData.propertyAmenities?.map(
+      (amenity: { amenityName: string }) => amenity.amenityName
+    ) || []),
+  ];
+
+  console.log("Features", features);
 
   if (isLoading) {
     return (
@@ -193,14 +199,9 @@ const ListDesc: React.FC = () => {
 
       <div className="w-full bg-white px-0 lg:px-12 rounded mb-16 mt-14 py-6">
         <p className="text-lg font-roboto">Features</p>
-        <div className="grid grid-cols-3 space-y-5 my-6">
+        <div className="grid grid-cols-3 my-6">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`flex items-center space-x-2 ${
-                feature === "Air Conditioning" ? "pt-5" : ""
-              }`}
-            >
+            <div key={index} className={`flex items-center justify-center space-x-2`}>
               <IoIosCheckmarkCircleOutline />
               <p className="">{feature}</p>
             </div>
