@@ -13,6 +13,7 @@ const ResetInputEmail = () => {
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [emailError, setEmailError] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { value } = event.target;
@@ -38,8 +39,12 @@ const ResetInputEmail = () => {
       const res = await axios.post(`${baseUrl}Auth/forgot-password`, { email });
 
       if (res.status === 200) {
-        const token = res.data.token;
-        router.push(`/reset-password/${token}/${email}`);
+        setEmail("");
+        setEmailError("");
+        setErrorMessage("");
+        setSuccessMessage(
+          "A reset link has been sent to your email. Please check your inbox."
+        );
       }
     } catch (error: any) {
       if (error.response?.data?.message) {
@@ -61,36 +66,45 @@ const ResetInputEmail = () => {
       {errorMessage && (
         <ErrorMessage message={errorMessage} onClose={() => setErrorMessage("")}></ErrorMessage>
       )}
-      <div className="flex justify-center items-center p-3 px-2 w-full text-md font-normal font-nunito">
-        Enter your email address, you will receive a link in your email to create a new password
-      </div>
+      {successMessage ? (
+        <div className="p-6 bg-green-100 rounded-md text-center">
+          <h2 className="text-xl font-bold text-green-700">Success!</h2>
+          <p className="text-green-600">{successMessage}</p>
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-center items-center p-3 px-2 w-full text-md font-normal font-nunito">
+            Enter your email address, you will receive a link in your email to create a new password
+          </div>
 
-      <div className="p-3 w-full">
-        <form onSubmit={handleSubmit}>
-          <span className="text-md font-normal font-nunito">Email Address</span>
-          <div className="pt-4">
-            <label>
-              <input
-                type="email"
-                value={email}
-                placeholder="Email Address"
-                onChange={handleEmailChange}
-                required
-                className="font-nunito rounded-3xl w-full h-10 border border-terragray px-3 py-2 text-sm focus:outline-none focus:border-terrablue"
-              />
-            </label>
-            {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
+          <div className="p-3 w-full">
+            <form onSubmit={handleSubmit}>
+              <span className="text-md font-normal font-nunito">Email Address</span>
+              <div className="pt-4">
+                <label>
+                  <input
+                    type="email"
+                    value={email}
+                    placeholder="Email Address"
+                    onChange={handleEmailChange}
+                    required
+                    className="font-nunito rounded-3xl w-full h-10 border border-terragray px-3 py-2 text-sm focus:outline-none focus:border-terrablue"
+                  />
+                </label>
+                {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
+              </div>
+              <div className="flex justify-center items-center pt-9 text-sm font-sans">
+                <AuthButton
+                  loading={loading}
+                  isButtonDisabled={false}
+                  text="Continue"
+                  action={handleSubmit}
+                />
+              </div>
+            </form>
           </div>
-          <div className="flex justify-center items-center pt-9 text-sm font-sans">
-            <AuthButton
-              loading={loading}
-              isButtonDisabled={false}
-              text="Continue"
-              action={handleSubmit}
-            />
-          </div>
-        </form>
-      </div>
+        </>
+      )}
     </div>
   );
 };

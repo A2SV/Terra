@@ -1,21 +1,30 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import contactUs from "@/public/contactUs.jpg";
 import { FiPhone, FiMapPin } from "react-icons/fi";
 import { ImLinkedin2 } from "react-icons/im";
 import { MdMailOutline } from "react-icons/md";
 import ContactForm from "./ContactForm";
-// import GoogleMapComponent from "../AddListing/GoogleMapComponent";
+import GoogleMapComponent from "@/components/AddListing/GoogleMapComponent";
 
 const ContactUsDetails = () => {
-  // const coordinates = { lat: 5.6037, lng: -0.187 };
+  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
+    lat: 5.6037,
+    lng: -0.187,
+  });
+
+  const handleLocationSelect = (lat: number, lng: number) => {
+    setCoordinates({ lat, lng });
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 my-14">
       <div className="flex flex-col items-center lg:items-end">
-        <div className="h-36">
-          <Image src={contactUs} alt="Testing" width={300} height={100} />
+      <div className=" w-2/3 h-full md:mt-24">
+          <GoogleMapComponent coordinates={coordinates} onLocationSelect={handleLocationSelect} />
         </div>
-        {/* <GoogleMapComponent  coordinates={coordinates} /> */}
       </div>
       <div className="flex flex-col items-center lg:items-start">
         <div className="text-[32px] lg:text-[48px] font-nunito font-bold pb-5">Get in Touch</div>

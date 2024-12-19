@@ -9,6 +9,7 @@ import ErrorMessage from "@/components/Common/Reusable/ErrorMessage";
 import SuccessMessage from "@/components/Common/Reusable/SuccessMessage";
 import AuthButton from "@/components/Common/Auth/AuthButton";
 import RememberMeCheckbox from "@/components/Common/Auth/Checkbox";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 const LoginCard: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
@@ -57,11 +58,6 @@ const LoginCard: React.FC = () => {
 
   const togglePasswordVisibility = (): void => {
     setPasswordVisible(!passwordVisible);
-    if (!passwordVisible) {
-      setTimeout(() => {
-        setPasswordVisible(false);
-      }, 700);
-    }
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -123,6 +119,7 @@ const LoginCard: React.FC = () => {
             />
             {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
           </div>
+
           <div className="details w-full">
             <p className="font-nunito text-sm font-normal mb-2">Password</p>
             <div className="relative w-full">
@@ -133,12 +130,12 @@ const LoginCard: React.FC = () => {
                 value={password}
                 onChange={handlePasswordChange}
               />
-              <img
-                src={passwordVisible ? "/eye-on.svg" : "/eye-off.svg"}
-                alt="Toggle Password Visibility"
+              <div
                 className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer h-5 w-5"
                 onClick={togglePasswordVisibility}
-              />
+              >
+                {passwordVisible ? <IoMdEyeOff /> : <IoMdEye />}
+              </div>
             </div>
           </div>
 
