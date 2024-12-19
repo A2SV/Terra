@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/gen/assets.gen.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
+import 'package:mobile/src/core/utils/currency_formatter.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_google_widget.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
@@ -341,10 +341,10 @@ class _ListingDetailState extends State<ListingDetail> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '\$${listing.paymentInformation.cost}',
+                        '${listing.paymentInformation.currency.symbol} ${formatMoney(double.tryParse(listing.paymentInformation.cost) ?? 0)}',
                         style: context.textTheme.labelMedium!.copyWith(
                           fontWeight: FontWeight.w600,
-                          fontSize: 20.sp,
+                          fontSize: 18.sp,
                         ),
                       ),
                       Text(

@@ -13,7 +13,24 @@ enum OfficeSpaceType {
   individualOffice,
 }
 
-enum PaymentCurrency { ghs, usd, eur, gbp }
+enum PaymentCurrency { ghc, usd, eur, gbp }
+
+extension PaymentCurrencyExtension on PaymentCurrency {
+  String get symbol {
+    switch (this) {
+      case PaymentCurrency.ghc:
+        return 'GH₵';
+      case PaymentCurrency.usd:
+        return 'USD';
+      case PaymentCurrency.eur:
+        return 'EUR';
+      case PaymentCurrency.gbp:
+        return 'GBP';
+      default:
+        return '';
+    }
+  }
+}
 
 enum PaymentFrequency {
   daily,
