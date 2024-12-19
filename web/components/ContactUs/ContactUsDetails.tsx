@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import contactUs from "@/public/contactUs.jpg";
 import { FiPhone, FiMapPin } from "react-icons/fi";
 import { ImLinkedin2 } from "react-icons/im";
 import { MdMailOutline } from "react-icons/md";
