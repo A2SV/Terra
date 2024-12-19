@@ -3,12 +3,10 @@
 import React, { ChangeEvent, useState } from "react";
 import { env } from "next-runtime-env";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import AuthButton from "../Common/Auth/AuthButton";
 import ErrorMessage from "../Common/Reusable/ErrorMessage";
 
 const ResetInputEmail = () => {
-  const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

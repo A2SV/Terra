@@ -1,0 +1,9 @@
+services:
+  - type: web
+    runtime: node
+    name: terra
+    region: frankfurt
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm run start
+
+    autoDeploy: true
