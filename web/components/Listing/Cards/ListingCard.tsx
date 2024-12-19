@@ -10,6 +10,7 @@ import { RiExpandDiagonalLine } from "react-icons/ri";
 import Link from "next/link";
 import Carousel from "@/components/Sliders/Carousel/Carousel";
 import { Listing } from "@/types/listingTypes";
+import formatMoney from "@/components/Common/Reusable/MoneyFormatter";
 
 interface ListingCardProps {
   item: Listing;
@@ -80,7 +81,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ item }) => {
         <div className="p-2 pl-1 pr-1 flex justify-between">
           <div className="pl-4 ">
             <h2 className="font-nunito font-bold text-[24px] text-btnColor">
-              GHC {item.paymentInformation.cost}
+              {formatMoney(item.paymentInformation.cost, { currency: "GHS", locale: "en-GH" })}
             </h2>
           </div>
           <p className="my-auto text-slate-400 font-nunito font-bold pr-4 text-sm">

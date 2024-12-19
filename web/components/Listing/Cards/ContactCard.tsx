@@ -43,11 +43,7 @@ const ContactCard: FC<ContactCardProps> = ({ agentImage, agentName, agentListing
           rows={9}
           maxLength={250}
         />
-        <select className="w-full border p-2 rounded-md mb-3">
-          <option>Select Option</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-        </select>
+
         <div className="flex items-center mb-3">
           <input type="checkbox" id="terms" className="mr-2" />
           <label htmlFor="terms" className="text-sm">

@@ -23,7 +23,6 @@ import { PropertyPhoto } from "@/types/listingTypes";
 import Spinner from "@/components/Common/Reusable/Spinner";
 import formatMoney from "@/components/Common/Reusable/MoneyFormatter";
 
-
 type EnumMapping = {
   [key: string]: { [key: number]: string };
 };
@@ -107,7 +106,6 @@ export const enumMapping: EnumMapping = {
     1: "IndividualOffice",
   },
 };
-
 
 const HeroListing = () => {
   const params = useParams<{ id: string }>();
@@ -202,7 +200,7 @@ const HeroListing = () => {
         </div>
         <ContactCard
           agentImage="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          agentName={`${listingData.lister?.firstName}, ${listingData.lister?.lastName}}`}
+          agentName={`${listingData.lister?.firstName}, ${listingData.lister?.lastName}`}
           agentListingsUrl="/listings"
         />
       </div>

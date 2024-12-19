@@ -356,12 +356,13 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
         },
         body: JSON.stringify(finalData),
       });
+      const responseData = await response.json();
 
       if (response.ok) {
         setSuccessMessage("Listing Has Been Added Sucessfully");
         setTimeout(() => {
           setSuccessMessage("");
-          router.push("/");
+          router.push(`/single/${responseData.data.id}`);
         }, 5000);
       } else {
         const errorResponse = await response.json();

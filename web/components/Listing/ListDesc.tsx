@@ -20,7 +20,13 @@ const ListDesc: React.FC = () => {
     }
   }, [data]);
 
-  const features = [...(listingData.propertyAmenities?.map((amenity: string) => amenity) || [])];
+  const features = [
+    ...(listingData.propertyAmenities?.map(
+      (amenity: { amenityName: string }) => amenity.amenityName
+    ) || []),
+  ];
+
+  console.log("Features", features);
 
   if (isLoading) {
     return (
@@ -38,6 +44,11 @@ const ListDesc: React.FC = () => {
     return <div>No blog data found.</div>;
   }
 
+  const handleOpenInGoogleMaps = () => {
+    const googleMapsUrl = `https://www.google.com/maps?q=${listingData.propertyLocation?.latitude},${listingData.propertyLocation?.longitude}`;
+    window.open(googleMapsUrl, "_blank");
+  };
+
   return (
     <div className="flex flex-col w-full lg:w-8/12 bg-gray-50">
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
@@ -50,7 +61,10 @@ const ListDesc: React.FC = () => {
       <div className="bg-white px-0 lg:px-12 rounded mb-16 mt-14 pt-8 pb-12">
         <div className="flex flex-row justify-between border-b-2 mt-3 items-center pt-3 pb-5">
           <p className="text-lg font-roboto">Address</p>
-          <button className="bg-sky-400 py-1 w-[28%] px-3 rounded flex items-center text-xs justify-between text-white">
+          <button
+            className="bg-sky-400 py-1 w-[28%] px-3 rounded flex items-center text-xs justify-between text-white"
+            onClick={handleOpenInGoogleMaps}
+          >
             <SlMap />
             Open on Google Maps
           </button>
@@ -185,14 +199,9 @@ const ListDesc: React.FC = () => {
 
       <div className="w-full bg-white px-0 lg:px-12 rounded mb-16 mt-14 py-6">
         <p className="text-lg font-roboto">Features</p>
-        <div className="grid grid-cols-3 space-y-5 my-6">
+        <div className="grid grid-cols-3 my-6">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`flex items-center space-x-2 ${
-                feature === "Air Conditioning" ? "pt-5" : ""
-              }`}
-            >
+            <div key={index} className={`flex items-center justify-center space-x-2`}>
               <IoIosCheckmarkCircleOutline />
               <p className="">{feature}</p>
             </div>
