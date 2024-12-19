@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
+import 'package:mobile/src/core/utils/currency_formatter.dart';
 import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -72,7 +73,7 @@ class _ListingsCardState extends State<ListingsCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "Starting GHC ${widget.listing.paymentInformation.cost}",
+                            "Starting ${widget.listing.paymentInformation.currency.name.toUpperCase()} ${formatMoney(double.tryParse(widget.listing.paymentInformation.cost) ?? 0)}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14.sp,
