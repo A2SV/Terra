@@ -12,11 +12,13 @@ import 'package:mobile/src/features/dashboard/domain/domain.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/custom_details_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/facility_chip_shimmer.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listing_detail_appbar_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/property_card.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/review_card.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/shader_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ListingDetail extends StatefulWidget {
@@ -130,7 +132,7 @@ class _ListingDetailState extends State<ListingDetail> {
                   ),
                 )
               : (state is ListingDetailsLoading)
-                  ? const Center(child: CircularProgressIndicator())
+                  ? _buildListingDetailShimmer()
                   : (state is ListingDetailSuccess)
                       ? _buildListingDetail(context, state.listingDetail)
                       : const SizedBox();
@@ -817,7 +819,7 @@ class _ListingDetailState extends State<ListingDetail> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: nearbyLocations.length,
-                padding: EdgeInsets.only(top: 0),
+                padding: const EdgeInsets.only(top: 0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.71,
@@ -840,6 +842,176 @@ class _ListingDetailState extends State<ListingDetail> {
             height: 5.h,
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildListingDetailShimmer() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.withOpacity(0.5),
+      highlightColor: Colors.transparent,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: context.height * 0.57,
+              child: Container(
+                height: context.height,
+                width: context.width,
+                color: Colors.grey,
+              ).circularClip(15.sp),
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 2.5.h,
+                        width: 25.w,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 1.5.h,
+                          width: 25.w,
+                          color: Colors.grey,
+                        ),
+                        Container(
+                          height: 2.h,
+                          width: 25.w,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      height: 2.h,
+                      width: 2.h,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(width: 2.w),
+                    Container(
+                      height: 1.5.h,
+                      width: 25.w,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 3.h),
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 1.3.h,
+                        horizontal: 5.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Container(
+                        height: 1.5.h,
+                        width: 25.w,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 1.3.h,
+                        horizontal: 5.w,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Container(
+                        height: 1.5.h,
+                        width: 25.w,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.1.h),
+                  child: const Divider(
+                    color: AppCommonColors.disabledFieldColorBorder,
+                  ),
+                ),
+              ],
+            ).horizontalPadding(4.5.w),
+            Container(
+              padding: EdgeInsets.only(left: 4.5.w),
+              height: 5.h,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: facilities.length,
+                itemBuilder: (context, index) {
+                  return const FacilityChipShimmer();
+                },
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    bottom: 1.5.h,
+                    top: 2.h,
+                  ),
+                  height: 2.5.h,
+                  width: 40.w,
+                  color: Colors.grey,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      height: 2.h,
+                      width: 2.h,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Container(
+                      height: 1.5.h,
+                      width: 25.w,
+                      color: Colors.grey,
+                    ),
+                    SizedBox(
+                      width: 1.h,
+                    ),
+                    Container(
+                      height: 1.5.h,
+                      width: 25.w,
+                      color: Colors.grey,
+                    ),
+                  ],
+                )
+              ],
+            ).horizontalPadding(4.5.w),
+          ],
+        ),
       ),
     );
   }

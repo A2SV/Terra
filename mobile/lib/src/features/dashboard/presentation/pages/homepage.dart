@@ -10,8 +10,10 @@ import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/filter_button.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/homepage_card.dart';
+import 'package:mobile/src/features/dashboard/presentation/widgets/listing_card_shimmer.dart';
 import 'package:mobile/src/features/dashboard/presentation/widgets/listings_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/theme/text_theme.dart';
 
@@ -23,12 +25,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    context.read<DashboardBloc>().add(GetAllListingsEvent());
-    super.initState();
-  }
-
   final List<String> _filters = [
     "Any",
     "Apartment",
@@ -211,7 +207,9 @@ class _HomePageState extends State<HomePage> {
                   if (state.listings.isNotEmpty)
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 3.5.w, vertical: 2.h),
+                        horizontal: 3.5.w,
+                        vertical: 2.h,
+                      ),
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -236,19 +234,16 @@ class _HomePageState extends State<HomePage> {
                     )
                   else
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 3.h, horizontal: 10.w),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 3.h,
+                        horizontal: 10.w,
+                      ),
                       child: const Center(
                         child: Text("No listings found"),
                       ),
                     ),
                 ] else if (state is DashboardLoading)
-                  Padding(
-                    padding: EdgeInsets.all(6.h),
-                    child: const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
-                  )
+                  _buildShimmerLoading()
                 else if (state is DashboardError)
                   Column(
                     children: [
@@ -276,9 +271,71 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  @override
+  void initState() {
+    context.read<DashboardBloc>().add(GetAllListingsEvent());
+    super.initState();
+  }
+
   void onFilterButtonPress(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Widget _buildShimmerLoading() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.withOpacity(0.5),
+      highlightColor: Colors.transparent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              left: 4.5.w,
+              top: 2.5.h,
+              bottom: 2.h,
+            ),
+            height: 2.h,
+            width: 50.w,
+            color: Colors.grey,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.5.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 2.h,
+                  width: 15.w,
+                  color: Colors.grey,
+                ),
+                Container(
+                  height: 2.h,
+                  width: 17.w,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 3.5.w,
+              vertical: 2.h,
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 5,
+              primary: false,
+              padding: EdgeInsets.zero,
+              itemBuilder: (context, index) {
+                return const ListingsCardShimmer();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
