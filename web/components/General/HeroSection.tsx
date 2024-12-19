@@ -53,16 +53,15 @@ const HeroSection: React.FC = () => {
                   <div className="text-sm font-nunito font-semibold md:text-lg lg:text-lg">
                     Property Type
                   </div>
-                  <Link href={""}>
-                    <div className="flex items-center">
-                      <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
-                        Property Type
-                      </div>
-                      <div className="text-base p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
-                        <IoIosArrowDown />
-                      </div>
+
+                  <div className="flex items-center">
+                    <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
+                      Property Type
                     </div>
-                  </Link>
+                    <div className="text-base p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
+                      <IoIosArrowDown />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="h-11 bg-slate-400 border md:ml-10 mx-4 lg:mx-10"></div>
@@ -71,16 +70,15 @@ const HeroSection: React.FC = () => {
                   <div className="text-sm font-nunito font-semibold md:text-lg lg:text-lg">
                     Location
                   </div>
-                  <Link href={""}>
-                    <div className="flex items-center">
-                      <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
-                        All Cities
-                      </div>
-                      <div className="text-base p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
-                        <IoIosArrowDown />
-                      </div>
+
+                  <div className="flex items-center">
+                    <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
+                      All Cities
                     </div>
-                  </Link>
+                    <div className="text-base p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
+                      <IoIosArrowDown />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="h-12 bg-slate-400 border mx-10 hidden md:block lg:block"></div>
@@ -89,16 +87,15 @@ const HeroSection: React.FC = () => {
                   <div className="text-sm font-nunito font-semibold md:text-lg lg:text-lg">
                     Property Size
                   </div>
-                  <Link href={""}>
-                    <div className="flex items-center">
-                      <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
-                        Bedrooms
-                      </div>
-                      <div className="text-lg p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
-                        <IoIosArrowDown />
-                      </div>
+
+                  <div className="flex items-center">
+                    <div className="font-nunito text-xs text-slate-400 hover:text-slate-600 md:text-sm lg:text-sm">
+                      Bedrooms
                     </div>
-                  </Link>
+                    <div className="text-lg p-2 text-slate-400 hover:transform transition-transform duration-200 hover:scale-125">
+                      <IoIosArrowDown />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="h-12 bg-slate-400 border mx-9 mr-7 md:ml-12 lg:mr-0 lg:mx-10"></div>
