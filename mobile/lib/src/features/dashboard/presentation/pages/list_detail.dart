@@ -817,7 +817,7 @@ class _ListingDetailState extends State<ListingDetail> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: nearbyLocations.length,
-                padding: EdgeInsets.only(top: 0),
+                padding: const EdgeInsets.only(top: 0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.71,

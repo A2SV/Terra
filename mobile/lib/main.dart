@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/core/dp_injection/dependency_injection.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
-import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/location/location_bloc.dart';
@@ -43,12 +43,6 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   @override
-  void initState() {
-    context.read<AuthenticationBloc>().add(GetCachedUserEvent());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppUserCubit, AppUserCubitState>(
       builder: (context, state) {
@@ -62,5 +56,11 @@ class _MainAppState extends State<MainApp> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    context.read<AuthenticationBloc>().add(GetCachedUserEvent());
+    super.initState();
   }
 }
