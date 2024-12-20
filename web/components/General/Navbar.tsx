@@ -28,7 +28,7 @@ const Navbar = () => {
         router.push("/aboutUs");
         break;
       case "Contact us":
-        router.push("/");
+        router.push("/contactUs");
         break;
       default:
         router.push("/");
