@@ -6,7 +6,7 @@ import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
-import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/conpare_listings_bloc/conpare_listings_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/location/location_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/homepage.dart';
@@ -53,76 +53,79 @@ class _DashBoardViewState extends State<DashBoardView> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: Align(
-        alignment: Alignment.bottomRight,
-        child: Visibility(
-          visible: compareMode,
-          child: ElevatedButton(
-            onPressed: () {
-              context.read<DashboardBloc>().add(LoadDashBoardEvent());
-              switchScreen(
-                context: context,
-                routeName: AppRoutes.compareListing,
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: AppCommonColors.mainBlueButton,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            child: SizedBox(
-              width: 33.w,
-              height: 6.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                    "assets/svg/repost.svg",
-                    height: 4.w,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.white,
-                      BlendMode.srcIn,
-                    ),
+      floatingActionButton: BlocBuilder<SelectedListsingsCubit, List<String>>(
+        builder: (context, state) {
+          return Align(
+            alignment: Alignment.bottomRight,
+            child: Visibility(
+              visible: state.length >= 2,
+              child: ElevatedButton(
+                onPressed: () {
+                  switchScreen(
+                    context: context,
+                    routeName: AppRoutes.compareListing,
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: AppCommonColors.mainBlueButton,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  SizedBox(width: 1.5.w),
-                  Text(
-                    'Compare',
-                    style: CustomTextStyles.kDefaultTextTheme(
-                      AppLightThemeColors.kBlackTextColor,
-                    ).bodySmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18.sp,
+                ),
+                child: SizedBox(
+                  width: 33.w,
+                  height: 6.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SvgPicture.asset(
+                        "assets/svg/repost.svg",
+                        height: 4.w,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
                         ),
-                  ),
-                  SizedBox(width: 1.5.w),
-                  Container(
-                    width: 5.w,
-                    height: 5.w,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '2',
+                      ),
+                      SizedBox(width: 1.5.w),
+                      Text(
+                        'Compare',
                         style: CustomTextStyles.kDefaultTextTheme(
                           AppLightThemeColors.kBlackTextColor,
                         ).bodySmall?.copyWith(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.w400,
-                              fontSize: 15.sp,
+                              fontSize: 18.sp,
                             ),
                       ),
-                    ),
+                      SizedBox(width: 1.5.w),
+                      Container(
+                        width: 5.w,
+                        height: 5.w,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '2',
+                            style: CustomTextStyles.kDefaultTextTheme(
+                              AppLightThemeColors.kBlackTextColor,
+                            ).bodySmall?.copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15.sp,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
       body: BlocListener<LocationBloc, LocationState>(
         listener: (context, state) {

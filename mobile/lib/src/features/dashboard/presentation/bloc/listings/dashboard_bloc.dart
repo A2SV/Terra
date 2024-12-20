@@ -19,38 +19,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }) : super(DashboardInitial()) {
     on<GetAllListingsEvent>(getAllListingsEvent);
     on<GetListingEvent>(getListingEvent);
-    on<CompareListingsEvent>(compareListingsEvent);
-    on<LoadDashBoardEvent>(loadDashBoardEvent);
   }
 
-  FutureOr<void> compareListingsEvent(
-      CompareListingsEvent event, Emitter<DashboardState> emit) async {
-    late ListingModel listing1;
-    late ListingModel listing2;
-    emit(ListingLoading());
-    print('Events...');
-    print(event.id1);
-    print(event.id2);
-
-    final result2 = await getListingUseCase(ListingParams(id: event.id2));
-    print(result2);
-    result2.fold((failure) => emit(ListingError(failure.message)),
-        (listing_2) => listing2 = listing_2);
-    final result1 = await getListingUseCase(ListingParams(id: event.id1));
-    result1.fold((failure) => emit(ListingError(failure.message)),
-        (listing_1) => listing1 = listing_1);
-    if (listing1 != Null && listing2 != Null) {
-      result2.fold((failure) => emit(ListingError(failure.message)),
-          (listing_2) => listing2 = listing_2);
-      final result1 = await getListingUseCase(ListingParams(id: event.id1));
-      result1.fold((failure) => emit(ListingError(failure.message)),
-          (listing_1) => listing1 = listing_1);
-      if (listing1 != Null && listing2 != Null) {
-        emit(CompareListing(listing1: listing1, listing2: listing2));
-      }
-    }
-  }
-
+ 
   FutureOr<void> getAllListingsEvent(
       DashboardEvent event, Emitter<DashboardState> emit) async {
     emit(DashboardLoading());
@@ -65,13 +36,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       GetListingEvent event, Emitter<DashboardState> emit) async {
     emit(ListingLoading());
     final result = await getListingUseCase(ListingParams(id: event.id));
-    print(result);
     result.fold(
         (failure) => emit(ListingError(failure.message)), (listing) => listing);
-  }
-
-  FutureOr<void> loadDashBoardEvent(
-      DashboardEvent event, Emitter<DashboardState> emit) async {
-    emit(DashboardInitial());
   }
 }

@@ -10,20 +10,18 @@ import 'package:mobile/src/features/auth/presentation/pages/otp_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/password_reset.dart';
 import 'package:mobile/src/features/auth/presentation/pages/register_page.dart';
 import 'package:mobile/src/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_contact_info.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_location.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/add_listing_photos.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/chat_page.dart';
+import 'package:mobile/src/features/dashboard/presentation/pages/compare_listing_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/list_detail.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/listings_filters.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/prof_page.dart';
 import 'package:mobile/src/features/dashboard/presentation/pages/saved_pages.dart';
 import 'package:mobile/src/features/onboarding/presentation/pages/onboarding_screen.dart';
-
-import '../../features/dashboard/presentation/pages/compare_listing.dart';
 
 final routes = <GoRoute>[
   GoRoute(

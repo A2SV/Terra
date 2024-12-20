@@ -6,6 +6,7 @@ import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/core/widgets/custom_loader.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -160,24 +161,14 @@ class OTPage extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
+                  if (state is AuthenticationLoading) {
+                    return CustomLoader(
+                      height: 4.5.h,
+                    );
+                  }
                   return CustomButton(
                     showSuffixWidget: true,
-                    suffixWidget: state is AuthenticationLoading
-                        ? const Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 25.0),
-                              child: SizedBox(
-                                height: 30.0,
-                                width: 30.0,
-                                child: CircularProgressIndicator.adaptive(
-                                  backgroundColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    disabled: state is AuthenticationLoading,
-                    text: state is AuthenticationLoading ? "" : 'Verify',
+                    text: 'Verify',
                     horizontalPadding: 0,
                     onPressed: () {
                       var value = pinController.value.text;

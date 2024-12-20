@@ -5,6 +5,7 @@ import 'package:mobile/src/core/theme/common_color.dart';
 import 'package:mobile/src/core/theme/text_theme.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
+import 'package:mobile/src/core/widgets/custom_loader.dart';
 import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../onboarding/presentation/widgets/page_indicator.dart';
@@ -218,7 +219,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                 },
                 builder: (context, state) {
                   if (state is AuthenticationLoading) {
-                    return const CircularProgressIndicator();
+                    return CustomLoader(
+                      height: 4.5.h,
+                    );
                   }
                   return SizedBox(
                     key: const Key('button'),
