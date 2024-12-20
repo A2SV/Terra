@@ -135,7 +135,7 @@ class HomepageCard extends StatelessWidget {
                   height: 0.5.h,
                 ),
                 Text(
-                  "Let's start exploring",
+                  "Let's start exploring some listings",
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.normal,
                         color: Theme.of(context).colorScheme.onPrimary,

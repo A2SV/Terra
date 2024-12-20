@@ -546,7 +546,10 @@ class _ListingDetailState extends State<ListingDetail> {
                   FacilityChip(label: otherFacilities[index]),
             ),
           ),
-          const CustomGoogleMap(),
+          CustomGoogleMap(
+            latitude: listing.propertyLocation_.latitude,
+            longitude: listing.propertyLocation_.longitude,
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
