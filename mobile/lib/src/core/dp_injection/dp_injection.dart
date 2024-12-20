@@ -95,7 +95,11 @@ void _initDashboard() {
       () => ListingDetailBloc(
         getListingByIdUseCase: sl<GetListingByIdUseCase>(),
       ),
-    );
+    )
+    ..registerLazySingleton(() => SelectedListsingsCubit())
+    ..registerLazySingleton(() => CompareListingsBloc(
+          getListingUseCase: sl<GetListingUseCase>(),
+        ));
 }
 
 void _registerCoreDependencies() {

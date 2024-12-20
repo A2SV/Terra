@@ -9,16 +9,7 @@ sealed class DashboardEvent extends Equatable {
 
 class GetAllListingsEvent extends DashboardEvent {}
 
-class LoadDashBoardEvent extends DashboardEvent {}
-
 class GetListingEvent extends DashboardEvent{
   final String id;
   GetListingEvent({required this.id});
-}
-
-
-class CompareListingsEvent extends DashboardEvent{
-  final String id1;
-  final String id2;
-  CompareListingsEvent({required this.id1,required this.id2});
 }

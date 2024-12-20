@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:mobile/src/core/theme/app_light_theme_colors.dart';
 import 'package:mobile/src/core/utils/currency_formatter.dart';
 import 'package:mobile/src/core/utils/custom_extensions.dart';
 import 'package:mobile/src/features/dashboard/data/models/listing.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/conpare_listings_bloc/conpare_listings_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -22,7 +23,6 @@ class ListingsCard extends StatefulWidget {
 }
 
 class _ListingsCardState extends State<ListingsCard> {
-  bool isTapped = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -224,52 +224,52 @@ class _ListingsCardState extends State<ListingsCard> {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(width: 4.w),
-                            InkWell(
-                              onTap: () async {
-                                //await box.put(_hiveKey, _isTapped ? 'compareListing' : null);
-                                setState(() {
-                                  isTapped = !isTapped; // Toggle tapped state
-                                  print(isTapped);
-                                });
-                                var box = await Hive.box('userData');
-                                List compare =
-                                    box.get('compareListing', defaultValue: []);
-
-                                if (isTapped == true) {
-                                  if (compare.length < 2) {
-                                    compare.add(widget.listing.id);
-                                  } else {
-                                    compare.removeAt(0);
-                                    compare.add(widget.listing.id);
-                                  }
-                                  await box.put('compareListing', compare);
-                                }
-                              },
-                              child: SvgPicture.asset(
-                                "assets/svg/repost.svg",
-                                height: 3.7.w,
-                                colorFilter: ColorFilter.mode(
-                                  isTapped == true ? Colors.blue : Colors.black,
-                                  BlendMode
-                                      .srcIn, // Ensures the color applies to the SVG
+                      BlocBuilder<SelectedListsingsCubit, List<String>>(
+                        builder: (context, state) {
+                          return Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(width: 4.w),
+                                InkWell(
+                                  onTap: () async {
+                                    //await box.put(_hiveKey, _isTapped ? 'compareListing' : null);
+                                    setState(() {
+                                      if (state.contains(widget.listing.id)) {
+                                        context
+                                            .read<SelectedListsingsCubit>()
+                                            .removeListing(widget.listing.id);
+                                        return;
+                                      }
+                                      context
+                                          .read<SelectedListsingsCubit>()
+                                          .addListing(widget.listing.id);
+                                    });
+                                  },
+                                  child: SvgPicture.asset(
+                                    "assets/svg/repost.svg",
+                                    height: 3.7.w,
+                                    colorFilter: ColorFilter.mode(
+                                      state.contains(widget.listing.id) == true
+                                          ? Colors.blue
+                                          : Colors.black,
+                                      BlendMode
+                                          .srcIn, // Ensures the color applies to the SVG
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                SizedBox(width: 4.w),
+                                InkWell(
+                                  onTap: () {},
+                                  child: SvgPicture.asset(
+                                    "assets/svg/Bookmark.svg",
+                                    height: 3.5.w,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(width: 4.w),
-                            InkWell(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                "assets/svg/Bookmark.svg",
-                                height: 3.5.w,
-                              ),
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ],
                   ),

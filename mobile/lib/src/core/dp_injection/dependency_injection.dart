@@ -15,6 +15,7 @@ import 'package:mobile/src/features/auth/presentation/bloc/bloc/authentication_b
 import 'package:mobile/src/core/cubit/app_user/app_user_cubit.dart';
 import 'package:mobile/src/features/dashboard/data/data.dart';
 import 'package:mobile/src/features/dashboard/domain/domain.dart';
+import 'package:mobile/src/features/dashboard/presentation/bloc/conpare_listings_bloc/conpare_listings_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listing_details/listing_details_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/listings/dashboard_bloc.dart';
 import 'package:mobile/src/features/dashboard/presentation/bloc/location/location_bloc.dart';
