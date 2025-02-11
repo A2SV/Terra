@@ -22,7 +22,7 @@ const ContactUsDetails = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 my-14">
       <div className="flex flex-col items-center lg:items-end">
-      <div className=" w-2/3 h-full md:mt-24">
+        <div className=" w-2/3 h-full md:mt-24">
           <GoogleMapComponent coordinates={coordinates} onLocationSelect={handleLocationSelect} />
         </div>
       </div>

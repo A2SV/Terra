@@ -42,9 +42,7 @@ const ResetInputEmail = () => {
         setEmail("");
         setEmailError("");
         setErrorMessage("");
-        setSuccessMessage(
-          "A reset link has been sent to your email. Please check your inbox."
-        );
+        setSuccessMessage("A reset link has been sent to your email. Please check your inbox.");
       }
     } catch (error: any) {
       if (error.response?.data?.message) {
@@ -91,7 +89,9 @@ const ResetInputEmail = () => {
                     className="font-nunito rounded-3xl w-full h-10 border border-terragray px-3 py-2 text-sm focus:outline-none focus:border-terrablue"
                   />
                 </label>
-                {emailError && <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>}
+                {emailError && (
+                  <p className="text-red-500 font-nunito text-sm mt-1">{emailError}</p>
+                )}
               </div>
               <div className="flex justify-center items-center pt-9 text-sm font-sans">
                 <AuthButton
