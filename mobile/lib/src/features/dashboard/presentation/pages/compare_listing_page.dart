@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/src/core/routes/routes.dart';
 import 'package:mobile/src/core/theme/common_color.dart';
+import 'package:mobile/src/core/utils/currency_formatter.dart';
 import 'package:mobile/src/core/utils/utils.dart';
 import 'package:mobile/src/core/widgets/custom_button.dart';
 import 'package:mobile/src/core/widgets/custom_loader.dart';
@@ -31,10 +32,9 @@ class ComparePage {
   });
 }
 
-List<ComparePage> pages = [];
-
 class CompareListingPage extends StatefulWidget {
   const CompareListingPage({super.key});
+
 
   @override
   State<CompareListingPage> createState() => _CompareListingPageState();
@@ -42,6 +42,8 @@ class CompareListingPage extends StatefulWidget {
 
 class _CompareListingPageState extends State<CompareListingPage> {
   late PageController pageController;
+  List<ComparePage> pages = [];
+
   int currentIndex = 0;
 
   @override
@@ -116,7 +118,7 @@ class _CompareListingPageState extends State<CompareListingPage> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 1.3.w),
                         child: Text(
-                          '${pages.length}',
+                          '${(context.watch<SelectedListsingsCubit>().state).length}',
                           textAlign: TextAlign.center,
                           style: CustomTextStyles.kDefaultTextTheme(
                                   AppLightThemeColors.kBlackTextColor)
@@ -228,11 +230,11 @@ class _CompareListingPageState extends State<CompareListingPage> {
                   }
 
                   if (state is CompareListingsSuccess) {
-                    print(state.listing1.propertyPhotos.first.url);
+                    debugPrint(state.listing1.propertyPhotos.first.url);
                     pages.add(ComparePage(
                       image: state.listing1.propertyPhotos.first.url,
                       location: state.listing1.propertyLocation.city,
-                      price: state.listing1.paymentInformation.cost,
+                      price: formatMoney(double.parse(state.listing1.paymentInformation.cost)),
                       type: state.listing1.propertyType.name,
                       bedrooms: 4,
                       size: state.listing1.propertySize,
@@ -240,7 +242,7 @@ class _CompareListingPageState extends State<CompareListingPage> {
                     pages.add(ComparePage(
                       image: state.listing2.propertyPhotos.first.url,
                       location: state.listing2.propertyLocation.city,
-                      price: state.listing2.paymentInformation.cost,
+                      price: formatMoney(double.parse(state.listing2.paymentInformation.cost)),
                       type: state.listing2.propertyType.name,
                       bedrooms: 4,
                       size: state.listing1.propertySize,
