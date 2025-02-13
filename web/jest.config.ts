@@ -18,8 +18,21 @@ const config: Config = {
   testEnvironmentOptions: {
     customExportConditions: [""],
   },
-  // Add more setup options before each test is run
+  collectCoverageFrom: [
+    "src/**/*.{ts,tsx}",
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "redux/**/*.{ts,tsx}",
+    "types/**/*.{ts,tsx}",
+    "utils/**/*.{ts,tsx}",
+    "wrappers/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/index.{js,jsx,ts,tsx}",
+  ],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/.next/",
+  ],
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 export default createJestConfig(config);

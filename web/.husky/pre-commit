@@ -1,9 +1,3 @@
-cd web
-
-echo -e '\n    🏗️👷 Styling, testing and building your project before committing \n'
-echo -e '🚧 Checking Prettier formatting...\n'
-
-# Check Prettier standards
 npm run check-prettier ||
 (
     echo '❌ Prettier failed in checking. Run "npm run prettier-fix" to let prettier format your files.';
@@ -26,20 +20,29 @@ echo -e '🚧 Checking ESLint...\n'
 # Check ESLint Standards
 npm run check-lint ||
 (
-        echo '❌ ESLint failed in checking. Run "npm run lint-fix" to fix the issues. If theyare not addressed automatically, please address them manually and try to commit again.'
-        false; 
+    echo '❌ ESLint failed in checking. Run "npm run lint-fix" to fix the issues. If they are not addressed automatically, please address them manually and try to commit again.';
+    false;
 )
 
 echo -e '✅ ESLint check complete. (3/4)\n'
+echo -e '🚧 Checking Jest coverage...\n'
+
+# Check Jest coverage
+npm run test -- --coverage --coverageThreshold='{"global": {"branches": 90, "functions": 90, "lines": 90, "statements": 90}}' ||
+(
+    echo '❌ Coverage threshold not met. Ensure your new code is covered above 90%.';
+    false;
+)
+
+echo -e '✅ Jest coverage check complete. (4/4)\n'
 echo -e '🚧 Building your application...\n'
 
 npm run build ||
 (
-    echo '❌ Build failed. Please address the issues above and try to commit again.'
+    echo '❌ Build failed. Please address the issues above and try to commit again.';
     false;
 )
 
-
 # If everything passes... Now we can commit
-echo -e '✅ All checks completed. (4/4)\n'
+echo -e '✅ All checks completed. (5/5)\n'
 echo -e 'Committing... \n'
