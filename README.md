@@ -42,6 +42,7 @@ For inquiries or support, reach out to [contact-terra@a2sv.org](mailto:contact-t
 * [Erica Annor Kyei](https://www.linkedin.com/in/erica-annor-kyei-624913312/)
 * [Ephraim Mensah](https://www.linkedin.com/in/ephraimmensah/)
 - [Haqq Munagah](https://github.com/mnhaqq)
+- [Boniface Delali Dakey](https://www.linkedin.comin/dakboniface/) - [Vision](https://docs.google.com/document/d/1vvYuLPSyrU2R_b47l9qDdMO91tklGxQuXjYa8CSrSQw/edit?usp=sharing)
 - [George Kofi Ohene-Adjei](https://github.com/georgeey123)
 - [Farouk Sedick](https://github.com/sedfarouk)
 - [Emre Varol](https://www.linkedin.com/in/emre-varol/) - [Vision](https://docs.google.com/document/d/1M_7XzJeuOrNpFFzb4po0aqew6nOll-37IySL5QcXtOE/edit?usp=sharing)
