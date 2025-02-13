@@ -36,7 +36,7 @@ npm start
 
 
 ## Contact
-For inquiries or support, reach out to [terra@a2sv.org](mailto:contact-terra@a2sv.org).
+For inquiries or support, reach out to [contact-terra@a2sv.org](mailto:contact-terra@a2sv.org).
 
 ## Contributors and Visions
 * [Erica Annor Kyei](https://www.linkedin.com/in/erica-annor-kyei-624913312/)
