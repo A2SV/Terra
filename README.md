@@ -46,4 +46,5 @@ For inquiries or support, reach out to [contact-terra@a2sv.org](mailto:contact-t
 - [Boniface Delali Dakey](https://www.linkedin.comin/dakboniface/) - [Vision](https://docs.google.com/document/d/1vvYuLPSyrU2R_b47l9qDdMO91tklGxQuXjYa8CSrSQw/edit?usp=sharing)
 - [George Kofi Ohene-Adjei](https://github.com/georgeey123)
 - [Farouk Sedick](https://github.com/sedfarouk)
+- [Mustapha Adams]([url](https://www.linkedin.com/in/mustapha-adams-b2116b223/)) - [Vision]([url](https://docs.google.com/document/d/1MuODTeELiIImqbepnBnJ50cVrrhLScvU1pYxspJ9ePE/edit?usp=sharing))
 - [Emre Varol](https://www.linkedin.com/in/emre-varol/) - [Vision](https://docs.google.com/document/d/1M_7XzJeuOrNpFFzb4po0aqew6nOll-37IySL5QcXtOE/edit?usp=sharing)
