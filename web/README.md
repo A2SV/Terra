@@ -1,42 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Terra
 
-## Getting Started
+This is the frontend repository for Terra.
 
-First, run the development server:
+## Tools Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js**: A React framework for server-side rendering and static site generation.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Redux Toolkit**: A toolset for efficient Redux development.
+- **Jest**: A delightful JavaScript testing framework with a focus on simplicity.
+- **ESLint**: A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
+- **Prettier**: An opinionated code formatter.
+- **Husky**: Git hooks made easy.
+- **Axios**: A promise-based HTTP client for the browser and Node.js.
+
+## Setup
+
+Follow these steps to set up the project locally:
+
+1. **Clone the repository:**
+
+    ```sh
+    git clone https://github.com/your-repo/terra.git
+    cd terra
+    ```
+
+2. **Install dependencies:**
+
+    ```sh
+    npm install
+    ```
+
+3. **Set up environment variables:**
+
+    Create a [.env](http://_vscodecontentref_/1) file in the root directory and add the following variables:
+
+    ```plaintext
+    NEXTAUTH_URL=http://localhost:3000
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+    NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=your-google-client-secret
+    NEXT_PUBLIC_BASE_URL=https://terra-wb9c.onrender.com/api/
+    NEXT_PUBLIC_GOOGLE_MAP_API_KEY=your-google-map-api-key
+    NEXTAUTH_SECRET=your-next-auth-secret
+    NEXTAUTH_SALT=your-next-auth-salt
+    ```
+
+4. **Run the development server:**
+
+    ```sh
+    npm run dev
+    ```
+
+5. **Build the project:**
+
+    ```sh
+    npm run build
+    ```
+
+6. **Start the production server:**
+
+    ```sh
+    npm start
+    ```
+
+## Running Tests
+
+To run tests, use the following command:
+
+```sh
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To check test coverage, use the following command:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Contributors
-
-- [John Teye Doku](https://www.linkedin.com/in/john-teye-doku-3a82041ba/)
-- [Raphael Adjei](https://www.linkedin.com/in/raphael-adjetey-adjei-5a505bb7/?originalSubdomain=gh)
-- [Nathan Luornor](https://www.linkedin.com/in/luornor/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+```sh
+npm run coverage
+```
