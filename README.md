@@ -40,7 +40,8 @@ For inquiries or support, reach out to [contact-terra@a2sv.org](mailto:contact-t
 
 ## Contributors and Visions
 * [Erica Annor Kyei](https://www.linkedin.com/in/erica-annor-kyei-624913312/)
-* [Ephraim Mensah](https://www.linkedin.com/in/ephraimmensah/) - [Vision](https://docs.google.com/document/d/1pKmjGcthIOEBhubM0ZvFig2bQNornfxK-dou40qAgbM/edit?usp=sharing)
+* [Ephraim Mensah](https://www.linkedin.com/in/ephraimmensah/)
+* [Raphael Adjei](https://www.linkedin.com/in/raphael-adjetey-adjei-5a505bb7/?originalSubdomain=gh) - [Vision](https://docs.google.com/document/d/1lPA9ueTVjHM5Pv277dxd_Ux5oJXvQQrWcuiVWnqVVrI/edit?addon_store&tab=t.0)
 - [Haqq Munagah](https://github.com/mnhaqq)
 - [Boniface Delali Dakey](https://www.linkedin.comin/dakboniface/) - [Vision](https://docs.google.com/document/d/1vvYuLPSyrU2R_b47l9qDdMO91tklGxQuXjYa8CSrSQw/edit?usp=sharing)
 - [George Kofi Ohene-Adjei](https://github.com/georgeey123)
