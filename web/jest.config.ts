@@ -29,10 +29,7 @@ const config: Config = {
     "!src/**/*.d.ts",
     "!src/**/index.{js,jsx,ts,tsx}",
   ],
-  coveragePathIgnorePatterns: [
-    "/node_modules/",
-    "/.next/",
-  ],
+  coveragePathIgnorePatterns: ["/node_modules/", "/.next/"],
 };
 
 export default createJestConfig(config);
