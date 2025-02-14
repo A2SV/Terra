@@ -21,6 +21,9 @@ npm install
 npm start
 ```
 
+## Backend Development Guide
+[Documentation](https://docs.google.com/document/d/1sCgs5ST_tjbe4Z3gleCmNhTBOCxhXffrh_ToNR-NDlA/edit?usp=sharing)
+
 ## Technologies Used
 - **Frontend:** Next.js
 - **Backend:** .NET
