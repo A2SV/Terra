@@ -13,16 +13,6 @@
 - **User Profiles:** Save favorite listings, track inquiries, and manage applications.
 - **Secure Transactions:** Verified listings and safe communication channels.
 
-## Installation
-```bash
-git clone https://github.com/A2SV/Terra.git
-cd Terra
-npm install
-npm start
-```
-
-## Backend Development Guide
-[Documentation](https://docs.google.com/document/d/1sCgs5ST_tjbe4Z3gleCmNhTBOCxhXffrh_ToNR-NDlA/edit?usp=sharing)
 
 ## Technologies Used
 - **Frontend:** Next.js
