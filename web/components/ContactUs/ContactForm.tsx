@@ -10,6 +10,8 @@ interface FormData {
   message: string;
 }
 
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -18,6 +20,7 @@ const ContactForm: React.FC = () => {
     subject: "",
     message: "",
   });
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,16 +30,63 @@ const ContactForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    setSubmitStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+    }
+    // Optionally reset status after some time
+    setTimeout(() => {
+      setSubmitStatus("idle");
+    }, 3000);
+  };
+
+  const getButtonStyle = () => {
+    switch (submitStatus) {
+      case "loading":
+        return "bg-gray-500";
+      case "success":
+        return "bg-green-500";
+      case "error":
+        return "bg-red-500";
+      default:
+        return "bg-[#1779F3]";
+    }
+  };
+
+  const getButtonText = () => {
+    switch (submitStatus) {
+      case "loading":
+        return "Sending...";
+      case "success":
+        return "Message Sent";
+      case "error":
+        return "Send Failed";
+      default:
+        return "Send Message";
+    }
   };
 
   return (
@@ -121,9 +171,10 @@ const ContactForm: React.FC = () => {
 
       <button
         type="submit"
-        className="bg-[#1779F3] text-white font-nunito text-[13px] px-5 py-3 rounded-[25px] font-bold"
+        className={`${getButtonStyle()} text-white font-nunito text-[13px] px-5 py-3 rounded-[25px] font-bold w-full`}
+        disabled={submitStatus === "loading"}
       >
-        Send Message
+        {getButtonText()}
       </button>
     </form>
   );
