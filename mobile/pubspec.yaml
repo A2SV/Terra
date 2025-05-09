@@ -27,7 +27,7 @@ dependencies:
   shimmer: ^3.0.0
   validation_pro: ^1.2.0
   cupertino_icons: ^1.0.2
-  google_maps_flutter: ^2.2.8
+  google_maps_flutter: ^2.10.0
   transparent_image: ^2.0.1
   shared_preferences: ^2.2.3
   internet_connection_checker: ^1.0.0+1
@@ -39,6 +39,8 @@ dependencies:
   dotted_border: ^2.1.0
   http: ^1.2.2
   geolocator: ^13.0.2
+  location: ^7.0.1
+  latlong2: ^0.9.1
 
 dev_dependencies:
   bloc_test: ^9.1.7

@@ -23,6 +23,7 @@ class ListingsCard extends StatefulWidget {
 }
 
 class _ListingsCardState extends State<ListingsCard> {
+  
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -133,7 +134,7 @@ class _ListingsCardState extends State<ListingsCard> {
                             child: FadeInImage.memoryNetwork(
                               placeholder: kTransparentImage,
                               image: widget.listing.lister.profilePictureUrl ??
-                                  "https://via.placeholder.com/150",
+                                  "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1734696795~exp=1734700395~hmac=fd965649b31053f87ff100cc910a83071ea6863c36d6df1be1347f09eff0be48&w=1380",
                               fit: BoxFit.cover,
                             ).circularClip(50),
                           ),
